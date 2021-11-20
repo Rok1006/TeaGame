@@ -13,8 +13,14 @@ public class PourDetector : MonoBehaviour
     Vector3 targetPos;
     public float rotatespeed;
 
+    //Method2: Particle System
+    public GameObject teaParticles;
+    public ParticleSystem tp;
+
     void Start() {
         targetPos = new Vector3(cup.transform.position.x,cup.transform.position.y,cup.transform.position.z);
+        teaParticles.SetActive(true);
+        tp.emissionRate = 0;
     }
     private void Update(){
         RotateTowardsCup();
@@ -24,11 +30,18 @@ public class PourDetector : MonoBehaviour
             isPouring = pourCheck;
 
             if(isPouring){
-                StartPour();
+                //teaParticles.SetActive(true);
+                tp.emissionRate = 70;
+                //StartPour();   //put this back on for method 1
             }else{
-                EndPour();
+                tp.emissionRate = 10;
+                Invoke("StopPouring", 1f);
+                //EndPour();    //put this back on for method 1
             }
         }
+    }
+    void StopPouring(){
+        tp.emissionRate = 0;
     }
 
     private void StartPour(){

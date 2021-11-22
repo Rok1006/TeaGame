@@ -8,6 +8,7 @@ TagManager:
   - Cup
   - L1
   - L2
+  - Bottom
   layers:
   - Default
   - TransparentFX

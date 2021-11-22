@@ -64,7 +64,7 @@ public class TeaPot : MonoBehaviour
             Invoke("PickedUP",.5f); 
             Invoke("CanRelease",.25f);  //allow player to release it
             rb.isKinematic = true;
-            indicator.SetActive(true);
+            //indicator.SetActive(true);   //uncomment this if need it
         }else{
             state = 1;
             canRelease = false;

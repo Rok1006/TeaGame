@@ -8,6 +8,7 @@ public class SpillingDetector : MonoBehaviour
     public bool inCup = false;
     public GameObject stain;
     bool leaveStain = false;
+    //float size;
     void Awake() {
         Instance = this;
     }
@@ -21,6 +22,8 @@ public class SpillingDetector : MonoBehaviour
         if(leaveStain){
             Vector3 stainPos = new Vector3(this.gameObject.transform.position.x,0.201f, this.gameObject.transform.position.z);
             GameObject j = Instantiate(stain, stainPos, Quaternion.identity) as GameObject;
+            float size = Random.Range(0.05f,0.8f);  //0.5
+            j.transform.localScale = new Vector3(size,size,size);
             j.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
             Destroy(j.gameObject,1f);
             leaveStain=false;

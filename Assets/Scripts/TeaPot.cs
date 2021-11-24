@@ -9,6 +9,7 @@ public class TeaPot : MonoBehaviour
     Vector3 pickUPDes;
     Vector3 targetPos;
     private GameObject thisParent;
+    public GameObject mainHolder;
     [Header("Status")]
     public bool OnteaPot = false;
     public bool canRelease = false;
@@ -31,6 +32,7 @@ public class TeaPot : MonoBehaviour
     void Start()
     {
         thisParent = this.transform.parent.gameObject;
+        mainHolder = thisParent.transform.parent.gameObject;
         rb = this.GetComponent<Rigidbody>();
         originalPos = new Vector3(this.transform.position.x, 0.653f, transform.position.z); //0.653f
         pickUPDes = new Vector3(this.transform.position.x, 2f, transform.position.z);
@@ -41,10 +43,6 @@ public class TeaPot : MonoBehaviour
         indicator.SetActive(false);
         otsc.enabled = false;
     }
-    //control: left click to pick pot up, right click to rotate> left click to release, wasd to move
-    //second option: have three icons on top pf pot for player to toggle on right click, left click to take action
-    //or two icons to toggle: rotate or tilt
-    //another option remove the ability to rotate
     void Update()
     {
         originalPos = new Vector3(this.transform.position.x, 0.653f, transform.position.z); //update the location constantly
@@ -79,58 +77,33 @@ public class TeaPot : MonoBehaviour
             pickedUP = false;  //not turning false at the end
             rb.isKinematic = false;
             canRelease = false;
-            //state=0;
         }
-        // else if(state==0&&Input.GetMouseButton(1)){
-        //     pickedUP = false;
-        // }
         //Rotating the pot to pour
         degree = thisParent.transform.forward.y* Mathf.Rad2Deg;
+        print(degree);
         if(pickedUP && Input.GetMouseButton(0)){  //leftClick to rotate/tilt
-            // canClick=false;
-            // if(degree>42){
-            //     thisParent.transform.Rotate(-Vector3.up*30* rotatespeed * Time.deltaTime);
-            // }
-        }else if (pickedUP&&Input.GetMouseButtonUp(0)){ //it did only once      //original mouse 1   only have to click on the pot to pour
+        }else if (pickedUP&&Input.GetMouseButtonUp(0)){ //original mouse 1   only have to click on the pot to pour
             // this.transform.position = pickUPDes;
-            thisParent.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
-            //canRelease = true; //
+            // if(degree<57){
+            //     thisParent.transform.Rotate(-Vector3.up*20* rotatespeed * Time.deltaTime);
+            // }
+            thisParent.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);  //snap to this rotation
             canClick=true;
         }
         indicator.transform.position= new Vector3(indicatorPt.transform.position.x,indicator.transform.position.y, indicatorPt.transform.position.z);
         //Triangle.transform.position.z = indicatorPt.transform.position.z;
-        // if(poured){
-        //     print(degree);
-        //     if(degree<-59.29579f){
-        //         thisParent.transform.Rotate(Vector3.up*30* rotatespeed * Time.deltaTime);
-        //     }
-        // }
-        // if(degree>59){
-        //     poured = false;
-        // }
-        // if(pickedUP && Input.GetMouseButtonUp(1)){
-        //     float degree = thisParent.transform.forward.y* Mathf.Rad2Deg;
-        //     if(degree<59.29579f){
-        //         thisParent.transform.Rotate(Vector3.up*30* rotatespeed * Time.deltaTime);
-        //     }
-        //     //poured = false;
-        //     //print("not pouring");
-        // }
-        // if(Input.GetKeyDown(KeyCode.E)){ //to tilt
-        //     //transform.rotation = lookAtSlowly(transform , new Vector3(-136f,0,0) , 1);
-        //     //degree+=1f;
-        // }
-        if(state==0&& Input.GetKey(KeyCode.W)){  //up in game
-           thisParent.transform.Translate(Vector3.down*movespeed*Time.deltaTime);
+        
+        if(pickedUP&& Input.GetKey(KeyCode.W)){  //up in game   state==0
+           mainHolder.transform.Translate(Vector3.down*movespeed*Time.deltaTime);
         }
-        if(state==0&& Input.GetKey(KeyCode.S)){ //down in game
-           thisParent.transform.Translate(Vector3.up*movespeed*Time.deltaTime);
+        if(pickedUP&& Input.GetKey(KeyCode.S)){ //down in game
+           mainHolder.transform.Translate(Vector3.up*movespeed*Time.deltaTime);
         }
-        if(state==0&& Input.GetKey(KeyCode.A)){  //up in game
-           thisParent.transform.Translate(Vector3.left*movespeed*Time.deltaTime);
+        if(pickedUP&& Input.GetKey(KeyCode.A)){  //up in game
+           mainHolder.transform.Translate(Vector3.left*movespeed*Time.deltaTime);
         }
-        if(state==0&& Input.GetKey(KeyCode.D)){ //down in game
-           thisParent.transform.Translate(Vector3.right*movespeed*Time.deltaTime);
+        if(pickedUP&& Input.GetKey(KeyCode.D)){ //down in game
+           mainHolder.transform.Translate(Vector3.right*movespeed*Time.deltaTime);  //thisParent
         }
         //thisParent.transform.rotation = Quaternion.Euler(-89.98f, 0f, 0f);
         
@@ -154,7 +127,7 @@ public class TeaPot : MonoBehaviour
     void OnMouseDrag(){  //this or uncomment the part above  //here u have to  click pot and drag to pour
         if(pickedUP){
             indicator.SetActive(false);
-        canClick=false;
+            canClick=false;
             if(degree>42){
                 thisParent.transform.Rotate(-Vector3.up*20* rotatespeed * Time.deltaTime);
                 //this.transform.Rotate(-Vector3.left*20* rotatespeed * Time.deltaTime);
@@ -174,3 +147,21 @@ public class TeaPot : MonoBehaviour
         }
     }
 }
+//// if(poured){
+        //         thisParent.transform.Rotate(-Vector3.up*20* rotatespeed * Time.deltaTime);
+        // }
+        // if(degree<57){
+        //     poured = false;
+        // }
+        // if(pickedUP && Input.GetMouseButtonUp(1)){
+        //     float degree = thisParent.transform.forward.y* Mathf.Rad2Deg;
+        //     if(degree<59.29579f){
+        //         thisParent.transform.Rotate(Vector3.up*30* rotatespeed * Time.deltaTime);
+        //     }
+        //     //poured = false;
+        //     //print("not pouring");
+        // }
+        // if(Input.GetKeyDown(KeyCode.E)){ //to tilt
+        //     //transform.rotation = lookAtSlowly(transform , new Vector3(-136f,0,0) , 1);
+        //     //degree+=1f;
+        // }

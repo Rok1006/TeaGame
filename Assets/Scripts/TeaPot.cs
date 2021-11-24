@@ -86,7 +86,7 @@ public class TeaPot : MonoBehaviour
         // }
         //Rotating the pot to pour
         degree = thisParent.transform.forward.y* Mathf.Rad2Deg;
-        if(pickedUP && Input.GetMouseButton(0)){  //rightClick to rotate/tilt
+        if(pickedUP && Input.GetMouseButton(0)){  //leftClick to rotate/tilt
             // canClick=false;
             // if(degree>42){
             //     thisParent.transform.Rotate(-Vector3.up*30* rotatespeed * Time.deltaTime);
@@ -116,10 +116,10 @@ public class TeaPot : MonoBehaviour
         //     //poured = false;
         //     //print("not pouring");
         // }
-        if(Input.GetKeyDown(KeyCode.E)){ //to tilt
-            //transform.rotation = lookAtSlowly(transform , new Vector3(-136f,0,0) , 1);
-            //degree+=1f;
-        }
+        // if(Input.GetKeyDown(KeyCode.E)){ //to tilt
+        //     //transform.rotation = lookAtSlowly(transform , new Vector3(-136f,0,0) , 1);
+        //     //degree+=1f;
+        // }
         if(state==0&& Input.GetKey(KeyCode.W)){  //up in game
            thisParent.transform.Translate(Vector3.down*movespeed*Time.deltaTime);
         }

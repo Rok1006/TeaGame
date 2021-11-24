@@ -26,8 +26,6 @@ public class Tea : MonoBehaviour
     void Update()
     {
         teasprite.color = teaColor;//new Color (79f, 130f, 96f, 1);
-        //currentHeight = tea.transform.position.y;
-        //if(Input.GetKey(KeyCode.Space)){  //moving up
         FillingUP();
     }
     void TeaBottom(){
@@ -38,13 +36,6 @@ public class Tea : MonoBehaviour
             float step = speed * Time.deltaTime;
             OriginalPos.transform.position = Vector3.MoveTowards(OriginalPos.transform.position, TopPos.transform.position, step);
         }
-        // if(targetHeight<maxHeight){
-        //     targetHeight+=0.01f;
-        //     print(targetHeight);
-        // }
-        // Vector3 target = new Vector3(0f,targetHeight, -1.77f);
-        // float step = speed * Time.deltaTime;
-        // TopPos.transform.position = Vector3.MoveTowards(TopPos.transform.position, target, step);
     }
     void OnTriggerEnter(Collider col) {
         if(col.gameObject.tag == "L1"){

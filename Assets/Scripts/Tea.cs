@@ -12,7 +12,7 @@ public class Tea : MonoBehaviour
     //Vector3 bottleTop;  //the target
     //float currentHeight;
     //float targetHeight;
-    public float minSize, middleSize, maxSize;
+    public float minSize, middleSize, maxSize;   //max original: 0.003516069
     public float speed;
     public GameObject OriginalPos;
     public GameObject TopPos;

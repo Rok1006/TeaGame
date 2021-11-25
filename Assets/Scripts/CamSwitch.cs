@@ -8,6 +8,7 @@ public class CamSwitch : MonoBehaviour
     public GameObject TeaCam;
     public GameObject ConversationCam;
     public GameObject ChoiceCam;  //pick ingredients
+    public GameObject CupboardCam;  //pick ingredients
     public GameObject drawer;
     Animator drawerAnim;
     void Start()
@@ -16,6 +17,7 @@ public class CamSwitch : MonoBehaviour
         TeaCam.SetActive(false); 
         ConversationCam.SetActive(false);
         ChoiceCam.SetActive(false);
+        CupboardCam.SetActive(false);
         drawerAnim = drawer.GetComponent<Animator>();
     }
 
@@ -30,6 +32,8 @@ public class CamSwitch : MonoBehaviour
             ConversationCamOn();
         }else if(Input.GetKeyDown(KeyCode.Alpha4)){
             ChoiceCamOn();
+        }else if(Input.GetKeyDown(KeyCode.Alpha5)){
+            CupboardCamOn();
         }
         if(ChoiceCam.activeSelf){
 
@@ -53,6 +57,7 @@ public class CamSwitch : MonoBehaviour
         TeaCam.SetActive(true); 
         ChoiceCam.SetActive(false);
         ConversationCam.SetActive(false);
+        CupboardCam.SetActive(false);
     }
     public void ConversationCamOn(){ //when player have conversation with customers
         drawerAnim.SetBool("In",true);
@@ -61,6 +66,7 @@ public class CamSwitch : MonoBehaviour
         TeaCam.SetActive(false); 
         ChoiceCam.SetActive(false);
         ConversationCam.SetActive(true);
+        CupboardCam.SetActive(false);
     }
     public void ChoiceCamOn(){ //when player have conversation with customers
         drawerAnim.SetBool("Out",true);
@@ -69,5 +75,15 @@ public class CamSwitch : MonoBehaviour
         TeaCam.SetActive(false); 
         ConversationCam.SetActive(false);
         ChoiceCam.SetActive(true);
+        CupboardCam.SetActive(false);
+    }
+    public void CupboardCamOn(){ //when player have conversation with customers
+        drawerAnim.SetBool("In",true);
+        drawerAnim.SetBool("Out",false);
+        StartCam.SetActive(false);
+        TeaCam.SetActive(false); 
+        ConversationCam.SetActive(false);
+        ChoiceCam.SetActive(false);
+        CupboardCam.SetActive(true);
     }
 }

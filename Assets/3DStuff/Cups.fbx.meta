@@ -1,21 +1,41 @@
 fileFormatVersion: 2
-guid: bbdaba2691a7e4122b14fbcb7b3e4c5b
+guid: cd930f0ed4b5644138cfb6fa82c2e061
 ModelImporter:
-  serializedVersion: 19301
+  serializedVersion: 20200
   internalIDToNameTable: []
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: sg_ceramiccream
-    second: {fileID: 2100000, guid: 600e13caaeb444621a29dffffe98bf6d, type: 2}
+      name: Gold
+    second: {fileID: 2100000, guid: 2cd49e17ae296483885a7e09b6a78056, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: sg_darkceramic
-    second: {fileID: 2100000, guid: 7460e56d81bbe4745bca66ebb0aeb710, type: 2}
+      name: Material
+    second: {fileID: 2100000, guid: 526a89cca68ef4b8ab898075ed2dc574, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bk
+    second: {fileID: 2100000, guid: ac5d650e650db4a5e91239060551bab1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sg_creamictexture
+    second: {fileID: 2100000, guid: 6730e9b356c0144d1888905a15886545, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sg_greenshade1
+    second: {fileID: 2100000, guid: 9c5aae74d00f34174bbaec371fe02fcc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: some
+    second: {fileID: 2100000, guid: 74df7c49320af470e92786c39b5182a0, type: 2}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -59,6 +79,7 @@ ModelImporter:
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
     skinWeightsMode: 0
     maxBonesPerVertex: 4
@@ -68,6 +89,9 @@ ModelImporter:
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
@@ -101,6 +125,7 @@ ModelImporter:
   animationType: 2
   humanoidOversampling: 1
   avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

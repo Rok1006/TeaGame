@@ -29,6 +29,11 @@ public class TeaPot : MonoBehaviour
     public GameObject indicatorPt;
     public GameObject indicator;
     public Outline otsc;  //the outline script
+
+    Vector3 prevMousePos;
+    Vector3 deltaMousePos;
+    float tiltHStrength = 0.1f;
+    float tiltVStrength = 0.2f;
     void Start()
     {
         thisParent = this.transform.parent.gameObject;
@@ -42,6 +47,8 @@ public class TeaPot : MonoBehaviour
         print(thisParent.transform.forward.y* Mathf.Rad2Deg);
         indicator.SetActive(false);
         otsc.enabled = false;
+
+        prevMousePos = Input.mousePosition;
     }
     void Update()
     {
@@ -79,16 +86,21 @@ public class TeaPot : MonoBehaviour
             canRelease = false;
         }
         //Rotating the pot to pour
-        degree = thisParent.transform.forward.y* Mathf.Rad2Deg;
-        print(degree);
-        if(pickedUP && Input.GetMouseButton(0)){  //leftClick to rotate/tilt
-        }else if (pickedUP&&Input.GetMouseButtonUp(0)){ //original mouse 1   only have to click on the pot to pour
+        //degree = thisParent.transform.forward.y* Mathf.Rad2Deg;
+        //print(degree);
+        if(pickedUP && Input.GetMouseButton(0)){    //Mouse Distance Tilt Pouring here
+            //thisParent.transform.rotation *= Quaternion.Euler(deltaMousePos);    
+            thisParent.transform.Rotate(deltaMousePos);
+        }
+        else if (pickedUP&&Input.GetMouseButtonUp(0)){ //original mouse 1   only have to click on the pot to pour
             // this.transform.position = pickUPDes;
             // if(degree<57){
             //     thisParent.transform.Rotate(-Vector3.up*20* rotatespeed * Time.deltaTime);
             // }
-            thisParent.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);  //snap to this rotation
-            canClick=true;
+            Vector3 tempZ = thisParent.transform.rotation * Vector3.forward;
+            thisParent.transform.rotation = Quaternion.Euler(-90f, 0f, tempZ.z);  //snap to this rotation, but keep the y rotation
+            //thisParent.transform.Rotate(0f,0f,tempZ.z*360);
+            canClick =true;
         }
         indicator.transform.position= new Vector3(indicatorPt.transform.position.x,indicator.transform.position.y, indicatorPt.transform.position.z);
         //Triangle.transform.position.z = indicatorPt.transform.position.z;
@@ -106,8 +118,17 @@ public class TeaPot : MonoBehaviour
            mainHolder.transform.Translate(Vector3.right*movespeed*Time.deltaTime);  //thisParent
         }
         //thisParent.transform.rotation = Quaternion.Euler(-89.98f, 0f, 0f);
-        
     }
+
+    private void LateUpdate()
+    {
+        deltaMousePos = Input.mousePosition - prevMousePos;
+        deltaMousePos = new Vector3(0f, deltaMousePos.x*tiltHStrength, deltaMousePos.y*tiltVStrength); 
+        //Change axis so so the rotation make sense. Also apply multiplier to damp the movement
+        prevMousePos = Input.mousePosition;
+        Debug.Log(deltaMousePos);
+    }
+
     void CanRelease(){
         canRelease = true;
     }
@@ -129,7 +150,7 @@ public class TeaPot : MonoBehaviour
             indicator.SetActive(false);
             canClick=false;
             if(degree>42){
-                thisParent.transform.Rotate(-Vector3.up*20* rotatespeed * Time.deltaTime);
+                //thisParent.transform.Rotate(-Vector3.up*20* rotatespeed * Time.deltaTime);
                 //this.transform.Rotate(-Vector3.left*20* rotatespeed * Time.deltaTime);
             }
         }

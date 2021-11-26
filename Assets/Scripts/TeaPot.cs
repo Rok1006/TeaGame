@@ -107,7 +107,8 @@ public class TeaPot : MonoBehaviour
             // if(degree<57){
             //     thisParent.transform.Rotate(-Vector3.up*20* rotatespeed * Time.deltaTime);
             // }
-
+            Vector3 tempZ = thisParent.transform.rotation * Vector3.forward; //Im trying to make the direction stay the same but failed....
+            thisParent.transform.rotation = Quaternion.Euler(-90f, 0f, tempZ.z);  //snap to this rotation, but keep the z rotation
             Vector3 posFix = -mousePosPrePour + Input.mousePosition;
             thisParent.transform.position += new Vector3(posFix.x * followHStrength, 0f, posFix.y * followVStrength); //snap to mouse new position
 

@@ -32,8 +32,14 @@ public class TeaPot : MonoBehaviour
 
     Vector3 prevMousePos;
     Vector3 deltaMousePos;
+    Vector3 deltaMousePosRot;
+    Vector3 deltaMousePosMove;
+    Vector3 mousePosPrePour;
+
     float tiltHStrength = 0.1f;
     float tiltVStrength = 0.2f;
+    float followHStrength = 0.0025f;
+    float followVStrength = 0.005f;
     void Start()
     {
         thisParent = this.transform.parent.gameObject;
@@ -88,43 +94,56 @@ public class TeaPot : MonoBehaviour
         //Rotating the pot to pour
         //degree = thisParent.transform.forward.y* Mathf.Rad2Deg;
         //print(degree);
-        if(pickedUP && Input.GetMouseButton(0)){    //Mouse Distance Tilt Pouring here
+        if (pickedUP && Input.GetMouseButtonDown(0))
+        {
+            mousePosPrePour = Input.mousePosition; //get pos before pouring so we can snap to new pos after pouring
+        }
+        if (pickedUP && Input.GetMouseButton(0)){    //Mouse Distance based Tilt Pouring here
             //thisParent.transform.rotation *= Quaternion.Euler(deltaMousePos);    
-            thisParent.transform.Rotate(deltaMousePos);
+            thisParent.transform.Rotate(deltaMousePosRot); 
         }
         else if (pickedUP&&Input.GetMouseButtonUp(0)){ //original mouse 1   only have to click on the pot to pour
             // this.transform.position = pickUPDes;
             // if(degree<57){
             //     thisParent.transform.Rotate(-Vector3.up*20* rotatespeed * Time.deltaTime);
             // }
-            Vector3 tempZ = thisParent.transform.rotation * Vector3.forward;
-            thisParent.transform.rotation = Quaternion.Euler(-90f, 0f, tempZ.z);  //snap to this rotation, but keep the y rotation
-            //thisParent.transform.Rotate(0f,0f,tempZ.z*360);
+
+            Vector3 posFix = -mousePosPrePour + Input.mousePosition;
+            thisParent.transform.position += new Vector3(posFix.x * followHStrength, 0f, posFix.y * followVStrength); //snap to mouse new position
+
             canClick =true;
         }
         indicator.transform.position= new Vector3(indicatorPt.transform.position.x,indicator.transform.position.y, indicatorPt.transform.position.z);
+
+        //Mouse Pickup and movement
+        if (pickedUP && !Input.GetMouseButton(0))
+        {
+            thisParent.transform.position += deltaMousePosMove;
+        }
+
         //Triangle.transform.position.z = indicatorPt.transform.position.z;
-        
-        if(pickedUP&& Input.GetKey(KeyCode.W)){  //up in game   state==0
-           mainHolder.transform.Translate(Vector3.down*movespeed*Time.deltaTime);
-        }
-        if(pickedUP&& Input.GetKey(KeyCode.S)){ //down in game
-           mainHolder.transform.Translate(Vector3.up*movespeed*Time.deltaTime);
-        }
-        if(pickedUP&& Input.GetKey(KeyCode.A)){  //up in game
-           mainHolder.transform.Translate(Vector3.left*movespeed*Time.deltaTime);
-        }
-        if(pickedUP&& Input.GetKey(KeyCode.D)){ //down in game
-           mainHolder.transform.Translate(Vector3.right*movespeed*Time.deltaTime);  //thisParent
-        }
-        //thisParent.transform.rotation = Quaternion.Euler(-89.98f, 0f, 0f);
+            /*
+            if(pickedUP&& Input.GetKey(KeyCode.W)){  //up in game   state==0
+               mainHolder.transform.Translate(Vector3.down*movespeed*Time.deltaTime);
+            }
+            if(pickedUP&& Input.GetKey(KeyCode.S)){ //down in game
+               mainHolder.transform.Translate(Vector3.up*movespeed*Time.deltaTime);
+            }
+            if(pickedUP&& Input.GetKey(KeyCode.A)){  //up in game
+               mainHolder.transform.Translate(Vector3.left*movespeed*Time.deltaTime);
+            }
+            if(pickedUP&& Input.GetKey(KeyCode.D)){ //down in game
+               mainHolder.transform.Translate(Vector3.right*movespeed*Time.deltaTime);  //thisParent
+            }*/
+            //thisParent.transform.rotation = Quaternion.Euler(-89.98f, 0f, 0f);
     }
 
     private void LateUpdate()
     {
         deltaMousePos = Input.mousePosition - prevMousePos;
-        deltaMousePos = new Vector3(0f, deltaMousePos.x*tiltHStrength, deltaMousePos.y*tiltVStrength); 
-        //Change axis so so the rotation make sense. Also apply multiplier to damp the movement
+        deltaMousePosRot = new Vector3(0f, deltaMousePos.x*tiltHStrength, deltaMousePos.y*tiltVStrength);
+        deltaMousePosMove = new Vector3(deltaMousePos.x*followHStrength,0f, deltaMousePos.y * followVStrength);
+        //Change axis so the rotation and move make sense. Also apply multiplier to damp the movement
         prevMousePos = Input.mousePosition;
         Debug.Log(deltaMousePos);
     }
@@ -147,6 +166,7 @@ public class TeaPot : MonoBehaviour
     }
     void OnMouseDrag(){  //this or uncomment the part above  //here u have to  click pot and drag to pour
         if(pickedUP){
+
             indicator.SetActive(false);
             canClick=false;
             if(degree>42){

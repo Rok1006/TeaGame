@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class TeaPot : MonoBehaviour
 {
-    public int speed;
-    Vector3 originalPos;
-    Vector3 pickUPDes;
-    Vector3 targetPos;
     private GameObject thisParent;
     public GameObject mainHolder;
+    public GameObject cup;
+    public GameObject stovePos;
+    public GameObject tpPos;
+    public GameObject TPindicator;
+    public GameObject Originalindicator;
+    public GameObject Stoveindicator;
     [Header("Status")]
     public bool OnteaPot = false;
     public bool canRelease = false;
@@ -17,12 +19,16 @@ public class TeaPot : MonoBehaviour
     public int state = 0;
     public bool poured = false;
     public bool canClick = true;
+    public bool inOriginalPlace;
     Rigidbody rb;
     [Header("Assignments")]
     public float rotatespeed;
     public float movespeed;
-    public GameObject cup;
-    //public float degree = 0f;
+    
+    public int speed;
+    Vector3 originalPos;
+    Vector3 pickUPDes;
+    Vector3 targetPos;
     Animator potAnim;
     float degree;
     private GameObject target;
@@ -36,10 +42,12 @@ public class TeaPot : MonoBehaviour
     Vector3 deltaMousePosMove;
     Vector3 mousePosPrePour;
 
-    float tiltHStrength = 0.1f;
-    float tiltVStrength = 0.2f;
-    float followHStrength = 0.0025f;
-    float followVStrength = 0.005f;
+    float tiltHStrength = 0.1f;   //0.1
+    float tiltVStrength = 0.2f;  //0.2
+    float followHStrength = 0.0025f;  //0.0025f
+    float followVStrength = 0.005f; //0.005f
+    float pX;
+    float pY;
     void Start()
     {
         thisParent = this.transform.parent.gameObject;
@@ -53,7 +61,8 @@ public class TeaPot : MonoBehaviour
         print(thisParent.transform.forward.y* Mathf.Rad2Deg);
         indicator.SetActive(false);
         otsc.enabled = false;
-
+        TPindicator.SetActive(false);
+        Stoveindicator.SetActive(false);
         prevMousePos = Input.mousePosition;
     }
     void Update()
@@ -61,25 +70,21 @@ public class TeaPot : MonoBehaviour
         originalPos = new Vector3(this.transform.position.x, 0.653f, transform.position.z); //update the location constantly
         pickUPDes = new Vector3(this.transform.position.x, 2f, transform.position.z);
         if(canClick&&OnteaPot && Input.GetMouseButton(0)&&state==1){   //pick up pot
+        // pX = this.transform.position.x;
+        // pY = this.transform.position.y;
             float step = speed * Time.deltaTime;
             this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
-            // canRelease = true;
-            //rb.isKinematic = true;
-            //pickedUP = true;
         }
         if(this.transform.position==pickUPDes){  //when the pot arrived at the top
             state=0;
-            //OnteaPot=false;
-            //canRelease = true;
-            //pickedUP = true;
             Invoke("PickedUP",.5f); 
-            Invoke("CanRelease",.25f);  //allow player to release it
+            //Invoke("CanRelease",.25f);  //allow player to release it Originall on
             rb.isKinematic = true;
             //indicator.SetActive(true);   //uncomment this if need it
         }else{
             state = 1;
             canRelease = false;
-            //pickedUP = false;
+            pickedUP = false;
         }
         if(state==1){
             //pickedUP = false;
@@ -91,9 +96,6 @@ public class TeaPot : MonoBehaviour
             rb.isKinematic = false;
             canRelease = false;
         }
-        //Rotating the pot to pour
-        //degree = thisParent.transform.forward.y* Mathf.Rad2Deg;
-        //print(degree);
         if (pickedUP && Input.GetMouseButtonDown(0))
         {
             mousePosPrePour = Input.mousePosition; //get pos before pouring so we can snap to new pos after pouring
@@ -103,46 +105,34 @@ public class TeaPot : MonoBehaviour
             thisParent.transform.Rotate(deltaMousePosRot); 
         }
         else if (pickedUP&&Input.GetMouseButtonUp(0)){ //original mouse 1   only have to click on the pot to pour
-            // this.transform.position = pickUPDes;
-            // if(degree<57){
-            //     thisParent.transform.Rotate(-Vector3.up*20* rotatespeed * Time.deltaTime);
-            // }
             Vector3 tempZ = thisParent.transform.rotation * Vector3.forward; //Im trying to make the direction stay the same but failed....
-            thisParent.transform.rotation = Quaternion.Euler(-90f, 0f, tempZ.z);  //snap to this rotation, but keep the z rotation
+            thisParent.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);  //tempZ.zsnap to this rotation, but keep the z rotation
             Vector3 posFix = -mousePosPrePour + Input.mousePosition;
             thisParent.transform.position += new Vector3(posFix.x * followHStrength, 0f, posFix.y * followVStrength); //snap to mouse new position
-
+            this.transform.position = pickUPDes; //this line fixed the a bit higer issue
             canClick =true;
+            pickedUP = false;
         }
         indicator.transform.position= new Vector3(indicatorPt.transform.position.x,indicator.transform.position.y, indicatorPt.transform.position.z);
-
+        //this.transform.position = new Vector3(pX,pY, this.transform.position.z);
         //Mouse Pickup and movement
-        if (pickedUP && !Input.GetMouseButton(0))
+        if (pickedUP && !Input.GetMouseButton(0))  //added canRelease to resolve issue: get pushed when release
         {
             thisParent.transform.position += deltaMousePosMove;
         }
-
-        //Triangle.transform.position.z = indicatorPt.transform.position.z;
-            /*
-            if(pickedUP&& Input.GetKey(KeyCode.W)){  //up in game   state==0
-               mainHolder.transform.Translate(Vector3.down*movespeed*Time.deltaTime);
-            }
-            if(pickedUP&& Input.GetKey(KeyCode.S)){ //down in game
-               mainHolder.transform.Translate(Vector3.up*movespeed*Time.deltaTime);
-            }
-            if(pickedUP&& Input.GetKey(KeyCode.A)){  //up in game
-               mainHolder.transform.Translate(Vector3.left*movespeed*Time.deltaTime);
-            }
-            if(pickedUP&& Input.GetKey(KeyCode.D)){ //down in game
-               mainHolder.transform.Translate(Vector3.right*movespeed*Time.deltaTime);  //thisParent
-            }*/
-            //thisParent.transform.rotation = Quaternion.Euler(-89.98f, 0f, 0f);
+        if(pickedUP){  //also: make it when hovering outside of original pos, player cant release
+            TPindicator.SetActive(true);
+            TPindicator.transform.position+= deltaMousePosMove;
+        }else{
+            TPindicator.SetActive(false);
+        }
+        
     }
 
     private void LateUpdate()
     {
         deltaMousePos = Input.mousePosition - prevMousePos;
-        deltaMousePosRot = new Vector3(0f, deltaMousePos.x*tiltHStrength, deltaMousePos.y*tiltVStrength);
+        deltaMousePosRot = new Vector3(0f, deltaMousePos.x*tiltHStrength, deltaMousePos.y*tiltVStrength);  //the pouring
         deltaMousePosMove = new Vector3(deltaMousePos.x*followHStrength,0f, deltaMousePos.y * followVStrength);
         //Change axis so the rotation and move make sense. Also apply multiplier to damp the movement
         prevMousePos = Input.mousePosition;
@@ -167,7 +157,6 @@ public class TeaPot : MonoBehaviour
     }
     void OnMouseDrag(){  //this or uncomment the part above  //here u have to  click pot and drag to pour
         if(pickedUP){
-
             indicator.SetActive(false);
             canClick=false;
             if(degree>42){
@@ -178,32 +167,51 @@ public class TeaPot : MonoBehaviour
     }
     void OnMouseExit(){
         otsc.enabled = false;
-        // if(pickedUP){
-        //     this.transform.position = pickUPDes;
-        // }
-        //OnteaPot = false;
     }
     void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "Table"){
             pickedUP = false;
+            canClick =true;
+        }
+        if(col.gameObject.tag == "Stove"){
+            pickedUP = false;
+            canClick =true;
+            //thisParent.transform.position = stovePos.transform.position;
+            //snap teapot to position on stove
+        }
+    }
+    void OnTriggerEnter(Collider col) {
+        if(col.gameObject.tag == "Stove"){
+            thisParent.transform.position = stovePos.transform.position;
+            //Stoveindicator.SetActive(true);
+        }
+        if(col.gameObject.tag == "StoveZone"){
+            Stoveindicator.SetActive(true);
+            //canRelease = true;
+        }
+        if(col.gameObject.tag == "TPTrigger"){
+            thisParent.transform.position = tpPos.transform.position;
+            TPindicator.transform.position = new Vector3(Originalindicator.transform.position.x,TPindicator.transform.position.y,Originalindicator.transform.position.z);
+        }
+        if(col.gameObject.tag == "TableZone"){
+            Originalindicator.SetActive(true);
+            //canRelease = true;
+        }
+        if(col.gameObject.tag == "Release"){
+            canRelease = true;
+        }
+    }
+    void OnTriggerExit(Collider col) {
+        if(col.gameObject.tag == "TableZone"){
+            Originalindicator.SetActive(false);
+            //canRelease = false;
+        }
+        if(col.gameObject.tag == "StoveZone"){
+            Stoveindicator.SetActive(false);
+            //canRelease = false;
+        }
+        if(col.gameObject.tag == "Release"){
+            canRelease = false;
         }
     }
 }
-//// if(poured){
-        //         thisParent.transform.Rotate(-Vector3.up*20* rotatespeed * Time.deltaTime);
-        // }
-        // if(degree<57){
-        //     poured = false;
-        // }
-        // if(pickedUP && Input.GetMouseButtonUp(1)){
-        //     float degree = thisParent.transform.forward.y* Mathf.Rad2Deg;
-        //     if(degree<59.29579f){
-        //         thisParent.transform.Rotate(Vector3.up*30* rotatespeed * Time.deltaTime);
-        //     }
-        //     //poured = false;
-        //     //print("not pouring");
-        // }
-        // if(Input.GetKeyDown(KeyCode.E)){ //to tilt
-        //     //transform.rotation = lookAtSlowly(transform , new Vector3(-136f,0,0) , 1);
-        //     //degree+=1f;
-        // }

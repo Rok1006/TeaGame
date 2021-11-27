@@ -9,6 +9,11 @@ TagManager:
   - L1
   - L2
   - Bottom
+  - Stove
+  - TableZone
+  - TPTrigger
+  - StoveZone
+  - Release
   layers:
   - Default
   - TransparentFX

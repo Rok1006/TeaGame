@@ -111,7 +111,7 @@ public class TeaPot : MonoBehaviour
             thisParent.transform.position += new Vector3(posFix.x * followHStrength, 0f, posFix.y * followVStrength); //snap to mouse new position
             this.transform.position = pickUPDes; //this line fixed the a bit higer issue
             canClick =true;
-            pickedUP = false;
+            //pickedUP = false;
         }
         indicator.transform.position= new Vector3(indicatorPt.transform.position.x,indicator.transform.position.y, indicatorPt.transform.position.z);
         //this.transform.position = new Vector3(pX,pY, this.transform.position.z);
@@ -126,6 +126,18 @@ public class TeaPot : MonoBehaviour
         }else{
             TPindicator.SetActive(false);
         }
+        // if(pickedUP&& Input.GetKey(KeyCode.W)){  //up in game   state==0
+        //        mainHolder.transform.Translate(Vector3.down*movespeed*Time.deltaTime);
+        //     }
+        //     if(pickedUP&& Input.GetKey(KeyCode.S)){ //down in game
+        //        mainHolder.transform.Translate(Vector3.up*movespeed*Time.deltaTime);
+        //     }
+        //     if(pickedUP&& Input.GetKey(KeyCode.A)){  //up in game
+        //        mainHolder.transform.Translate(Vector3.left*movespeed*Time.deltaTime);
+        //     }
+        //     if(pickedUP&& Input.GetKey(KeyCode.D)){ //down in game
+        //        mainHolder.transform.Translate(Vector3.right*movespeed*Time.deltaTime);  //thisParent
+        //     }
         
     }
 
@@ -176,6 +188,7 @@ public class TeaPot : MonoBehaviour
         if(col.gameObject.tag == "Stove"){
             pickedUP = false;
             canClick =true;
+            Stoveindicator.SetActive(false);
             //thisParent.transform.position = stovePos.transform.position;
             //snap teapot to position on stove
         }
@@ -191,6 +204,7 @@ public class TeaPot : MonoBehaviour
         }
         if(col.gameObject.tag == "TPTrigger"){
             thisParent.transform.position = tpPos.transform.position;
+            //mainHolder.transform.position = tpPos.transform.position;
             TPindicator.transform.position = new Vector3(Originalindicator.transform.position.x,TPindicator.transform.position.y,Originalindicator.transform.position.z);
         }
         if(col.gameObject.tag == "TableZone"){

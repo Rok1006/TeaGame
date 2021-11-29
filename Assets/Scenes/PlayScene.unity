@@ -14610,6 +14610,7 @@ MonoBehaviour:
   poured: 0
   canClick: 1
   inOriginalPlace: 0
+  canMove: 1
   rotatespeed: 5
   movespeed: 5
   speed: 10
@@ -21876,6 +21877,7 @@ MonoBehaviour:
   poured: 0
   canClick: 1
   inOriginalPlace: 0
+  canMove: 1
   rotatespeed: 5
   movespeed: 5
   speed: 10
@@ -23362,6 +23364,7 @@ MonoBehaviour:
   poured: 0
   canClick: 1
   inOriginalPlace: 0
+  canMove: 1
   rotatespeed: 5
   movespeed: 5
   speed: 10
@@ -25037,7 +25040,7 @@ GameObject:
   - component: {fileID: 7007605296501971827}
   m_Layer: 0
   m_Name: HolderTray
-  m_TagString: Untagged
+  m_TagString: Table
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

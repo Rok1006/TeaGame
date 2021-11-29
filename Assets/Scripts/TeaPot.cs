@@ -20,6 +20,7 @@ public class TeaPot : MonoBehaviour
     public bool poured = false;
     public bool canClick = true;
     public bool inOriginalPlace;
+    public bool canMove =true;
     Rigidbody rb;
     [Header("Assignments")]
     public float rotatespeed;
@@ -70,10 +71,9 @@ public class TeaPot : MonoBehaviour
         originalPos = new Vector3(this.transform.position.x, 0.653f, transform.position.z); //update the location constantly
         pickUPDes = new Vector3(this.transform.position.x, 2f, transform.position.z);
         if(canClick&&OnteaPot && Input.GetMouseButton(0)&&state==1){   //pick up pot
-        // pX = this.transform.position.x;
-        // pY = this.transform.position.y;
             float step = speed * Time.deltaTime;
             this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
+            canMove = true;
         }
         if(this.transform.position==pickUPDes){  //when the pot arrived at the top
             state=0;
@@ -84,13 +84,14 @@ public class TeaPot : MonoBehaviour
         }else{
             state = 1;
             canRelease = false;
-            pickedUP = false;
+            //pickedUP = false;
         }
         if(state==1){
             //pickedUP = false;
         }
         //releasing it
         if(state==0&&canRelease&&Input.GetMouseButton(1)){  //release it change to right click
+            canMove = false;   //not to be pushed when release
             indicator.SetActive(false);
             pickedUP = false;  //not turning false at the end
             rb.isKinematic = false;
@@ -104,7 +105,7 @@ public class TeaPot : MonoBehaviour
             //thisParent.transform.rotation *= Quaternion.Euler(deltaMousePos);    
             thisParent.transform.Rotate(deltaMousePosRot); 
         }
-        else if (pickedUP&&Input.GetMouseButtonUp(0)){ //original mouse 1   only have to click on the pot to pour
+        else if (pickedUP&&Input.GetMouseButtonUp(0)){ //original mouse 1   only have to click on the pot to pour   pickedUP
             Vector3 tempZ = thisParent.transform.rotation * Vector3.forward; //Im trying to make the direction stay the same but failed....
             thisParent.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);  //tempZ.zsnap to this rotation, but keep the z rotation
             Vector3 posFix = -mousePosPrePour + Input.mousePosition;
@@ -112,13 +113,15 @@ public class TeaPot : MonoBehaviour
             this.transform.position = pickUPDes; //this line fixed the a bit higer issue
             canClick =true;
             //pickedUP = false;
+            
         }
         indicator.transform.position= new Vector3(indicatorPt.transform.position.x,indicator.transform.position.y, indicatorPt.transform.position.z);
-        //this.transform.position = new Vector3(pX,pY, this.transform.position.z);
         //Mouse Pickup and movement
         if (pickedUP && !Input.GetMouseButton(0))  //added canRelease to resolve issue: get pushed when release
         {
-            thisParent.transform.position += deltaMousePosMove;
+            if(canMove){
+                thisParent.transform.position += deltaMousePosMove;
+            }
         }
         if(pickedUP){  //also: make it when hovering outside of original pos, player cant release
             TPindicator.SetActive(true);
@@ -148,7 +151,7 @@ public class TeaPot : MonoBehaviour
         deltaMousePosMove = new Vector3(deltaMousePos.x*followHStrength,0f, deltaMousePos.y * followVStrength);
         //Change axis so the rotation and move make sense. Also apply multiplier to damp the movement
         prevMousePos = Input.mousePosition;
-        Debug.Log(deltaMousePos);
+        //Debug.Log(deltaMousePos);
     }
 
     void CanRelease(){
@@ -164,6 +167,7 @@ public class TeaPot : MonoBehaviour
         OnteaPot = true;
     }
     void OnMouseOver() {
+        OnteaPot = true;
         if(!pickedUP){
             otsc.enabled = true;
         }
@@ -180,6 +184,7 @@ public class TeaPot : MonoBehaviour
     }
     void OnMouseExit(){
         otsc.enabled = false;
+        print("yeh");
         Invoke("NtonPot",.5f);
         // OnteaPot = false;
     }

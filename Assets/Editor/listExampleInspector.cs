@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
  using UnityEditor;
  using UnityEditorInternal;
+ using UnityEngine.UI;
  
  [CustomEditor(typeof(Customer))]
  public class listExampleInspector : Editor

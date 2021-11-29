@@ -8,13 +8,12 @@ public class SpillingDetector : MonoBehaviour
     public bool inCup = false;
     public GameObject stain;
     bool leaveStain = false;
-    //float size;
     void Awake() {
         Instance = this;
     }
     void Start()
     {
-        
+        TeaCeremonyManager.Instance.steamParticles.emissionRate = 0;
     }
 
     void Update()
@@ -39,6 +38,8 @@ public class SpillingDetector : MonoBehaviour
         if(col.gameObject.tag == "Cup"){
             print("Hit");
             inCup = true;
+            TeaCeremonyManager.Instance.steamParticles.emissionRate = 2;
+            Invoke("SteamEmitStop",2f);
         }else{
             print("notHit");
             inCup = false;
@@ -46,6 +47,10 @@ public class SpillingDetector : MonoBehaviour
     }
     void OnParticleTrigger(){
 
+    }
+    void SteamEmitStop(){
+        //TeaCeremonyManager.Instance.sP.SetActive(false);
+        TeaCeremonyManager.Instance.steamParticles.emissionRate = 0;
     }
     void OnTriggerEnter(Collider col) {
         if(col.gameObject.tag == "Bottom"){

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TeaPot : MonoBehaviour
 {
+    public static TeaPot Instance;
     private GameObject thisParent;
     public GameObject mainHolder;
     public GameObject cup;
@@ -49,6 +50,10 @@ public class TeaPot : MonoBehaviour
     float followVStrength = 0.005f; //0.005f
     float pX;
     float pY;
+    public float heatness = 0;  //current heatness of the pot  will decrease constantly
+    void Awake() {
+        Instance = this;
+    }
     void Start()
     {
         thisParent = this.transform.parent.gameObject;
@@ -105,13 +110,14 @@ public class TeaPot : MonoBehaviour
             //thisParent.transform.rotation *= Quaternion.Euler(deltaMousePos);    
             thisParent.transform.Rotate(deltaMousePosRot); 
         }
-        else if (pickedUP&&Input.GetMouseButtonUp(0)){ //original mouse 1   only have to click on the pot to pour   pickedUP
+        else if (pickedUP&&Input.GetMouseButtonUp(0)){ //when pick up and release right click
             Vector3 tempZ = thisParent.transform.rotation * Vector3.forward; //Im trying to make the direction stay the same but failed....
             thisParent.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);  //tempZ.zsnap to this rotation, but keep the z rotation
             Vector3 posFix = -mousePosPrePour + Input.mousePosition;
             thisParent.transform.position += new Vector3(posFix.x * followHStrength, 0f, posFix.y * followVStrength); //snap to mouse new position
             this.transform.position = pickUPDes; //this line fixed the a bit higer issue
             canClick =true;
+            canRelease = true;
             //pickedUP = false;
             
         }
@@ -184,22 +190,34 @@ public class TeaPot : MonoBehaviour
     }
     void OnMouseExit(){
         otsc.enabled = false;
-        print("yeh");
         Invoke("NtonPot",.5f);
         // OnteaPot = false;
     }
     void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "Table"){
-            pickedUP = false;
+            print("table");
+            pickedUP = false;  //not working after using stove
             canClick =true;
+            //TPindicator.SetActive(false);
         }
         if(col.gameObject.tag == "Stove"){
             pickedUP = false;
-            canClick =true;
             Stoveindicator.SetActive(false);
+            if(heatness<1){  //if not heated
+                canClick =false;   //originally true
+                Debug.Log("heating");
+                TeaCeremonyManager.Instance.TeaPotHeating();
+            }
+            if (heatness>=1){
+                //canClick =true; 
+            }
             //thisParent.transform.position = stovePos.transform.position;
-            //snap teapot to position on stove
         }
+    }
+    void OnCollisionExit(Collision col) {
+        // if(col.gameObject.tag == "Stove"){
+        //     TeaCeremonyManager.Instance.ResetStove();
+        // }
     }
     void OnTriggerEnter(Collider col) {
         if(col.gameObject.tag == "Stove"){

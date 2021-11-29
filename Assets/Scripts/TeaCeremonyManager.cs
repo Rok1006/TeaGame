@@ -14,6 +14,7 @@ public class TeaCeremonyManager : MonoBehaviour
     public GameObject potBar;
     private Image pb;
     bool candlelighting = false;
+    bool potHeating = false;
     public GameObject torchLight;
     Light tl;
     public GameObject sideLight;
@@ -22,6 +23,8 @@ public class TeaCeremonyManager : MonoBehaviour
     private float initialSLtBrightness = 0.62f;
     public GameObject candleFire;
     float fireSize;
+    public ParticleSystem steamParticles;
+    public ParticleSystem tpSteamParticles;
     void Awake() {
         Instance = this;
     }
@@ -39,6 +42,7 @@ public class TeaCeremonyManager : MonoBehaviour
         tl.intensity = initialTLtBrightness;
         sl = sideLight.GetComponent<Light>();
         sl.intensity = initialSLtBrightness;
+        tpSteamParticles.emissionRate = 0;
     }
     void Update()
     {
@@ -59,16 +63,31 @@ public class TeaCeremonyManager : MonoBehaviour
         }
         //Teapot
         if(pb.fillAmount == 1){
-            potBar.SetActive(false);
+            TeaPot.Instance.canClick = true;
+            tpSteamParticles.emissionRate = 2;
+            Invoke("StopTeaPotSteam",2.5f);
+            ResetStove();
         }
-        
+        if(potHeating){
+            potBar.SetActive(true);
+            pb.fillAmount+=0.005f;
+            TeaPot.Instance.heatness+=0.005f; //keep tracking
+        }
+    }
+    public void ResetStove(){
+        potHeating = false;
+        potBar.SetActive(false);
+        pb.fillAmount = 0;
+        //pb.fillAmount = TeaPot.Instance.heatness; //reset it
+    }
+    void StopTeaPotSteam(){
+        tpSteamParticles.emissionRate = 0;
     }
     public void CandleLighting(){
         candlelighting = true;
     }
     public void TeaPotHeating(){
-        potBar.SetActive(true);
-        pb.fillAmount+=0.005f;
+        potHeating = true;
     }
     void LightDiming(){
         tl.intensity-=0.0007f;

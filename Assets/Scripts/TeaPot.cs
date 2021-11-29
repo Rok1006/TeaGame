@@ -157,7 +157,8 @@ public class TeaPot : MonoBehaviour
     void PickedUP(){
         pickedUP  = true;
     }
-    void OnMouseDown(){
+    void NtonPot(){
+        OnteaPot = false;
     }
     void OnMouseEnter(){
         OnteaPot = true;
@@ -179,6 +180,8 @@ public class TeaPot : MonoBehaviour
     }
     void OnMouseExit(){
         otsc.enabled = false;
+        Invoke("NtonPot",.5f);
+        // OnteaPot = false;
     }
     void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "Table"){

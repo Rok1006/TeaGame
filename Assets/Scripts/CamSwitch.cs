@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CamSwitch : MonoBehaviour
 {
+    public static CamSwitch Instance;
     public GameObject StartCam;
     public GameObject TeaCam;
     public GameObject ConversationCam;
@@ -11,6 +12,9 @@ public class CamSwitch : MonoBehaviour
     public GameObject CupboardCam;  //pick ingredients
     public GameObject drawer;
     Animator drawerAnim;
+    void Awake() {
+        Instance = this;
+    }
     void Start()
     {
         StartCam.SetActive(true);

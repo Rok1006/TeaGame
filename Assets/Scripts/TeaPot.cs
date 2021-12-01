@@ -70,6 +70,7 @@ public class TeaPot : MonoBehaviour
         TPindicator.SetActive(false);
         Stoveindicator.SetActive(false);
         prevMousePos = Input.mousePosition;
+        Originalindicator.SetActive(false);
     }
     void Update()
     {
@@ -115,7 +116,7 @@ public class TeaPot : MonoBehaviour
             thisParent.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);  //tempZ.zsnap to this rotation, but keep the z rotation
             Vector3 posFix = -mousePosPrePour + Input.mousePosition;
             thisParent.transform.position += new Vector3(posFix.x * followHStrength, 0f, posFix.y * followVStrength); //snap to mouse new position
-            this.transform.position = pickUPDes; //this line fixed the a bit higer issue
+            //this.transform.position = pickUPDes; //this line fixed the a bit higer issue
             canClick =true;
             canRelease = true;
             //pickedUP = false;
@@ -131,7 +132,11 @@ public class TeaPot : MonoBehaviour
         }
         if(pickedUP){  //also: make it when hovering outside of original pos, player cant release
             TPindicator.SetActive(true);
-            TPindicator.transform.position+= deltaMousePosMove;
+            Vector3 pos = this.transform.position;
+            pos.y = 0.224f;  //table height
+            pos.z = this.transform.position.z+0.15f;
+            TPindicator.transform.position = pos;
+            //TPindicator.transform.position+= deltaMousePosMove;
         }else{
             TPindicator.SetActive(false);
         }
@@ -153,7 +158,7 @@ public class TeaPot : MonoBehaviour
     private void LateUpdate()
     {
         deltaMousePos = Input.mousePosition - prevMousePos;
-        deltaMousePosRot = new Vector3(0f, deltaMousePos.x*tiltHStrength, deltaMousePos.y*tiltVStrength);  //the pouring
+        deltaMousePosRot = new Vector3(0f, deltaMousePos.x*tiltHStrength, 0f);  //the pouring deltaMousePos.y*tiltVStrength
         deltaMousePosMove = new Vector3(deltaMousePos.x*followHStrength,0f, deltaMousePos.y * followVStrength);
         //Change axis so the rotation and move make sense. Also apply multiplier to damp the movement
         prevMousePos = Input.mousePosition;
@@ -196,7 +201,7 @@ public class TeaPot : MonoBehaviour
     void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "Table"){
             print("table");
-            pickedUP = false;  //not working after using stove
+            pickedUP = false;  //not working after using stove is there sth that get turn on again not sensitive?
             canClick =true;
             //TPindicator.SetActive(false);
         }
@@ -220,6 +225,12 @@ public class TeaPot : MonoBehaviour
         // }
     }
     void OnTriggerEnter(Collider col) {
+        // if(col.gameObject.tag == "Table"){
+        //     print("table");
+        //     pickedUP = false;  //not working after using stove
+        //     canClick =true;
+        //     //TPindicator.SetActive(false);
+        // }
         if(col.gameObject.tag == "Stove"){
             thisParent.transform.position = stovePos.transform.position;
             //Stoveindicator.SetActive(true);

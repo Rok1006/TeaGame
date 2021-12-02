@@ -7,11 +7,20 @@ using UnityEngine;
 //Missing: drop it on table, dip to take powder
 public class MatchaBox : MonoBehaviour
 {
+    public static MatchaBox Instance;
     public GameObject lid;
     public GameObject matchaBox;
+    public GameObject powderPt;
+    public GameObject powderPrefab;
+    public GameObject currenPowder;
+    public GameObject toolTrigger;
+    public GameObject OriginalToolPos;
     public Outline otsc;
     public bool pickedUP = false;
     public bool clicked = false;
+    public bool inPowderZone =false;
+    public bool havePowder = false;
+    public bool canRelease = false;
     public int speed;
     public int state = 0;  //down
     Animator mbAnim;
@@ -23,24 +32,32 @@ public class MatchaBox : MonoBehaviour
     Vector3 deltaMousePosRot;
     Vector3 deltaMousePosMove;
     Vector3 mousePosPrePour;
-    float tiltHStrength = 0.1f;   //0.1
+    float tiltHStrength = 0.7f;   //0.1
     float tiltVStrength = 0.2f;  //0.2
-    float followHStrength = 0.0025f;  //0.0025f
-    float followVStrength = 0.005f; //0.005f
+    public float followHStrength = 0.0025f;  //0.0025f
+    public float followVStrength = 0.005f; //0.005f
+    void Awake() {
+        Instance = this;
+    }
     void Start()
     {
         otsc.enabled = false;
         mbAnim = matchaBox.GetComponent<Animator>();
         rb = this.GetComponent<Rigidbody>();
-        originalPos = new Vector3(this.transform.position.x, 0.282f, transform.position.z); //0.653f
-        pickUPDes = new Vector3(this.transform.position.x, 1.076f, transform.position.z);
+        originalPos = new Vector3(1.44f, 0.282f, -2.261f); //0.653f
+        pickUPDes = new Vector3(this.transform.position.x, 1.076f, this.transform.position.z);
         prevMousePos = Input.mousePosition;
+        toolTrigger.SetActive(false);
     }
     void Update()
     {
+        //originalPos = new Vector3(this.transform.position.x, 0.282f, transform.position.z); //0.653f
+        //pickUPDes = new Vector3(this.transform.position.x, 1.076f, transform.position.z);
         if(state==0&&clicked){
             float step = speed * Time.deltaTime;
             this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
+            mbAnim.SetBool("Open", true);
+            mbAnim.SetBool("Close", false);
         }
         if(this.transform.position==pickUPDes){  //player picked it up
             otsc.enabled = false;
@@ -54,22 +71,45 @@ public class MatchaBox : MonoBehaviour
             this.transform.position += deltaMousePosMove;
         }
         //Release it
-        if(state==1&&Input.GetMouseButton(1)){  //later add canRelease bool
+        if(state==1&&Input.GetMouseButton(1)&&canRelease){  //later add canRelease bool
             state = 0;
             clicked = false;
             pickedUP = false;
             rb.isKinematic = false;
         }
+        //Dip it & snap back
+        if (pickedUP && Input.GetMouseButton(0)){    //Mouse Distance based Tilt Pouring here  
+            this.transform.Rotate(deltaMousePosRot); 
+            if(havePowder){  //if have powder and drag
+                Invoke("ReleasePowder",0f);
+            }
+            // currenPowder.transform.parent = null;
+        }else if (pickedUP&&Input.GetMouseButtonUp(0)){ //when pick up and release right click
+            Vector3 tempZ = this.transform.rotation * Vector3.forward; //Im trying to make the direction stay the same but failed....
+            this.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);  //tempZ.zsnap to this rotation, but keep the z rotation
+            Vector3 posFix = -mousePosPrePour + Input.mousePosition;
+            this.transform.position += new Vector3(0f, 0f, 0f); //snap to mouse new position   posFix.y * followVStrength
+            if(inPowderZone&&havePowder==false){
+                powderON();
+            }
+            inPowderZone = false;
+            // if(havePowder){  //if have powder and drag
+            //     Invoke("ReleasePowder",5f);
+            // }
+            // canClick =true;
+            // canRelease = true;
+        }
     }
     private void LateUpdate()
     {
         deltaMousePos = Input.mousePosition - prevMousePos;
-        deltaMousePosRot = new Vector3(0f, deltaMousePos.x*tiltHStrength, 0f);  //the pouring deltaMousePos.y*tiltVStrength
+        deltaMousePosRot = new Vector3(deltaMousePos.x*tiltHStrength, 0f, 0f);  
         deltaMousePosMove = new Vector3(deltaMousePos.x*followHStrength,0f, deltaMousePos.y * followVStrength);  //last one was y
         prevMousePos = Input.mousePosition;
     }
     void PickedUP(){
         pickedUP  = true;
+        toolTrigger.SetActive(true);
     }
     void OnMouseDown() {
         clicked = true;
@@ -89,5 +129,35 @@ public class MatchaBox : MonoBehaviour
             mbAnim.SetBool("Close", true);
         }
     }
-
+    void powderON(){
+        currenPowder = Instantiate(powderPrefab, powderPt.transform.position, Quaternion.identity) as GameObject;
+        currenPowder.transform.parent = powderPt.transform;
+        havePowder = true;  //if fell off cup turn it false
+        //currenPowder = j;
+    }
+    void ReleasePowder(){
+        currenPowder.transform.parent = null;
+    }
+    void OnCollisionEnter(Collision col) {
+        if(col.gameObject.tag == "Table"){
+            pickedUP = false;
+            toolTrigger.SetActive(false);
+        }
+    }
+    void OnTriggerEnter(Collider col) {
+        if(col.gameObject.tag == "Powder"){
+            inPowderZone = true;
+        }
+        if(col.gameObject.tag == "ToolZone"){
+            canRelease  = true;
+        }
+        if(col.gameObject.tag == "ToolTrigger"){
+            this.transform.position = OriginalToolPos.transform.position;
+        }
+    }
+    void OnTriggerExit(Collider col) {
+        if(col.gameObject.tag == "ToolZone"){
+            canRelease  = false;
+        }
+    }
 }

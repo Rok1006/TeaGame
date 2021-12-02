@@ -79,7 +79,7 @@ public class TeaPot : MonoBehaviour
         if(canClick&&OnteaPot && Input.GetMouseButton(0)&&state==1){   //pick up pot
             float step = speed * Time.deltaTime;
             this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
-            canMove = true;
+            canMove = true;  //this canmove to after player completely release after pick up
         }
         if(this.transform.position==pickUPDes){  //when the pot arrived at the top
             state=0;

@@ -36,6 +36,8 @@ public class MatchaBox : MonoBehaviour
     float tiltVStrength = 0.2f;  //0.2
     public float followHStrength = 0.0025f;  //0.0025f
     public float followVStrength = 0.005f; //0.005f
+    Vector3 mPos;
+    public GameObject TableCollider;
     void Awake() {
         Instance = this;
     }
@@ -48,22 +50,27 @@ public class MatchaBox : MonoBehaviour
         pickUPDes = new Vector3(this.transform.position.x, 1.076f, this.transform.position.z);
         prevMousePos = Input.mousePosition;
         toolTrigger.SetActive(false);
+        TableCollider.SetActive(false);
     }
     void Update()
     {
         //originalPos = new Vector3(this.transform.position.x, 0.282f, transform.position.z); //0.653f
         //pickUPDes = new Vector3(this.transform.position.x, 1.076f, transform.position.z);
+        if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){
         if(state==0&&clicked){
             float step = speed * Time.deltaTime;
             this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
             mbAnim.SetBool("Open", true);
             mbAnim.SetBool("Close", false);
         }
+        }
         if(this.transform.position==pickUPDes){  //player picked it up
             otsc.enabled = false;
             state = 1;  //up
             rb.isKinematic = true;
-            Invoke("PickedUP",.5f); 
+            if(Input.GetMouseButtonUp(0)){  //Fixed changed pos when hold pot and drag without release in the middle
+              Invoke("PickedUP",.5f);   
+            }
         }
         //MOvement
         if (pickedUP && !Input.GetMouseButton(0))  //moving the tool
@@ -76,6 +83,7 @@ public class MatchaBox : MonoBehaviour
             clicked = false;
             pickedUP = false;
             rb.isKinematic = false;
+            TableCollider.SetActive(false);
         }
         //Dip it & snap back
         if (pickedUP && Input.GetMouseButton(0)){    //Mouse Distance based Tilt Pouring here  
@@ -88,7 +96,16 @@ public class MatchaBox : MonoBehaviour
             Vector3 tempZ = this.transform.rotation * Vector3.forward; //Im trying to make the direction stay the same but failed....
             this.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);  //tempZ.zsnap to this rotation, but keep the z rotation
             Vector3 posFix = -mousePosPrePour + Input.mousePosition;
-            this.transform.position += new Vector3(0f, 0f, 0f); //snap to mouse new position   posFix.y * followVStrength
+            Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast (ray, out hit, 100)) {
+                Debug.Log (hit.transform.name);
+                mPos = hit.point;
+                //mPos.y = 1.076f;
+                Debug.Log (mPos);
+            }
+            //this.transform.position += new Vector3(0f, 0f, 0f); //snap to mouse new position   posFix.y * followVStrength
+            this.transform.position = mPos;
             if(inPowderZone&&havePowder==false){
                 powderON();
             }
@@ -99,6 +116,19 @@ public class MatchaBox : MonoBehaviour
             // canClick =true;
             // canRelease = true;
         }
+        //get current mouse position xy cord
+        //perform a raycast through the camera from camera into the scene where the positon is on the table
+        //make the object go to the ray casted position   tell u where u hit then set to object to the ray cast pos
+        //move it based on where the mouse is on the table
+        //Raycast mouse position
+        // Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+        // RaycastHit hit;
+        // if (Physics.Raycast (ray, out hit, 50)) {
+        //     Debug.Log (hit.transform.name);
+        //     Vector3 mPos = hit.transform.position;
+        //     mPos.y = 1.076f;
+        //     Debug.Log (mPos);
+        // }
     }
     private void LateUpdate()
     {
@@ -110,13 +140,16 @@ public class MatchaBox : MonoBehaviour
     void PickedUP(){
         pickedUP  = true;
         toolTrigger.SetActive(true);
+        TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.POWDERTOOL;
+        TableCollider.SetActive(true);
     }
     void OnMouseDown() {
+        if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){
         clicked = true;
-        //tool go up/being pick up literally
+        }
     }
     void OnMouseOver() {
-        if(!clicked){
+        if(!clicked&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){
             otsc.enabled = true;
             mbAnim.SetBool("Open", true);
             mbAnim.SetBool("Close", false);
@@ -142,6 +175,7 @@ public class MatchaBox : MonoBehaviour
         if(col.gameObject.tag == "Table"){
             pickedUP = false;
             toolTrigger.SetActive(false);
+            TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
         }
     }
     void OnTriggerEnter(Collider col) {

@@ -13,6 +13,7 @@ public class TeaPot : MonoBehaviour
     public GameObject TPindicator;
     public GameObject Originalindicator;
     public GameObject Stoveindicator;
+    public GameObject StovePlaceholderObj;
     [Header("Status")]
     public bool OnteaPot = false;
     public bool canRelease = false;
@@ -71,25 +72,31 @@ public class TeaPot : MonoBehaviour
         Stoveindicator.SetActive(false);
         prevMousePos = Input.mousePosition;
         Originalindicator.SetActive(false);
+        StovePlaceholderObj.SetActive(true);
     }
     void Update()
     {
         originalPos = new Vector3(this.transform.position.x, 0.653f, transform.position.z); //update the location constantly
         pickUPDes = new Vector3(this.transform.position.x, 2f, transform.position.z);
+        if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT){
         if(canClick&&OnteaPot && Input.GetMouseButton(0)&&state==1){   //pick up pot
             float step = speed * Time.deltaTime;
             this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
-            canMove = true;  //this canmove to after player completely release after pick up
+            // canMove = true;  //this canmove to after player completely release after pick up
+        }
         }
         if(this.transform.position==pickUPDes){  //when the pot arrived at the top
+            canMove = true; 
             state=0;
-            Invoke("PickedUP",.5f); 
+            if(Input.GetMouseButtonUp(0)){  //Fixed changed pos when hold pot and drag without release in the middle
+              Invoke("PickedUP",.5f);   
+            }
             //Invoke("CanRelease",.25f);  //allow player to release it Originall on
             rb.isKinematic = true;
-            //indicator.SetActive(true);   //uncomment this if need it
         }else{
             state = 1;
-            canRelease = false;
+            //canRelease = false;
+            //rb.isKinematic = false;
             //pickedUP = false;
         }
         if(state==1){
@@ -110,15 +117,17 @@ public class TeaPot : MonoBehaviour
         if (pickedUP && Input.GetMouseButton(0)){    //Mouse Distance based Tilt Pouring here
             //thisParent.transform.rotation *= Quaternion.Euler(deltaMousePos);    
             thisParent.transform.Rotate(deltaMousePosRot); 
+            StovePlaceholderObj.SetActive(false);
         }
         else if (pickedUP&&Input.GetMouseButtonUp(0)){ //when pick up and release right click
             Vector3 tempZ = thisParent.transform.rotation * Vector3.forward; //Im trying to make the direction stay the same but failed....
             thisParent.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);  //tempZ.zsnap to this rotation, but keep the z rotation
             Vector3 posFix = -mousePosPrePour + Input.mousePosition;
-            thisParent.transform.position += new Vector3(posFix.x * followHStrength, 0f, posFix.y * followVStrength); //snap to mouse new position
-            //this.transform.position = pickUPDes; //this line fixed the a bit higer issue
+            thisParent.transform.position += new Vector3(posFix.x * followHStrength, 0f, posFix.y * followVStrength ); //snap to mouse new position    posFix.y * followVStrength why rotating pot changes z pos
+            //thisParent.transform.position = pickUPDes; //this line fixed the a bit higer issue
             canClick =true;
-            canRelease = true;
+            //canRelease = true;
+            StovePlaceholderObj.SetActive(true);
             //pickedUP = false;
             
         }
@@ -139,20 +148,7 @@ public class TeaPot : MonoBehaviour
             //TPindicator.transform.position+= deltaMousePosMove;
         }else{
             TPindicator.SetActive(false);
-        }
-        // if(pickedUP&& Input.GetKey(KeyCode.W)){  //up in game   state==0
-        //        mainHolder.transform.Translate(Vector3.down*movespeed*Time.deltaTime);
-        //     }
-        //     if(pickedUP&& Input.GetKey(KeyCode.S)){ //down in game
-        //        mainHolder.transform.Translate(Vector3.up*movespeed*Time.deltaTime);
-        //     }
-        //     if(pickedUP&& Input.GetKey(KeyCode.A)){  //up in game
-        //        mainHolder.transform.Translate(Vector3.left*movespeed*Time.deltaTime);
-        //     }
-        //     if(pickedUP&& Input.GetKey(KeyCode.D)){ //down in game
-        //        mainHolder.transform.Translate(Vector3.right*movespeed*Time.deltaTime);  //thisParent
-        //     }
-        
+        } 
     }
 
     private void LateUpdate()
@@ -170,6 +166,7 @@ public class TeaPot : MonoBehaviour
     }
     void PickedUP(){
         pickedUP  = true;
+        TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.TEAPOT;
     }
     void NtonPot(){
         OnteaPot = false;
@@ -179,7 +176,7 @@ public class TeaPot : MonoBehaviour
     }
     void OnMouseOver() {
         OnteaPot = true;
-        if(!pickedUP){
+        if(!pickedUP&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT){
             otsc.enabled = true;
         }
     }
@@ -200,12 +197,14 @@ public class TeaPot : MonoBehaviour
     }
     void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "Table"){
-            print("table");
+            //print("table");
             pickedUP = false;  //not working after using stove is there sth that get turn on again not sensitive?
             canClick =true;
-            //TPindicator.SetActive(false);
+            TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
         }
         if(col.gameObject.tag == "Stove"){
+            //rb.isKinematic = true;
+            Debug.Log("yeh");
             pickedUP = false;
             Stoveindicator.SetActive(false);
             if(heatness<1){  //if not heated
@@ -214,7 +213,7 @@ public class TeaPot : MonoBehaviour
                 TeaCeremonyManager.Instance.TeaPotHeating();
             }
             if (heatness>=1){
-                //canClick =true; 
+                canClick =true; 
             }
             //thisParent.transform.position = stovePos.transform.position;
         }

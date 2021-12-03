@@ -1,0 +1,13 @@
+<Stage>1
+My first sentence
+<p>1
+Second sentence with long pause
+<p>2.5
+Last sentence with Animation
+<p>1.2
+<a>Flip
+<Stage>2
+Great tea but I'm still sad
+<p>1.2
+This is the second stage dialog
+<p>1

@@ -1,0 +1,10 @@
+<Stage>1
+Bad Tea
+<p>2
+I hate u
+<a>Flip
+<p>2
+Now you die!
+<a>Flip
+<p>1
+<Stage>2

@@ -6,6 +6,7 @@ using UnityEngine.Experimental.Rendering.Universal;
 //Included:
 //1. Candle lighting
 //2. TeaPot Heating
+//3.TeaColor
 public class TeaCeremonyManager : MonoBehaviour
 {
     public static TeaCeremonyManager Instance;
@@ -25,6 +26,10 @@ public class TeaCeremonyManager : MonoBehaviour
     float fireSize;
     public ParticleSystem steamParticles;
     public ParticleSystem tpSteamParticles;
+    public enum TeaTool{NONE,POWDERTOOL,TEAPOT,STIRTOOL};
+    public TeaTool currentTool = TeaTool.NONE;
+    public Color[] TeaColors; //1=Water, 2=GreenTea, 3=TeawithTooMuchWater, 4=Water with weirdElement
+    public GameObject Stain;
     void Awake() {
         Instance = this;
     }
@@ -43,6 +48,7 @@ public class TeaCeremonyManager : MonoBehaviour
         sl = sideLight.GetComponent<Light>();
         sl.intensity = initialSLtBrightness;
         tpSteamParticles.emissionRate = 0;
+        Stain.GetComponent<SpriteRenderer>().color = TeaColors[0];
     }
     void Update()
     {

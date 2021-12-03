@@ -45,16 +45,20 @@ public class StirTool : MonoBehaviour
         dipPos = new Vector3(this.transform.position.x, 0.97f, this.transform.position.z); //0.653f
         pickUPDes = new Vector3(this.transform.position.x, 1.6f, this.transform.position.z);
         //CLick and pick it up
+        if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){
         if(state==0&&clicked){
             float step = speed * Time.deltaTime;
             this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
             this.transform.rotation = Quaternion.Euler(180f, 0f, 0f); 
         }
+        }
         if(this.transform.position==pickUPDes){  //player picked it up
             otsc.enabled = false;
             state = 1;  //up
             rb.isKinematic = true;
-            Invoke("PickedUP",.5f);
+            if(Input.GetMouseButtonUp(0)){  //Fixed changed pos when hold pot and drag without release in the middle
+              Invoke("PickedUP",.5f);   
+            }
         }
         //Movement
         if (pickedUP && !Input.GetMouseButton(0))  //moving the tool
@@ -88,12 +92,15 @@ public class StirTool : MonoBehaviour
     void PickedUP(){
         pickedUP  = true;
         toolTrigger.SetActive(true);
+        TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.STIRTOOL;
     }
     void OnMouseDown() {
+        if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){
         clicked = true;
+        }
     }
     void OnMouseOver() {
-        if(!clicked){
+        if(!clicked&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){
             otsc.enabled = true;
         }
     }
@@ -106,6 +113,7 @@ public class StirTool : MonoBehaviour
         if(col.gameObject.tag == "Table"){
             pickedUP = false; 
             toolTrigger.SetActive(false);
+            TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
         }
     }
     void OnTriggerEnter(Collider col) {

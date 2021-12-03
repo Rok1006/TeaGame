@@ -8,7 +8,7 @@ public class Tea : MonoBehaviour
     SpriteRenderer teasprite;
     public GameObject tea;
     public Color teaColor;
-    public float maxHeight, minHeight, almostHeight;  //the cup max min , almostHeight is the level where liquid its almost at the bottom
+    //public float maxHeight, minHeight, almostHeight;  //the cup max min , almostHeight is the level where liquid its almost at the bottom
     //Vector3 bottleTop;  //the target
     //float currentHeight;
     //float targetHeight;
@@ -21,11 +21,12 @@ public class Tea : MonoBehaviour
         teasprite = this.GetComponent<SpriteRenderer>();
         teasprite.color = teaColor;//new Color (79f, 130f, 96f, 1);
         this.transform.localScale = new Vector3(minSize,minSize,minSize);
+        teasprite.color = TeaCeremonyManager.Instance.TeaColors[0];  //blue water color
     }
 
     void Update()
     {
-        teasprite.color = teaColor;//new Color (79f, 130f, 96f, 1);
+        // teasprite.color = teaColor;//new Color (79f, 130f, 96f, 1);
         FillingUP();
     }
     void TeaBottom(){

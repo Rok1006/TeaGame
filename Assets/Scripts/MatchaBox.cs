@@ -101,7 +101,7 @@ public class MatchaBox : MonoBehaviour
             if (Physics.Raycast (ray, out hit, 100)) {
                 Debug.Log (hit.transform.name);
                 mPos = hit.point;
-                //mPos.y = 1.076f;
+                mPos.y = 1.076f;
                 Debug.Log (mPos);
             }
             //this.transform.position += new Vector3(0f, 0f, 0f); //snap to mouse new position   posFix.y * followVStrength
@@ -116,19 +116,6 @@ public class MatchaBox : MonoBehaviour
             // canClick =true;
             // canRelease = true;
         }
-        //get current mouse position xy cord
-        //perform a raycast through the camera from camera into the scene where the positon is on the table
-        //make the object go to the ray casted position   tell u where u hit then set to object to the ray cast pos
-        //move it based on where the mouse is on the table
-        //Raycast mouse position
-        // Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-        // RaycastHit hit;
-        // if (Physics.Raycast (ray, out hit, 50)) {
-        //     Debug.Log (hit.transform.name);
-        //     Vector3 mPos = hit.transform.position;
-        //     mPos.y = 1.076f;
-        //     Debug.Log (mPos);
-        // }
     }
     private void LateUpdate()
     {
@@ -173,6 +160,8 @@ public class MatchaBox : MonoBehaviour
     }
     void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "Table"){
+            mbAnim.SetBool("Open", false);
+            mbAnim.SetBool("Close", true);
             pickedUP = false;
             toolTrigger.SetActive(false);
             TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;

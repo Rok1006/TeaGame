@@ -15,7 +15,7 @@ public class Powder : MonoBehaviour
     }
     void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "Cup"){
-            //do sth
+            Tea.Instance.numOfPowder+=1;
             MatchaBox.Instance.havePowder = false;
 
         }

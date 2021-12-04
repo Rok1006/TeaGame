@@ -17,6 +17,7 @@ TagManager:
   - Powder
   - ToolZone
   - ToolTrigger
+  - StirrTool
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - Particles
   - Objects
   - Cupboard
-  - 
+  - Drawer
   - 
   - 
   - 

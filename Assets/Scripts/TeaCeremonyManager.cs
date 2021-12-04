@@ -17,7 +17,6 @@ public class TeaCeremonyManager : MonoBehaviour
     //4.Particles(Maybe this shouldn't be here?)
     //5.Tool State(currHolding)
     //6.Stain
-
     public static TeaCeremonyManager Instance; //For easy access this is smart
 
     #region UI
@@ -51,12 +50,12 @@ public class TeaCeremonyManager : MonoBehaviour
     #endregion
 
     #region Tools
-    public enum TeaTool{NONE,POWDERTOOL,TEAPOT,STIRTOOL};
+    public enum TeaTool{NONE,POWDERTOOL,TEAPOT,STIRTOOL,NOTOOL};
     public TeaTool currentTool = TeaTool.NONE;
     #endregion
 
     #region Stain
-    public Color[] TeaColors; //1=Water, 2=GreenTea, 3=TeawithTooMuchWater, 4=Water with weirdElement
+    public Color[] TeaColors; //0=Water, 1=GreenTea, 2=TeawithToolesspowder, 3=Water with weirdElement, 4=GreenTeaWtoomucPowder
     public GameObject Stain;
     #endregion
     void Awake() {

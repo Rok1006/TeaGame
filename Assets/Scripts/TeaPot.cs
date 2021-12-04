@@ -109,6 +109,7 @@ public class TeaPot : MonoBehaviour
             pickedUP = false;  //not turning false at the end
             rb.isKinematic = false;
             canRelease = false;
+            Tea.Instance.cupCapacity.SetActive(false);
         }
         if (pickedUP && Input.GetMouseButtonDown(0))
         {
@@ -167,6 +168,7 @@ public class TeaPot : MonoBehaviour
     void PickedUP(){
         pickedUP  = true;
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.TEAPOT;
+        Tea.Instance.cupCapacity.SetActive(true);
     }
     void NtonPot(){
         OnteaPot = false;

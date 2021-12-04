@@ -12,11 +12,17 @@ public class CamSwitch : MonoBehaviour
     public GameObject CupboardCam;  //pick ingredients
     public GameObject drawer;
     Animator drawerAnim;
+
+    //Enum for access
+    public enum CamState {StartCam, TeaCam, ConvCam, ChoiceCam, BoardCam}
+    public CamState camState;
+
     void Awake() {
         Instance = this;
     }
     void Start()
     {
+        camState = CamState.StartCam;
         StartCam.SetActive(true);
         TeaCam.SetActive(false); 
         ConversationCam.SetActive(false);
@@ -27,19 +33,33 @@ public class CamSwitch : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1)){
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            camState = CamState.StartCam;
             StartCamOn();
-        }else if(Input.GetKeyDown(KeyCode.Alpha2)){
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            camState = CamState.TeaCam;
             TeaCamOn();
             //drawerAnim.SetTrigger("in");
-        }else if(Input.GetKeyDown(KeyCode.Alpha3)){
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            camState = CamState.ConvCam;
             ConversationCamOn();
-        }else if(Input.GetKeyDown(KeyCode.Alpha4)){
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            camState = CamState.ChoiceCam;
             ChoiceCamOn();
-        }else if(Input.GetKeyDown(KeyCode.Alpha5)){
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            camState = CamState.BoardCam;
             CupboardCamOn();
         }
-        if(ChoiceCam.activeSelf){
+        if(ChoiceCam.activeSelf){ //?
 
         }else{
             //drawerAnim.SetTrigger("in");

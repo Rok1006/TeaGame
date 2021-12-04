@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
-
+using TMPro;
 public class Ghost : MonoBehaviour
 {
     #region TextReader
@@ -25,11 +25,17 @@ public class Ghost : MonoBehaviour
     #endregion
 
     public List<StageData> stageList = new List<StageData>();
-    public Text textDisplay;
+    public TextMeshProUGUI textDisplay;
+    
+    public GameObject objDialogBox;
+    public RectTransform rectTrans;
+    float dialogBoxPosDown = -178f;
+    float dialogBoxPosUp = 160f;
+
     public float typingSpeed = 0.2f;
     public int stageIndex = 0; //real stage number -1
     public int dialogIndex = 0; //the line we are currently on
-    Coroutine dialogLoopCor;
+    Coroutine dialogLoopCor; //Store so we can stop
     int wrongCount = 0;
 
     public Animator anim;
@@ -41,6 +47,8 @@ public class Ghost : MonoBehaviour
         textDisplay.text = "";
         StartCoroutine(StageLoop());
         anim = GetComponent<Animator>();
+        rectTrans = objDialogBox.GetComponent<RectTransform>();
+        objDialogBox.SetActive(false);
     }
     void Update()
     {
@@ -52,16 +60,24 @@ public class Ghost : MonoBehaviour
         {
             DrinkTea("Good");
         }
+
+        //DialogBoxPos
+        if(CamSwitch.Instance.camState == CamSwitch.CamState.TeaCam)
+            rectTrans.anchoredPosition3D = new Vector3(rectTrans.anchoredPosition3D.x,dialogBoxPosUp, rectTrans.anchoredPosition3D.z);
+        else if (CamSwitch.Instance.camState == CamSwitch.CamState.ConvCam)
+            rectTrans.anchoredPosition3D = new Vector3(rectTrans.anchoredPosition3D.x, dialogBoxPosDown, rectTrans.anchoredPosition3D.z);
     }
     IEnumerator StageLoop() //Main loop for each stage
     {
         Debug.Log("Intro Animation HERE");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         Debug.Log("Start dialog");
         dialogLoopCor = StartCoroutine(TypeAll());
+
     }
     IEnumerator TypeAll() //Go through every dialog of the stage
-    { 
+    {
+        objDialogBox.SetActive(true);
         for(int i=dialogIndex; i<stageList[stageIndex].dialogList.Count; i++)
         {
             DialogData dialogData = stageList[stageIndex].dialogList[i];
@@ -76,10 +92,13 @@ public class Ghost : MonoBehaviour
             dialogIndex++;
         }
         Animate(null); //End of all dialog reset animation
+
+        objDialogBox.SetActive(false);//Maybe delte later!!!!!IDK   
         //Player game over here!!!
     }
     IEnumerator Type(DialogData dialogData) //Go through one specific dialog
     {
+        objDialogBox.SetActive(true);
         Debug.Log("Drink Reacting...");
         Animate(dialogData.animType);
         foreach (char letter in dialogData.dialog.ToCharArray())
@@ -90,6 +109,20 @@ public class Ghost : MonoBehaviour
         yield return new WaitForSeconds(dialogData.pauseTime);
         textDisplay.text = "";
         dialogLoopCor = StartCoroutine(TypeAll());  //Back to main dialog list
+    }
+
+    public void NextStage()
+    {
+        //Stop everything now --------Merge this with part of DrinkTea() to optimize
+        textDisplay.text = "";
+        StopCoroutine(dialogLoopCor);
+        Animate(null);
+
+        //Next Stage
+        wrongCount = 0;
+        stageIndex++;
+        dialogIndex = 0;
+        StartCoroutine(StageLoop());
     }
     void DrinkTea(string teaType)
     {

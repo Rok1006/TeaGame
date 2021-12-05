@@ -57,7 +57,7 @@ public class StirTool : MonoBehaviour
             state = 1;  //up
             rb.isKinematic = true;
             if(Input.GetMouseButtonUp(0)){  //Fixed changed pos when hold pot and drag without release in the middle
-              Invoke("PickedUP",.5f);   
+              Invoke("PickedUP",0.01f);   //,.5f
             }
         }
         //Movement
@@ -113,7 +113,6 @@ public class StirTool : MonoBehaviour
         if(col.gameObject.tag == "Table"){
             pickedUP = false; 
             toolTrigger.SetActive(false);
-            TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
         }
     }
     void OnTriggerEnter(Collider col) {
@@ -125,6 +124,7 @@ public class StirTool : MonoBehaviour
             canRelease  = true;
         }
         if(col.gameObject.tag == "ToolTrigger"){
+            TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
             this.transform.position = OriginalToolPos.transform.position;
         }
     }

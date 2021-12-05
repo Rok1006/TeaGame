@@ -69,7 +69,7 @@ public class MatchaBox : MonoBehaviour
             state = 1;  //up
             rb.isKinematic = true;
             if(Input.GetMouseButtonUp(0)){  //Fixed changed pos when hold pot and drag without release in the middle
-              Invoke("PickedUP",.5f);   
+              Invoke("PickedUP",0.01f);  //,.5f 
             }
         }
         //MOvement
@@ -78,7 +78,7 @@ public class MatchaBox : MonoBehaviour
             this.transform.position += deltaMousePosMove;
         }
         //Release it
-        if(state==1&&Input.GetMouseButton(1)&&canRelease){  //later add canRelease bool
+        if(state==1&&Input.GetMouseButton(1)&&canRelease&&!havePowder){  //later add canRelease bool
             state = 0;
             clicked = false;
             pickedUP = false;
@@ -93,6 +93,7 @@ public class MatchaBox : MonoBehaviour
             }
             // currenPowder.transform.parent = null;
         }else if (pickedUP&&Input.GetMouseButtonUp(0)){ //when pick up and release right click
+            havePowder = false;
             Vector3 tempZ = this.transform.rotation * Vector3.forward; //Im trying to make the direction stay the same but failed....
             this.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);  //tempZ.zsnap to this rotation, but keep the z rotation
             Vector3 posFix = -mousePosPrePour + Input.mousePosition;
@@ -157,6 +158,7 @@ public class MatchaBox : MonoBehaviour
     }
     void ReleasePowder(){
         currenPowder.transform.parent = null;
+        //havePowder = false;
     }
     void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "Table"){
@@ -164,7 +166,6 @@ public class MatchaBox : MonoBehaviour
             mbAnim.SetBool("Close", true);
             pickedUP = false;
             toolTrigger.SetActive(false);
-            TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
         }
     }
     void OnTriggerEnter(Collider col) {
@@ -175,6 +176,7 @@ public class MatchaBox : MonoBehaviour
             canRelease  = true;
         }
         if(col.gameObject.tag == "ToolTrigger"){
+            TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
             this.transform.position = OriginalToolPos.transform.position;
         }
     }

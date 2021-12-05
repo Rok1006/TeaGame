@@ -17,11 +17,13 @@ public class Powder : MonoBehaviour
         if(col.gameObject.tag == "Cup"){
             Tea.Instance.numOfPowder+=1;
             MatchaBox.Instance.havePowder = false;
+            Destroy(this.gameObject, .5f);
 
         }
         if(col.gameObject.tag == "Table"){
             MatchaBox.Instance.havePowder = false;
-            //Destroy(this.gameObject, .5f);
+            Destroy(this.gameObject, .5f);
         }
+        //MatchaBox.Instance.havePowder = false;
     }
 }

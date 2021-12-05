@@ -89,7 +89,7 @@ public class TeaPot : MonoBehaviour
             canMove = true; 
             state=0;
             if(Input.GetMouseButtonUp(0)){  //Fixed changed pos when hold pot and drag without release in the middle
-              Invoke("PickedUP",.5f);   
+              Invoke("PickedUP",0.01f);  //,.5f 
             }
             //Invoke("CanRelease",.25f);  //allow player to release it Originall on
             rb.isKinematic = true;
@@ -202,7 +202,6 @@ public class TeaPot : MonoBehaviour
             //print("table");
             pickedUP = false;  //not working after using stove is there sth that get turn on again not sensitive?
             canClick =true;
-            TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
         }
         if(col.gameObject.tag == "Stove"){
             //rb.isKinematic = true;
@@ -241,6 +240,7 @@ public class TeaPot : MonoBehaviour
             //canRelease = true;
         }
         if(col.gameObject.tag == "TPTrigger"){
+            TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
             thisParent.transform.position = tpPos.transform.position;
             //mainHolder.transform.position = tpPos.transform.position;
             TPindicator.transform.position = new Vector3(Originalindicator.transform.position.x,TPindicator.transform.position.y,Originalindicator.transform.position.z);

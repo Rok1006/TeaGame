@@ -15,6 +15,8 @@ public class Tea : MonoBehaviour
     public float speed;
     public GameObject OriginalPos;
     public GameObject TopPos;
+    public float distance;
+    public float initialDistance;
     [Header("UI")]
     public GameObject stirBar;
     private Image sb;
@@ -39,15 +41,21 @@ public class Tea : MonoBehaviour
         sb = stirBar.GetComponent<Image>();
         sb.fillAmount = 0;
         stirBar.SetActive(false);
-        //cc = cupCapacity.GetComponent<Image>();
         cc.fillAmount = 0;
         cupCapacity.SetActive(false);  //on when player holding up pot
+        initialDistance = TopPos.transform.position.y-OriginalPos.transform.position.y;
     }
     void Update()
     {
-        FillingUP();
+        distance = TopPos.transform.position.y-OriginalPos.transform.position.y;
+        //print(distance); 
+        if(distance<initialDistance){
+            cc.fillAmount +=0.0012f;
+            initialDistance = distance; //setting it to every current
+        }
+
+        FillingUP(); 
         if(stirring){
-            //particles here
             stirBar.SetActive(true);
             sb.fillAmount+=0.008f;
         }else{
@@ -60,7 +68,7 @@ public class Tea : MonoBehaviour
         //Change of state
         if(numOfPowder==3){  //right amt
             teastate = 1;
-        }else if(numOfPowder<3){  //too less
+        }else if(numOfPowder<3&&numOfPowder>0){  //too less
             teastate = 2;
         }else if(numOfPowder>3){   //too much
             teastate = 4;
@@ -74,7 +82,7 @@ public class Tea : MonoBehaviour
     }
     void FillingUP(){
         if(SpillingDetector.Instance.inCup&& Input.GetMouseButton(0)){
-            cc.fillAmount +=0.0023f;
+            //cc.fillAmount +=0.0018f;  //0.0023f, change this to according to the distance between top and original pos
             float step = speed * Time.deltaTime;
             OriginalPos.transform.position = Vector3.MoveTowards(OriginalPos.transform.position, TopPos.transform.position, step);
         }

@@ -18,22 +18,31 @@ public class SpillingDetector : MonoBehaviour
 
     void Update()
     {
+        //print(Time.frameCount);
+        // if(Time.frameCount%4==0){
+        //     print("yeh");
+        // }
+        if(Time.frameCount%2==0){
         if(leaveStain){
             Vector3 stainPos = new Vector3(this.gameObject.transform.position.x,0.201f, this.gameObject.transform.position.z);
             GameObject j = Instantiate(stain, stainPos, Quaternion.identity) as GameObject;
             float size = Random.Range(0.05f,0.8f);  //0.5
             j.transform.localScale = new Vector3(size,size,size);
             j.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
-            Destroy(j.gameObject,1f);
+            Destroy(j.gameObject,.5f);
             leaveStain=false;
                //later can have a variation of size
+        }
         }
     }
     void OnParticleCollision(GameObject col)   
     {
         print("sth");
-        //print(this.gameObject.transform.position.x);
-        leaveStain = true;
+        if(col.gameObject.tag == "Table"){
+            leaveStain = true;
+        }else{
+            leaveStain = false;
+        }
         //make in instanciate only once
         if(col.gameObject.tag == "Cup"){
             print("Hit");

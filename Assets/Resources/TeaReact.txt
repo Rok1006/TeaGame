@@ -1,10 +1,30 @@
 <Stage>1
-Bad Tea
+This is your first time. Try again.
+<p>3
+Try once more. You'll get the hang of it soon.
+<p>3
+I was wrong about you.
 <p>2
-I hate u
 <a>Flip
-<p>2
-Now you die!
-<a>Flip
-<p>1
 <Stage>2
+You can do better than that.
+<p>2
+No.
+<p>2
+<a>Flip
+<Stage>3
+I expected more.
+<p>2
+<a>Flip
+<Stage>4
+I had higher hopes for you.
+<p>2
+<a>Flip
+<Stage>5
+This one was pretty straightforward.
+<p>2
+<a>Flip
+<Stage>6
+What would you do if the tea is bitter?
+<p>2
+<a>Flip

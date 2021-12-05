@@ -22,6 +22,7 @@ public class CamSwitch : MonoBehaviour
     }
     void Start()
     {
+        TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NOTOOL;
         camState = CamState.StartCam;
         StartCam.SetActive(true);
         TeaCam.SetActive(false); 
@@ -29,7 +30,6 @@ public class CamSwitch : MonoBehaviour
         ChoiceCam.SetActive(false);
         CupboardCam.SetActive(false);
         drawerAnim = drawer.GetComponent<Animator>();
-        TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NOTOOL;
     }
 
     void Update()

@@ -14,6 +14,7 @@ public class Ghost : MonoBehaviour
     {
         public List<DialogData> dialogList = new List<DialogData>();
         public List<DialogData> TeaReactList = new List<DialogData>();
+        public float stagePause;
     }
     [System.Serializable]
     public class DialogData
@@ -69,8 +70,8 @@ public class Ghost : MonoBehaviour
     }
     IEnumerator StageLoop() //Main loop for each stage
     {
-        Debug.Log("Intro Animation HERE");
-        yield return new WaitForSeconds(2f);
+        Debug.Log("New Stage: "+stageIndex);
+        yield return new WaitForSeconds(stageList[stageIndex].stagePause); //Wait before begin
         Debug.Log("Start dialog");
         dialogLoopCor = StartCoroutine(TypeAll());
 
@@ -81,15 +82,33 @@ public class Ghost : MonoBehaviour
         for(int i=dialogIndex; i<stageList[stageIndex].dialogList.Count; i++)
         {
             DialogData dialogData = stageList[stageIndex].dialogList[i];
-            Animate(dialogData.animType);
-            foreach (char letter in dialogData.dialog.ToCharArray())
+            if (dialogData.dialog == "<Next>")
             {
-                textDisplay.text += letter;
-                yield return new WaitForSeconds(typingSpeed);
+                NextStage();
             }
-            yield return new WaitForSeconds(dialogData.pauseTime);
-            textDisplay.text = "";
-            dialogIndex++;
+            else
+            {
+                Animate(dialogData.animType);
+                foreach (char letter in dialogData.dialog.ToCharArray())
+                {
+                    if (Input.GetKeyDown(KeyCode.Period)) //Debug Stuff
+                    {
+                        i++;
+                        print(i);
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Comma))
+                    {
+                        i--;
+                        print(i);
+                    }
+                    textDisplay.text += letter;
+                    yield return new WaitForSeconds(typingSpeed);
+                }
+                
+                yield return new WaitForSeconds(dialogData.pauseTime);
+                textDisplay.text = "";
+                dialogIndex++;
+            }
         }
         Animate(null); //End of all dialog reset animation
 
@@ -155,10 +174,6 @@ public class Ghost : MonoBehaviour
 
     void Animate(string animType)
     {
-        if (!string.IsNullOrEmpty(animType))
-        {
-            animType = Regex.Replace(animType, @"\t|\n|\r", "");//Regex to remove the pesky '\r' (<-what a jerk)
-        }
         switch (animType)
         {
             case ("Flip"):
@@ -184,6 +199,11 @@ public class Ghost : MonoBehaviour
         StageData currStage = new StageData(); // empty new stage and dialog to use
         DialogData currDialog = new DialogData();
 
+        for (int i = 0; i < lineTextList.Count; i++)
+        {
+            lineTextList[i] = Regex.Replace(lineTextList[i], @"\t|\n|\r", "");//Regex to remove the pesky '\r' (<-what a jerk)
+        }
+
         foreach (string lineText in lineTextList)
         {
             if (lineText.Contains("<Stage>"))//Create and store stagedata on <Stage>
@@ -197,7 +217,10 @@ public class Ghost : MonoBehaviour
                 if (lineText.Contains("<p>")) //read and store pausetime
                 {
                     currDialog.pauseTime = float.Parse(lineText.Substring(lineText.IndexOf(">") + 1));
-
+                }
+                else if (lineText.Contains("<stagePause>")) //read and store pausetime for beginning of stage
+                {
+                    currStage.stagePause = float.Parse(lineText.Substring(lineText.IndexOf(">") + 1));
                 }
                 else if (lineText.Contains("<a>")) //read and store animation type
                 {
@@ -211,7 +234,7 @@ public class Ghost : MonoBehaviour
                 }
             }
         }
-        Debug.Log("Reading React done.");
+        Debug.Log("Reading Dialog done.");
     }
     void ReadReactText()
     {
@@ -220,7 +243,7 @@ public class Ghost : MonoBehaviour
         List<string> lineTextList = new List<string>(txtFile.text.Split('\n')); //Spilt file to lines
 
         //Processing txt
-        int stageInd = 0;
+        int stageInd = -1; //so the first time it goes to 0
         StageData currStage = new StageData();
         DialogData currDialog = new DialogData();
 
@@ -228,6 +251,7 @@ public class Ghost : MonoBehaviour
         {
             if (lineText.Contains("<Stage>"))//Create and store stagedata on <Stage>
             {
+                stageInd++;
                 currStage = stageList[stageInd];
                 Debug.Log("Reading" + lineText + "...");
             }
@@ -250,7 +274,7 @@ public class Ghost : MonoBehaviour
                 }
             }
         }
-        Debug.Log("Reading done.");
+        Debug.Log("Reading React done.");
     }
 }
 

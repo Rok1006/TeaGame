@@ -1,39 +1,67 @@
 <Stage>1
+<stagePause>2
+Tonight is the night... I hope you are ready.
+<p>1
+My time is running out.
+<p>1
+Do you still remember the things I've taught you?
+<p>2
+Worry not.
+<p>0.8
+Before I let you off on your own.
+<p>1
+I'll walk you through it for one last time.
+<p>1
+This time, remember it with your heart...
+<p>2
+...If you are determined to take my place... and face them by yourself.
+<p>2
+Now then... Shall we?
+<p>2
+Take a look around. But don't touch anything yet.
+<p>0.5
+Take a deep breath and listen to me.
+<p>0.3
+You will know what to do once we get there.
+<p>2
+<Next>
+<Stage>2
+<stagePause>2
 Making tea is bringing a river of life to the table. 
 <p>6
-It can clean but can¡¯t be minced.
+It can clean but can't be minced.
 <p>6
 It is the bones and flesh in a cup of tea.
 <p>6
-<Stage>2
+<Stage>3
 Where the river flows, a trail of greens grows.
 <p>6
 Though it may look dull, its scent soothes your soul.
 <p>6
 Its scent reaches farthest when it looks weakest.
 <p>6
-<Stage>3
+<Stage>4
 Ice breeds no greens.
 <p>6
 It takes time for ice to turn into rivers.
 <p>6
 Only rivers breed fine greens.
 <p>6
-<Stage>4
-To grow things on soil, you¡¯ll work with a trowel.
+<Stage>5
+To grow things on soil, you'll work with a trowel.
 <p>6
 Without it, no greens will grow even with a river.
 <p>6
 You trowel the soil to make the tea royal.
 <p>6
-<Stage>5
-It¡¯s better in pieces than when it¡¯s complete.
+<Stage>6
+It's better in pieces than when it's complete.
 <p>6
 The harder you try to crush it, the finer it becomes.
 <p>6
-It¡¯s bitter, but that makes it better.
+It's bitter, but that makes it better.
 <p>6
-<Stage>6
+<Stage>7
 It goes well with a cup of tea.
 <p>6
 It looks like the moon outside.

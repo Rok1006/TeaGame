@@ -47,7 +47,7 @@ public class SpillingDetector : MonoBehaviour
         if(col.gameObject.tag == "Cup"){
             print("Hit");
             inCup = true;
-            if(TeaPot.Instance.heatness>=1){TeaCeremonyManager.Instance.steamParticles.emissionRate = 2;}
+            if(TeaPot.Instance.heatness>=0.7f){TeaCeremonyManager.Instance.steamParticles.emissionRate = 2;}
             Invoke("SteamEmitStop",2f);
         }else{
             print("notHit");

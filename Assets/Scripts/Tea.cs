@@ -15,19 +15,25 @@ public class Tea : MonoBehaviour
     public float speed;
     public GameObject OriginalPos;
     public GameObject TopPos;
+    public Vector3 resetPos;
     public float distance;
     public float initialDistance;
+    public GameObject teaPattern; //when stirring
     [Header("UI")]
     public GameObject stirBar;
     private Image sb;
     public GameObject cupCapacity;
     public Image cc;
+    public GameObject heatBar;
+    public Slider hb;
     
     [Header("Tea Status")]
     public bool stirring = false;
     public float liquidLevel;  //amt of liquid in the cup  Decent amt is 0.80
     public int numOfPowder;
+    public int numOfIngredients;
     public int teastate;
+    public string ingredientType;
     //heatness of the tea
     void Awake() {
         Instance = this;
@@ -38,28 +44,36 @@ public class Tea : MonoBehaviour
         teasprite.color = teaColor;//new Color (79f, 130f, 96f, 1);
         this.transform.localScale = new Vector3(minSize,minSize,minSize);
         teasprite.color = TeaCeremonyManager.Instance.TeaColors[0];  //blue water color
+        heatBar.SetActive(false);
         sb = stirBar.GetComponent<Image>();
         sb.fillAmount = 0;
         stirBar.SetActive(false);
         cc.fillAmount = 0;
         cupCapacity.SetActive(false);  //on when player holding up pot
+        
+        teaPattern.SetActive(false);
         initialDistance = TopPos.transform.position.y-OriginalPos.transform.position.y;
+        //Reset Related
+        resetPos = OriginalPos.transform.position; //this is where original pos will go back to when reset
     }
     void Update()
     {
+        //FillUp Tea
+        liquidLevel = cc.fillAmount;
         distance = TopPos.transform.position.y-OriginalPos.transform.position.y;
-        //print(distance); 
         if(distance<initialDistance){
             cc.fillAmount +=0.0012f;
             initialDistance = distance; //setting it to every current
         }
-
         FillingUP(); 
+        //Stirring Tea
         if(stirring){
+            teaPattern.SetActive(true);
             stirBar.SetActive(true);
             sb.fillAmount+=0.008f;
         }else{
             stirBar.SetActive(false);
+            teaPattern.SetActive(false);
         }
         if(sb.fillAmount==1){  //every stirr
             RestartStirBar();
@@ -75,12 +89,11 @@ public class Tea : MonoBehaviour
         }else if(numOfPowder<1){  //&& if have other ingredients
             teastate = 0;
         }
-
     }
     void TeaBottom(){
         teaColor.a = 0f;
     }
-    void FillingUP(){
+    void FillingUP(){   //Filling UP tea
         if(SpillingDetector.Instance.inCup&& Input.GetMouseButton(0)){
             //cc.fillAmount +=0.0018f;  //0.0023f, change this to according to the distance between top and original pos
             float step = speed * Time.deltaTime;
@@ -109,7 +122,6 @@ public class Tea : MonoBehaviour
             stirring = false;
         } 
     }
-
     void TeaState(){   //Change tea color
         switch(teastate){
             case 0:  //water
@@ -126,6 +138,17 @@ public class Tea : MonoBehaviour
             break;
             case 4:  //tea with too much powder
                 teasprite.color = TeaCeremonyManager.Instance.TeaColors[4];
+            break;
+        }
+    }
+    public void ChangeIngredientType(string type){
+        ingredientType = type;
+        Invoke("IngredientType", 3f); //wait time in effect
+    }
+    void IngredientType(){ //meed the cup to have water inorder to have effect
+        switch(ingredientType){
+            case "FlowerTeaBomb":
+                //how it affect the tea, may be sth float up
             break;
         }
     }

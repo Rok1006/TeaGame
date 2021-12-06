@@ -18,6 +18,7 @@ TagManager:
   - ToolZone
   - ToolTrigger
   - StirrTool
+  - Ingredients
   layers:
   - Default
   - TransparentFX

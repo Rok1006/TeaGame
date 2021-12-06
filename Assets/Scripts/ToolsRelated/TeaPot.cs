@@ -23,6 +23,7 @@ public class TeaPot : MonoBehaviour
     public bool canClick = true;
     public bool inOriginalPlace;
     public bool canMove =true;
+    public bool onStove = false;
     Rigidbody rb;
     [Header("Assignments")]
     public float rotatespeed;
@@ -150,8 +151,13 @@ public class TeaPot : MonoBehaviour
         }else{
             TPindicator.SetActive(false);
         } 
+        //TeaPot heatness
+        Tea.Instance.hb.value = heatness;
+        if(!onStove&&heatness>0){ //&& offstove
+            HeatnessReduce();   
+        }
+       
     }
-
     private void LateUpdate()
     {
         deltaMousePos = Input.mousePosition - prevMousePos;
@@ -161,7 +167,6 @@ public class TeaPot : MonoBehaviour
         prevMousePos = Input.mousePosition;
         //Debug.Log(deltaMousePos);
     }
-
     void CanRelease(){
         canRelease = true;
     }
@@ -169,9 +174,13 @@ public class TeaPot : MonoBehaviour
         pickedUP  = true;
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.TEAPOT;
         Tea.Instance.cupCapacity.SetActive(true);
+        Tea.Instance.heatBar.SetActive(true);
     }
     void NtonPot(){
         OnteaPot = false;
+    }
+    void HeatnessReduce(){
+        heatness-=0.0005f;
     }
     void OnMouseEnter(){
         OnteaPot = true;
@@ -200,12 +209,13 @@ public class TeaPot : MonoBehaviour
     void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "Table"){
             //print("table");
+            Tea.Instance.heatBar.SetActive(false);
             pickedUP = false;  //not working after using stove is there sth that get turn on again not sensitive?
             canClick =true;
         }
         if(col.gameObject.tag == "Stove"){
             //rb.isKinematic = true;
-            Debug.Log("yeh");
+            onStove = true;
             pickedUP = false;
             Stoveindicator.SetActive(false);
             if(heatness<1){  //if not heated
@@ -220,9 +230,10 @@ public class TeaPot : MonoBehaviour
         }
     }
     void OnCollisionExit(Collision col) {
-        // if(col.gameObject.tag == "Stove"){
-        //     TeaCeremonyManager.Instance.ResetStove();
-        // }
+        if(col.gameObject.tag == "Stove"){
+            onStove = false;
+        //     // TeaCeremonyManager.Instance.ResetStove();
+        }
     }
     void OnTriggerEnter(Collider col) {
         // if(col.gameObject.tag == "Table"){

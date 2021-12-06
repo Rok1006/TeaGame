@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
-        
+        TeaCeremonyManager.Instance.startDiming = false; //also whenever player is in tutorial
     }
 
     // Update is called once per frame
@@ -22,13 +22,19 @@ public class GameManager : MonoBehaviour
     {
         switch (currGhost.stageIndex)
         {
-            case (0):
+            // case (0):
+            // {
+            //     if (TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT)
+            //     {
+            //         tutor.NextImage();
+            //         currGhost.NextStage();
+            //     }
+            //     break;
+            // }
+            case (1):  //when player is allowed to move things //make it when ever player is in a tutorial, startDimming to false
             {
-                if (TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT)
-                {
-                    tutor.NextImage();
-                    currGhost.NextStage();
-                }
+                //Change camera angle to teaCam
+                TeaCeremonyManager.Instance.startDiming = true;   
                 break;
             }
         }

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Ingredients : MonoBehaviour
 {
+    public string ingredientName;
     public Outline oc;
+    public GameObject IngredientPrefab;
     void Start()
     {
         oc.enabled = false;
@@ -21,5 +23,9 @@ public class Ingredients : MonoBehaviour
 
     void OnMouseExit(){
         oc.enabled = false;
+    }
+    void OnMouseDown() {
+        TeaCeremonyManager.Instance.IngredientsAdd(IngredientPrefab);
+        Tea.Instance.ChangeIngredientType(ingredientName);
     }
 }

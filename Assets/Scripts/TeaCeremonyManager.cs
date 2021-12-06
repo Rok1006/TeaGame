@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Experimental.Rendering.Universal;
-//Included:
-//1. Candle lighting
-//2. TeaPot Heating
-//3.TeaColor
 public class TeaCeremonyManager : MonoBehaviour
 {
     //Hi! I'm TeaCeremonyManager! I'm glad you are here with me.
@@ -16,7 +12,9 @@ public class TeaCeremonyManager : MonoBehaviour
     //3.Object State(like fire)
     //4.Particles(Maybe this shouldn't be here?)
     //5.Tool State(currHolding)
-    //6.Stain
+    //6.TeaColor
+    //7.Ingredients Insertion
+    //8.TeaServing
     public static TeaCeremonyManager Instance; //For easy access this is smart
 
     #region UI
@@ -33,18 +31,15 @@ public class TeaCeremonyManager : MonoBehaviour
     public GameObject torchLight;
     private float initTorchBrightness = 2.36f;
     Light tl;
-
     public GameObject sideLight;
     private float initSideBrightness = 0.62f;
     Light sl;
-    #endregion
-
-    #region Objects
+    public bool startDiming = false;
     public GameObject candleFire;
     float fireSize;
     #endregion
 
-    #region Parti
+    #region Particles
     public ParticleSystem steamParticles;
     public ParticleSystem tpSteamParticles;
     #endregion
@@ -54,9 +49,19 @@ public class TeaCeremonyManager : MonoBehaviour
     public TeaTool currentTool = TeaTool.NONE;
     #endregion
 
-    #region Stain
+    #region TeaColor
     public Color[] TeaColors; //0=Water, 1=GreenTea, 2=TeawithToolesspowder, 3=Water with weirdElement, 4=GreenTeaWtoomucPowder
     public GameObject Stain;
+    #endregion
+    #region Ingredients
+    public GameObject InsertSpot;
+    #endregion
+    #region Serving
+    public GameObject OriginalCupPos;
+    public GameObject ServeCupPos;
+    public GameObject mainCup;
+    public bool served = false;
+    public GameObject tea;
     #endregion
     void Awake() {
         Instance = this;
@@ -77,10 +82,14 @@ public class TeaCeremonyManager : MonoBehaviour
         sl.intensity = initSideBrightness;
         tpSteamParticles.emissionRate = 0;
         Stain.GetComponent<SpriteRenderer>().color = TeaColors[0];
+        //Color32 c = Stain.GetComponent<SpriteRenderer>().color;
+        //print("r is"+c.r);
     }
     void Update()
     {
-        LightDiming();
+        if(startDiming){
+          LightDiming();  
+        }
         candleFire.transform.localScale = new Vector3(fireSize,fireSize,fireSize);
         //Candle
         if(cb.fillAmount == 1){
@@ -105,15 +114,21 @@ public class TeaCeremonyManager : MonoBehaviour
         if(potHeating){
             potBar.SetActive(true);
             pb.fillAmount+=0.005f;
-            TeaPot.Instance.heatness+=0.005f; //keep tracking
+            if(pb.fillAmount!=1&&TeaPot.Instance.heatness<1){
+                TeaPot.Instance.heatness+=0.005f; //keep tracking
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.F)) //Button stoped working help
         {
             CandleLighting();
         }
+        //Testing
+        if(Input.GetKeyDown(KeyCode.G)){ //if teacup back to player reset tea state
+            TeaReturn();
+        }
     }
-
+    //TeaPot & Heating
     public void ResetStove(){
         potHeating = false;
         potBar.SetActive(false);
@@ -123,11 +138,12 @@ public class TeaCeremonyManager : MonoBehaviour
     void StopTeaPotSteam(){
         tpSteamParticles.emissionRate = 0;
     }
-    public void CandleLighting(){
-        candlelighting = true;
-    }
     public void TeaPotHeating(){
         potHeating = true;
+    }
+    //Lighting
+    public void CandleLighting(){
+        candlelighting = true;
     }
     void LightDiming(){
         tl.intensity-=0.0007f;
@@ -135,5 +151,26 @@ public class TeaCeremonyManager : MonoBehaviour
         if(fireSize>30){
             fireSize-= 0.1f; 
         }
+    }
+    //Ingredients Insertion
+    public void IngredientsAdd(GameObject Ingredients){
+        GameObject i = Instantiate(Ingredients, InsertSpot.transform.position, Quaternion.identity) as GameObject;
+    }
+    public void ServeTea(){
+        mainCup.transform.position = ServeCupPos.transform.position;
+        served = true;
+        //opposite person with do sth to the tea
+    }
+    public void TeaReturn(){
+        mainCup.transform.position = OriginalCupPos.transform.position;
+        served = false;
+        //reset tea state
+        Tea.Instance.OriginalPos.transform.position = Tea.Instance.resetPos; //rest tea to initial pos
+        Tea.Instance.initialDistance = Tea.Instance.TopPos.transform.position.y-Tea.Instance.OriginalPos.transform.position.y; //reset initial distance for cup capacity
+        tea.transform.localScale = new Vector3(Tea.Instance.minSize,Tea.Instance.minSize,Tea.Instance.minSize); //reset scale
+        Tea.Instance.teastate = 0; 
+        Tea.Instance.cc.fillAmount = 0;
+        Tea.Instance.numOfPowder = 0;
+        Tea.Instance.numOfIngredients = 0;
     }
 }

@@ -14,6 +14,7 @@ public class Ghost : MonoBehaviour
     {
         public List<DialogData> dialogList = new List<DialogData>();
         public List<DialogData> TeaReactList = new List<DialogData>();
+        public List<DialogData> TeaTutorList = new List<DialogData>();
         public float stagePause;
     }
     [System.Serializable]
@@ -37,6 +38,7 @@ public class Ghost : MonoBehaviour
     public int stageIndex = 0; //real stage number -1
     public int dialogIndex = 0; //the line we are currently on
     Coroutine dialogLoopCor; //Store so we can stop
+    Coroutine reactCor;
     int wrongCount = 0;
 
     public Animator anim;
@@ -45,6 +47,7 @@ public class Ghost : MonoBehaviour
     {
         ReadDialogText();
         ReadReactText();
+        ReadTutorText();
         textDisplay.text = "";
         StartCoroutine(StageLoop());
         anim = GetComponent<Animator>();
@@ -151,11 +154,17 @@ public class Ghost : MonoBehaviour
             //Stop everything now
             textDisplay.text = "";
             StopCoroutine(dialogLoopCor);
+            StopCoroutine(reactCor);
             Animate(null);
 
             //Start React
-            StartCoroutine(Type(stageList[stageIndex].TeaReactList[wrongCount]));//Get dialog based on wrongCount
-            wrongCount++;
+            if (wrongCount >= stageList[stageIndex].TeaReactList.Count)
+                reactCor = StartCoroutine(Type(stageList[stageIndex].TeaTutorList[0]));//Get dialog based on wrongCount
+            else
+            {
+                reactCor = StartCoroutine(Type(stageList[stageIndex].TeaReactList[wrongCount]));//Get dialog based on wrongCount
+                wrongCount++;
+            }
         }
         if (teaType == "Good")
         {
@@ -276,5 +285,47 @@ public class Ghost : MonoBehaviour
         }
         Debug.Log("Reading React done.");
     }
+
+    void ReadTutorText()
+    {
+        //Reading React txt
+        txtFile = Resources.Load<TextAsset>("GhostData_tutorial"); //Read the file
+        List<string> lineTextList = new List<string>(txtFile.text.Split('\n')); //Spilt file to lines
+
+        //Processing txt
+        int stageInd = -1; //so the first time it goes to 0
+        StageData currStage = new StageData();
+        DialogData currDialog = new DialogData();
+
+        foreach (string lineText in lineTextList)
+        {
+            if (lineText.Contains("<Stage>"))//Create and store stagedata on <Stage>
+            {
+                stageInd++;
+                currStage = stageList[stageInd];
+                Debug.Log("Reading" + lineText + "...");
+            }
+            else
+            {
+                if (lineText.Contains("<p>")) //read and store pausetime
+                {
+                    currDialog.pauseTime = float.Parse(lineText.Substring(lineText.IndexOf(">") + 1));
+
+                }
+                else if (lineText.Contains("<a>")) //read and store animation type
+                {
+                    currDialog.animType = lineText.Substring(lineText.IndexOf(">") + 1);
+                }
+                else //read and stor sentence
+                {
+                    currDialog = new DialogData();
+                    currStage.TeaTutorList.Add(currDialog);
+                    currDialog.dialog = lineText;
+                }
+            }
+        }
+        Debug.Log("Reading React done.");
+    }
+
 }
 

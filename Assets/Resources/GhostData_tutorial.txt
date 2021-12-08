@@ -1,19 +1,19 @@
 <Stage>1
 <Stage>2
 Pick up the teapot. Now. Put it on the boiler.
-<p>6
+<p>999
 <Stage>3
 Just pour the water.It's not that hard.
-<p>6
+<p>999
 <Stage>4
 ...Get the tea leaves will ya?
-<p>6
+<p>999
 <Stage>5
 I'm talking about the matcha powder. I really need to work on my metaphors, don't I?
-<p>6
+<p>999
 <Stage>6
 You need a stirring tool to mix things. Is it that hard to understand?
-<p>6
+<p>999
 <Stage>7
 There! I've had it! A snack would go well with a cup of tea! Why... You...
-<p>6
+<p>999

@@ -27,6 +27,7 @@ public class TeaCeremonyManager : MonoBehaviour
     bool potHeating = false;
     public GameObject discardButton;
     public bool canDiscard = false;
+    //public GameObject toolFirststep;
     #endregion
 
     #region Lights

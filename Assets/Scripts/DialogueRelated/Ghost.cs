@@ -154,7 +154,8 @@ public class Ghost : MonoBehaviour
             //Stop everything now
             textDisplay.text = "";
             StopCoroutine(dialogLoopCor);
-            StopCoroutine(reactCor);
+            if(reactCor!= null)
+                StopCoroutine(reactCor);
             Animate(null);
 
             //Start React

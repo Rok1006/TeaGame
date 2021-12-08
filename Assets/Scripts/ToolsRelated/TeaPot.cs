@@ -39,7 +39,7 @@ public class TeaPot : MonoBehaviour
     public GameObject indicatorPt;
     public GameObject indicator;
     public Outline otsc;  //the outline script
-
+    public GameObject toolFirststep;
     Vector3 prevMousePos;
     Vector3 deltaMousePos;
     Vector3 deltaMousePosRot;
@@ -74,6 +74,7 @@ public class TeaPot : MonoBehaviour
         prevMousePos = Input.mousePosition;
         Originalindicator.SetActive(false);
         StovePlaceholderObj.SetActive(true);
+        toolFirststep.SetActive(false);
     }
     void Update()
     {
@@ -81,6 +82,8 @@ public class TeaPot : MonoBehaviour
         pickUPDes = new Vector3(this.transform.position.x, 2f, transform.position.z);
         if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT){
         if(canClick&&OnteaPot && Input.GetMouseButton(0)&&state==0){   //pick up pot
+            toolFirststep.SetActive(false); //tutorial
+            Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
             float step = speed * Time.deltaTime;
             this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
             // canMove = true;  //this canmove to after player completely release after pick up
@@ -90,6 +93,7 @@ public class TeaPot : MonoBehaviour
             canMove = true; 
             state=1;
             if(Input.GetMouseButtonUp(0)){  //Fixed changed pos when hold pot and drag without release in the middle
+              Tutorial.Instance.NextStep();
               Invoke("PickedUP",0.01f);  //,.5f 
             }
             //Invoke("CanRelease",.25f);  //allow player to release it Originall on
@@ -111,6 +115,8 @@ public class TeaPot : MonoBehaviour
             rb.isKinematic = false;
             canRelease = false;
             Tea.Instance.cupCapacity.SetActive(false);
+            Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(false); //tutorial
+            Tutorial.Instance.ResetSteps(); //tutorial
         }
         if (pickedUP && Input.GetMouseButtonDown(0))
         {
@@ -122,7 +128,6 @@ public class TeaPot : MonoBehaviour
             StovePlaceholderObj.SetActive(false);
         }
         else if (pickedUP&&Input.GetMouseButtonUp(0)){ //when pick up and release right click
-        //state = 1;
             Vector3 tempZ = thisParent.transform.rotation * Vector3.forward; //Im trying to make the direction stay the same but failed....
             thisParent.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);  //tempZ.zsnap to this rotation, but keep the z rotation
             Vector3 posFix = -mousePosPrePour + Input.mousePosition;
@@ -176,6 +181,7 @@ public class TeaPot : MonoBehaviour
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.TEAPOT;
         Tea.Instance.cupCapacity.SetActive(true);
         Tea.Instance.heatBar.SetActive(true);
+        Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
     }
     void NtonPot(){
         OnteaPot = false;
@@ -190,6 +196,8 @@ public class TeaPot : MonoBehaviour
         OnteaPot = true;
         if(!pickedUP&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT){
             otsc.enabled = true;
+            toolFirststep.SetActive(true);
+            //Tutorial.Instance.currentStepsDisplay = Tutorial.Instance.TPsteps;
         }
     }
     void OnMouseDrag(){  //this or uncomment the part above  //here u have to  click pot and drag to pour
@@ -204,6 +212,7 @@ public class TeaPot : MonoBehaviour
     }
     void OnMouseExit(){
         otsc.enabled = false;
+        toolFirststep.SetActive(false);
         Invoke("NtonPot",.5f);
         // OnteaPot = false;
     }

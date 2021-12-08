@@ -27,39 +27,47 @@ You will know what to do once we get there.
 <Next>
 <Stage>2
 <stagePause>2
-Making tea is bringing a river of life to the table. 
-<p>6
-It can clean but can't be minced.
-<p>6
-It is the bones and flesh in a cup of tea.
-<p>6
-<Stage>3
-Where the river flows, a trail of greens grows.
-<p>6
-Though it may look dull, its scent soothes your soul.
-<p>6
-Its scent reaches farthest when it looks weakest.
-<p>6
-<Stage>4
+To make good tea, you need to first understand the person you are brewing for.
+<p>3
+Sometimes people aren't as straightforward as they can be.
+<p>3
+To understand someone, you need to observe their words and discern the underlying messages.
+<p>3
+Use me as practice. Will you understand the underlying messages of my words?
+<p>4
 Ice breeds no greens.
 <p>6
 It takes time for ice to turn into rivers.
 <p>6
 Only rivers breed fine greens.
 <p>6
+<Stage>3
+Making tea is bringing a river of life to the table. 
+<p>6
+It can clean but can't be minced.
+<p>6
+It is the bones and flesh in a cup of tea.
+<p>6
+<Stage>4
+Where the river flows, a trail of greens grows.
+<p>6
+Though it may look dull, its scent soothes your soul.
+<p>6
+Its scent reaches farthest when it looks weakest.
+<p>6
 <Stage>5
-To grow things on soil, you'll work with a trowel.
-<p>6
-Without it, no greens will grow even with a river.
-<p>6
-You trowel the soil to make the tea royal.
-<p>6
-<Stage>6
 It's better in pieces than when it's complete.
 <p>6
 The harder you try to crush it, the finer it becomes.
 <p>6
 It's bitter, but that makes it better.
+<p>6
+<Stage>6
+To grow things on soil, you'll work with a trowel.
+<p>6
+Without it, no greens will grow even with a river.
+<p>6
+You trowel the soil to make the tea royal.
 <p>6
 <Stage>7
 It goes well with a cup of tea.

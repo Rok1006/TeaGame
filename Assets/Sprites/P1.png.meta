@@ -744,6 +744,69 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: P1_21
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 278
+        width: 154
+        height: 208
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f793e6f118c6dd060800000000000000
+      internalID: 6979854299328035199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_22
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 278
+        width: 149
+        height: 209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5fb8e6c64448d3c0800000000000000
+      internalID: -4334639570568560806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_23
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 277
+        width: 137
+        height: 209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4915830a9c1aba890800000000000000
+      internalID: -7445679671578439276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

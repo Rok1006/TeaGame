@@ -678,7 +678,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 166773475}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: OriginalPos
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
@@ -1434,7 +1434,7 @@ GameObject:
   m_Component:
   - component: {fileID: 366578219}
   - component: {fileID: 366578220}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Level1
   m_TagString: L1
   m_Icon: {fileID: 0}
@@ -1512,7 +1512,7 @@ GameObject:
   - component: {fileID: 414926194}
   - component: {fileID: 414926193}
   - component: {fileID: 414926192}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: FakeTea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15219,7 +15219,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1423111838}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: TopPos
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
@@ -15461,7 +15461,7 @@ GameObject:
   - component: {fileID: 1456228686}
   - component: {fileID: 1456228690}
   - component: {fileID: 1456228687}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: StirTeaPattern
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15685,7 +15685,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1473570731}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: InsertSpot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39131,7 +39131,7 @@ GameObject:
   - component: {fileID: 2782103857334404050}
   - component: {fileID: 6314545238598475862}
   - component: {fileID: 6314545238598475861}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: MainCup
   m_TagString: Cup
   m_Icon: {fileID: 0}

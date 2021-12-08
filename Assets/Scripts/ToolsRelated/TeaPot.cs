@@ -80,7 +80,7 @@ public class TeaPot : MonoBehaviour
         originalPos = new Vector3(this.transform.position.x, 0.653f, transform.position.z); //update the location constantly
         pickUPDes = new Vector3(this.transform.position.x, 2f, transform.position.z);
         if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT){
-        if(canClick&&OnteaPot && Input.GetMouseButton(0)&&state==1){   //pick up pot
+        if(canClick&&OnteaPot && Input.GetMouseButton(0)&&state==0){   //pick up pot
             float step = speed * Time.deltaTime;
             this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
             // canMove = true;  //this canmove to after player completely release after pick up
@@ -88,23 +88,23 @@ public class TeaPot : MonoBehaviour
         }
         if(this.transform.position==pickUPDes){  //when the pot arrived at the top
             canMove = true; 
-            state=0;
+            state=1;
             if(Input.GetMouseButtonUp(0)){  //Fixed changed pos when hold pot and drag without release in the middle
               Invoke("PickedUP",0.01f);  //,.5f 
             }
             //Invoke("CanRelease",.25f);  //allow player to release it Originall on
             rb.isKinematic = true;
         }else{
-            state = 1;
+            state = 0;
             //canRelease = false;
             //rb.isKinematic = false;
             //pickedUP = false;
         }
-        if(state==1){
-            //pickedUP = false;
-        }
+        // if(state==1){
+        //     //pickedUP = false;
+        // }
         //releasing it
-        if(state==0&&canRelease&&Input.GetMouseButton(1)){  //release it change to right click
+        if(state==1&&canRelease&&Input.GetMouseButton(1)){  //release it change to right click
             canMove = false;   //not to be pushed when release
             indicator.SetActive(false);
             pickedUP = false;  //not turning false at the end
@@ -122,7 +122,7 @@ public class TeaPot : MonoBehaviour
             StovePlaceholderObj.SetActive(false);
         }
         else if (pickedUP&&Input.GetMouseButtonUp(0)){ //when pick up and release right click
-        state = 1;
+        //state = 1;
             Vector3 tempZ = thisParent.transform.rotation * Vector3.forward; //Im trying to make the direction stay the same but failed....
             thisParent.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);  //tempZ.zsnap to this rotation, but keep the z rotation
             Vector3 posFix = -mousePosPrePour + Input.mousePosition;

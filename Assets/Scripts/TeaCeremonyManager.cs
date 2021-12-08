@@ -25,6 +25,8 @@ public class TeaCeremonyManager : MonoBehaviour
     public GameObject potBar;
     private Image pb;
     bool potHeating = false;
+    public GameObject discardButton;
+    public bool canDiscard = false;
     #endregion
 
     #region Lights
@@ -42,10 +44,11 @@ public class TeaCeremonyManager : MonoBehaviour
     #region Particles
     public ParticleSystem steamParticles;
     public ParticleSystem tpSteamParticles;
+    public GameObject cloudParticles;
     #endregion
 
     #region Tools
-    public enum TeaTool{NONE,POWDERTOOL,TEAPOT,STIRTOOL,NOTOOL};
+    public enum TeaTool{NONE,POWDERTOOL,TEAPOT,STIRTOOL,NOTOOL};  //None is prestate
     public TeaTool currentTool = TeaTool.NONE;
     #endregion
 
@@ -81,12 +84,18 @@ public class TeaCeremonyManager : MonoBehaviour
         sl = sideLight.GetComponent<Light>();
         sl.intensity = initSideBrightness;
         tpSteamParticles.emissionRate = 0;
+        cloudParticles.SetActive(false);
         Stain.GetComponent<SpriteRenderer>().color = TeaColors[0];
         //Color32 c = Stain.GetComponent<SpriteRenderer>().color;
-        //print("r is"+c.r);
+        discardButton.SetActive(false);
     }
     void Update()
     {
+        if(currentTool == TeaTool.NOTOOL||currentTool == TeaTool.NONE){
+            discardButton.SetActive(true);
+        }else{
+            discardButton.SetActive(false);
+        }
         if(startDiming){
           LightDiming();  
         }
@@ -172,5 +181,22 @@ public class TeaCeremonyManager : MonoBehaviour
         Tea.Instance.cc.fillAmount = 0;
         Tea.Instance.numOfPowder = 0;
         Tea.Instance.numOfIngredients = 0;
+    }
+    public void DiscardTea(){ //whe sensei want to discard it , it will happened, cus there is stuff in it
+        // if(canDiscard){
+        cloudParticles.SetActive(true);
+        Invoke("StopCloud",2.5f);
+        Tea.Instance.OriginalPos.transform.position = Tea.Instance.resetPos; //rest tea to initial pos
+        Tea.Instance.initialDistance = Tea.Instance.TopPos.transform.position.y-Tea.Instance.OriginalPos.transform.position.y; //reset initial distance for cup capacity
+        tea.transform.localScale = new Vector3(Tea.Instance.minSize,Tea.Instance.minSize,Tea.Instance.minSize); //reset scale
+        Tea.Instance.teastate = 0; 
+        Tea.Instance.cc.fillAmount = 0;
+        Tea.Instance.numOfPowder = 0;
+        Tea.Instance.numOfIngredients = 0;
+        //}
+    }
+    void StopCloud(){
+        cloudParticles.SetActive(false);
+        //canDiscard = false;
     }
 }

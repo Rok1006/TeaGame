@@ -122,11 +122,12 @@ public class TeaPot : MonoBehaviour
             StovePlaceholderObj.SetActive(false);
         }
         else if (pickedUP&&Input.GetMouseButtonUp(0)){ //when pick up and release right click
+        state = 1;
             Vector3 tempZ = thisParent.transform.rotation * Vector3.forward; //Im trying to make the direction stay the same but failed....
             thisParent.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);  //tempZ.zsnap to this rotation, but keep the z rotation
             Vector3 posFix = -mousePosPrePour + Input.mousePosition;
             thisParent.transform.position += new Vector3(posFix.x * followHStrength, 0f, posFix.y * followVStrength ); //snap to mouse new position    posFix.y * followVStrength why rotating pot changes z pos
-            //thisParent.transform.position = pickUPDes; //this line fixed the a bit higer issue
+            //this.transform.position = pickUPDes; //this line fixed the a bit higer issue
             canClick =true;
             //canRelease = true;
             StovePlaceholderObj.SetActive(true);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 //script of the pickuptool object
 //control: u pick up with mouse, move with mouse when click once u dip the tool once into the box, when tool and box meet 
 //Done: pickup and move
@@ -15,6 +16,8 @@ public class MatchaBox : MonoBehaviour
     public GameObject currenPowder;
     public GameObject toolTrigger;
     public GameObject OriginalToolPos;
+    public GameObject powdernumUI;
+    public Text powdernum;
     public Outline otsc;
     public bool pickedUP = false;
     public bool clicked = false;
@@ -51,9 +54,11 @@ public class MatchaBox : MonoBehaviour
         prevMousePos = Input.mousePosition;
         toolTrigger.SetActive(false);
         TableCollider.SetActive(false);
+        powdernumUI.SetActive(false);
     }
     void Update()
     {
+        powdernum.text = "X"+Tea.Instance.numOfPowder.ToString();
         //originalPos = new Vector3(this.transform.position.x, 0.282f, transform.position.z); //0.653f
         //pickUPDes = new Vector3(this.transform.position.x, 1.076f, transform.position.z);
         if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){
@@ -84,6 +89,7 @@ public class MatchaBox : MonoBehaviour
             pickedUP = false;
             rb.isKinematic = false;
             TableCollider.SetActive(false);
+            powdernumUI.SetActive(false);
         }
         //Dip it & snap back
         if (pickedUP && Input.GetMouseButton(0)){    //Mouse Distance based Tilt Pouring here  
@@ -130,6 +136,7 @@ public class MatchaBox : MonoBehaviour
         toolTrigger.SetActive(true);
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.POWDERTOOL;
         TableCollider.SetActive(true);
+        powdernumUI.SetActive(true);
     }
     void OnMouseDown() {
         if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){

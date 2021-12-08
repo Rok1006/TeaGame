@@ -93,6 +93,7 @@ public class StirTool : MonoBehaviour
         pickedUP  = true;
         toolTrigger.SetActive(true);
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.STIRTOOL;
+        Tea.Instance.TeaState();
     }
     void OnMouseDown() {
         if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){

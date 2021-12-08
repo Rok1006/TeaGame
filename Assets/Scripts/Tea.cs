@@ -10,7 +10,7 @@ public class Tea : MonoBehaviour
     public static Tea Instance;
     SpriteRenderer teasprite;
     public GameObject tea;
-    public Color teaColor;
+    //public Color teaColor;
     public float minSize, middleSize, maxSize;   //max original: 0.003516069
     public float speed;
     public GameObject OriginalPos;
@@ -18,7 +18,10 @@ public class Tea : MonoBehaviour
     public Vector3 resetPos;
     public float distance;
     public float initialDistance;
+    private float originalDistance;  //static
     public GameObject teaPattern; //when stirring
+    public Color32 targetColor;
+    public Color32 currentColor;
     [Header("UI")]
     public GameObject stirBar;
     private Image sb;
@@ -41,9 +44,10 @@ public class Tea : MonoBehaviour
     void Start()
     {
         teasprite = this.GetComponent<SpriteRenderer>();
-        teasprite.color = teaColor;//new Color (79f, 130f, 96f, 1);
+        //teasprite.color = teaColor;//new Color (79f, 130f, 96f, 1);
         this.transform.localScale = new Vector3(minSize,minSize,minSize);
-        teasprite.color = TeaCeremonyManager.Instance.TeaColors[0];  //blue water color
+        currentColor = TeaCeremonyManager.Instance.TeaColors[0];  //blue water color
+        teasprite.color = currentColor;   //color
         heatBar.SetActive(false);
         sb = stirBar.GetComponent<Image>();
         sb.fillAmount = 0;
@@ -53,11 +57,28 @@ public class Tea : MonoBehaviour
         
         teaPattern.SetActive(false);
         initialDistance = TopPos.transform.position.y-OriginalPos.transform.position.y;
+        originalDistance = TopPos.transform.position.y-OriginalPos.transform.position.y;
         //Reset Related
         resetPos = OriginalPos.transform.position; //this is where original pos will go back to when reset
     }
     void Update()
     {
+        teasprite.color = currentColor;
+        if(distance<originalDistance||numOfIngredients>0||numOfPowder>0){
+            //TeaCeremonyManager.Instance.canDiscard = true;
+            TeaCeremonyManager.Instance.discardButton.GetComponent<Button>().interactable = true;
+        }else{
+            TeaCeremonyManager.Instance.discardButton.GetComponent<Button>().interactable = false;
+        }
+        // if(numOfIngredients>0||numOfPowder>0){
+        //     //TeaCeremonyManager.Instance.canDiscard = true;
+        //     TeaCeremonyManager.Instance.discardButton.GetComponent<Button>().interactable = true;
+        // }else{
+        //     TeaCeremonyManager.Instance.discardButton.GetComponent<Button>().interactable = false;
+        // }
+        // else if(distance==originalDistance){
+        //     TeaCeremonyManager.Instance.canDiscard = false;
+        // }
         //FillUp Tea
         liquidLevel = cc.fillAmount;
         distance = TopPos.transform.position.y-OriginalPos.transform.position.y;
@@ -66,19 +87,23 @@ public class Tea : MonoBehaviour
             initialDistance = distance; //setting it to every current
         }
         FillingUP(); 
+
         //Stirring Tea
-        if(stirring){
+        if(stirring){   //the bar
             teaPattern.SetActive(true);
             stirBar.SetActive(true);
             sb.fillAmount+=0.008f;
+            GradualColorChange();
+            //change tea
         }else{
             stirBar.SetActive(false);
             teaPattern.SetActive(false);
         }
         if(sb.fillAmount==1){  //every stirr
             RestartStirBar();
-            TeaState();//affect tea//change tea color
+            // TeaState();//affect tea//change tea color  //move it to before stirring, for instance when pick up tool
         }
+
         //Change of state
         if(numOfPowder==3){  //right amt
             teastate = 1;
@@ -91,7 +116,7 @@ public class Tea : MonoBehaviour
         }
     }
     void TeaBottom(){
-        teaColor.a = 0f;
+        //teaColor.a = 0f;
     }
     void FillingUP(){   //Filling UP tea
         if(SpillingDetector.Instance.inCup&& Input.GetMouseButton(0)){
@@ -114,6 +139,7 @@ public class Tea : MonoBehaviour
             this.transform.localScale = new Vector3(maxSize,maxSize,maxSize);
         }
         if(col.gameObject.tag == "StirrTool"){
+            // TeaState();
             stirring = true;
         } 
     }
@@ -122,23 +148,45 @@ public class Tea : MonoBehaviour
             stirring = false;
         } 
     }
-    void TeaState(){   //Change tea color
+    public void TeaState(){   //Change tea color
         switch(teastate){
             case 0:  //water
-                teasprite.color = TeaCeremonyManager.Instance.TeaColors[0];
+                //teasprite.color = TeaCeremonyManager.Instance.TeaColors[0];
+                targetColor=TeaCeremonyManager.Instance.TeaColors[0];
             break;
             case 1:  //greentea
-                teasprite.color = TeaCeremonyManager.Instance.TeaColors[1];
+                //teasprite.color = TeaCeremonyManager.Instance.TeaColors[1];
+                targetColor = TeaCeremonyManager.Instance.TeaColors[1];
             break;
             case 2:  //tea with too less powder
-                teasprite.color = TeaCeremonyManager.Instance.TeaColors[2];
+                //teasprite.color = TeaCeremonyManager.Instance.TeaColors[2];
+                targetColor = TeaCeremonyManager.Instance.TeaColors[2];
             break;
             case 3:  //water with weird element
-                teasprite.color = TeaCeremonyManager.Instance.TeaColors[3];
+                //teasprite.color = TeaCeremonyManager.Instance.TeaColors[3];
+                targetColor = TeaCeremonyManager.Instance.TeaColors[3];
             break;
             case 4:  //tea with too much powder
-                teasprite.color = TeaCeremonyManager.Instance.TeaColors[4];
+                //teasprite.color = TeaCeremonyManager.Instance.TeaColors[4];
+                targetColor = TeaCeremonyManager.Instance.TeaColors[4];
             break;
+        }
+    }
+    void GradualColorChange(){
+        if(currentColor.r<targetColor.r){
+            currentColor.r+=1;
+        }else{
+            currentColor.r-=1;
+        }
+        if(currentColor.g<targetColor.g){
+            currentColor.g+=1;
+        }else{
+            currentColor.g-=1;
+        }
+        if(currentColor.b<targetColor.b){
+            currentColor.b+=1;
+        }else{
+            currentColor.b-=1;
         }
     }
     public void ChangeIngredientType(string type){

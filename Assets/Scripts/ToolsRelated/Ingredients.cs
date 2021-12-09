@@ -19,10 +19,12 @@ public class Ingredients : MonoBehaviour
     void OnMouseOver() {
         //go up a little
         oc.enabled = true;
+        GoToDrawer.Instance.IGText = ingredientName;
     }
 
     void OnMouseExit(){
         oc.enabled = false;
+        GoToDrawer.Instance.IGText = "";
     }
     void OnMouseDown() {
         TeaCeremonyManager.Instance.IngredientsAdd(IngredientPrefab);

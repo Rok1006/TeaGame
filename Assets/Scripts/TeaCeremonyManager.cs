@@ -49,7 +49,7 @@ public class TeaCeremonyManager : MonoBehaviour
     #endregion
 
     #region Tools
-    public enum TeaTool{NONE,POWDERTOOL,TEAPOT,STIRTOOL,NOTOOL};  //None is prestate
+    public enum TeaTool{NONE,POWDERTOOL,TEAPOT,STIRTOOL,NOTOOL,INGRED};  //None is prestate
     public TeaTool currentTool = TeaTool.NONE;
     #endregion
 

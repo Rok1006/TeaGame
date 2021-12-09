@@ -5,6 +5,7 @@ using UnityEngine;
 public class TeaPot : MonoBehaviour
 {
     public static TeaPot Instance;
+    public string toolName;
     private GameObject thisParent;
     public GameObject mainHolder;
     public GameObject cup;
@@ -197,6 +198,7 @@ public class TeaPot : MonoBehaviour
         if(!pickedUP&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT){
             otsc.enabled = true;
             toolFirststep.SetActive(true);
+            TeaCeremonyManager.Instance.tText = toolName;
             //Tutorial.Instance.currentStepsDisplay = Tutorial.Instance.TPsteps;
         }
     }
@@ -214,6 +216,7 @@ public class TeaPot : MonoBehaviour
         otsc.enabled = false;
         toolFirststep.SetActive(false);
         Invoke("NtonPot",.5f);
+        TeaCeremonyManager.Instance.tText = "";
         // OnteaPot = false;
     }
     void OnCollisionEnter(Collision col) {

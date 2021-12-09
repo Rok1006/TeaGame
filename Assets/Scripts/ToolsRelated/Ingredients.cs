@@ -7,6 +7,7 @@ public class Ingredients : MonoBehaviour
     public string ingredientName;
     public Outline oc;
     public GameObject IngredientPrefab;
+    
     void Start()
     {
         oc.enabled = false;

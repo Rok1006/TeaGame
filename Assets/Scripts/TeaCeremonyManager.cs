@@ -27,6 +27,8 @@ public class TeaCeremonyManager : MonoBehaviour
     bool potHeating = false;
     public GameObject discardButton;
     public bool canDiscard = false;
+    public GameObject toolText;
+    public string tText;
     //public GameObject toolFirststep;
     #endregion
 
@@ -89,9 +91,11 @@ public class TeaCeremonyManager : MonoBehaviour
         Stain.GetComponent<SpriteRenderer>().color = TeaColors[0];
         //Color32 c = Stain.GetComponent<SpriteRenderer>().color;
         discardButton.SetActive(false);
+        toolText.SetActive(false);
     }
     void Update()
     {
+        toolText.GetComponent<Text>().text =  tText.ToString();
         if(currentTool == TeaTool.NOTOOL||currentTool == TeaTool.NONE){
             discardButton.SetActive(true);
         }else{

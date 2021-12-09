@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GoToDrawer : MonoBehaviour
 {
     public static GoToDrawer Instance;
+    public string toolName;
     public Outline oc;
     public int state = 0;
     bool canClick;
@@ -41,6 +42,7 @@ public class GoToDrawer : MonoBehaviour
             oc.enabled = true;
             canClick=true;
             tutorial.SetActive(true);
+            TeaCeremonyManager.Instance.tText = toolName;
         }
     }
 
@@ -48,6 +50,7 @@ public class GoToDrawer : MonoBehaviour
         oc.enabled = false;
         canClick=false;
         tutorial.SetActive(false);
+        TeaCeremonyManager.Instance.tText = "";
     }
     void OnMouseDown() {
         if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.INGRED){

@@ -75,6 +75,7 @@ public class CamSwitch : MonoBehaviour
         ChoiceCam.SetActive(false);
         ConversationCam.SetActive(false);
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NOTOOL;
+        TeaCeremonyManager.Instance.toolText.SetActive(false);
     }
     public void TeaCamOn(){  //When player is making tea
         drawerAnim.SetBool("In",true);
@@ -85,6 +86,7 @@ public class CamSwitch : MonoBehaviour
         ConversationCam.SetActive(false);
         CupboardCam.SetActive(false);
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
+        TeaCeremonyManager.Instance.toolText.SetActive(true);
     }
     public void ConversationCamOn(){ //when player have conversation with customers
         drawerAnim.SetBool("In",true);
@@ -94,6 +96,7 @@ public class CamSwitch : MonoBehaviour
         ChoiceCam.SetActive(false);
         ConversationCam.SetActive(true);
         CupboardCam.SetActive(false);
+        TeaCeremonyManager.Instance.toolText.SetActive(false);
     }
     public void ChoiceCamOn(){ //when player have conversation with customers
         drawerAnim.SetBool("Out",true);
@@ -104,6 +107,7 @@ public class CamSwitch : MonoBehaviour
         ChoiceCam.SetActive(true);
         CupboardCam.SetActive(false);
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.INGRED;
+        TeaCeremonyManager.Instance.toolText.SetActive(false);
     }
     public void CupboardCamOn(){ //when player have conversation with customers
         drawerAnim.SetBool("In",true);
@@ -114,5 +118,7 @@ public class CamSwitch : MonoBehaviour
         ChoiceCam.SetActive(false);
         CupboardCam.SetActive(true);
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NOTOOL;
+        SnackOffer.Instance.snackText.SetActive(true);
+        TeaCeremonyManager.Instance.toolText.SetActive(false);
     }
 }

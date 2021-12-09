@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class MatchaBox : MonoBehaviour
 {
     public static MatchaBox Instance;
+    public string toolName;
     public GameObject lid;
     public GameObject matchaBox;
     public GameObject powderPt;
@@ -157,6 +158,7 @@ public class MatchaBox : MonoBehaviour
             mbAnim.SetBool("Open", true);
             mbAnim.SetBool("Close", false);
             toolFirststep.SetActive(true);
+            TeaCeremonyManager.Instance.tText = toolName;
         }
     }
     void OnMouseExit() {
@@ -165,6 +167,7 @@ public class MatchaBox : MonoBehaviour
             mbAnim.SetBool("Open", false);
             mbAnim.SetBool("Close", true);
             toolFirststep.SetActive(false);
+            TeaCeremonyManager.Instance.tText = "";
         }
     }
     void powderON(){

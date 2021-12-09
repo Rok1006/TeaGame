@@ -5,6 +5,7 @@ using UnityEngine;
 public class StirTool : MonoBehaviour
 {
     public static StirTool Instance;
+    public string toolName;
     public Outline otsc;
     public bool pickedUP = false;
     public bool clicked = false;
@@ -112,12 +113,14 @@ public class StirTool : MonoBehaviour
         if(!clicked&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){
             otsc.enabled = true;
             toolFirststep.SetActive(true);
+            TeaCeremonyManager.Instance.tText = toolName;
         }
     }
     void OnMouseExit() {
         if(!clicked){
             otsc.enabled = false;
             toolFirststep.SetActive(false);
+            TeaCeremonyManager.Instance.tText = "";
         }
     }
     void OnCollisionEnter(Collision col) {

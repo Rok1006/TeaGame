@@ -13,7 +13,13 @@ public class TeaType : MonoBehaviour
     //3. amt of powder
     //4. type of ingredient
     //5. stirred
+
+    //About tutorial tea, no matter how player is making it, as long as there is water and powder in it sensei will be okay
+    public static TeaType Instance;
     public int teaType; //use switch
+    void Awake() {
+        Instance = this;
+    }
     void Start()
     {
         
@@ -22,5 +28,11 @@ public class TeaType : MonoBehaviour
     void Update()
     {
         
+    }
+    public void CheckCurrentTea(){  //after tutorial is done, check if the tea serve is correct
+        
+    }
+    public void CheckTutorialTea(){
+
     }
 }

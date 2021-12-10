@@ -48,7 +48,7 @@ public class StirTool : MonoBehaviour
         dipPos = new Vector3(this.transform.position.x, 0.97f, this.transform.position.z); //0.653f
         pickUPDes = new Vector3(this.transform.position.x, 1.6f, this.transform.position.z);
         //CLick and pick it up
-        if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseStirTool){
+        if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseStirTool||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay){
         if(state==0&&clicked){
             toolFirststep.SetActive(false); //tutorial
             Tutorial.Instance.STsteps[Tutorial.Instance.stepIndex].SetActive(true);
@@ -110,7 +110,7 @@ public class StirTool : MonoBehaviour
         }
     }
     void OnMouseOver() {
-        if(!clicked&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseStirTool){
+        if(!clicked&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseStirTool||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay){
             otsc.enabled = true;
             toolFirststep.SetActive(true);
             TeaCeremonyManager.Instance.tText = toolName;

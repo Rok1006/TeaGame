@@ -64,7 +64,7 @@ public class MatchaBox : MonoBehaviour
         powdernum.text = "X"+Tea.Instance.numOfPowder.ToString();
         //originalPos = new Vector3(this.transform.position.x, 0.282f, transform.position.z); //0.653f
         //pickUPDes = new Vector3(this.transform.position.x, 1.076f, transform.position.z);
-        if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UsePowderTool){
+        if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UsePowderTool||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay){
         if(state==0&&clicked){
             toolFirststep.SetActive(false); //tutorial
             Tutorial.Instance.PTsteps[Tutorial.Instance.stepIndex].SetActive(true);
@@ -153,7 +153,7 @@ public class MatchaBox : MonoBehaviour
         }
     }
     void OnMouseOver() {
-        if(!clicked&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UsePowderTool){
+        if(!clicked&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UsePowderTool||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay){
             otsc.enabled = true;
             mbAnim.SetBool("Open", true);
             mbAnim.SetBool("Close", false);

@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public Tutorial tutor;
     public Ghost currGhost;
 
-    
+
     void Start()
     {
         TeaCeremonyManager.Instance.startDiming = false; //also whenever player is in tutorial
@@ -18,52 +18,76 @@ public class GameManager : MonoBehaviour
     {
         CheckState();
     }
-    public void CheckState()
+    public void CheckState()  //stageIndex 0 is stage1, stevo will change it
     {
         switch (currGhost.stageIndex)
         {
-            // case (0):
-            // {
+            case (0):   //testing
+            {
+                TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;  //add these 2 when players is allow to freeplay 
+                SnackOffer.Instance.canTakeSnack = true;
             //     if (TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT)
             //     {
             //         tutor.NextImage();
             //         currGhost.NextStage();
             //     }
-            //     break;
-            // }
+                break;
+            }
             case (1):  //when player is allowed to move things //make it when ever player is in a tutorial, startDimming to false
             {
-                //Change camera angle to teaCam
                 CamSwitch.Instance.TeaCamOn();
                 TeaCeremonyManager.Instance.startDiming = true; 
-                //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseTeapot;  
+                //tell player about the lighting will go dimm
+                //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseTeapot; 
+                //auto next stage after dialogue finish <Next> in txt 
                 break;
             }
             case (2):  //Stage2 is boiling tea
             {
                 TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseTeapot;
+                //if boiled tea on stove, NextStage() 3
+                if(Tutorial.Instance.usedStove){
+                    //NextStage() 3
+                }
                 break;
             }
             case (3):  //Stage3 is pouring tea
             {
                 TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseTeapot;
+                //if tea distance in cup increase larger than half and put down pot, NextStage() 4 
+                if(Tutorial.Instance.usedTeaPot&&Tea.Instance.distance<0.2f){
+                    //NextStage() 4 
+                }
                 break;
             }
             case (4):  //Stage4 is adding powder
             {
                 TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UsePowderTool;
+                //if powder in cup >0 and put down powder tool, NextStage() 5 
+                if(Tutorial.Instance.usedPowderT&&Tea.Instance.numOfPowder>0){
+                    //NextStage() 5 
+                }
                 break;
             }
             case (5):  //Stage5 is stirring tea
             {
                 TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseStirTool;
+                //if color change, stir tool down , NextStage() 6 
+                //if(Tutorial.Instance.usedStirT&&)
                 break;
             }
             case (6):  //Stage6 is add ingredients
             {
                 TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.GetIngredient;
+                //if added ingredients>0 , NextStage()
                 break;
             }
+            //case (7):  //Tutorial ENDED , make real tea now
+            //{
+                //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;  //add these 2 when players is allow to freeplay 
+                //SnackOffer.Instance.canTakeSnack = true;
+                //Tutorial.Instance.tutorialComplete = true;
+            //}
 
             // at some stage add SnackOffer.Instance.canTakeSnack = true; //allow player to take snack
             //after that is free play

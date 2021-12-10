@@ -175,6 +175,15 @@ public class TeaCeremonyManager : MonoBehaviour
         mainCup.transform.position = ServeCupPos.transform.position;
         served = true;
         //opposite person with do sth to the tea
+        //wait time, drinking effect
+        //JudgeTea()
+    }
+    public void JudgeTea(){   //sensei and customer judging your tea
+        if(Tutorial.Instance.tutorialComplete){ //is completed tutrial
+            TeaType.Instance.CheckCurrentTea();
+        }else{ //For tutorial tea
+            TeaType.Instance.CheckTutorialTea();
+        }
     }
     public void TeaReturn(){
         mainCup.transform.position = OriginalCupPos.transform.position;

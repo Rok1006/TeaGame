@@ -14,16 +14,19 @@ public class Tutorial : MonoBehaviour
     //public GameObject[] currentStepsDisplay;
     public int stepIndex = 0;
     public static Tutorial Instance;
+    public bool tutorialComplete = false;
+    [Header("TutorialCheck")]
+    public bool usedStove = false;  //placed on stove
+    public bool usedTeaPot = false;  //placed back on table
+    public bool usedPowderT = false;  //placed bk o table
+    public bool usedStirT = false; //placed bk on table
+    public bool usedIngred = false;  
     private void Awake()
     {
         Instance = this;
     }
     void Start()
     {
-        //ToolTutorial.SetActive(true);
-        // ToolTutorialTP.SetActive(false);
-        // ToolTutorialST.SetActive(false);
-        // ToolTutorialPT.SetActive(false);
     }
 
     void Update(){
@@ -31,14 +34,6 @@ public class Tutorial : MonoBehaviour
             //ToolTutorialTP.SetActive(true); //make it appear in the center
             //currentStepsDisplay = TPsteps;
             // TPsteps[stepIndex].SetActive(true);
-        }else{
-            //ToolTutorialTP.SetActive(false);
-        }
-        if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.STIRTOOL){
-        }
-        if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.POWDERTOOL){
-        }
-        if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NOTOOL){
         }
         if(TPsteps[stepIndex].activeSelf&&stepIndex>0){
             TPsteps[stepIndex-1].SetActive(false);
@@ -66,4 +61,7 @@ public class Tutorial : MonoBehaviour
         PTsteps[Tutorial.Instance.stepIndex].SetActive(false);
     }
 
+    // void OrderOfTutorialCheck(){
+    //     switch()
+    // }
 }

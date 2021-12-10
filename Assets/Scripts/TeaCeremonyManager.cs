@@ -54,7 +54,8 @@ public class TeaCeremonyManager : MonoBehaviour
     public enum TeaTool{NONE,POWDERTOOL,TEAPOT,STIRTOOL,NOTOOL,INGRED};  //None is prestate
     public TeaTool currentTool = TeaTool.NONE;
     #endregion
-
+    public enum TutorialState{Nothing,FreePlay,UseTeapot,UseStirTool,UsePowderTool,GetIngredient};
+    public TutorialState currentTutorialState = TutorialState.Nothing;  
     #region TeaColor
     public Color[] TeaColors; //0=Water, 1=GreenTea, 2=TeawithToolesspowder, 3=Water with weirdElement, 4=GreenTeaWtoomucPowder
     public GameObject Stain;

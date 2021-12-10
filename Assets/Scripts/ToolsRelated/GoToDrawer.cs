@@ -38,7 +38,7 @@ public class GoToDrawer : MonoBehaviour
         }
     }
     void OnMouseOver() {
-        if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.INGRED){
+        if(TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.GetIngredient&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.INGRED){
             oc.enabled = true;
             canClick=true;
             tutorial.SetActive(true);
@@ -53,7 +53,7 @@ public class GoToDrawer : MonoBehaviour
         TeaCeremonyManager.Instance.tText = "";
     }
     void OnMouseDown() {
-        if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.INGRED){
+        if(TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.GetIngredient&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.INGRED){
         tutorial.SetActive(false);
         if(state==0){
             CamSwitch.Instance.ChoiceCamOn();

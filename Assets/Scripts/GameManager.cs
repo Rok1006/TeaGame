@@ -34,9 +34,41 @@ public class GameManager : MonoBehaviour
             case (1):  //when player is allowed to move things //make it when ever player is in a tutorial, startDimming to false
             {
                 //Change camera angle to teaCam
-                TeaCeremonyManager.Instance.startDiming = true;   
+                CamSwitch.Instance.TeaCamOn();
+                TeaCeremonyManager.Instance.startDiming = true; 
+                //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseTeapot;  
                 break;
             }
+            case (2):  //Stage2 is boiling tea
+            {
+                TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseTeapot;
+                break;
+            }
+            case (3):  //Stage3 is pouring tea
+            {
+                TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseTeapot;
+                break;
+            }
+            case (4):  //Stage4 is adding powder
+            {
+                TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UsePowderTool;
+                break;
+            }
+            case (5):  //Stage5 is stirring tea
+            {
+                TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseStirTool;
+                break;
+            }
+            case (6):  //Stage6 is add ingredients
+            {
+                TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.GetIngredient;
+                break;
+            }
+
+            // at some stage add SnackOffer.Instance.canTakeSnack = true; //allow player to take snack
+            //after that is free play
+            //how to turn them all to free to use later, afterwards  just put  or free play in too !! must be in front e.h Freeplay|| Usetool && ...
+
         }
     }
 }

@@ -19,6 +19,7 @@ TagManager:
   - ToolTrigger
   - StirrTool
   - Ingredients
+  - Snacks
   layers:
   - Default
   - TransparentFX

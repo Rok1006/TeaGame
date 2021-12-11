@@ -11,7 +11,7 @@ public class SnackOffer : MonoBehaviour
     public GameObject tutorial;
     public GameObject snackText;  //put the text foreverything
     public string skText;
-    public bool canTakeSnack = false;
+    public bool canTakeSnack = true;
     void Awake() {
         Instance=this;
     }
@@ -28,7 +28,9 @@ public class SnackOffer : MonoBehaviour
         snackText.GetComponent<Text>().text =  skText.ToString();
     }
     void OnMouseOver() {
-        if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&canTakeSnack){
+        if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE
+            &&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseSnack
+            &&canTakeSnack){
             otsc.enabled = true;
             tutorial.SetActive(true);
             TeaCeremonyManager.Instance.tText = toolName;
@@ -40,7 +42,10 @@ public class SnackOffer : MonoBehaviour
         TeaCeremonyManager.Instance.tText = "";
     }
     void OnMouseDown() {
-        if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&canTakeSnack){
+        if (TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE
+            && TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseSnack
+            && canTakeSnack)
+        {
             tutorial.SetActive(false);
             CamSwitch.Instance.CupboardCamOn();
             snackText.SetActive(true);

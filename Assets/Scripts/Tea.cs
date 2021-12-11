@@ -39,6 +39,7 @@ public class Tea : MonoBehaviour
     public string ingredientType;
     public bool melted;
     public List<GameObject> toMeltList = new List<GameObject>();
+    public List<GameObject> powderList = new List<GameObject>();
     //heatness of the tea
     void Awake() {
         Instance = this;
@@ -120,8 +121,17 @@ public class Tea : MonoBehaviour
         }
 
         //Destroy special ingredients if have liquid
-        if (liquidLevel >= 0.3f && toMeltList.Count>0)
-            MeltIngred();
+        if (liquidLevel >= 0.3f)
+        {
+            if(toMeltList.Count > 0)
+                MeltIngred();
+            if (powderList.Count > 0) //melt powder
+            {
+                foreach (GameObject powder in powderList)
+                    Destroy(powder);
+                powderList.Clear();
+            }
+        }
     }
 
     void MeltIngred()

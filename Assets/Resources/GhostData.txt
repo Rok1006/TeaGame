@@ -4,20 +4,20 @@ Good Evening.
 <p>1.5
 This is the night then.
 <p>2
-I¡¯ll be gone soon, and you¡¯ll have to face them all by yourself.
+I'll be gone soon, and you'll have to face them all by yourself.
 <p>4
 I could see you are nervous¡­
 <p>2
-It¡¯s alright. 
+It's alright. 
 <p>1
-Let¡¯s go through the steps once more.
+Let's go through the steps once more.
 <p>2
 Serve me tea once last time¡­Just the regular is fine.
 <p>4
-Let¡¯s get started.
+Let's get started.
 <p>2
-<Stage1>
-<stagePause>2
+<Stage>1
+<stagePause>0
 Take the tea pot and drop it on the boiler next to it
 <p>6
 They are both on your upper right corner of the table.
@@ -29,88 +29,75 @@ Are you serious¡­Take the Tea Pot and Drop it on the Boiler!
 They are on the right corner of the Table!!
 <p>6
 <a>Flip
-<Stage2>
-<stagePause>2
-Wait for the water to boil¡­
-<p>1
+<Stage>2
+<stagePause>0
 While the water is boiling. Add the powder stuff to the cup.
 <p>6
-
-<Stage3>
-
-Tonight is the night... I hope you are ready.
-<p>1
-My time is running out.
-<p>1
-Do you still remember the things I've taught you?
-<p>2
-Worry not.
-<p>0.8
-Before I let you off on your own.
-<p>1
-I'll walk you through it for one last time.
-<p>1
-This time, remember it with your heart...
-<p>2
-...If you are determined to take my place... and face them by yourself.
-<p>2
-Now then... Shall we?
-<p>2
-Take a look around. But don't touch anything yet.
-<p>0.5
-Take a deep breath and listen to me.
-<p>0.3
-You will know what to do once we get there.
-<p>2
-To make good tea, you need to first understand the person you are brewing for.
-<p>3
-Sometimes people aren't as straightforward as they can be.
-<p>3
-To understand someone, you need to observe their words and discern the underlying messages.
-<p>3
-Use me as practice. Will you understand the underlying messages of my words?
+The spoon is to your left.
 <p>4
-<Next>
-<Stage>1
-<stagePause>2
-Ice breeds no greens.
-<p>8
-It takes time for ice to turn into rivers.
-<p>8
-Only rivers breed fine greens.
-<p>8
-<Stage>2
-Making tea is bringing a river of life to the table. 
-<p>8
-It can clean but can't be minced.
-<p>8
-It is the bones and flesh in a cup of tea.
-<p>8
+I would just like some matcha.
+<p>2
+Spoon some matcha powder, and put it in the cup.
+<p>4
+ANGRY
+<p>3
 <Stage>3
-Where the river flows, a trail of greens grows.
-<p>8
-Though it may look dull, its scent soothes your soul.
-<p>8
-Its scent reaches farthest when it looks weakest.
-<p>8
+<stagePause>0
+Sometimes they also wwant special stuff.
+<p>1
+It's next to the cup.
+<p>1
+Though I don't need anything, feel free to add them.
+<p>2
+Some of them might have special needs so this is important.
+<p>3
+Let's move on.
+<p>2
+<Next>
 <Stage>4
-It's better in pieces than when it's complete.
-<p>8
-The harder you try to crush it, the finer it becomes.
-<p>8
-It's bitter, but that makes it better.
-<p>8
+<stagePause>0
+Ice breeds no green. Let's add the hot water in.
+<p>3
+Take the pot and pour the hot water into the cup.
+<p>3
+ANGRY
+<p>3
+<a>Flip
 <Stage>5
-To grow things on soil, you'll work with a trowel.
-<p>6
-Without it, no greens will grow even with a river.
-<p>6
-You trowel the soil to make the tea royal.
-<p>6
+<stagePause>0
+Stir it with the stir tool on your left
+<p>5
 <Stage>6
-It goes well with a cup of tea.
-<p>6
-It looks like the moon outside.
-<p>6
-Even tea can be bitter, but this never is.
-<p>6
+<stagePause>0
+Nowserve!
+<p>50
+<Stage>7
+<stagePause>0
+Good tea I like.
+<p>1
+I wish I would remember the feeling of drinking tea over there...
+<p>2
+I want snack.
+<p>2
+You can get snack with the THING next to the spoon
+<p>10
+ANGRU
+<p>2
+<Stage>8
+<stagePause>0
+Ok, I'm all set.
+<p>4
+I'm going now
+<p>2
+Wait no last thing lol
+<p>1
+The candle, don't forget to reignite it if it gets too dark.
+<p>3
+Every wondering souls need light
+<p>2
+Your tea is light guide path and you'll be ok
+<p>4
+ok I really need to gos eeya
+<p>3
+<a>Leave
+

@@ -156,7 +156,10 @@ public class MatchaBox : MonoBehaviour
         }
     }
     void OnMouseOver() {
-        if(!clicked&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UsePowderTool||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay){
+        if(!clicked
+            &&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE
+            &&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UsePowderTool
+            ||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay){
             otsc.enabled = true;
             mbAnim.SetBool("Open", true);
             mbAnim.SetBool("Close", false);

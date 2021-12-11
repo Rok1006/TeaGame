@@ -54,7 +54,7 @@ public class TeaCeremonyManager : MonoBehaviour
     public enum TeaTool{NONE,POWDERTOOL,TEAPOT,STIRTOOL,NOTOOL,INGRED};  //None is prestate
     public TeaTool currentTool = TeaTool.NONE;
     #endregion
-    public enum TutorialState{Nothing,FreePlay,UseTeapot,UseStirTool,UsePowderTool,GetIngredient};
+    public enum TutorialState{Nothing,FreePlay,UseTeapot,UseStirTool,UsePowderTool,GetIngredient,ServeOK,UseSnack};
     public TutorialState currentTutorialState = TutorialState.Nothing;  
     #region TeaColor
     public Color[] TeaColors; //0=Water, 1=GreenTea, 2=TeawithToolesspowder, 3=Water with weirdElement, 4=GreenTeaWtoomucPowder
@@ -161,8 +161,8 @@ public class TeaCeremonyManager : MonoBehaviour
         candlelighting = true;
     }
     void LightDiming(){
-        tl.intensity-=0.0007f;
-        sl.intensity-=0.0007f;
+        tl.intensity-=0.0005f;
+        sl.intensity-=0.0005f;
         if(fireSize>30){
             fireSize-= 0.1f; 
         }
@@ -197,44 +197,53 @@ public class TeaCeremonyManager : MonoBehaviour
     public void ServeTea(){
         mainCup.transform.position = ServeCupPos.transform.position;
         served = true;
-        //opposite person with do sth to the tea
+        GameManager.Instance.currGhost.DrinkTea(tea.GetComponent<Tea>());//opposite person with do sth to the tea
+        TeaReturn();
         //wait time, drinking effect
         //JudgeTea()
     }
+    /*
     public void JudgeTea(){   //sensei and customer judging your tea
         if(Tutorial.Instance.tutorialComplete){ //is completed tutrial
             TeaType.Instance.CheckCurrentTea();
         }else{ //For tutorial tea
             TeaType.Instance.CheckTutorialTea();
         }
-    }
+    }*/
     public void TeaReturn(){
         mainCup.transform.position = OriginalCupPos.transform.position;
         served = false;
         //reset tea state
-        Tea.Instance.OriginalPos.transform.position = Tea.Instance.resetPos; //rest tea to initial pos
-        Tea.Instance.initialDistance = Tea.Instance.TopPos.transform.position.y-Tea.Instance.OriginalPos.transform.position.y; //reset initial distance for cup capacity
-        tea.transform.localScale = new Vector3(Tea.Instance.minSize,Tea.Instance.minSize,Tea.Instance.minSize); //reset scale
-        Tea.Instance.teastate = 0; 
-        Tea.Instance.cc.fillAmount = 0;
-        Tea.Instance.numOfPowder = 0;
-        Tea.Instance.numOfIngredients = 0;
+        ClearTea();
     }
     public void DiscardTea(){ //whe sensei want to discard it , it will happened, cus there is stuff in it
         // if(canDiscard){
         cloudParticles.SetActive(true);
         Invoke("StopCloud",2.5f);
-        Tea.Instance.OriginalPos.transform.position = Tea.Instance.resetPos; //rest tea to initial pos
-        Tea.Instance.initialDistance = Tea.Instance.TopPos.transform.position.y-Tea.Instance.OriginalPos.transform.position.y; //reset initial distance for cup capacity
-        tea.transform.localScale = new Vector3(Tea.Instance.minSize,Tea.Instance.minSize,Tea.Instance.minSize); //reset scale
-        Tea.Instance.teastate = 0; 
-        Tea.Instance.cc.fillAmount = 0;
-        Tea.Instance.numOfPowder = 0;
-        Tea.Instance.numOfIngredients = 0;
+        ClearTea();
         //}
     }
     void StopCloud(){
         cloudParticles.SetActive(false);
         //canDiscard = false;
+    }
+    void ClearTea()
+    {
+        Tea.Instance.OriginalPos.transform.position = Tea.Instance.resetPos; //rest tea to initial pos
+        Tea.Instance.initialDistance = Tea.Instance.TopPos.transform.position.y - Tea.Instance.OriginalPos.transform.position.y; //reset initial distance for cup capacity
+        tea.transform.localScale = new Vector3(Tea.Instance.minSize, Tea.Instance.minSize, Tea.Instance.minSize); //reset scale
+        Tea.Instance.teastate = 0;
+        Tea.Instance.cc.fillAmount = 0;
+        Tea.Instance.numOfPowder = 0;
+        Tea.Instance.numOfIngredients = 0;
+        foreach (GameObject powder in Tea.Instance.powderList)
+            Destroy(powder);
+        Tea.Instance.powderList.Clear();
+        foreach (GameObject ingred in Tea.Instance.toMeltList)
+            Destroy(ingred);
+        Ingredients.haveAsh = false;
+        Ingredients.haveBomb = false;
+        Ingredients.haveLeaf = false;
+        Tea.Instance.toMeltList.Clear();
     }
 }

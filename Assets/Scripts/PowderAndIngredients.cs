@@ -21,6 +21,7 @@ public class PowderAndIngredients : MonoBehaviour
             if(col.gameObject.tag == "Cup"){
                 Tea.Instance.numOfPowder+=1;
                 MatchaBox.Instance.havePowder = false;
+                Tea.Instance.powderList.Add(gameObject);
                 Destroy(this.gameObject, 60f);
 
             }

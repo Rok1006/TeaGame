@@ -58,11 +58,11 @@ public class Ghost : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            DrinkTea("Bad");
+            //DrinkTea("Bad");
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            DrinkTea("Good");
+            //DrinkTea("Good");
         }
 
         //DialogBoxPos
@@ -146,9 +146,12 @@ public class Ghost : MonoBehaviour
         dialogIndex = 0;
         StartCoroutine(StageLoop());
     }
-    void DrinkTea(string teaType)
+    public void DrinkTea(Tea tea)
     {
-        Debug.Log("Drink " + teaType);
+        Debug.Log("Drinking tea...");
+        NextStage(); //Sensei always like your tea
+        /*
+
         if (teaType == "Bad")
         {
             //Stop everything now
@@ -168,18 +171,14 @@ public class Ghost : MonoBehaviour
             }
         }
         if (teaType == "Good")
-        {
-            //Stop everything now
-            textDisplay.text = "";
-            StopCoroutine(dialogLoopCor);
-            Animate(null);
+        {*/
 
-            //Next Stage
-            wrongCount = 0;
-            stageIndex++;
-            dialogIndex = 0;
-            StartCoroutine(StageLoop());
-        }
+    }
+
+    public void EatSnack()
+    {
+        Debug.Log("Drinking tea..."); // Sensei Always like snack
+        NextStage();
     }
 
     void Animate(string animType)
@@ -187,22 +186,27 @@ public class Ghost : MonoBehaviour
         switch (animType)
         {
             case ("Flip"):
-                {
-                    anim.SetBool("toFlip", true);
-                    break;
-                }
+            {
+                anim.SetBool("toFlip", true);
+                break;
+            }
+            case ("Leave"):
+            {
+                anim.SetBool("toLeave", true);
+                break;
+            }
             case (null): //empty case, set everything to false!
-                {       //It's null so you don't need to write <a> in txt if no animation
-                    anim.SetBool("toFlip", false);
-                    break;
-                }
+            {       //It's null so you don't need to write <a> in txt if no animation
+                anim.SetBool("toFlip", false);
+                break;
+            }
         }
     }
 
     void ReadDialogText()
     {
         //Reading txt
-        txtFile = Resources.Load<TextAsset>("GhostData1"); //Read the file
+        txtFile = Resources.Load<TextAsset>("GhostData"); //Read the file
         List<string> lineTextList = new List<string>(txtFile.text.Split('\n')); //Spilt file to lines
 
         //Processing txt

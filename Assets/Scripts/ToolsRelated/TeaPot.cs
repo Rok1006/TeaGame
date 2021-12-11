@@ -118,6 +118,7 @@ public class TeaPot : MonoBehaviour
             Tea.Instance.cupCapacity.SetActive(false);
             Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(false); //tutorial
             Tutorial.Instance.ResetSteps(); //tutorial
+            Tutorial.Instance.usedTeaPot = true; //GameManager
         }
         if (pickedUP && Input.GetMouseButtonDown(0))
         {
@@ -240,6 +241,7 @@ public class TeaPot : MonoBehaviour
                 canClick =true; 
             }
             //thisParent.transform.position = stovePos.transform.position;
+            Tutorial.Instance.usedStove = true; //GameManager
         }
     }
     void OnCollisionExit(Collision col) {

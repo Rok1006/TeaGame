@@ -98,6 +98,7 @@ public class MatchaBox : MonoBehaviour
             powdernumUI.SetActive(false);
             Tutorial.Instance.PTsteps[Tutorial.Instance.stepIndex].SetActive(false); //tutorial
             Tutorial.Instance.ResetSteps(); //tutorial
+            Tutorial.Instance.usedPowderT = true; //GameManager
         }
         //Dip it & snap back
         if (pickedUP && Input.GetMouseButton(0)){    //Mouse Distance based Tilt Pouring here  

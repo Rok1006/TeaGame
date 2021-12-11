@@ -80,6 +80,7 @@ public class StirTool : MonoBehaviour
             this.transform.rotation = Quaternion.Euler(90f, 0f, 0f); 
             Tutorial.Instance.STsteps[Tutorial.Instance.stepIndex].SetActive(false); //tutorial
             Tutorial.Instance.ResetSteps(); //tutorial
+            Tutorial.Instance.usedStirT = true; //GameManager
         }
         //Dip it & snap back
         if (pickedUP && Input.GetMouseButton(0)){ 

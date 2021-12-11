@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Tea : MonoBehaviour
 {
     public static Tea Instance;
-    SpriteRenderer teasprite;
+    public SpriteRenderer teasprite;
     public GameObject tea;
     //public Color teaColor;
     public float minSize, middleSize, maxSize;   //max original: 0.003516069

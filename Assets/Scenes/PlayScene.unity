@@ -1744,6 +1744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71ee7cfc1a8a4846bec00399855deef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teasprite: {fileID: 0}
   tea: {fileID: 414926190}
   minSize: 0.001754701
   middleSize: 0.002411531
@@ -36705,6 +36706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71ee7cfc1a8a4846bec00399855deef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teasprite: {fileID: 0}
   tea: {fileID: 1953210246}
   minSize: 0.001754701
   middleSize: 0.002411531

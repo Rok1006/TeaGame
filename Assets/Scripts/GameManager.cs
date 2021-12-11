@@ -24,8 +24,8 @@ public class GameManager : MonoBehaviour
         {
             case (0):   //testing
             {
-                TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;  //add these 2 when players is allow to freeplay 
-                SnackOffer.Instance.canTakeSnack = true;
+                // TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;  //add these 2 when players is allow to freeplay 
+                // SnackOffer.Instance.canTakeSnack = true;
             //     if (TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT)
             //     {
             //         tutor.NextImage();
@@ -73,16 +73,23 @@ public class GameManager : MonoBehaviour
             {
                 TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseStirTool;
                 //if color change, stir tool down , NextStage() 6 
-                //if(Tutorial.Instance.usedStirT&&)
+                if(Tutorial.Instance.usedStirT&&Tea.Instance.teasprite.color ==Tea.Instance.targetColor){
+                   // NextStage() 6 
+                }
                 break;
             }
             case (6):  //Stage6 is add ingredients
             {
                 TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.GetIngredient;
                 //if added ingredients>0 , NextStage()
+                if(Tea.Instance.numOfIngredients>0){  //may need edit 
+                    //NextStage() go on and serve it
+                    
+                }
                 break;
             }
-            //case (7):  //Tutorial ENDED , make real tea now
+            //case 7 : pen camera to teaCam, allow player to serve
+            //case (?):  //Tutorial ENDED , make real tea now
             //{
                 //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;  //add these 2 when players is allow to freeplay 
                 //SnackOffer.Instance.canTakeSnack = true;

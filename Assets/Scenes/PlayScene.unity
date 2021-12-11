@@ -1773,6 +1773,8 @@ MonoBehaviour:
   numOfIngredients: 0
   teastate: 0
   ingredientType: 
+  melted: 0
+  toMeltList: []
 --- !u!212 &414926195
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3314,7 +3316,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hold & Drag to Spoon
+  m_Text: Left Click & Drag to rotate
 --- !u!222 &665975011
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4116,6 +4118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 753367487}
   - component: {fileID: 753367486}
+  - component: {fileID: 753367488}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4151,6 +4154,102 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &753367488
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753367485}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 012a9139c4dbea74aae67b8d290972f9, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &785411757
 GameObject:
   m_ObjectHideFlags: 0
@@ -4489,7 +4588,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Left Click to Take
+  m_Text: Left Click & Hold
 --- !u!222 &909398631
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -36735,6 +36834,8 @@ MonoBehaviour:
   numOfIngredients: 0
   teastate: 0
   ingredientType: 
+  melted: 0
+  toMeltList: []
 --- !u!65 &1953210250
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -38814,6 +38915,9 @@ MonoBehaviour:
   oc: {fileID: 1706177164149028138}
   IngredientPrefab: {fileID: 1781662755987918177, guid: d09df7af1b3b2486f9bc0b42c2db5cd7,
     type: 3}
+  isAsh: 0
+  isBomb: 0
+  isLeaf: 1
 --- !u!135 &1706177164149028137
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -40447,6 +40551,9 @@ MonoBehaviour:
   oc: {fileID: 3365941148654042178}
   IngredientPrefab: {fileID: 6736212257081809794, guid: a5142787849684316b2331da146d36f3,
     type: 3}
+  isAsh: 0
+  isBomb: 1
+  isLeaf: 0
 --- !u!33 &3469287836838533202
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -41566,14 +41673,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5472855247150160069}
-  m_LocalRotation: {x: -0.59038967, y: -0.38915297, z: -0.3891531, w: 0.5903896}
-  m_LocalPosition: {x: 1.29, y: 0.28, z: -2.41}
+  m_LocalRotation: {x: -0.5060767, y: -0.4938486, z: -0.49384856, w: 0.50607663}
+  m_LocalPosition: {x: 1.3754805, y: 0.28, z: -2.262754}
   m_LocalScale: {x: -0.9765017, y: -56.682594, z: -0.61154497}
   m_Children:
   - {fileID: 924256343}
   m_Father: {fileID: 543450652845442578}
   m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -66.781}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -88.599}
 --- !u!33 &4704240202092143035
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -62212,6 +62319,9 @@ MonoBehaviour:
   oc: {fileID: 8768232035070056993}
   IngredientPrefab: {fileID: 6335559991074494937, guid: 07637f1b6a6954130a8f1c1d976f5d6b,
     type: 3}
+  isAsh: 1
+  isBomb: 0
+  isLeaf: 0
 --- !u!135 &8768232035070056995
 SphereCollider:
   m_ObjectHideFlags: 0

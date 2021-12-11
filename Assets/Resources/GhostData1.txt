@@ -1,43 +1,5 @@
 <Stage>0
 <stagePause>2
-Good Evening.
-<p>1.5
-This is the night then.
-<p>2
-I¡¯ll be gone soon, and you¡¯ll have to face them all by yourself.
-<p>4
-I could see you are nervous¡­
-<p>2
-It¡¯s alright. 
-<p>1
-Let¡¯s go through the steps once more.
-<p>2
-Serve me tea once last time¡­Just the regular is fine.
-<p>4
-Let¡¯s get started.
-<p>2
-<Stage1>
-<stagePause>2
-Take the tea pot and drop it on the boiler next to it
-<p>6
-They are both on your upper right corner of the table.
-<p>6
-¡­please be respectful to both of our times.
-<p>6
-Are you serious¡­Take the Tea Pot and Drop it on the Boiler!
-<p>6
-They are on the right corner of the Table!!
-<p>6
-<a>Flip
-<Stage2>
-<stagePause>2
-Wait for the water to boil¡­
-<p>1
-While the water is boiling. Add the powder stuff to the cup.
-<p>6
-
-<Stage3>
-
 Tonight is the night... I hope you are ready.
 <p>1
 My time is running out.

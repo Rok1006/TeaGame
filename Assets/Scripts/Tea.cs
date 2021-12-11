@@ -37,6 +37,8 @@ public class Tea : MonoBehaviour
     public int numOfIngredients;
     public int teastate;
     public string ingredientType;
+    public bool melted;
+    public List<GameObject> toMeltList = new List<GameObject>();
     //heatness of the tea
     void Awake() {
         Instance = this;
@@ -116,6 +118,34 @@ public class Tea : MonoBehaviour
         }else if(numOfPowder<1){  //&& if have other ingredients
             teastate = 0;
         }
+
+        //Destroy special ingredients if have liquid
+        if (liquidLevel >= 0.3f && toMeltList.Count>0)
+            MeltIngred();
+    }
+
+    void MeltIngred()
+    {
+        if (toMeltList.Contains(Ingredients.ashObj))
+        {
+            toMeltList.Remove(Ingredients.ashObj);
+            Destroy(Ingredients.ashObj);
+            Ingredients.haveAsh = false;
+        }
+        if (toMeltList.Contains(Ingredients.bombObj))
+        {
+            toMeltList.Remove(Ingredients.bombObj);
+            Destroy(Ingredients.bombObj);
+            Ingredients.haveBomb = false;
+        }
+        if (toMeltList.Contains(Ingredients.leafObj))
+        {
+            toMeltList.Remove(Ingredients.leafObj);
+            Destroy(Ingredients.leafObj);
+            Ingredients.haveLeaf = false;
+        }
+        //melted = true; commented this out bc what is the player adds after melting?
+        //If find good way to optimize, don't have this method run in update.
     }
     void TeaBottom(){
         //teaColor.a = 0f;

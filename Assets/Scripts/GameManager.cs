@@ -20,9 +20,11 @@ public class GameManager : MonoBehaviour
     }
     public void CheckState()  //stageIndex 0 is stage1, stevo will change it
     {
+        if (Input.GetKeyDown(KeyCode.O))
+            currGhost.NextStage();
         switch (currGhost.stageIndex)
         {
-            case (0):   //testing
+            case (999):   //testing
             {
                 // TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;  //add these 2 when players is allow to freeplay 
                 // SnackOffer.Instance.canTakeSnack = true;
@@ -33,25 +35,30 @@ public class GameManager : MonoBehaviour
             //     }
                 break;
             }
-            case (1):  //when player is allowed to move things //make it when ever player is in a tutorial, startDimming to false
+            case (0):  //when player is allowed to move things //make it when ever player is in a tutorial, startDimming to false
             {
-                CamSwitch.Instance.TeaCamOn();
-                TeaCeremonyManager.Instance.startDiming = true; 
+                
+                
+                TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseTeapot;
                 //tell player about the lighting will go dimm
                 //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseTeapot; 
                 //auto next stage after dialogue finish <Next> in txt 
                 break;
             }
-            case (2):  //Stage2 is boiling tea
+            case (1):  //Stage2 is boiling tea
             {
-                TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseTeapot;
-                //if boiled tea on stove, NextStage() 3
-                if(Tutorial.Instance.usedStove){
+                    CamSwitch.Instance.TeaCamOn();
+                    TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseTeapot;
+                    TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseStirTool;
+                    TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.GetIngredient;
+                    TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UsePowderTool;
+                    //if boiled tea on stove, NextStage() 3
+                    if (Tutorial.Instance.usedStove){
                     //NextStage() 3
                 }
                 break;
             }
-            case (3):  //Stage3 is pouring tea
+            case (2):  //Stage3 is pouring tea
             {
                 TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseTeapot;
                 //if tea distance in cup increase larger than half and put down pot, NextStage() 4 
@@ -60,7 +67,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             }
-            case (4):  //Stage4 is adding powder
+            case (3):  //Stage4 is adding powder
             {
                 TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UsePowderTool;
                 //if powder in cup >0 and put down powder tool, NextStage() 5 
@@ -69,7 +76,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             }
-            case (5):  //Stage5 is stirring tea
+            case (4):  //Stage5 is stirring tea
             {
                 TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseStirTool;
                 //if color change, stir tool down , NextStage() 6 
@@ -78,14 +85,14 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             }
-            case (6):  //Stage6 is add ingredients
+            case (5):  //Stage6 is add ingredients
             {
                 TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.GetIngredient;
                 //if added ingredients>0 , NextStage()
                 if(Tea.Instance.numOfIngredients>0){  //may need edit 
-                    //NextStage() go on and serve it
-                    
-                }
+                                                      //NextStage() go on and serve it
+                        TeaCeremonyManager.Instance.startDiming = true;
+                    }
                 break;
             }
             //case 7 : pen camera to teaCam, allow player to serve

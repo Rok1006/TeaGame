@@ -202,7 +202,7 @@ public class Ghost : MonoBehaviour
     void ReadDialogText()
     {
         //Reading txt
-        txtFile = Resources.Load<TextAsset>("GhostData"); //Read the file
+        txtFile = Resources.Load<TextAsset>("GhostData1"); //Read the file
         List<string> lineTextList = new List<string>(txtFile.text.Split('\n')); //Spilt file to lines
 
         //Processing txt

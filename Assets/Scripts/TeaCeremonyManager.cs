@@ -168,9 +168,32 @@ public class TeaCeremonyManager : MonoBehaviour
         }
     }
     //Ingredients Insertion
-    public void IngredientsAdd(GameObject Ingredients){
-        GameObject i = Instantiate(Ingredients, InsertSpot.transform.position, Quaternion.identity) as GameObject;
+    public void IngredientsAdd(GameObject ingred, string ingredType) 
+    {
+        GameObject i = Instantiate(ingred, InsertSpot.transform.position, Quaternion.identity) as GameObject;
+        switch (ingredType)
+        {
+            case ("Ash"):
+            {
+                i.GetComponent<PowderAndIngredients>().isAsh = true;
+                Ingredients.ashObj = i;
+                break;
+            }
+            case ("Bomb"):
+            {
+                i.GetComponent<PowderAndIngredients>().isBomb = true;
+                Ingredients.bombObj = i;
+                break;
+            }
+            case ("Leaf"):
+            {
+                i.GetComponent<PowderAndIngredients>().isLeaf = true;
+                Ingredients.leafObj = i;
+                break;
+            }
+        }
     }
+        
     public void ServeTea(){
         mainCup.transform.position = ServeCupPos.transform.position;
         served = true;

@@ -58,6 +58,8 @@ public class MatchaBox : MonoBehaviour
         TableCollider.SetActive(false);
         powdernumUI.SetActive(false);
         toolFirststep.SetActive(false);
+        OriginalToolPos.transform.position = transform.position;
+        OriginalToolPos.transform.rotation = transform.rotation;
     }
     void Update()
     {

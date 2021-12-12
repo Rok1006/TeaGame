@@ -174,7 +174,7 @@ public class Ghost : MonoBehaviour
             StopCoroutine(dialogLoopCor);
             if (reactCor != null)
                 StopCoroutine(reactCor);
-            reactCor = StartCoroutine(TypeDelay(stageList[stageIndex].TeaReactList[0],1.1f)); //If you serve him water in stage 1
+            reactCor = StartCoroutine(TypeDelay(stageList[stageIndex].TeaReactList[0],2.1f)); //If you serve him water in stage 1
         }
         else
             NextStage(); 

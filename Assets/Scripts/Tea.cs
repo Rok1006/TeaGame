@@ -69,13 +69,19 @@ public class Tea : MonoBehaviour
     void Update()
     {
         teasprite.color = currentColor;
-        if(distance<originalDistance||numOfIngredients>0||numOfPowder>0){
-            //TeaCeremonyManager.Instance.canDiscard = true;
-            TeaCeremonyManager.Instance.discardButton.GetComponent<Button>().interactable = true;
-            ServeTray.Instance.canServe = true;
-        }else{
-            TeaCeremonyManager.Instance.discardButton.GetComponent<Button>().interactable = false;
-            ServeTray.Instance.canServe = false;
+        if (Tutorial.Instance.tutorialComplete)
+        {
+            if (distance < originalDistance || numOfIngredients > 0 || numOfPowder > 0 && liquidLevel>0)
+            {
+                //TeaCeremonyManager.Instance.canDiscard = true;
+                TeaCeremonyManager.Instance.discardButton.GetComponent<Button>().interactable = true;
+                ServeTray.Instance.canServe = true;
+            }
+            else
+            {
+                TeaCeremonyManager.Instance.discardButton.GetComponent<Button>().interactable = false;
+                ServeTray.Instance.canServe = false;
+            }
         }
         // if(numOfIngredients>0||numOfPowder>0){
         //     //TeaCeremonyManager.Instance.canDiscard = true;

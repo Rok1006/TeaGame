@@ -26,7 +26,8 @@ public class ServeTray : MonoBehaviour
     }
     void OnMouseOver() {
         //go up a little
-        if(!TeaCeremonyManager.Instance.served&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&!occupied&&canServe){
+        if(!TeaCeremonyManager.Instance.served&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE && !occupied && canServe) {
+            //&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.ServeOK){
             oc.enabled = true;
             guide.SetActive(true);
         }
@@ -37,7 +38,8 @@ public class ServeTray : MonoBehaviour
         guide.SetActive(false);
     }
     void OnMouseDown() {
-        if(!TeaCeremonyManager.Instance.served&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&!occupied&&canServe){
+        if(!TeaCeremonyManager.Instance.served&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE && !occupied && canServe) {
+            //&& TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.ServeOK)
             TeaCeremonyManager.Instance.ServeTea();
         }
     }

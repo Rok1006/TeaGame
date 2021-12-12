@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public Ghost gtcs;
     public GameObject DialogueUI;
     public GameObject SoundManager;
-
+    bool changeToTeaCam = false;
     private void Awake()
     {
         Instance = this;
@@ -44,12 +44,18 @@ public class GameManager : MonoBehaviour
         {
             case (0):  //when player is allowed to move things //make it when ever player is in a tutorial, startDimming to false
             {
+                ServeTray.Instance.canServe = false;
                 //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
                 break;//Intro
             }
             case (1):  //Stage1 - Put on boiler
             {
-                CamSwitch.Instance.TeaCamOn();
+                    if (!changeToTeaCam)
+                    {
+                        CamSwitch.Instance.TeaCamOn();
+                        changeToTeaCam = true;
+                    }
+                ServeTray.Instance.canServe = true;
                 TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseTeapot;
                 if (Tutorial.Instance.usedStove){
                     currGhost.NextStage();
@@ -58,8 +64,9 @@ public class GameManager : MonoBehaviour
             }
             case (2):  //Stage2 Add powder
             {
+                ServeTray.Instance.canServe = false;
                 TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UsePowderTool;
-                if (Tea.Instance.numOfPowder > 0)
+                if (Tea.Instance.numOfPowder > 0 && Tutorial.Instance.usedPowderT)
                 {
                     currGhost.NextStage();    
                 }
@@ -91,12 +98,14 @@ public class GameManager : MonoBehaviour
             }
             case (6): //serve...Nextstage in Ghost.DrinkTea()
             {
-                TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.ServeOK;
+                ServeTray.Instance.canServe = true;
+                    //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.ServeOK;
                 break;
             }
             case (7): //Snacktime NextStage in Ghost.EatSnack()
             {
-                TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseSnack;
+                    ServeTray.Instance.canServe = false;
+                    TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseSnack;
                 break;
             }
             case (8): //sensei abt to go, may be put the following to the next

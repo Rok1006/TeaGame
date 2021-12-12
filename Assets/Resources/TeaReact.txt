@@ -2,34 +2,34 @@
 This dialog should not play. Error occurred.
 <p>5
 <Stage>1
-Plain water? Is this a JOKE!?
+Is this a JOKE!?
 <p>3
 <a>Angry
 <Stage>2
-Plain water? Is this a JOKE!?
+Is this a JOKE!?
 <p>3
 <a>Angry
 <Stage>3
-Plain water? Is this a JOKE!?
+Is this a JOKE!?
 <p>3
 <a>Angry
 <Stage>4
-Plain water? Is this a JOKE!?
+Is this a JOKE!?
 <p>3
 <a>Angry
 <Stage>5
-Plain water? Is this a JOKE!?
+Is this a JOKE!?
 <p>3
 <a>Angry
 <Stage>6
-Plain water? Is this a JOKE!?
+Is this a JOKE!?
 <p>3
 <a>Angry
 <Stage>7
-Plain water? Is this a JOKE!?
+Is this a JOKE!?
 <p>3
 <a>Angry
 <Stage>8
-Plain water? Is this a JOKE!?
+Is this a JOKE!?
 <p>3
 <a>Angry

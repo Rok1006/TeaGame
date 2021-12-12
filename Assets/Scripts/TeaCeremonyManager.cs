@@ -202,8 +202,9 @@ public class TeaCeremonyManager : MonoBehaviour
     public void ServeTea(){
         mainCup.transform.position = ServeCupPos.transform.position;
         served = true;
-        
-        if(!Tutorial.Instance.tutorialComplete){ //is completed tutrial
+        CamSwitch.Instance.ConversationCamOn();
+
+        if (!Tutorial.Instance.tutorialComplete){ //is completed tutrial
             
             StartCoroutine(SenseiJudge());
         }else{ //For real tea
@@ -212,7 +213,7 @@ public class TeaCeremonyManager : MonoBehaviour
     }
     IEnumerator SenseiJudge(){
         GameManager.Instance.currGhost.DrinkTea(tea.GetComponent<Tea>());//opposite person with do sth to the tea
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         TeaReturn();
         sc.Poof();
         cloudParticles.SetActive(true);  //poof Pl

@@ -129,6 +129,7 @@ public class TeaPot : MonoBehaviour
             Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(false); //tutorial
             Tutorial.Instance.ResetSteps(); //tutorial
             Tutorial.Instance.usedTeaPot = true; //GameManager
+            TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
         }
         if (pickedUP && Input.GetMouseButtonDown(0))
         {

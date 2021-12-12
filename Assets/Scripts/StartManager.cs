@@ -9,10 +9,12 @@ public class StartManager : MonoBehaviour
     public GameObject FadeIn;
     public GameObject Camera;
     Animator camAnim;
+    public GameObject ControlPanel;
     void Start()
     {
         camAnim = Camera.GetComponent<Animator>();
         FadeIn.SetActive(false);
+        ControlPanel.SetActive(false);
     }
 
     void Update()
@@ -34,7 +36,10 @@ public class StartManager : MonoBehaviour
     void LoadScene(){
         SceneManager.LoadScene(sceneName);
     }
-    public void OptionButton(){
-
+    public void ControlButton(){
+        ControlPanel.SetActive(true);
+    }
+    public void BackButton(){
+        ControlPanel.SetActive(false);
     }
 }

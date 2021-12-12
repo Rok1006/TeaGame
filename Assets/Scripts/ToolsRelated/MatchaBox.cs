@@ -92,16 +92,16 @@ public class MatchaBox : MonoBehaviour
         //MOvement
         if (pickedUP && !Input.GetMouseButton(0))  //moving the tool
         {
-            this.transform.position += deltaMousePosMove;
-            // Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-            // RaycastHit hit;
-            // if (Physics.Raycast (ray, out hit, 100)) {
-            //     Debug.Log (hit.transform.name);
-            //     mPos = hit.point;
-            //     mPos.y = 1.076f;
-            //     Debug.Log (mPos);
-            // }
-            // this.transform.position = mPos;
+            //this.transform.position += deltaMousePosMove;
+            Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast (ray, out hit, 100)) {
+                Debug.Log (hit.transform.name);
+                mPos = hit.point;
+                mPos.y = 1.076f;
+                Debug.Log (mPos);
+            }
+            this.transform.position = mPos;
         }
         //Release it
         if(state==1&&Input.GetMouseButton(1)&&canRelease&&!havePowder){  //later add canRelease bool

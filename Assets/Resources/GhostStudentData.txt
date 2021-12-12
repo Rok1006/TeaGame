@@ -2,7 +2,7 @@
 <stagePause>4
 ......f..lll.....
 <p>3
-<si>0.08
+<si>0.05
 I want...a full tea...
-<p>
+<p>2
 

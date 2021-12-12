@@ -30,7 +30,7 @@ public class GhostStudent : MonoBehaviour
     public List<StageData> stageList = new List<StageData>();
     public TextMeshProUGUI textDisplay;
     Color textColor = new Color(0, 0, 0);
-    float ogTextSize = 5;
+    float ogTextSize = 5.5f;
     
     public GameObject objDialogBox;
     public RectTransform rectTrans;

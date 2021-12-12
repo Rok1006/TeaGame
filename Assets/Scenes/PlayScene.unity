@@ -4164,8 +4164,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 5
-  m_fontSizeBase: 5
+  m_fontSize: 5.5
+  m_fontSizeBase: 5.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10087,6 +10087,10 @@ MonoBehaviour:
   gtcs: {fileID: 1641279433}
   DialogueUI: {fileID: 1849024645}
   SoundManager: {fileID: 1498024794}
+  ghostList:
+  - {fileID: 930557313}
+  - {fileID: 389663942}
+  ghostIndex: 0
 --- !u!4 &753367487
 Transform:
   m_ObjectHideFlags: 0
@@ -30415,7 +30419,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 33
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -30468,7 +30472,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.61
+      scalar: 0.01
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -30965,9 +30969,9 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 0.0000013555058, y: -0.00070485595, z: 0.000011915874}
+    m_Position: {x: 5.4, y: -0.00070485595, z: 18.96}
     m_Rotation: {x: -0.000111082474, y: 0, z: 0}
-    m_Scale: {x: 54.39065, y: 0.9999994, z: 9.299756}
+    m_Scale: {x: 115.46, y: -3.34, z: 45.45}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -31165,7 +31169,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3.44
+      scalar: 0.2
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -32319,7 +32323,7 @@ ParticleSystem:
     speedModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.25
+      scalar: 0
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -35047,7 +35051,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1566936891}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.91, y: 6.66, z: 36.93}
+  m_LocalPosition: {x: -0.91, y: 6.7, z: 98.5}
   m_LocalScale: {x: 0.51603425, y: 0.51603425, z: 0.51603425}
   m_Children: []
   m_Father: {fileID: 0}
@@ -40325,7 +40329,7 @@ MonoBehaviour:
   textDisplay: {fileID: 688486044}
   objDialogBox: {fileID: 1849024645}
   rectTrans: {fileID: 0}
-  typingSpeed: 0
+  typingSpeed: 0.03
   stageIndex: 0
   dialogIndex: 0
   anim: {fileID: 0}
@@ -41008,6 +41012,7 @@ GameObject:
   - component: {fileID: 1827956062}
   - component: {fileID: 1827956064}
   - component: {fileID: 1827956063}
+  - component: {fileID: 1827956065}
   m_Layer: 0
   m_Name: objGhostStudent
   m_TagString: Untagged
@@ -41042,8 +41047,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageList: []
-  textDisplay: {fileID: 0}
-  objDialogBox: {fileID: 0}
+  textDisplay: {fileID: 688486044}
+  objDialogBox: {fileID: 1849024645}
   rectTrans: {fileID: 0}
   typingSpeed: 0.2
   stageIndex: 0
@@ -41100,6 +41105,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1827956065
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827956061}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 40ed43b71648f124cb300dbe7091335a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1849024645
 GameObject:
   m_ObjectHideFlags: 0

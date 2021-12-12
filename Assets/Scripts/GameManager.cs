@@ -168,6 +168,16 @@ public class GameManager : MonoBehaviour
     }
     public void GhostLeave()
     {
+        switch (ghostIndex)
+        {
+            case (0):
+                {
+                    TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;  //add these 2 when players is allow to freeplay 
+                    SnackOffer.Instance.canTakeSnack = true;
+                    Tutorial.Instance.tutorialComplete = true;
+                    break;
+                }
+        }
         StartCoroutine(BetweenGhosts());
         ghostIndex++;
     }

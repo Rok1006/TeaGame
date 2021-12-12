@@ -7,17 +7,31 @@ public class GameManager : MonoBehaviour
     public Tutorial tutor;
     public Ghost currGhost;
     public static GameManager Instance;
+    public GameObject Fadeout;
+    public Ghost gtcs;
+    public GameObject DialogueUI;
+    public GameObject SoundManager;
 
     private void Awake()
     {
         Instance = this;
+        Fadeout.SetActive(true);
+        //gtcs.enabled = false;
+        DialogueUI.SetActive(false);
+        SoundManager.SetActive(false);
+        StartCoroutine(StartPlay());
     }
     void Start()
     {
         TeaCeremonyManager.Instance.startDiming = false; //also whenever player is in tutorial
     }
 
-    // Update is called once per frame
+    IEnumerator StartPlay(){
+        yield return new WaitForSeconds(1.3f);
+        Fadeout.SetActive(false);
+        DialogueUI.SetActive(true);
+        SoundManager.SetActive(true);
+    }
     void Update()
     {
         CheckState();
@@ -30,7 +44,7 @@ public class GameManager : MonoBehaviour
         {
             case (0):  //when player is allowed to move things //make it when ever player is in a tutorial, startDimming to false
             {
-                TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
+                //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
                 break;//Intro
             }
             case (1):  //Stage1 - Put on boiler
@@ -87,9 +101,11 @@ public class GameManager : MonoBehaviour
             }
             case (8): //sensei abt to go, may be put the following to the next
             {
+                
                 TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
                 TeaCeremonyManager.Instance.startDiming = true;
-                Tutorial.Instance.tutorialComplete = true;
+                Tutorial.Instance.tutorialComplete = true;  //this two may be put after case 8
+                TeaCeremonyManager.Instance.LightingButton.SetActive(true);
                 break;
             }
             //case 7 : pen camera to teaCam, allow player to serve

@@ -6,51 +6,58 @@ This is the night then.
 <p>2
 I'll be gone soon, and you'll have to face them all by yourself.
 <p>4
-I could see you are nervous...
+I can see you're nervous.
 <p>2
 It's alright. 
 <p>1
-Let's go through the steps once more.
+Let's go through each step once more.
 <p>2
-Serve me tea once last time...Just the regular is fine.
+Serve me tea one last time... The regular is fine.
 <p>4
 Let's get started.
 <p>2
+<Next>
 <Stage>1
 <stagePause>0
-Take the tea pot and drop it on the boiler next to it
+Take the tea pot and put it on the boiler next to it.
 <p>4
-They are both on your upper right corner of the table.
+They are both in the upper right corner of the table.
 <p>4
-...please be respectful to both of our times.
+...Please hurry. My time is running out and your next customer will arrive soon.
 <p>3
-Are you serious...Take the Tea Pot and Drop it on the Boiler!
+Are you serious...Take The Tea Pot and Drop it on the Boiler!
 <p>4
 <a>Angry
-They are on the right corner of the Table!!
+They're in the upper right corner of the table!!
 <p>6
 <a>Angry
 <Stage>2
 <stagePause>0
-While the water is boiling. Add the powder stuff to the cup.
+While the water is boiling. Add some tea powder to the cup.
 <p>6
 The spoon is to your left.
 <p>4
-I would just like some matcha.
+I would love some matcha for the last cup of tea I drink in this life.
 <p>2
 Spoon some matcha powder, and put it in the cup.
 <p>4
-ANGRY
+Matcha powder is in the container above your spoon.
+<p>3
+<a>Angry
+I will be gone soon without having my last cup of tea. Are you okay with that?
+<p>2
+<a>Angry
+Spoon the powder from the container!!
 <p>3
 <Stage>3
 <stagePause>0
-Sometimes they also wwant special stuff.
+Some customers may prefer a stronger taste.
 <p>1
-It's next to the cup.
+Use the tea leaf. It's next to the cup.
 <p>1
-Though I don't need anything, feel free to add them.
+Though I don't need it, you should be aware when someone asks.
 <p>2
-Some of them might have special needs so this is important.
+Some of them won't drink the tea without it so this is important.
 <p>3
 Let's move on.
 <p>2
@@ -59,46 +66,60 @@ Let's move on.
 <stagePause>0
 Ice breeds no green. Let's add the hot water in.
 <p>3
-Take the pot and pour the hot water into the cup.
+Take the teapot and pour the hot water into the cup.
 <p>3
-ANGRY
-<p>3
+<a>Angry
+Do you know how to pour?
+<p>5
 <a>Flip
+POUR. THE. WATER. BEFORE. I. GO. POOF.
 <Stage>5
 <stagePause>0
-Stir it with the stir tool on your left
+Good. Now stir with the matcha whisk on your left.
+<p>6
+You grab the matcha whisk. You dip it in your cup.
+<p>3
+<a>Flip
+Then. you. STIRRRRRRR.
 <p>5
 <Stage>6
 <stagePause>0
-Nowserve!
+Now serve!
 <p>50
 <Stage>7
 <stagePause>0
-Good tea I like.
+Good tea. I like.
 <p>1
-I wish I would remember the feeling of drinking tea over there...
+I wish I could carry the memory of this tea to the next life.
 <p>2
-I want snack.
+Now I want snack.
 <p>2
-You can get snack with the THING next to the spoon
+Good snack would make a cup of tea even better.
+<p>3
+Get snack using the snack tongs next to the spoon.
 <p>10
-ANGRU
+<a>Angry
+Old man wants dessert. I don't care about my diarrhea anymore now that I'm dead.
 <p>2
 <Stage>8
 <stagePause>0
-Ok, I'm all set.
+I am contented. I was right about you.
 <p>4
-I'm going now
+I'm going now. Goodbye, my best pupil.
 <p>2
-Wait no last thing lol
+Wait no jk one last thing lol.
 <p>1
-The candle, don't forget to reignite it if it gets too dark.
+The candle, don't forget to reignite it if it becomes too dark.
 <p>3
-Every wondering souls need light
+Every wandering soul needs some light to warm them.
 <p>2
-Your tea is light guide path and you'll be ok
+The light of the fire is transient.
+<p>3
+The light of your tea... will guide them to their next life.
 <p>4
-ok I really need to gos eeya
+I have faith in you.
+<p>4
+Okay now I really need to go seeya!
 <p>3
 <a>Leave
 

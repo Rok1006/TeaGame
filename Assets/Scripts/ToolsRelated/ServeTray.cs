@@ -9,11 +9,13 @@ public class ServeTray : MonoBehaviour
     public GameObject guide;
     public bool occupied = false;
     public bool canServe = false;
+    public SoundManager sc;
     void Awake() {
         Instance = this;
     }
     void Start()
     {
+        sc = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         oc.enabled = false;
         guide.SetActive(false);
     }
@@ -42,9 +44,16 @@ public class ServeTray : MonoBehaviour
     void OnTriggerEnter(Collider col) {
         if(col.gameObject.tag=="Cup"||col.gameObject.tag=="Snacks"){
             occupied = true;
+            sc.ReleaseItem();
         }
         if(col.gameObject.tag=="Cup"){
             
         }
+    }
+    void OnTriggerExit(Collider col) {
+        if(col.gameObject.tag=="Cup"||col.gameObject.tag=="Snacks"){
+            occupied = false;
+        }
+        
     }
 }

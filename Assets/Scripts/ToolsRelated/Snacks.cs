@@ -10,8 +10,10 @@ public class Snacks : MonoBehaviour
     public GameObject servePos;
     public GameObject snackPrefab;
     public GameObject currentSnack;
+    public SoundManager sc;
     void Start()
     {
+        sc = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         oc.enabled = false;
         //sText = "";
         SnackOffer.Instance.snackParticles.SetActive(false);
@@ -34,21 +36,24 @@ public class Snacks : MonoBehaviour
                 Vector3 newPos = new Vector3(servePos.transform.position.x+0.23f,servePos.transform.position.y,servePos.transform.position.z);
                 GameObject s = Instantiate(snackPrefab, newPos,Quaternion.identity) as GameObject;
                 currentSnack = s;
+                sc.PickToolUp();
             }
             else
             {
                 GameObject s = Instantiate(snackPrefab, servePos.transform.position,Quaternion.identity) as GameObject;
                 currentSnack = s;
+                sc.PickToolUp();
             }
             StartCoroutine(SenseiEat());
         }
     }
     IEnumerator SenseiEat(){
         yield return new WaitForSeconds(2f);
+        sc.Poof();
         SnackOffer.Instance.snackParticles.SetActive(true);
         GameManager.Instance.currGhost.EatSnack();
         Destroy(currentSnack.gameObject);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3.5f);
         SnackOffer.Instance.snackParticles.SetActive(false);
     }
 

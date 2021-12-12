@@ -7,9 +7,10 @@ public class PowderAndIngredients : MonoBehaviour
     public bool isAsh;
     public bool isBomb;
     public bool isLeaf;
+    public SoundManager sc;
     void Start()
     {
-        
+        sc = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
     void Update()
@@ -45,6 +46,7 @@ public class PowderAndIngredients : MonoBehaviour
     void OnTriggerEnter(Collider col) {
         if(this.gameObject.tag == "Powder"){
             if(col.gameObject.tag == "Bottom"){  //Cup
+                sc.PowderDown();
                 Tea.Instance.numOfPowder+=1;
                 MatchaBox.Instance.havePowder = false;
                 Tea.Instance.powderList.Add(gameObject);

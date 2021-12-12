@@ -13,11 +13,13 @@ public class SnackOffer : MonoBehaviour
     public string skText;
     public bool canTakeSnack = true;
     public GameObject snackParticles;
+    public SoundManager sc;
     void Awake() {
         Instance=this;
     }
     void Start()
     {
+        sc = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         otsc.enabled = false;
         tutorial.SetActive(false);
         snackText.SetActive(false);
@@ -47,6 +49,7 @@ public class SnackOffer : MonoBehaviour
             && TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseSnack
             )//&& canTakeSnack
         {
+            sc.PickToolUp();
             tutorial.SetActive(false);
             CamSwitch.Instance.CupboardCamOn();
             snackText.SetActive(true);

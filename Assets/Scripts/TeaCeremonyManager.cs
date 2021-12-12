@@ -21,7 +21,7 @@ public class TeaCeremonyManager : MonoBehaviour
     public GameObject candleBar;
     private Image cb;
     bool candlelighting = false;
-
+    public GameObject LightingButton;
     public GameObject potBar;
     private Image pb;
     bool potHeating = false;
@@ -70,11 +70,14 @@ public class TeaCeremonyManager : MonoBehaviour
     public bool served = false;
     public GameObject tea;
     #endregion
+    public SoundManager sc;
     void Awake() {
         Instance = this;
     }
     void Start()
     {
+        LightingButton.SetActive(false);
+        sc = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         fireSize = 100;
         cb = candleBar.GetComponent<Image>();
         pb = potBar.GetComponent<Image>();
@@ -97,8 +100,10 @@ public class TeaCeremonyManager : MonoBehaviour
     void Update()
     {
         toolText.GetComponent<Text>().text =  tText.ToString();
-        if(currentTool == TeaTool.NOTOOL||currentTool == TeaTool.NONE){
-            discardButton.SetActive(true);
+        if(currentTool == TeaTool.NOTOOL||currentTool == TeaTool.NONE&&currentTutorialState == TutorialState.FreePlay){
+            if(Tutorial.Instance.tutorialComplete){
+                discardButton.SetActive(true);
+            }
         }else{
             discardButton.SetActive(false);
         }
@@ -207,11 +212,12 @@ public class TeaCeremonyManager : MonoBehaviour
     }
     IEnumerator SenseiJudge(){
         GameManager.Instance.currGhost.DrinkTea(tea.GetComponent<Tea>());//opposite person with do sth to the tea
-        //cloudParticles.SetActive(true);  //poof Pl
         yield return new WaitForSeconds(1f);
-        //cloudParticles.SetActive(false);
-        //ClearTea();
         TeaReturn();
+        sc.Poof();
+        cloudParticles.SetActive(true);  //poof Pl
+        yield return new WaitForSeconds(3.5f);
+        cloudParticles.SetActive(false);
     }
     // public void JudgeTea(){   //sensei and customer judging your tea
     //     if(Tutorial.Instance.tutorialComplete){ //is completed tutrial
@@ -224,17 +230,15 @@ public class TeaCeremonyManager : MonoBehaviour
     // }
     public void TeaReturn(){
         mainCup.transform.position = OriginalCupPos.transform.position;
-        Tea.Instance.OriginalPos.transform.position = Tea.Instance.resetPos; //rest tea to initial pos
+        //Tea.Instance.OriginalPos.transform.position = Tea.Instance.resetPos; //rest tea to initial pos
         served = false;
-        //reset tea state
-        //ClearTea();
+        ClearTea();
     }
     public void DiscardTea(){ //whe sensei want to discard it , it will happened, cus there is stuff in it
-        // if(canDiscard){
+        sc.Poof();
         cloudParticles.SetActive(true);
         Invoke("StopCloud",2.5f);
         ClearTea();
-        //}
     }
     void StopCloud(){
         cloudParticles.SetActive(false);
@@ -242,7 +246,7 @@ public class TeaCeremonyManager : MonoBehaviour
     }
     void ClearTea()
     {
-        // Tea.Instance.OriginalPos.transform.position = Tea.Instance.resetPos; //rest tea to initial pos
+        Tea.Instance.OriginalPos.transform.position = Tea.Instance.resetPos; //rest tea to initial pos
         Tea.Instance.initialDistance = Tea.Instance.TopPos.transform.position.y - Tea.Instance.OriginalPos.transform.position.y; //reset initial distance for cup capacity
         tea.transform.localScale = new Vector3(Tea.Instance.minSize, Tea.Instance.minSize, Tea.Instance.minSize); //reset scale
         Tea.Instance.teastate = 0;

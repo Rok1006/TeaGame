@@ -76,6 +76,7 @@ public class MatchaBox : MonoBehaviour
             this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
             mbAnim.SetBool("Open", true);
             mbAnim.SetBool("Close", false);
+            //sc.OpenLid();
             sc.PickToolUp();
         }
         }
@@ -175,6 +176,7 @@ public class MatchaBox : MonoBehaviour
                 otsc.enabled = true;
                 mbAnim.SetBool("Open", true);
                 mbAnim.SetBool("Close", false);
+                //sc.OpenLid();
                 toolFirststep.SetActive(true);
                 TeaCeremonyManager.Instance.tText = toolName;
             }

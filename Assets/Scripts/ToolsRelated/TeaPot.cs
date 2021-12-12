@@ -46,6 +46,7 @@ public class TeaPot : MonoBehaviour
     Vector3 deltaMousePosRot;
     Vector3 deltaMousePosMove;
     Vector3 mousePosPrePour;
+    Vector3 mouseStartPos;
 
     float tiltHStrength = 0.1f;   //0.1
     float tiltVStrength = 0.2f;  //0.2
@@ -54,6 +55,8 @@ public class TeaPot : MonoBehaviour
     float pX;
     float pY;
     public float heatness = 0;  //current heatness of the pot  will decrease constantly
+    Vector3 mPos;
+    public SoundManager sc;
     void Awake() {
         Instance = this;
     }
@@ -83,10 +86,14 @@ public class TeaPot : MonoBehaviour
         pickUPDes = new Vector3(this.transform.position.x, 2f, transform.position.z);
         if(TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseTeapot&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT){ //added stuff
         if(canClick&&OnteaPot && Input.GetMouseButton(0)&&state==0){   //pick up pot
+            //mouseStartPos = Input.mousePosition;
+            //Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.visible = false;
             toolFirststep.SetActive(false); //tutorial
             Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
             float step = speed * Time.deltaTime;
             this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
+            sc.PickUpTeaPot();
             // canMove = true;  //this canmove to after player completely release after pick up
         }
         }
@@ -94,6 +101,9 @@ public class TeaPot : MonoBehaviour
             canMove = true; 
             state=1;
             if(Input.GetMouseButtonUp(0)){  //Fixed changed pos when hold pot and drag without release in the middle
+              //Cursor.lockState = CursorLockMode.None;
+              //Cursor.visible = true;
+              //InputState.Change(Mouse.current.position, mouseStartPos);
               Tutorial.Instance.NextStep();
               Invoke("PickedUP",0.01f);  //,.5f 
             }
@@ -124,10 +134,15 @@ public class TeaPot : MonoBehaviour
         {
             mousePosPrePour = Input.mousePosition; //get pos before pouring so we can snap to new pos after pouring
         }
+        degree = thisParent.transform.forward.y* Mathf.Rad2Deg;
+        if(degree>42){  //teapot pouring sound
+            sc.PourTea();
+        }
         if (pickedUP && Input.GetMouseButton(0)){    //Mouse Distance based Tilt Pouring here
             //thisParent.transform.rotation *= Quaternion.Euler(deltaMousePos);    
             thisParent.transform.Rotate(deltaMousePosRot); 
             StovePlaceholderObj.SetActive(false);
+            // sc.PourTea();
         }
         else if (pickedUP&&Input.GetMouseButtonUp(0)){ //when pick up and release right click
             Vector3 tempZ = thisParent.transform.rotation * Vector3.forward; //Im trying to make the direction stay the same but failed....
@@ -184,6 +199,7 @@ public class TeaPot : MonoBehaviour
         Tea.Instance.cupCapacity.SetActive(true);
         Tea.Instance.heatBar.SetActive(true);
         Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
+        //MatchaBox.Instance.TableCollider.SetActive(true);
     }
     void NtonPot(){
         OnteaPot = false;
@@ -222,12 +238,13 @@ public class TeaPot : MonoBehaviour
     }
     void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "Table"){
-            //print("table");
+            sc.PlaceTeaPot();
             Tea.Instance.heatBar.SetActive(false);
             pickedUP = false;  //not working after using stove is there sth that get turn on again not sensitive?
             canClick =true;
         }
         if(col.gameObject.tag == "Stove"){
+            sc.PlaceTeaPot();
             //rb.isKinematic = true;
             onStove = true;
             pickedUP = false;

@@ -18,13 +18,13 @@ public class PowderAndIngredients : MonoBehaviour
     }
     void OnCollisionEnter(Collision col) {
         if(this.gameObject.tag == "Powder"){
-            if(col.gameObject.tag == "Cup"){
-                Tea.Instance.numOfPowder+=1;
-                MatchaBox.Instance.havePowder = false;
-                Tea.Instance.powderList.Add(gameObject);
-                Destroy(this.gameObject, 60f);
+            // if(col.gameObject.tag == "Cup"){  //Cup
+            //     Tea.Instance.numOfPowder+=1;
+            //     MatchaBox.Instance.havePowder = false;
+            //     Tea.Instance.powderList.Add(gameObject);
+            //     Destroy(this.gameObject, 60f);
 
-            }
+            // }
             if(col.gameObject.tag == "Table"){
                 MatchaBox.Instance.havePowder = false;
                 Destroy(this.gameObject, .75f);
@@ -39,6 +39,17 @@ public class PowderAndIngredients : MonoBehaviour
             }
             if(col.gameObject.tag == "Table"){
                 Destroy(this.gameObject, .75f);
+            }
+        }
+    }
+    void OnTriggerEnter(Collider col) {
+        if(this.gameObject.tag == "Powder"){
+            if(col.gameObject.tag == "Bottom"){  //Cup
+                Tea.Instance.numOfPowder+=1;
+                MatchaBox.Instance.havePowder = false;
+                Tea.Instance.powderList.Add(gameObject);
+                Destroy(this.gameObject, 3f);
+
             }
         }
     }

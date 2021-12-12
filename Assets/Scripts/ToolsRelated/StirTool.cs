@@ -28,11 +28,13 @@ public class StirTool : MonoBehaviour
     float tiltVStrength = 0.2f;  //0.2
     public float followHStrength = 0.0025f;  //0.0025f
     public float followVStrength = 0.005f; //0.005f
+    public SoundManager sc;
     void Awake() {
         Instance = this;
     }
     void Start()
     {
+        sc = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         otsc.enabled = false;
         rb = this.GetComponent<Rigidbody>();
         dipPos = new Vector3(this.transform.position.x, 0.97f, this.transform.position.z); //0.653f
@@ -55,6 +57,7 @@ public class StirTool : MonoBehaviour
             float step = speed * Time.deltaTime;
             this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
             this.transform.rotation = Quaternion.Euler(180f, 0f, 0f); 
+            sc.PickToolUp();
         }
         }
         if(this.transform.position==pickUPDes){  //player picked it up
@@ -128,6 +131,7 @@ public class StirTool : MonoBehaviour
         if(col.gameObject.tag == "Table"){
             pickedUP = false; 
             toolTrigger.SetActive(false);
+            sc.PlaceToolDown();
         }
     }
     void OnTriggerEnter(Collider col) {

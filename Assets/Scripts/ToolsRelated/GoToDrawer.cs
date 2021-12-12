@@ -14,11 +14,13 @@ public class GoToDrawer : MonoBehaviour
     public GameObject ingredientText;
     public string IGText;
     private string tutorialText;
+    public SoundManager sc;
     void Awake() {
         Instance = this;
     }
     void Start()
     {
+        sc = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         oc.enabled = false;
         tutorial.SetActive(false);
         tutorialText = "ADD INGREDIENTS";
@@ -56,10 +58,12 @@ public class GoToDrawer : MonoBehaviour
         if(TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.GetIngredient&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.INGRED){
         tutorial.SetActive(false);
         if(state==0){
+            sc.OpenDrawer();
             CamSwitch.Instance.ChoiceCamOn();
             Invoke("stateChange", .5f);
         }
         if(state==1){
+            sc.OpenDrawer();
             CamSwitch.Instance.TeaCamOn();
             state=0;
         }

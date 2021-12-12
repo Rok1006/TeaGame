@@ -30,9 +30,6 @@ public class TeaType : MonoBehaviour
         
     }
     public void CheckCurrentTea(){  //after tutorial is done, check if the tea serve is correct
-        
-    }
-    public void CheckTutorialTea(){
 
     }
 }

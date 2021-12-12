@@ -197,24 +197,37 @@ public class TeaCeremonyManager : MonoBehaviour
     public void ServeTea(){
         mainCup.transform.position = ServeCupPos.transform.position;
         served = true;
+        
+        if(!Tutorial.Instance.tutorialComplete){ //is completed tutrial
+            StartCoroutine(SenseiJudge());
+        }else{ //For real tea
+            TeaType.Instance.CheckCurrentTea();
+        }
+    }
+    IEnumerator SenseiJudge(){
+        yield return new WaitForSeconds(1f);
+        cloudParticles.SetActive(true);  //poof
+        ClearTea();
+        yield return new WaitForSeconds(2f);
+        cloudParticles.SetActive(false);
         GameManager.Instance.currGhost.DrinkTea(tea.GetComponent<Tea>());//opposite person with do sth to the tea
         TeaReturn();
-        //wait time, drinking effect
-        //JudgeTea()
     }
-    /*
-    public void JudgeTea(){   //sensei and customer judging your tea
-        if(Tutorial.Instance.tutorialComplete){ //is completed tutrial
-            TeaType.Instance.CheckCurrentTea();
-        }else{ //For tutorial tea
-            TeaType.Instance.CheckTutorialTea();
-        }
-    }*/
+    // public void JudgeTea(){   //sensei and customer judging your tea
+    //     if(Tutorial.Instance.tutorialComplete){ //is completed tutrial
+    //         // TeaType.Instance.CheckCurrentTea();
+    //         GameManager.Instance.currGhost.DrinkTea(tea.GetComponent<Tea>());//opposite person with do sth to the tea
+    //         TeaReturn();
+    //     }else{ //For tutorial tea
+    //         TeaType.Instance.CheckTutorialTea();
+    //     }
+    // }
     public void TeaReturn(){
         mainCup.transform.position = OriginalCupPos.transform.position;
+        Tea.Instance.OriginalPos.transform.position = Tea.Instance.resetPos; //rest tea to initial pos
         served = false;
         //reset tea state
-        ClearTea();
+        //ClearTea();
     }
     public void DiscardTea(){ //whe sensei want to discard it , it will happened, cus there is stuff in it
         // if(canDiscard){
@@ -229,7 +242,7 @@ public class TeaCeremonyManager : MonoBehaviour
     }
     void ClearTea()
     {
-        Tea.Instance.OriginalPos.transform.position = Tea.Instance.resetPos; //rest tea to initial pos
+        // Tea.Instance.OriginalPos.transform.position = Tea.Instance.resetPos; //rest tea to initial pos
         Tea.Instance.initialDistance = Tea.Instance.TopPos.transform.position.y - Tea.Instance.OriginalPos.transform.position.y; //reset initial distance for cup capacity
         tea.transform.localScale = new Vector3(Tea.Instance.minSize, Tea.Instance.minSize, Tea.Instance.minSize); //reset scale
         Tea.Instance.teastate = 0;

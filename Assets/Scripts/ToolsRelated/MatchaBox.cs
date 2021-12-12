@@ -43,11 +43,13 @@ public class MatchaBox : MonoBehaviour
     Vector3 mPos;
     public GameObject TableCollider;
     public GameObject toolFirststep;
+    public SoundManager sc;
     void Awake() {
         Instance = this;
     }
     void Start()
     {
+        sc = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         otsc.enabled = false;
         mbAnim = matchaBox.GetComponent<Animator>();
         rb = this.GetComponent<Rigidbody>();
@@ -74,10 +76,11 @@ public class MatchaBox : MonoBehaviour
             this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
             mbAnim.SetBool("Open", true);
             mbAnim.SetBool("Close", false);
+            sc.PickToolUp();
         }
         }
         if(this.transform.position==pickUPDes){  //player picked it up
-            otsc.enabled = false;
+            //otsc.enabled = false;
             state = 1;  //up
             rb.isKinematic = true;
             if(Input.GetMouseButtonUp(0)){  //Fixed changed pos when hold pot and drag without release in the middle
@@ -89,6 +92,15 @@ public class MatchaBox : MonoBehaviour
         if (pickedUP && !Input.GetMouseButton(0))  //moving the tool
         {
             this.transform.position += deltaMousePosMove;
+            // Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+            // RaycastHit hit;
+            // if (Physics.Raycast (ray, out hit, 100)) {
+            //     Debug.Log (hit.transform.name);
+            //     mPos = hit.point;
+            //     mPos.y = 1.076f;
+            //     Debug.Log (mPos);
+            // }
+            // this.transform.position = mPos;
         }
         //Release it
         if(state==1&&Input.GetMouseButton(1)&&canRelease&&!havePowder){  //later add canRelease bool
@@ -156,18 +168,20 @@ public class MatchaBox : MonoBehaviour
         }
     }
     void OnMouseOver() {
-        if(!clicked
-            &&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE
+        if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE
             &&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UsePowderTool
             ||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay){
-            otsc.enabled = true;
-            mbAnim.SetBool("Open", true);
-            mbAnim.SetBool("Close", false);
-            toolFirststep.SetActive(true);
-            TeaCeremonyManager.Instance.tText = toolName;
+            if(!clicked){
+                otsc.enabled = true;
+                mbAnim.SetBool("Open", true);
+                mbAnim.SetBool("Close", false);
+                toolFirststep.SetActive(true);
+                TeaCeremonyManager.Instance.tText = toolName;
+            }
         }
     }
     void OnMouseExit() {
+        otsc.enabled = false;
         if(!clicked){
             otsc.enabled = false;
             mbAnim.SetBool("Open", false);
@@ -179,11 +193,14 @@ public class MatchaBox : MonoBehaviour
     void powderON(){
         currenPowder = Instantiate(powderPrefab, powderPt.transform.position, Quaternion.identity) as GameObject;
         currenPowder.transform.parent = powderPt.transform;
+        currenPowder.GetComponent<Rigidbody>().isKinematic = true;
         havePowder = true;  //if fell off cup turn it false
+        
         //currenPowder = j;
     }
     void ReleasePowder(){
         currenPowder.transform.parent = null;
+        currenPowder.GetComponent<Rigidbody>().isKinematic = false;
         //havePowder = false;
     }
     void OnCollisionEnter(Collision col) {
@@ -192,6 +209,7 @@ public class MatchaBox : MonoBehaviour
             mbAnim.SetBool("Close", true);
             pickedUP = false;
             toolTrigger.SetActive(false);
+            sc.PlaceToolDown();
         }
     }
     void OnTriggerEnter(Collider col) {

@@ -41,11 +41,13 @@ public class Tea : MonoBehaviour
     public List<GameObject> toMeltList = new List<GameObject>();
     public List<GameObject> powderList = new List<GameObject>();
     //heatness of the tea
+    public SoundManager sc;
     void Awake() {
         Instance = this;
     }
     void Start()
     {
+        sc = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         teasprite = this.GetComponent<SpriteRenderer>();
         //teasprite.color = teaColor;//new Color (79f, 130f, 96f, 1);
         this.transform.localScale = new Vector3(minSize,minSize,minSize);
@@ -182,7 +184,9 @@ public class Tea : MonoBehaviour
         }
         if(col.gameObject.tag == "StirrTool"){
             // TeaState();
+            sc.Stirring();
             stirring = true;
+
         } 
     }
     void OnTriggerExit(Collider col) {

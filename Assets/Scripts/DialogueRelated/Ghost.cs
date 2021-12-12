@@ -66,7 +66,7 @@ public class Ghost : MonoBehaviour
         }
 
         //DialogBoxPos
-        if(CamSwitch.Instance.camState == CamSwitch.CamState.TeaCam)
+        if(CamSwitch.Instance.camState == CamSwitch.CamState.TeaCam||CamSwitch.Instance.camState == CamSwitch.CamState.BoardCam)
             rectTrans.anchoredPosition3D = new Vector3(rectTrans.anchoredPosition3D.x,dialogBoxPosUp, rectTrans.anchoredPosition3D.z);
         else if (CamSwitch.Instance.camState == CamSwitch.CamState.ConvCam)
             rectTrans.anchoredPosition3D = new Vector3(rectTrans.anchoredPosition3D.x, dialogBoxPosDown, rectTrans.anchoredPosition3D.z);

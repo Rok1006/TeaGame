@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
         {
             case (0):  //when player is allowed to move things //make it when ever player is in a tutorial, startDimming to false
             {
+                TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
                 break;//Intro
             }
             case (1):  //Stage1 - Put on boiler
@@ -84,10 +85,11 @@ public class GameManager : MonoBehaviour
                 TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseSnack;
                 break;
             }
-            case (8):
+            case (8): //sensei abt to go, may be put the following to the next
             {
                 TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
                 TeaCeremonyManager.Instance.startDiming = true;
+                Tutorial.Instance.tutorialComplete = true;
                 break;
             }
             //case 7 : pen camera to teaCam, allow player to serve

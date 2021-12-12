@@ -1,9 +1,11 @@
 <Stage>0
 <stagePause>2
 Good Evening.
-<p>1.5
+<p>0.5
+<a>Leave
 This is the night then.
 <p>2
+<a>Leave
 I'll be gone soon, and you'll have to face them all by yourself.
 <p>4
 I can see you're nervous.

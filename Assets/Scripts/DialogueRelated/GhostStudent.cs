@@ -23,11 +23,14 @@ public class GhostStudent : MonoBehaviour
         public string dialog;
         public float pauseTime;
         public string animType;
+        public float shakeIntensity;
     }
     #endregion
 
     public List<StageData> stageList = new List<StageData>();
     public TextMeshProUGUI textDisplay;
+    Color textColor = new Color(0, 0, 0);
+    float ogTextSize = 5;
     
     public GameObject objDialogBox;
     public RectTransform rectTrans;
@@ -47,13 +50,15 @@ public class GhostStudent : MonoBehaviour
     {
         ReadDialogText();
         ReadReactText();
-        ReadTutorText();
+        //ReadTutorText();
         textDisplay.text = "";
         StartCoroutine(StageLoop());
         
         anim = GetComponent<Animator>();
 
         rectTrans = objDialogBox.GetComponent<RectTransform>();
+        objDialogBox.SetActive(true);
+        textDisplay.color = textColor;
         objDialogBox.SetActive(false);
     }
     void Update()
@@ -72,6 +77,11 @@ public class GhostStudent : MonoBehaviour
             rectTrans.anchoredPosition3D = new Vector3(rectTrans.anchoredPosition3D.x,dialogBoxPosUp, rectTrans.anchoredPosition3D.z);
         else if (CamSwitch.Instance.camState == CamSwitch.CamState.ConvCam)
             rectTrans.anchoredPosition3D = new Vector3(rectTrans.anchoredPosition3D.x, dialogBoxPosDown, rectTrans.anchoredPosition3D.z);
+    }
+    private void FixedUpdate()
+    {
+        if (objDialogBox.activeSelf)
+            TextShake(stageList[stageIndex].dialogList[dialogIndex].shakeIntensity);
     }
     IEnumerator StageLoop() //Main loop for each stage
     {
@@ -149,7 +159,11 @@ public class GhostStudent : MonoBehaviour
         textDisplay.text = "";
         dialogLoopCor = StartCoroutine(TypeAll());  //Back to main dialog list
     }
-
+    void TextShake(float intensity)
+    {
+        if(intensity!=0)
+            textDisplay.fontSize = ogTextSize + Random.Range(-intensity, intensity);
+    }
     public void NextStage()
     {
         //Stop everything now --------Merge this with part of DrinkTea() to optimize
@@ -209,6 +223,18 @@ public class GhostStudent : MonoBehaviour
         NextStage();
     }
 
+    public void Leave()
+    {
+        //Stop everything now
+        textDisplay.text = "";
+        StopCoroutine(dialogLoopCor);
+        if (reactCor != null)
+            StopCoroutine(reactCor);
+        reactCor = StartCoroutine(TypeDelay(stageList[stageIndex].TeaReactList[0], 2.1f)); //If you serve him water in stage 1
+        GameManager.Instance.GhostLeave();
+        gameObject.SetActive(false); // go to next life..........
+    }
+
     void Animate(string animType)
     {
         switch (animType)
@@ -248,7 +274,7 @@ public class GhostStudent : MonoBehaviour
     void ReadDialogText()
     {
         //Reading txt
-        txtFile = Resources.Load<TextAsset>("GhostData"); //Read the file
+        txtFile = Resources.Load<TextAsset>("GhostStudentData"); //Read the file
         List<string> lineTextList = new List<string>(txtFile.text.Split('\n')); //Spilt file to lines
 
         //Processing txt
@@ -282,6 +308,10 @@ public class GhostStudent : MonoBehaviour
                 {
                     currDialog.animType = lineText.Substring(lineText.IndexOf(">") + 1);
                 }
+                else if (lineText.Contains("<si>")) //read and store animation type
+                {
+                    currDialog.shakeIntensity = float.Parse(lineText.Substring(lineText.IndexOf(">") + 1));
+                }
                 else //read and stor sentence
                 {
                     currDialog = new DialogData();
@@ -295,7 +325,7 @@ public class GhostStudent : MonoBehaviour
     void ReadReactText()
     {
         //Reading React txt
-        txtFile = Resources.Load<TextAsset>("TeaReact"); //Read the file
+        txtFile = Resources.Load<TextAsset>("GhostStudentReact"); //Read the file
         List<string> lineTextList = new List<string>(txtFile.text.Split('\n')); //Spilt file to lines
 
         //Processing txt
@@ -326,6 +356,10 @@ public class GhostStudent : MonoBehaviour
                 else if (lineText.Contains("<a>")) //read and store animation type
                 {
                     currDialog.animType = lineText.Substring(lineText.IndexOf(">") + 1);
+                }
+                else if (lineText.Contains("<si>")) //read and store animation type
+                {
+                    currDialog.shakeIntensity = float.Parse(lineText.Substring(lineText.IndexOf(">") + 1));
                 }
                 else //read and stor sentence
                 {

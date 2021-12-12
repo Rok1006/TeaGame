@@ -178,29 +178,17 @@ public class Ghost : MonoBehaviour
         }
         else
             NextStage(); 
-        /*
-
-        if (teaType == "Bad")
-        {
-            //Stop everything now
-            textDisplay.text = "";
-            StopCoroutine(dialogLoopCor);
-            if(reactCor!= null)
-                StopCoroutine(reactCor);
-            Animate(null);
-
-            //Start React
-            if (wrongCount >= stageList[stageIndex].TeaReactList.Count)
-                reactCor = StartCoroutine(Type(stageList[stageIndex].TeaTutorList[0]));//Get dialog based on wrongCount
-            else
-            {
-                reactCor = StartCoroutine(Type(stageList[stageIndex].TeaReactList[wrongCount]));//Get dialog based on wrongCount
-                wrongCount++;
-            }
-        }
-        if (teaType == "Good")
-        {*/
-
+    }
+    public void Leave()
+    {
+        //Stop everything now
+        textDisplay.text = "";
+        StopCoroutine(dialogLoopCor);
+        if (reactCor != null)
+            StopCoroutine(reactCor);
+        reactCor = StartCoroutine(TypeDelay(stageList[stageIndex].TeaReactList[0], 2.1f)); //If you serve him water in stage 1
+        GameManager.Instance.GhostLeave();
+        gameObject.SetActive(false); // go to next life..........
     }
 
     public void EatSnack()
@@ -248,7 +236,7 @@ public class Ghost : MonoBehaviour
     void ReadDialogText()
     {
         //Reading txt
-        txtFile = Resources.Load<TextAsset>("GhostData"); //Read the file
+        txtFile = Resources.Load<TextAsset>("Sensei/GhostData"); //Read the file
         List<string> lineTextList = new List<string>(txtFile.text.Split('\n')); //Spilt file to lines
 
         //Processing txt
@@ -295,7 +283,7 @@ public class Ghost : MonoBehaviour
     void ReadReactText()
     {
         //Reading React txt
-        txtFile = Resources.Load<TextAsset>("TeaReact"); //Read the file
+        txtFile = Resources.Load<TextAsset>("Sensei/TeaReact"); //Read the file
         List<string> lineTextList = new List<string>(txtFile.text.Split('\n')); //Spilt file to lines
 
         //Processing txt
@@ -341,7 +329,7 @@ public class Ghost : MonoBehaviour
     void ReadTutorText()
     {
         //Reading React txt
-        txtFile = Resources.Load<TextAsset>("GhostData_tutorial"); //Read the file
+        txtFile = Resources.Load<TextAsset>("Sensei/GhostData_tutorial"); //Read the file
         List<string> lineTextList = new List<string>(txtFile.text.Split('\n')); //Spilt file to lines
 
         //Processing txt

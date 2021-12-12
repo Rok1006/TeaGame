@@ -1,0 +1,6 @@
+<Stage>0
+<stagePause>4
+......f..lll.....
+<p>30
+<si>0.08
+

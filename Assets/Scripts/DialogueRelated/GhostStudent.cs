@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using TMPro;
-public class Ghost : MonoBehaviour
+public class GhostStudent : MonoBehaviour
 {
     #region TextReader
     TextAsset txtFile;

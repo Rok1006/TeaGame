@@ -50,7 +50,9 @@ public class Ghost : MonoBehaviour
         ReadTutorText();
         textDisplay.text = "";
         StartCoroutine(StageLoop());
+        
         anim = GetComponent<Animator>();
+
         rectTrans = objDialogBox.GetComponent<RectTransform>();
         objDialogBox.SetActive(false);
     }
@@ -121,7 +123,22 @@ public class Ghost : MonoBehaviour
     IEnumerator Type(DialogData dialogData) //Go through one specific dialog
     {
         objDialogBox.SetActive(true);
-        Debug.Log("Drink Reacting...");
+        Debug.Log("Drink Reacting..."+dialogData.animType);
+        Animate(dialogData.animType);
+        foreach (char letter in dialogData.dialog.ToCharArray())
+        {
+            textDisplay.text += letter;
+            yield return new WaitForSeconds(typingSpeed);
+        }
+        yield return new WaitForSeconds(dialogData.pauseTime);
+        textDisplay.text = "";
+        dialogLoopCor = StartCoroutine(TypeAll());  //Back to main dialog list
+    }
+    IEnumerator TypeDelay(DialogData dialogData, float delay) //Go through one specific dialog
+    {
+        yield return new WaitForSeconds(delay);
+        objDialogBox.SetActive(true);
+        Debug.Log("Drink Reacting..." + dialogData.animType);
         Animate(dialogData.animType);
         foreach (char letter in dialogData.dialog.ToCharArray())
         {
@@ -149,7 +166,18 @@ public class Ghost : MonoBehaviour
     public void DrinkTea(Tea tea)
     {
         Debug.Log("Drinking tea...");
-        NextStage(); //Sensei always like your tea
+        Animate("Drink");
+        if (tea.numOfPowder == 0 && tea.numOfIngredients == 0)
+        {
+            //Stop everything now
+            textDisplay.text = "";
+            StopCoroutine(dialogLoopCor);
+            if (reactCor != null)
+                StopCoroutine(reactCor);
+            reactCor = StartCoroutine(TypeDelay(stageList[stageIndex].TeaReactList[0],1.1f)); //If you serve him water in stage 1
+        }
+        else
+            NextStage(); 
         /*
 
         if (teaType == "Bad")
@@ -177,7 +205,7 @@ public class Ghost : MonoBehaviour
 
     public void EatSnack()
     {
-        Debug.Log("Drinking tea..."); // Sensei Always like snack
+        Debug.Log("Snacking..."); // Sensei Always like snack
         NextStage();
     }
 
@@ -185,9 +213,20 @@ public class Ghost : MonoBehaviour
     {
         switch (animType)
         {
-            case ("Flip"):
+            case ("Angry"):
             {
-                anim.SetBool("toFlip", true);
+                    print("GETMAD");
+                anim.SetBool("isAngry", true);
+                break;
+            }
+            case ("Happy"):
+            {
+                anim.SetBool("isHappy", true);
+                break;
+            }
+            case ("Drink"):
+            {
+                anim.SetTrigger("toDrinkT");    
                 break;
             }
             case ("Leave"):
@@ -197,7 +236,10 @@ public class Ghost : MonoBehaviour
             }
             case (null): //empty case, set everything to false!
             {       //It's null so you don't need to write <a> in txt if no animation
+                anim.SetBool("toLeave", false);
                 anim.SetBool("toFlip", false);
+                anim.SetBool("isAngry", false);
+                anim.SetBool("isHappy", false);
                 break;
             }
         }
@@ -261,6 +303,11 @@ public class Ghost : MonoBehaviour
         StageData currStage = new StageData();
         DialogData currDialog = new DialogData();
 
+        for (int i = 0; i < lineTextList.Count; i++)
+        {
+            lineTextList[i] = Regex.Replace(lineTextList[i], @"\t|\n|\r", "");//Regex to remove the pesky '\r' (<-what a jerk)
+        }
+
         foreach (string lineText in lineTextList)
         {
             if (lineText.Contains("<Stage>"))//Create and store stagedata on <Stage>
@@ -301,6 +348,11 @@ public class Ghost : MonoBehaviour
         int stageInd = -1; //so the first time it goes to 0
         StageData currStage = new StageData();
         DialogData currDialog = new DialogData();
+
+        for (int i = 0; i < lineTextList.Count; i++)
+        {
+            lineTextList[i] = Regex.Replace(lineTextList[i], @"\t|\n|\r", "");//Regex to remove the pesky '\r' (<-what a jerk)
+        }
 
         foreach (string lineText in lineTextList)
         {

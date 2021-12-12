@@ -199,18 +199,18 @@ public class TeaCeremonyManager : MonoBehaviour
         served = true;
         
         if(!Tutorial.Instance.tutorialComplete){ //is completed tutrial
+            
             StartCoroutine(SenseiJudge());
         }else{ //For real tea
             TeaType.Instance.CheckCurrentTea();
         }
     }
     IEnumerator SenseiJudge(){
-        yield return new WaitForSeconds(1f);
-        cloudParticles.SetActive(true);  //poof
-        ClearTea();
-        yield return new WaitForSeconds(2f);
-        cloudParticles.SetActive(false);
         GameManager.Instance.currGhost.DrinkTea(tea.GetComponent<Tea>());//opposite person with do sth to the tea
+        //cloudParticles.SetActive(true);  //poof Pl
+        yield return new WaitForSeconds(1f);
+        //cloudParticles.SetActive(false);
+        //ClearTea();
         TeaReturn();
     }
     // public void JudgeTea(){   //sensei and customer judging your tea

@@ -2,32 +2,34 @@
 This dialog should not play. Error occurred.
 <p>5
 <Stage>1
-This is your first time. Try again.
+Plain water? Is this a JOKE!?
 <p>3
-Try once more. You'll get the hang of it soon.
-<p>3
-I was wrong about you.
-<p>2
-<a>Flip
+<a>Angry
 <Stage>2
-You can do better than that.
-<p>2
-No.
-<p>2
-<a>Flip
+Plain water? Is this a JOKE!?
+<p>3
+<a>Angry
 <Stage>3
-I expected more.
-<p>2
-<a>Flip
+Plain water? Is this a JOKE!?
+<p>3
+<a>Angry
 <Stage>4
-I had higher hopes for you.
-<p>2
-<a>Flip
+Plain water? Is this a JOKE!?
+<p>3
+<a>Angry
 <Stage>5
-This one was pretty straightforward.
-<p>2
-<a>Flip
+Plain water? Is this a JOKE!?
+<p>3
+<a>Angry
 <Stage>6
-What would you do if the tea is bitter?
-<p>2
-<a>Flip
+Plain water? Is this a JOKE!?
+<p>3
+<a>Angry
+<Stage>7
+Plain water? Is this a JOKE!?
+<p>3
+<a>Angry
+<Stage>8
+Plain water? Is this a JOKE!?
+<p>3
+<a>Angry

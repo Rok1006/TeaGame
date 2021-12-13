@@ -171,7 +171,7 @@ public class MatchaBox : MonoBehaviour
     void OnMouseOver() {
         if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE
             &&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UsePowderTool
-            ||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay){
+            ||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay&&!pickedUP){
             if(!clicked){
                 otsc.enabled = true;
                 mbAnim.SetBool("Open", true);

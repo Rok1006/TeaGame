@@ -52034,7 +52034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   oc: {fileID: 1597073611943663154}
-  SnackName: Buns
+  SnackName: Dorayaki
   servePos: {fileID: 1265126738}
   snackPrefab: {fileID: 5330487910976598138, guid: 1a9d10168cb2c47a88996121d13a253a,
     type: 3}

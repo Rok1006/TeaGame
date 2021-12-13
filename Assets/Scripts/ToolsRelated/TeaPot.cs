@@ -199,7 +199,7 @@ public class TeaPot : MonoBehaviour
     void PickedUP(){
         pickedUP  = true;
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.TEAPOT;
-        Tea.Instance.cupCapacity.SetActive(true);
+        Tea.Instance.cupCapacity.SetActive(false);
         Tea.Instance.heatBar.SetActive(true);
         Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
         //MatchaBox.Instance.TableCollider.SetActive(true);

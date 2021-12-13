@@ -254,6 +254,7 @@ public class TeaCeremonyManager : MonoBehaviour
         Tea.Instance.cc.fillAmount = 0;
         Tea.Instance.numOfPowder = 0;
         Tea.Instance.numOfIngredients = 0;
+        Tea.Instance.currentColor = TeaCeremonyManager.Instance.TeaColors[0];
         foreach (GameObject powder in Tea.Instance.powderList)
             Destroy(powder);
         Tea.Instance.powderList.Clear();

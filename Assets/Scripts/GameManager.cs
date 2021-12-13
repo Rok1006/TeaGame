@@ -111,6 +111,7 @@ public class GameManager : MonoBehaviour
                     }
                 case (6): //serve...Nextstage in Ghost.DrinkTea()
                     {
+                        TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.ServeOK;
                         ServeTray.Instance.canServe = true;
                         //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.ServeOK;
                         break;

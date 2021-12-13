@@ -32,7 +32,7 @@ public class SnackOffer : MonoBehaviour
     }
     void OnMouseOver() {
         if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE
-            &&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseSnack
+            &&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseSnack||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE
             ){ //&&canTakeSnack
             otsc.enabled = true;
             tutorial.SetActive(true);
@@ -46,7 +46,7 @@ public class SnackOffer : MonoBehaviour
     }
     void OnMouseDown() {
         if (TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE
-            && TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseSnack
+            && TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseSnack||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE
             )//&& canTakeSnack
         {
             sc.PickToolUp();

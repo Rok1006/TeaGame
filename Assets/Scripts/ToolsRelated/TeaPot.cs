@@ -243,6 +243,7 @@ public class TeaPot : MonoBehaviour
     }
     void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "Table"){
+            state=0;
             sc.PlaceTeaPot();
             Tea.Instance.heatBar.SetActive(false);
             pickedUP = false;  //not working after using stove is there sth that get turn on again not sensitive?

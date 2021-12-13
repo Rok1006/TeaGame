@@ -265,7 +265,7 @@ public class GhostStudent : MonoBehaviour
     public void EatSnack()
     {
         Debug.Log("Snacking..."); // Sensei Always like snack
-        NextStage();
+        StartCoroutine(BlinkNextStage());
     }
 
     public void Leave()

@@ -59,7 +59,9 @@ Though I don't need these ingredients, you should be aware when they want them
 <p>3
 They have lost their minds, so it is up to you to realize their needs.
 <p>3.5
-Let's move on.
+Or else...you might become one of them...
+<p>2
+Anyways. Let's move on.
 <p>1.5
 <Next>
 <Stage>4
@@ -146,7 +148,9 @@ The light of the fire is transient.
 <p>3
 And light of your tea... will guide them to their next life.
 <p>3.5
-I have faith in you.
+They won't be as nice as I am, but
+<p>4
+I have faith in you. 
 <p>1
 Goodbye, my best pupil.
 <p>3.5

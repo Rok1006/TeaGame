@@ -4231,7 +4231,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Left Click & Drag to rotate
+  m_Text: Left Click & Drag to Dig
 --- !u!222 &665975011
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4524,7 +4524,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hold & Drag to pour
+  m_Text: Hold & Drag to Pour
 --- !u!222 &690911842
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10836,7 +10836,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Left Click & Hold
+  m_Text: Left Click to Pick Up
 --- !u!222 &909398631
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11885,7 +11885,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Left Click & HOLD to lower & move
+  m_Text: Left Click Hold & Move to Stir
 --- !u!222 &1010732515
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -23056,7 +23056,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Left Click to Take
+  m_Text: Left Click to Pick Up
 --- !u!222 &1149940716
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -23667,7 +23667,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Left Click to view snack
+  m_Text: Left Click to View Snack
 --- !u!222 &1235452835
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25101,7 +25101,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Left Click & Hold
+  m_Text: Left Click to Pick Up
 --- !u!222 &1453720523
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -42109,7 +42109,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: RightClick to Release
+  m_Text: RightClick to Drop
 --- !u!222 &1919375812
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -50286,7 +50286,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2054568249
 RectTransform:
   m_ObjectHideFlags: 0

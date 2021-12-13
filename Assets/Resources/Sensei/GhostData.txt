@@ -136,7 +136,7 @@ I am contented. I was right about you.
 <a>Happy
 My time is up.
 <p>1
-And I can feel them coming too.
+And I can feel them coming soon.
 <p>2
 My last reminder to you...
 <p>2
@@ -144,11 +144,9 @@ The candle, don't forget to reignite it if it becomes too dark.
 <p>4
 Every wandering soul needs some light to warm them.
 <p>2
-The light of the fire is transient.
-<p>3
 And light of your tea... will guide them to their next life.
 <p>3.5
-They won't be as nice as I am, but
+They won't be as nice as I am, but,
 <p>4
 I have faith in you. 
 <p>1

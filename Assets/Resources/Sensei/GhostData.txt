@@ -3,7 +3,8 @@
 Good Evening.
 <p>1.5
 This is the night then.
-<p>2
+<p>1.5
+<a>Leave
 I'll be gone soon, and you'll have to face them all by yourself.
 <p>2.5
 I can see you're nervous.
@@ -13,7 +14,7 @@ It's alright.
 Let's go through each step once more.
 <p>2
 Serve me tea one last time... The regular is fine.
-<p>3.5
+<p>3.2
 Let's get started.
 <p>2
 <Next>

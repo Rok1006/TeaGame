@@ -56,6 +56,7 @@ public class Snacks : MonoBehaviour
         else
             GameManager.Instance.stuGhost.EatSnack();
         Destroy(currentSnack.gameObject);
+        ServeTray.Instance.occupied = false;
         yield return new WaitForSeconds(3.5f);
         SnackOffer.Instance.snackParticles.SetActive(false);
     }

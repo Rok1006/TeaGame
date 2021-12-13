@@ -31,6 +31,7 @@ public class GhostStudent : MonoBehaviour
     public TextMeshProUGUI textDisplay;
     Color textColor = new Color(0, 0, 0);
     float ogTextSize = 5.5f;
+    //Vector3 ogTextPos
     
     public GameObject objDialogBox;
     public RectTransform rectTrans;
@@ -161,8 +162,11 @@ public class GhostStudent : MonoBehaviour
     }
     void TextShake(float intensity)
     {
-        if(intensity!=0)
+        if (intensity != 0)
+        {
             textDisplay.fontSize = ogTextSize + Random.Range(-intensity, intensity);
+            //textDisplay.transform.position = ()
+        }
     }
     public void NextStage()
     {
@@ -181,6 +185,14 @@ public class GhostStudent : MonoBehaviour
     {
         Debug.Log("Drinking tea...");
         Animate("Drink");
+        switch (stageIndex)
+        {
+            case (0):
+            {
+                NextStage();
+                break;
+            }
+        }
         if (tea.numOfPowder == 0 && tea.numOfIngredients == 0)
         {
             //Stop everything now

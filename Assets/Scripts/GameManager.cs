@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator BetweenGhosts()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(6);
         GhostEnter();
     }
     public void GhostEnter()

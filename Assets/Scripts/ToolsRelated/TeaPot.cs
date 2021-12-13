@@ -147,6 +147,7 @@ public class TeaPot : MonoBehaviour
             // sc.PourTea();
         }
         else if (pickedUP&&Input.GetMouseButtonUp(0)){ //when pick up and release right click
+            sc.StopPourTea();
             Vector3 tempZ = thisParent.transform.rotation * Vector3.forward; //Im trying to make the direction stay the same but failed....
             thisParent.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);  //tempZ.zsnap to this rotation, but keep the z rotation
             Vector3 posFix = -mousePosPrePour + Input.mousePosition;

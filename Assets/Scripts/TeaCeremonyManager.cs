@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.SceneManagement;
 public class TeaCeremonyManager : MonoBehaviour
 {
     //Hi! I'm TeaCeremonyManager! I'm glad you are here with me.
@@ -16,7 +17,7 @@ public class TeaCeremonyManager : MonoBehaviour
     //7.Ingredients Insertion
     //8.TeaServing
     public static TeaCeremonyManager Instance; //For easy access this is smart
-
+    public string sceneName;
     #region UI
     public GameObject candleBar;
     private Image cb;
@@ -262,5 +263,8 @@ public class TeaCeremonyManager : MonoBehaviour
         Ingredients.haveBomb = false;
         Ingredients.haveLeaf = false;
         Tea.Instance.toMeltList.Clear();
+    }
+    public void BackToMenu(){
+        SceneManager.LoadScene(sceneName);
     }
 }

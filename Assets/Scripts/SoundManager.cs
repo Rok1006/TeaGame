@@ -34,6 +34,7 @@ public class SoundManager : MonoBehaviour
         poof = selectOther[0];
     }
     public void PourTea(){teaPour.Play();}
+    public void StopPourTea(){teaPour.Stop();}
     public void PlaceTeaPot(){teapotDown.Play();}
     public void PickUpTeaPot(){teapotPickUp.Play();}
     public void PlaceToolDown(){toolDown.Play();}

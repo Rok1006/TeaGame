@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
                 case (4):  //Stage4 is pour hot water
                     {
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseTeapot;
-                        if (Tutorial.Instance.usedTeaPot && Tea.Instance.liquidLevel > 0.7f)
+                        if (Tutorial.Instance.usedTeaPot && Tea.Instance.distance < 0.2f)
                         {
                             currGhost.NextStage();
                         }

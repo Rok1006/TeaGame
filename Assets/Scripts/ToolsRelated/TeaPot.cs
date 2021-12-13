@@ -110,6 +110,7 @@ public class TeaPot : MonoBehaviour
             //Invoke("CanRelease",.25f);  //allow player to release it Originall on
             rb.isKinematic = true;
         }else{
+            Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(false); //tutorial: To fix tea pot tutorial glitch
             state = 0;
             //canRelease = false;
             //rb.isKinematic = false;
@@ -136,13 +137,13 @@ public class TeaPot : MonoBehaviour
             mousePosPrePour = Input.mousePosition; //get pos before pouring so we can snap to new pos after pouring
         }
         degree = thisParent.transform.forward.y* Mathf.Rad2Deg;
-        if(degree>42){  //teapot pouring sound
-            sc.PourTea();
-        }
         if (pickedUP && Input.GetMouseButton(0)){    //Mouse Distance based Tilt Pouring here
             //thisParent.transform.rotation *= Quaternion.Euler(deltaMousePos);    
             thisParent.transform.Rotate(deltaMousePosRot); 
             StovePlaceholderObj.SetActive(false);
+            if(degree>42){  //teapot pouring sound
+                sc.PourTea();
+            }
             // sc.PourTea();
         }
         else if (pickedUP&&Input.GetMouseButtonUp(0)){ //when pick up and release right click
@@ -214,10 +215,12 @@ public class TeaPot : MonoBehaviour
     void OnMouseOver() {
         OnteaPot = true;
         if(!pickedUP&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseTeapot||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay){  //originally have: ||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT
+            if(canClick){
             otsc.enabled = true;
             toolFirststep.SetActive(true);
             TeaCeremonyManager.Instance.tText = toolName;
             //Tutorial.Instance.currentStepsDisplay = Tutorial.Instance.TPsteps;
+            }
         }
     }
     void OnMouseDrag(){  //this or uncomment the part above  //here u have to  click pot and drag to pour

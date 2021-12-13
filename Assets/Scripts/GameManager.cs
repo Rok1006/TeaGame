@@ -121,9 +121,9 @@ public class GameManager : MonoBehaviour
                 case (8): //sensei abt to go, may be put the following to the next
                     {
 
-                        TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
+                        //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
                         TeaCeremonyManager.Instance.startDiming = true;
-                        Tutorial.Instance.tutorialComplete = true;  //this two may be put after case 8
+                        //Tutorial.Instance.tutorialComplete = true;  //this two may be put after case 8
                         TeaCeremonyManager.Instance.LightingButton.SetActive(true);
                         break;
                     }

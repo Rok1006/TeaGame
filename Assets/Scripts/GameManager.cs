@@ -5,7 +5,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public Tutorial tutor;
+    
     public Ghost currGhost;
+    public GhostStudent stuGhost;
+
     public static GameManager Instance;
     public GameObject Fadeout;
     public Ghost gtcs;
@@ -144,11 +147,15 @@ public class GameManager : MonoBehaviour
             }
             case (1): //Student
             {
-                switch (currGhost.stageIndex)
+                switch (stuGhost.stageIndex)
                 {
                     case (0):
                     {
-                        break;
+                            TeaCeremonyManager.Instance.startDiming = true;
+                            SnackOffer.Instance.canTakeSnack = true;
+                            Tutorial.Instance.tutorialComplete = true;
+                            TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
+                            break;
                     }
                 }
                 break;
@@ -180,5 +187,6 @@ public class GameManager : MonoBehaviour
         }
         StartCoroutine(BetweenGhosts());
         ghostIndex++;
+        //stuGhost = ghostList[ghostIndex];
     }
 }

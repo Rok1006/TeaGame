@@ -51,7 +51,10 @@ public class Snacks : MonoBehaviour
         yield return new WaitForSeconds(2f);
         sc.Poof();
         SnackOffer.Instance.snackParticles.SetActive(true);
-        GameManager.Instance.currGhost.EatSnack();
+        if(GameManager.Instance.ghostIndex == 0)
+            GameManager.Instance.currGhost.EatSnack();
+        else
+            GameManager.Instance.stuGhost.EatSnack();
         Destroy(currentSnack.gameObject);
         yield return new WaitForSeconds(3.5f);
         SnackOffer.Instance.snackParticles.SetActive(false);

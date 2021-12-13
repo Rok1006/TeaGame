@@ -31,7 +31,10 @@ public class GhostStudent : MonoBehaviour
     public TextMeshProUGUI textDisplay;
     Color textColor = new Color(0, 0, 0);
     float ogTextSize = 5.5f;
-    //Vector3 ogTextPos
+    public GameObject objBlink;
+    public GameObject overScreen;
+
+    public List<Sprite> sprList = new List<Sprite>();
     
     public GameObject objDialogBox;
     public RectTransform rectTrans;
@@ -49,10 +52,13 @@ public class GhostStudent : MonoBehaviour
 
     void Start()
     {
+        objBlink.SetActive(true);
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
         ReadDialogText();
         ReadReactText();
         //ReadTutorText();
         textDisplay.text = "";
+
         StartCoroutine(StageLoop());
         
         anim = GetComponent<Animator>();
@@ -64,15 +70,12 @@ public class GhostStudent : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.C))
         {
-            //DrinkTea("Bad");
+            objBlink.SetActive(true);
+            TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.Nothing;
+            overScreen.SetActive(true);
         }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            //DrinkTea("Good");
-        }
-
         //DialogBoxPos
         if(CamSwitch.Instance.camState == CamSwitch.CamState.TeaCam||CamSwitch.Instance.camState == CamSwitch.CamState.BoardCam)
             rectTrans.anchoredPosition3D = new Vector3(rectTrans.anchoredPosition3D.x,dialogBoxPosUp, rectTrans.anchoredPosition3D.z);
@@ -86,6 +89,16 @@ public class GhostStudent : MonoBehaviour
     }
     IEnumerator StageLoop() //Main loop for each stage
     {
+        objBlink.SetActive(true);
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        if (stageIndex == 1)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = sprList[0];
+            anim.SetInteger("stage", 1);
+        }
+
+        yield return new WaitForSeconds(1f);
+        objBlink.SetActive(false);
         Debug.Log("New Stage: "+stageIndex);
         yield return new WaitForSeconds(stageList[stageIndex].stagePause); //Wait before begin
         Debug.Log("Start dialog");
@@ -129,6 +142,11 @@ public class GhostStudent : MonoBehaviour
         Animate(null); //End of all dialog reset animation
 
         objDialogBox.SetActive(false);//Maybe delte later!!!!!IDK   
+        Animate("Kill");
+        yield return new WaitForSeconds(0.7f);
+        objBlink.SetActive(true);
+        TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.Nothing;
+        overScreen.SetActive(true);
         //Player game over here!!!
     }
     IEnumerator Type(DialogData dialogData) //Go through one specific dialog
@@ -160,6 +178,21 @@ public class GhostStudent : MonoBehaviour
         textDisplay.text = "";
         dialogLoopCor = StartCoroutine(TypeAll());  //Back to main dialog list
     }
+    IEnumerator BlinkNextStage()
+    {
+        //Stop everything now --------Merge this with part of DrinkTea() to optimize
+        textDisplay.text = "";
+        StopCoroutine(dialogLoopCor);
+        Animate(null);
+        yield return new WaitForSeconds(2.5f);//tea time
+
+        objBlink.SetActive(true);
+        //Next Stage
+        wrongCount = 0;
+        stageIndex++;
+        dialogIndex = 0;
+        StartCoroutine(StageLoop());
+    }
     void TextShake(float intensity)
     {
         if (intensity != 0)
@@ -189,11 +222,11 @@ public class GhostStudent : MonoBehaviour
         {
             case (0):
             {
-                NextStage();
+                StartCoroutine(BlinkNextStage());
                 break;
             }
         }
-        if (tea.numOfPowder == 0 && tea.numOfIngredients == 0)
+        /*if (tea.numOfPowder == 0 && tea.numOfIngredients == 0)
         {
             //Stop everything now
             textDisplay.text = "";
@@ -203,7 +236,7 @@ public class GhostStudent : MonoBehaviour
             reactCor = StartCoroutine(TypeDelay(stageList[stageIndex].TeaReactList[0],2.1f)); //If you serve him water in stage 1
         }
         else
-            NextStage(); 
+            NextStage(); */
         /*
 
         if (teaType == "Bad")
@@ -265,6 +298,11 @@ public class GhostStudent : MonoBehaviour
             case ("Drink"):
             {
                 anim.SetTrigger("toDrinkT");    
+                break;
+            }
+            case ("Kill"):
+            {
+                anim.SetTrigger("toKill");
                 break;
             }
             case ("Leave"):

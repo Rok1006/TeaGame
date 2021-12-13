@@ -204,15 +204,14 @@ public class TeaCeremonyManager : MonoBehaviour
         served = true;
         CamSwitch.Instance.ConversationCamOn();
 
-        if (!Tutorial.Instance.tutorialComplete){ //is completed tutrial
-            
+       
             StartCoroutine(SenseiJudge());
-        }else{ //For real tea
-            TeaType.Instance.CheckCurrentTea();
-        }
     }
     IEnumerator SenseiJudge(){
-        GameManager.Instance.currGhost.DrinkTea(tea.GetComponent<Tea>());//opposite person with do sth to the tea
+        if(GameManager.Instance.ghostIndex == 0)
+            GameManager.Instance.currGhost.DrinkTea(tea.GetComponent<Tea>());//opposite person with do sth to the tea
+        else
+            GameManager.Instance.stuGhost.DrinkTea(tea.GetComponent<Tea>());//opposite person with do sth to the tea
         yield return new WaitForSeconds(2f);
         TeaReturn();
         sc.Poof();

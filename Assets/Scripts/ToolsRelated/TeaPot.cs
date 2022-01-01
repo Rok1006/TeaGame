@@ -240,6 +240,7 @@ public class TeaPot : MonoBehaviour
     }
     void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "Table"){
+            Tutorial.Instance.TPsteps[0].SetActive(false);
             state=0;
             sc.PlaceTeaPot();
             Tea.Instance.heatBar.SetActive(false);
@@ -247,6 +248,7 @@ public class TeaPot : MonoBehaviour
             canClick =true;
         }
         if(col.gameObject.tag == "Stove"){
+            Tutorial.Instance.TPsteps[0].SetActive(false);
             sc.PlaceTeaPot();
             //rb.isKinematic = true;
             onStove = true;

@@ -134,9 +134,9 @@ public class TeaCeremonyManager : MonoBehaviour
         }
         if(potHeating){
             potBar.SetActive(true);
-            pb.fillAmount+=0.005f;
+            pb.fillAmount+=0.008f;
             if(pb.fillAmount!=1&&TeaPot.Instance.heatness<1){
-                TeaPot.Instance.heatness+=0.005f; //keep tracking
+                TeaPot.Instance.heatness+=0.008f; //keep tracking
             }
         }
 

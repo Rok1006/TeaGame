@@ -90,7 +90,10 @@ public class TeaPot : MonoBehaviour
             //Cursor.lockState = CursorLockMode.Locked;
             //Cursor.visible = false;
             toolFirststep.SetActive(false); //tutorial
-            Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
+            //Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
+            if(Input.GetMouseButtonDown(0)){ //did only once why keep appearing
+                Tutorial.Instance.TPsteps[0].SetActive(true);  //release click to move
+            }
             float step = speed * Time.deltaTime;
             this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
             sc.PickUpTeaPot();
@@ -101,24 +104,15 @@ public class TeaPot : MonoBehaviour
             canMove = true; 
             state=1;
             if(Input.GetMouseButtonUp(0)){  //Fixed changed pos when hold pot and drag without release in the middle
-              //Cursor.lockState = CursorLockMode.None;
-              //Cursor.visible = true;
-              //InputState.Change(Mouse.current.position, mouseStartPos);
-              Tutorial.Instance.NextStep();
+              //Tutorial.Instance.NextStep();  turn on next toool step here originally
               Invoke("PickedUP",0.01f);  //,.5f 
             }
             //Invoke("CanRelease",.25f);  //allow player to release it Originall on
             rb.isKinematic = true;
         }else{
-            Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(false); //tutorial: To fix tea pot tutorial glitch
+            //Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(false); //tutorial: To fix tea pot tutorial glitch
             state = 0;
-            //canRelease = false;
-            //rb.isKinematic = false;
-            //pickedUP = false;
         }
-        // if(state==1){
-        //     //pickedUP = false;
-        // }
         //releasing it
         if(state==1&&canRelease&&Input.GetMouseButton(1)){  //release it change to right click
             canMove = false;   //not to be pushed when release
@@ -127,7 +121,8 @@ public class TeaPot : MonoBehaviour
             rb.isKinematic = false;
             canRelease = false;
             Tea.Instance.cupCapacity.SetActive(false);
-            Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(false); //tutorial
+            //Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(false); //tutorial
+            Tutorial.Instance.TPsteps[1].SetActive(false);
             Tutorial.Instance.ResetSteps(); //tutorial
             Tutorial.Instance.usedTeaPot = true; //GameManager
             TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
@@ -201,8 +196,10 @@ public class TeaPot : MonoBehaviour
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.TEAPOT;
         Tea.Instance.cupCapacity.SetActive(false);
         Tea.Instance.heatBar.SetActive(true);
-        Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
+        //Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
         //MatchaBox.Instance.TableCollider.SetActive(true);
+        Tutorial.Instance.TPsteps[1].SetActive(true);
+        Tutorial.Instance.TPsteps[0].SetActive(false);
     }
     void NtonPot(){
         OnteaPot = false;

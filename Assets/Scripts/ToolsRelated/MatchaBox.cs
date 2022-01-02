@@ -71,7 +71,10 @@ public class MatchaBox : MonoBehaviour
         if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UsePowderTool||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay){
         if(state==0&&clicked){
             toolFirststep.SetActive(false); //tutorial
-            Tutorial.Instance.PTsteps[Tutorial.Instance.stepIndex].SetActive(true);
+            //Tutorial.Instance.PTsteps[Tutorial.Instance.stepIndex].SetActive(true);
+            if(Input.GetMouseButtonDown(0)&&!toolFirststep.activeSelf){ //did only once why keep appearing
+                Tutorial.Instance.PTsteps[0].SetActive(true);  //release click to move
+            }
             float step = speed * Time.deltaTime;
             this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
             mbAnim.SetBool("Open", true);
@@ -85,7 +88,7 @@ public class MatchaBox : MonoBehaviour
             state = 1;  //up
             rb.isKinematic = true;
             if(Input.GetMouseButtonUp(0)){  //Fixed changed pos when hold pot and drag without release in the middle
-              Tutorial.Instance.NextStep();
+              //Tutorial.Instance.NextStep();
               Invoke("PickedUP",0.01f);  //,.5f 
             }
         }
@@ -111,7 +114,8 @@ public class MatchaBox : MonoBehaviour
             rb.isKinematic = false;
             TableCollider.SetActive(false);
             powdernumUI.SetActive(false);
-            Tutorial.Instance.PTsteps[Tutorial.Instance.stepIndex].SetActive(false); //tutorial
+            //Tutorial.Instance.PTsteps[Tutorial.Instance.stepIndex].SetActive(false); //tutorial
+            Tutorial.Instance.PTsteps[1].SetActive(false);
             Tutorial.Instance.ResetSteps(); //tutorial
             Tutorial.Instance.usedPowderT = true; //GameManager
         }
@@ -161,7 +165,9 @@ public class MatchaBox : MonoBehaviour
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.POWDERTOOL;
         TableCollider.SetActive(true);
         powdernumUI.SetActive(true);
-        Tutorial.Instance.PTsteps[Tutorial.Instance.stepIndex].SetActive(true);
+        Tutorial.Instance.PTsteps[1].SetActive(true);
+        Tutorial.Instance.PTsteps[0].SetActive(false);
+        //Tutorial.Instance.PTsteps[Tutorial.Instance.stepIndex].SetActive(true);
     }
     void OnMouseDown() {
         if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){
@@ -177,7 +183,10 @@ public class MatchaBox : MonoBehaviour
                 mbAnim.SetBool("Open", true);
                 mbAnim.SetBool("Close", false);
                 //sc.OpenLid();
+                //toolFirststep.SetActive(true);
+                if(!Tutorial.Instance.PTsteps[0].activeSelf){
                 toolFirststep.SetActive(true);
+                }
                 TeaCeremonyManager.Instance.tText = toolName;
             }
         }
@@ -207,6 +216,7 @@ public class MatchaBox : MonoBehaviour
     }
     void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "Table"){
+            Tutorial.Instance.PTsteps[0].SetActive(false);
             mbAnim.SetBool("Open", false);
             mbAnim.SetBool("Close", true);
             pickedUP = false;

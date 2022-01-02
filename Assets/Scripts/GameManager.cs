@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
                 case (5):  //Stage5 is stir
                     {
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseStirTool;
-                        if (Tutorial.Instance.usedStirT)// && Tea.Instance.teasprite.color == Tea.Instance.targetColor)
+                        if (Tutorial.Instance.usedStirT&&Tea.Instance.teasprite.color == Tea.Instance.targetColor)// && Tea.Instance.teasprite.color == Tea.Instance.targetColor)
                             currGhost.NextStage();
                         if (Tea.Instance.numOfIngredients > 0)
                         {  //may need edit 

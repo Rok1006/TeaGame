@@ -53,7 +53,10 @@ public class StirTool : MonoBehaviour
         if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseStirTool||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay){
         if(state==0&&clicked){
             toolFirststep.SetActive(false); //tutorial
-            Tutorial.Instance.STsteps[Tutorial.Instance.stepIndex].SetActive(true);
+            // Tutorial.Instance.STsteps[Tutorial.Instance.stepIndex].SetActive(true);
+            if(Input.GetMouseButtonDown(0)&&!toolFirststep.activeSelf){ //did only once why keep appearing
+                Tutorial.Instance.STsteps[0].SetActive(true);  //release click to move
+            }
             float step = speed * Time.deltaTime;
             this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
             this.transform.rotation = Quaternion.Euler(180f, 0f, 0f); 
@@ -65,7 +68,7 @@ public class StirTool : MonoBehaviour
             state = 1;  //up
             rb.isKinematic = true;
             if(Input.GetMouseButtonUp(0)){  //Fixed changed pos when hold pot and drag without release in the middle
-              Tutorial.Instance.NextStep();
+              //Tutorial.Instance.NextStep();
               Invoke("PickedUP",0.01f);   //,.5f
             }
         }
@@ -81,7 +84,8 @@ public class StirTool : MonoBehaviour
             pickedUP = false;
             rb.isKinematic = false;  //its being turned on constantly
             this.transform.rotation = Quaternion.Euler(90f, 0f, 0f); 
-            Tutorial.Instance.STsteps[Tutorial.Instance.stepIndex].SetActive(false); //tutorial
+            //Tutorial.Instance.STsteps[Tutorial.Instance.stepIndex].SetActive(false); //tutorial
+            Tutorial.Instance.STsteps[1].SetActive(false);
             Tutorial.Instance.ResetSteps(); //tutorial
             Tutorial.Instance.usedStirT = true; //GameManager
         }
@@ -106,7 +110,9 @@ public class StirTool : MonoBehaviour
         toolTrigger.SetActive(true);
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.STIRTOOL;
         Tea.Instance.TeaState();
-        Tutorial.Instance.STsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
+        //Tutorial.Instance.STsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
+        Tutorial.Instance.STsteps[1].SetActive(true);
+        Tutorial.Instance.STsteps[0].SetActive(false);
     }
     void OnMouseDown() {
         if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){
@@ -116,7 +122,10 @@ public class StirTool : MonoBehaviour
     void OnMouseOver() {
         if(!clicked&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseStirTool||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay&&!clicked&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){
             otsc.enabled = true;
+            //toolFirststep.SetActive(true);
+            if(!Tutorial.Instance.STsteps[0].activeSelf){
             toolFirststep.SetActive(true);
+            }
             TeaCeremonyManager.Instance.tText = toolName;
         }
     }
@@ -129,6 +138,7 @@ public class StirTool : MonoBehaviour
     }
     void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "Table"){
+            Tutorial.Instance.STsteps[0].SetActive(false);
             pickedUP = false; 
             toolTrigger.SetActive(false);
             sc.PlaceToolDown();

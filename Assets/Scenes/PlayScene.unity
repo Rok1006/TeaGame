@@ -2274,6 +2274,9 @@ MonoBehaviour:
   currentColor:
     serializedVersion: 2
     rgba: 0
+  originalColor:
+    serializedVersion: 2
+    rgba: 0
   stirBar: {fileID: 28910139}
   cupCapacity: {fileID: 168875679}
   cc: {fileID: 2095985750}
@@ -49811,6 +49814,9 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 0
   currentColor:
+    serializedVersion: 2
+    rgba: 0
+  originalColor:
     serializedVersion: 2
     rgba: 0
   stirBar: {fileID: 0}

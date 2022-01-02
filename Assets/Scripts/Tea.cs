@@ -22,6 +22,7 @@ public class Tea : MonoBehaviour
     public GameObject teaPattern; //when stirring
     public Color32 targetColor;
     public Color32 currentColor;
+    public Color32 originalColor;
     [Header("UI")]
     public GameObject stirBar;
     private Image sb;
@@ -65,6 +66,8 @@ public class Tea : MonoBehaviour
         originalDistance = TopPos.transform.position.y-OriginalPos.transform.position.y;
         //Reset Related
         resetPos = OriginalPos.transform.position; //this is where original pos will go back to when reset
+
+        originalColor = teasprite.color;
     }
     void Update()
     {

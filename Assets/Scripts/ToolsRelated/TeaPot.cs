@@ -82,6 +82,9 @@ public class TeaPot : MonoBehaviour
     }
     void Update()
     {
+        // if(toolFirststep.activeSelf){
+        //     Tutorial.Instance.TPsteps[0].SetActive(false);
+        // }
         originalPos = new Vector3(this.transform.position.x, 0.653f, transform.position.z); //update the location constantly
         pickUPDes = new Vector3(this.transform.position.x, 2f, transform.position.z);
         if(TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseTeapot&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT){ //added stuff
@@ -91,7 +94,7 @@ public class TeaPot : MonoBehaviour
             //Cursor.visible = false;
             toolFirststep.SetActive(false); //tutorial
             //Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
-            if(Input.GetMouseButtonDown(0)){ //did only once why keep appearing
+            if(Input.GetMouseButtonDown(0)&&!toolFirststep.activeSelf){ //did only once why keep appearing
                 Tutorial.Instance.TPsteps[0].SetActive(true);  //release click to move
             }
             float step = speed * Time.deltaTime;
@@ -215,7 +218,9 @@ public class TeaPot : MonoBehaviour
         if(!pickedUP&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseTeapot||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay&&!pickedUP&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){  //originally have: ||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT
             if(canClick){
             otsc.enabled = true;
+            if(!Tutorial.Instance.TPsteps[0].activeSelf){
             toolFirststep.SetActive(true);
+            }
             TeaCeremonyManager.Instance.tText = toolName;
             //Tutorial.Instance.currentStepsDisplay = Tutorial.Instance.TPsteps;
             }

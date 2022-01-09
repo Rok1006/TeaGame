@@ -172,7 +172,7 @@ public class Tea : MonoBehaviour
         //teaColor.a = 0f;
     }
     void FillingUP(){   //Filling UP tea
-        if(SpillingDetector.Instance.inCup&& Input.GetMouseButton(0)&&TeaPot.Instance.degree<42){
+        if(SpillingDetector.Instance.inCup&& Input.GetMouseButton(0)&&TeaPot.Instance.degree<TeaPot.Instance.pouringDegree){
             //cc.fillAmount +=0.0018f;  //0.0023f, change this to according to the distance between top and original pos
             float step = speed * Time.deltaTime;
             OriginalPos.transform.position = Vector3.MoveTowards(OriginalPos.transform.position, TopPos.transform.position, step);

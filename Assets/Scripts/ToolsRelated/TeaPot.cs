@@ -37,6 +37,7 @@ public class TeaPot : MonoBehaviour
     float originalHeight = 0.653f;
     float destHeight = 2f;
     public float degree;
+    public int pouringDegree = 42; //degree when it is pouring
     private GameObject target;
     public GameObject indicatorPt;
     public GameObject indicator;
@@ -131,7 +132,7 @@ public class TeaPot : MonoBehaviour
             //thisParent.transform.rotation *= Quaternion.Euler(deltaMousePos);    
             thisParent.transform.Rotate(deltaMousePosRot); 
             StovePlaceholderObj.SetActive(false);
-            if(degree>42){  //teapot pouring sound
+            if(degree>pouringDegree){  //teapot pouring sound
                 sc.PourTea();
             }
         }

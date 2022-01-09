@@ -29,12 +29,13 @@ public class TeaPot : MonoBehaviour
     [Header("Assignments")]
     public float rotatespeed;
     public float movespeed;
-    
     public int speed;
     Vector3 originalPos;
     Vector3 pickUPDes;
     Vector3 targetPos;
     Animator potAnim;
+    float originalHeight = 0.653f;
+    float destHeight = 2f;
     float degree;
     private GameObject target;
     public GameObject indicatorPt;
@@ -47,7 +48,6 @@ public class TeaPot : MonoBehaviour
     Vector3 deltaMousePosMove;
     Vector3 mousePosPrePour;
     Vector3 mouseStartPos;
-
     float tiltHStrength = 0.1f;   //0.1
     float tiltVStrength = 0.2f;  //0.2
     float followHStrength = 0.0025f;  //0.0025f
@@ -65,8 +65,8 @@ public class TeaPot : MonoBehaviour
         thisParent = this.transform.parent.gameObject;
         mainHolder = thisParent.transform.parent.gameObject;
         rb = this.GetComponent<Rigidbody>();
-        originalPos = new Vector3(this.transform.position.x, 0.653f, transform.position.z); //0.653f
-        pickUPDes = new Vector3(this.transform.position.x, 2f, transform.position.z);
+        originalPos = new Vector3(this.transform.position.x, originalHeight, transform.position.z); //0.653f
+        pickUPDes = new Vector3(this.transform.position.x, destHeight, transform.position.z);
         targetPos = new Vector3(cup.transform.position.x,cup.transform.position.y,cup.transform.position.z);
         thisParent.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
         potAnim = this.GetComponent<Animator>();
@@ -82,25 +82,18 @@ public class TeaPot : MonoBehaviour
     }
     void Update()
     {
-        // if(toolFirststep.activeSelf){
-        //     Tutorial.Instance.TPsteps[0].SetActive(false);
-        // }
-        originalPos = new Vector3(this.transform.position.x, 0.653f, transform.position.z); //update the location constantly
-        pickUPDes = new Vector3(this.transform.position.x, 2f, transform.position.z);
+        originalPos = new Vector3(this.transform.position.x, originalHeight, transform.position.z); //update the location constantly
+        pickUPDes = new Vector3(this.transform.position.x, destHeight, transform.position.z);
         if(TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseTeapot&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT){ //added stuff
         if(canClick&&OnteaPot && Input.GetMouseButton(0)&&state==0){   //pick up pot
-            //mouseStartPos = Input.mousePosition;
-            //Cursor.lockState = CursorLockMode.Locked;
-            //Cursor.visible = false;
             toolFirststep.SetActive(false); //tutorial
             //Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
-            if(Input.GetMouseButtonDown(0)&&!toolFirststep.activeSelf){ //did only once why keep appearing
+            if(Input.GetMouseButtonDown(0)&&!toolFirststep.activeSelf){ 
                 Tutorial.Instance.TPsteps[0].SetActive(true);  //release click to move
             }
             float step = speed * Time.deltaTime;
             this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
             sc.PickUpTeaPot();
-            // canMove = true;  //this canmove to after player completely release after pick up
         }
         }
         if(this.transform.position==pickUPDes){  //when the pot arrived at the top
@@ -110,7 +103,6 @@ public class TeaPot : MonoBehaviour
               //Tutorial.Instance.NextStep();  turn on next toool step here originally
               Invoke("PickedUP",0.01f);  //,.5f 
             }
-            //Invoke("CanRelease",.25f);  //allow player to release it Originall on
             rb.isKinematic = true;
         }else{
             //Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(false); //tutorial: To fix tea pot tutorial glitch
@@ -142,7 +134,6 @@ public class TeaPot : MonoBehaviour
             if(degree>42){  //teapot pouring sound
                 sc.PourTea();
             }
-            // sc.PourTea();
         }
         else if (pickedUP&&Input.GetMouseButtonUp(0)){ //when pick up and release right click
             sc.StopPourTea();
@@ -150,11 +141,8 @@ public class TeaPot : MonoBehaviour
             thisParent.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);  //tempZ.zsnap to this rotation, but keep the z rotation
             Vector3 posFix = -mousePosPrePour + Input.mousePosition;
             thisParent.transform.position += new Vector3(posFix.x * followHStrength, 0f, posFix.y * followVStrength ); //snap to mouse new position    posFix.y * followVStrength why rotating pot changes z pos
-            //this.transform.position = pickUPDes; //this line fixed the a bit higer issue
             canClick =true;
-            //canRelease = true;
             StovePlaceholderObj.SetActive(true);
-            //pickedUP = false;
             
         }
         indicator.transform.position= new Vector3(indicatorPt.transform.position.x,indicator.transform.position.y, indicatorPt.transform.position.z);
@@ -171,7 +159,6 @@ public class TeaPot : MonoBehaviour
             pos.y = 0.224f;  //table height
             pos.z = this.transform.position.z+0.15f;
             TPindicator.transform.position = pos;
-            //TPindicator.transform.position+= deltaMousePosMove;
         }else{
             TPindicator.SetActive(false);
         } 
@@ -189,7 +176,6 @@ public class TeaPot : MonoBehaviour
         deltaMousePosMove = new Vector3(deltaMousePos.x*followHStrength,0f, deltaMousePos.y * followVStrength);
         //Change axis so the rotation and move make sense. Also apply multiplier to damp the movement
         prevMousePos = Input.mousePosition;
-        //Debug.Log(deltaMousePos);
     }
     void CanRelease(){
         canRelease = true;
@@ -199,8 +185,6 @@ public class TeaPot : MonoBehaviour
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.TEAPOT;
         Tea.Instance.cupCapacity.SetActive(false);
         Tea.Instance.heatBar.SetActive(true);
-        //Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
-        //MatchaBox.Instance.TableCollider.SetActive(true);
         Tutorial.Instance.TPsteps[1].SetActive(true);
         Tutorial.Instance.TPsteps[0].SetActive(false);
     }
@@ -222,7 +206,6 @@ public class TeaPot : MonoBehaviour
             toolFirststep.SetActive(true);
             }
             TeaCeremonyManager.Instance.tText = toolName;
-            //Tutorial.Instance.currentStepsDisplay = Tutorial.Instance.TPsteps;
             }
         }
     }
@@ -241,7 +224,6 @@ public class TeaPot : MonoBehaviour
         toolFirststep.SetActive(false);
         Invoke("NtonPot",.5f);
         TeaCeremonyManager.Instance.tText = "";
-        // OnteaPot = false;
     }
     void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "Table"){
@@ -249,18 +231,17 @@ public class TeaPot : MonoBehaviour
             state=0;
             sc.PlaceTeaPot();
             Tea.Instance.heatBar.SetActive(false);
-            pickedUP = false;  //not working after using stove is there sth that get turn on again not sensitive?
+            pickedUP = false; 
             canClick =true;
         }
         if(col.gameObject.tag == "Stove"){
             Tutorial.Instance.TPsteps[0].SetActive(false);
             sc.PlaceTeaPot();
-            //rb.isKinematic = true;
             onStove = true;
             pickedUP = false;
             Stoveindicator.SetActive(false);
             if(heatness<1){  //if not heated
-                canClick =false;   //originally true
+                canClick =false;  
                 Debug.Log("heating");
                 TeaCeremonyManager.Instance.TeaPotHeating();
             }
@@ -274,33 +255,22 @@ public class TeaPot : MonoBehaviour
     void OnCollisionExit(Collision col) {
         if(col.gameObject.tag == "Stove"){
             onStove = false;
-        //     // TeaCeremonyManager.Instance.ResetStove();
         }
     }
     void OnTriggerEnter(Collider col) {
-        // if(col.gameObject.tag == "Table"){
-        //     print("table");
-        //     pickedUP = false;  //not working after using stove
-        //     canClick =true;
-        //     //TPindicator.SetActive(false);
-        // }
         if(col.gameObject.tag == "Stove"){
             thisParent.transform.position = stovePos.transform.position;
-            //Stoveindicator.SetActive(true);
         }
         if(col.gameObject.tag == "StoveZone"){
             Stoveindicator.SetActive(true);
-            //canRelease = true;
         }
         if(col.gameObject.tag == "TPTrigger"){
             TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
             thisParent.transform.position = tpPos.transform.position;
-            //mainHolder.transform.position = tpPos.transform.position;
             TPindicator.transform.position = new Vector3(Originalindicator.transform.position.x,TPindicator.transform.position.y,Originalindicator.transform.position.z);
         }
         if(col.gameObject.tag == "TableZone"){
             Originalindicator.SetActive(true);
-            //canRelease = true;
         }
         if(col.gameObject.tag == "Release"){
             canRelease = true;
@@ -309,11 +279,9 @@ public class TeaPot : MonoBehaviour
     void OnTriggerExit(Collider col) {
         if(col.gameObject.tag == "TableZone"){
             Originalindicator.SetActive(false);
-            //canRelease = false;
         }
         if(col.gameObject.tag == "StoveZone"){
             Stoveindicator.SetActive(false);
-            //canRelease = false;
         }
         if(col.gameObject.tag == "Release"){
             canRelease = false;

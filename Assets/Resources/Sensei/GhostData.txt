@@ -20,7 +20,7 @@ Let's get started.
 <Stage>1
 <stagePause>0
 Take the tea pot and put it on the boiler next to it.
-<p>8
+<p>8.2
 They are both in the upper right corner of the table.
 <p>8
 ...Please hurry. My time is running out and your next customer will arrive soon.
@@ -36,7 +36,7 @@ They're in the upper right corner of the table!!
 While the water is boiling. Add some tea powder to the cup.
 <p>3
 The spoon is to your left.
-<p>7
+<p>7.3
 I would love some matcha for the last cup of tea I drink in this life.
 <p>4
 Spoon some matcha powder, and put it in the cup.
@@ -115,12 +115,12 @@ Sigh...I would like to have some dessert to ease the bitterness.
 Sometimes serving dessert might just save your life.
 <p>2
 Get the dessert using the dessert tongs next to the spoon.
-<p>6
-It's on your right.
+<p>6.5
+It's on your left.
 <p>10
 It's right there.
 <p>3
-I want dessert...I don't care about my diarrhe-
+I want dessert...I don't care about my diar-
 <p>1.5
 <a>Angry
 Just get the dessert! I can't go feeling this uncontend!

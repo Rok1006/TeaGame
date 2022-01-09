@@ -19,7 +19,7 @@ public class TeaPot : MonoBehaviour
     public bool OnteaPot = false;
     public bool canRelease = false;
     public bool pickedUP = false;
-    public int state = 0;
+    public int upState = 0;
     public bool poured = false;
     public bool canClick = true;
     public bool inOriginalPlace;
@@ -36,7 +36,7 @@ public class TeaPot : MonoBehaviour
     Animator potAnim;
     float originalHeight = 0.653f;
     float destHeight = 2f;
-    float degree;
+    public float degree;
     private GameObject target;
     public GameObject indicatorPt;
     public GameObject indicator;
@@ -85,7 +85,7 @@ public class TeaPot : MonoBehaviour
         originalPos = new Vector3(this.transform.position.x, originalHeight, transform.position.z); //update the location constantly
         pickUPDes = new Vector3(this.transform.position.x, destHeight, transform.position.z);
         if(TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseTeapot&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT){ //added stuff
-        if(canClick&&OnteaPot && Input.GetMouseButton(0)&&state==0){   //pick up pot
+        if(canClick&&OnteaPot && Input.GetMouseButton(0)&&upState==0){   //pick up pot
             toolFirststep.SetActive(false); //tutorial
             //Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
             if(Input.GetMouseButtonDown(0)&&!toolFirststep.activeSelf){ 
@@ -98,7 +98,7 @@ public class TeaPot : MonoBehaviour
         }
         if(this.transform.position==pickUPDes){  //when the pot arrived at the top
             canMove = true; 
-            state=1;
+            upState=1; //upState refers to the upState of being picked up or not
             if(Input.GetMouseButtonUp(0)){  //Fixed changed pos when hold pot and drag without release in the middle
               //Tutorial.Instance.NextStep();  turn on next toool step here originally
               Invoke("PickedUP",0.01f);  //,.5f 
@@ -106,13 +106,13 @@ public class TeaPot : MonoBehaviour
             rb.isKinematic = true;
         }else{
             //Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(false); //tutorial: To fix tea pot tutorial glitch
-            state = 0;
+            upState = 0; //not yet to the top
         }
         //releasing it
-        if(state==1&&canRelease&&Input.GetMouseButton(1)){  //release it change to right click
+        if(upState==1&&canRelease&&Input.GetMouseButton(1)){  //release it change to right click
             canMove = false;   //not to be pushed when release
             indicator.SetActive(false);
-            pickedUP = false;  //not turning false at the end
+            pickedUP = false;  
             rb.isKinematic = false;
             canRelease = false;
             Tea.Instance.cupCapacity.SetActive(false);
@@ -228,7 +228,7 @@ public class TeaPot : MonoBehaviour
     void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "Table"){
             Tutorial.Instance.TPsteps[0].SetActive(false);
-            state=0;
+            upState=0;
             sc.PlaceTeaPot();
             Tea.Instance.heatBar.SetActive(false);
             pickedUP = false; 

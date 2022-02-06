@@ -34,7 +34,7 @@ public class SoundManager : MonoBehaviour
         poof = selectOther[0];
     }
     public void PourTea(){teaPour.Play();}
-    public void StopPourTea(){teaPour.Stop();}
+    public void StopPourTea(){ FadeOut(teaPour, 1.0f); }
     public void PlaceTeaPot(){teapotDown.Play();}
     public void PickUpTeaPot(){teapotPickUp.Play();}
     public void PlaceToolDown(){toolDown.Play();}
@@ -46,5 +46,19 @@ public class SoundManager : MonoBehaviour
     public void PowderDown(){powder.Play();}
     //Select & Other
     public void Poof(){poof.Play();}
+    public static IEnumerator FadeOut(AudioSource audioSource, float FadeTime)
+    {
+        float startVolume = audioSource.volume;
+        Debug.Log(audioSource.volume);
+        while (audioSource.volume > 0)
+        {
+            audioSource.volume -= startVolume * Time.deltaTime / FadeTime;
+
+            yield return null;
+        }
+
+        audioSource.Stop();
+        audioSource.volume = startVolume;
+    }
 
 }

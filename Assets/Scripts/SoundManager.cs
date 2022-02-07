@@ -33,6 +33,11 @@ public class SoundManager : MonoBehaviour
         AudioSource[] selectOther = SelectAndOtherSound.GetComponents<AudioSource>();
         poof = selectOther[0];
     }
+
+    private void Update()
+    {
+        teaPour.volume = PourDetector.current_emission_rate / 70;
+    }
     public void PourTea(){teaPour.Play();}
     public void StopPourTea(){ FadeOut(teaPour, 1.0f); }
     public void PlaceTeaPot(){teapotDown.Play();}

@@ -161,9 +161,10 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             }
+            //case 2 other ghost
         }
     }
-    IEnumerator BetweenGhosts()
+    IEnumerator BetweenGhosts() //input day night switch?
     {
         yield return new WaitForSeconds(6);
         GhostEnter();

@@ -10,13 +10,13 @@ public class StartManager : MonoBehaviour
     public GameObject Camera;
     Animator camAnim;
     public GameObject ControlPanel;
+    // [Header("LevelSelection")]
     void Start()
     {
         camAnim = Camera.GetComponent<Animator>();
         FadeIn.SetActive(false);
         ControlPanel.SetActive(false);
     }
-
     void Update()
     {
         
@@ -30,8 +30,6 @@ public class StartManager : MonoBehaviour
         FadeIn.SetActive(true);
         yield return new WaitForSeconds(1.5f);
         LoadScene();
-
-
     }
     void LoadScene(){
         SceneManager.LoadScene(sceneName);
@@ -41,5 +39,12 @@ public class StartManager : MonoBehaviour
     }
     public void BackButton(){
         ControlPanel.SetActive(false);
+    }
+    //LevelSelection Function
+    public void GetDayNum(int num){ //assign the num back in inspector add to button
+       LevelData.Instance.dayNum = num;
+    }
+    public void GetCustomerName(string cusName){ //assign the num back in inspector add to button
+       LevelData.Instance.customerName = cusName;
     }
 }

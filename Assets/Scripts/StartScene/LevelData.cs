@@ -5,8 +5,8 @@ using UnityEngine;
 public class LevelData : MonoBehaviour
 {
     public static LevelData Instance;
-    public int dayNum;
-    public string customerName;
+    public int ghostNum;
+    public string title;
 
     void Awake() {
         Instance = this;

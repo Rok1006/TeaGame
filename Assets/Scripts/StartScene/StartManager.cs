@@ -42,9 +42,9 @@ public class StartManager : MonoBehaviour
     }
     //LevelSelection Function
     public void GetDayNum(int num){ //assign the num back in inspector add to button
-       LevelData.Instance.dayNum = num;
+       LevelData.Instance.ghostNum = num;
     }
-    public void GetCustomerName(string cusName){ //assign the num back in inspector add to button
-       LevelData.Instance.customerName = cusName;
+    public void GetCustomerName(string t){ //assign the num back in inspector add to button
+       LevelData.Instance.title = t;
     }
 }

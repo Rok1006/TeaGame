@@ -5,10 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public Tutorial tutor;
-    
     public Ghost currGhost;
     public GhostStudent stuGhost;
-
     public static GameManager Instance;
     public GameObject Fadeout;
     public Ghost gtcs;
@@ -18,13 +16,13 @@ public class GameManager : MonoBehaviour
     public int ghostIndex = 0;
     bool changeToTeaCam = false;
     private void Awake()
-    {
+    { 
         Instance = this;
         Fadeout.SetActive(true);
         //gtcs.enabled = false;
         DialogueUI.SetActive(false);
         SoundManager.SetActive(false);
-        StartCoroutine(StartPlay());
+        StartCoroutine(BeforePlay());
     }
     void Start()
     {
@@ -33,11 +31,19 @@ public class GameManager : MonoBehaviour
         TeaCeremonyManager.Instance.startDiming = false; //also whenever player is in tutorial
     }
 
-    IEnumerator StartPlay(){
+    IEnumerator BeforePlay(){
+        // SceneDataLoad.Instance.titleText.text = LevelData.Instance.title.ToString();//display title
+        // ghostIndex = LevelData.Instance.ghostNum; //get the num from levelindex
+        yield return new WaitForSeconds(.5f);
+        SceneDataLoad.Instance.TitleScreen.SetActive(true); //with some pop up anim, display text
         yield return new WaitForSeconds(1.3f);
         Fadeout.SetActive(false);
+        // SceneDataLoad.Instance.TitleScreen.SetActive(true); //with some pop up anim, display text
+        yield return new WaitForSeconds(2f); 
+        SceneDataLoad.Instance.TitleScreen.SetActive(false);
         DialogueUI.SetActive(true);
         SoundManager.SetActive(true);
+        GhostEnter(); //new
     }
     void Update()
     {
@@ -161,9 +167,14 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             }
+            case (2): //Student2
+            {
+                //save after this student
+                break;
+            }
         }
     }
-    IEnumerator BetweenGhosts()
+    IEnumerator BetweenGhosts() //input day night switch?
     {
         yield return new WaitForSeconds(6);
         GhostEnter();

@@ -10,6 +10,7 @@ public class PourDetector : MonoBehaviour
     private bool isPouring = false;
     private Stream currentStream = null;
     public GameObject cup;
+    public static float current_emission_rate;
     Vector3 targetPos;
     public float rotatespeed;
 
@@ -39,6 +40,7 @@ public class PourDetector : MonoBehaviour
                 //EndPour();    //put this back on for method 1
             }
         }
+        current_emission_rate= tp.emissionRate;
     }
     void StopPouring(){
         tp.emissionRate = 0;

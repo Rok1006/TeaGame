@@ -56,6 +56,7 @@ public class StirTool : MonoBehaviour
             // Tutorial.Instance.STsteps[Tutorial.Instance.stepIndex].SetActive(true);
             if(Input.GetMouseButtonDown(0)&&!toolFirststep.activeSelf){ //did only once why keep appearing
                 Tutorial.Instance.STsteps[0].SetActive(true);  //release click to move
+                GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
             }
             float step = speed * Time.deltaTime;
             this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);

@@ -90,6 +90,7 @@ public class TeaPot : MonoBehaviour
             toolFirststep.SetActive(false); //tutorial
             //Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
             if(Input.GetMouseButtonDown(0)&&!toolFirststep.activeSelf){ 
+                GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
                 Tutorial.Instance.TPsteps[0].SetActive(true);  //release click to move
             }
             float step = speed * Time.deltaTime;
@@ -103,6 +104,7 @@ public class TeaPot : MonoBehaviour
             if(Input.GetMouseButtonUp(0)){  //Fixed changed pos when hold pot and drag without release in the middle
               //Tutorial.Instance.NextStep();  turn on next toool step here originally
               Invoke("PickedUP",0.01f);  //,.5f 
+              GameManager.Instance.arrowAnim.SetTrigger("stove");
             }
             rb.isKinematic = true;
         }else{
@@ -236,6 +238,8 @@ public class TeaPot : MonoBehaviour
             canClick =true;
         }
         if(col.gameObject.tag == "Stove"){
+            GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
+            GameManager.Instance.arrowAnim.SetTrigger("powder");
             Tutorial.Instance.TPsteps[0].SetActive(false);
             sc.PlaceTeaPot();
             onStove = true;

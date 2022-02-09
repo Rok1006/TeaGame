@@ -74,6 +74,7 @@ public class MatchaBox : MonoBehaviour
             //Tutorial.Instance.PTsteps[Tutorial.Instance.stepIndex].SetActive(true);
             if(Input.GetMouseButtonDown(0)&&!toolFirststep.activeSelf){ //did only once why keep appearing
                 Tutorial.Instance.PTsteps[0].SetActive(true);  //release click to move
+                GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
             }
             float step = speed * Time.deltaTime;
             this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
@@ -217,6 +218,7 @@ public class MatchaBox : MonoBehaviour
     void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "Table"){
             Tutorial.Instance.PTsteps[0].SetActive(false);
+            GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
             mbAnim.SetBool("Open", false);
             mbAnim.SetBool("Close", true);
             pickedUP = false;

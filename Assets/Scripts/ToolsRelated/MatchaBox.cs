@@ -119,6 +119,8 @@ public class MatchaBox : MonoBehaviour
             Tutorial.Instance.PTsteps[1].SetActive(false);
             Tutorial.Instance.ResetSteps(); //tutorial
             Tutorial.Instance.usedPowderT = true; //GameManager
+            GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
+            if(!Tutorial.Instance.tutorialComplete){GameManager.Instance.arrowAnim.SetTrigger("ingredients");} //this
         }
         //Dip it & snap back
         if (pickedUP && Input.GetMouseButton(0)){    //Mouse Distance based Tilt Pouring here  
@@ -218,7 +220,8 @@ public class MatchaBox : MonoBehaviour
     void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "Table"){
             Tutorial.Instance.PTsteps[0].SetActive(false);
-            GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
+            // GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
+            // //if(!Tutorial.Instance.tutorialComplete){GameManager.Instance.arrowAnim.SetTrigger("ingredients");} //this
             mbAnim.SetBool("Open", false);
             mbAnim.SetBool("Close", true);
             pickedUP = false;

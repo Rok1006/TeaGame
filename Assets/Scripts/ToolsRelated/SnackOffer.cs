@@ -49,6 +49,7 @@ public class SnackOffer : MonoBehaviour
             && TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseSnack||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE
             )//&& canTakeSnack
         {
+            GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
             sc.PickToolUp();
             tutorial.SetActive(false);
             CamSwitch.Instance.CupboardCamOn();

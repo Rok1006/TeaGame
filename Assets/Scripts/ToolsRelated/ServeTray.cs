@@ -41,6 +41,7 @@ public class ServeTray : MonoBehaviour
         if(!TeaCeremonyManager.Instance.served&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE && !occupied && canServe) {
             //&& TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.ServeOK)
             TeaCeremonyManager.Instance.ServeTea();
+            GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
         }
     }
     void OnTriggerEnter(Collider col) {

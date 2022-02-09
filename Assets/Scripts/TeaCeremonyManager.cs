@@ -129,7 +129,7 @@ public class TeaCeremonyManager : MonoBehaviour
         if(pb.fillAmount == 1){
             TeaPot.Instance.canClick = true;
             tpSteamParticles.emissionRate = 2;
-            Invoke("StopTeaPotSteam",2.5f);
+            Invoke("StopTeaPotSteam",30f);
             ResetStove();
         }
         if(potHeating){
@@ -156,7 +156,7 @@ public class TeaCeremonyManager : MonoBehaviour
         pb.fillAmount = 0;
         //pb.fillAmount = TeaPot.Instance.heatness; //reset it
     }
-    void StopTeaPotSteam(){
+    public void StopTeaPotSteam(){
         tpSteamParticles.emissionRate = 0;
     }
     public void TeaPotHeating(){

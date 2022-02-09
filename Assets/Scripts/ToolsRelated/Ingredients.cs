@@ -41,6 +41,10 @@ public class Ingredients : MonoBehaviour
         GoToDrawer.Instance.IGText = "";
     }
     void OnMouseDown() {
+        if(!Tutorial.Instance.tutorialComplete){
+            GameManager.Instance.arrowAnim.SetTrigger("ingredients");   
+        }
+       
         if (isAsh)
         {
             if (!haveAsh)

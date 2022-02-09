@@ -104,7 +104,8 @@ public class TeaPot : MonoBehaviour
             if(Input.GetMouseButtonUp(0)){  //Fixed changed pos when hold pot and drag without release in the middle
               //Tutorial.Instance.NextStep();  turn on next toool step here originally
               Invoke("PickedUP",0.01f);  //,.5f 
-              GameManager.Instance.arrowAnim.SetTrigger("stove");
+              GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
+              if(!Tutorial.Instance.tutorialComplete){GameManager.Instance.arrowAnim.SetTrigger("stove");}
             }
             rb.isKinematic = true;
         }else{
@@ -239,7 +240,7 @@ public class TeaPot : MonoBehaviour
         }
         if(col.gameObject.tag == "Stove"){
             GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
-            GameManager.Instance.arrowAnim.SetTrigger("powder");
+            if(!Tutorial.Instance.tutorialComplete){GameManager.Instance.arrowAnim.SetTrigger("powder");}
             Tutorial.Instance.TPsteps[0].SetActive(false);
             sc.PlaceTeaPot();
             onStove = true;
@@ -259,6 +260,8 @@ public class TeaPot : MonoBehaviour
     }
     void OnCollisionExit(Collision col) {
         if(col.gameObject.tag == "Stove"){
+            TeaCeremonyManager.Instance.StopTeaPotSteam();
+            GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
             onStove = false;
         }
     }

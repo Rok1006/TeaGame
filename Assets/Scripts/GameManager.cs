@@ -22,28 +22,22 @@ public class GameManager : MonoBehaviour
     { 
         Instance = this;
         Fadeout.SetActive(true);
-        //gtcs.enabled = false;
         DialogueUI.SetActive(false);
         SoundManager.SetActive(false);
         StartCoroutine(BeforePlay());
     }
     void Start()
     {
-        //ghostList.Add(GameObject.Find("objGhostSenseiParent"));
-        //ghostList.Add(GameObject.Find("objGhostStudentParent"));
         TeaCeremonyManager.Instance.startDiming = false; //also whenever player is in tutorial
         arrowAnim = Arrows.GetComponent<Animator>();
     }
 
     IEnumerator BeforePlay(){
-        // SceneDataLoad.Instance.titleText.text = LevelData.Instance.title.ToString();//display title
-        // ghostIndex = LevelData.Instance.ghostNum; //get the num from levelindex
         yield return new WaitForSeconds(.5f);
         SceneDataLoad.Instance.TitleScreen.SetActive(true); //with some pop up anim, display text
         yield return new WaitForSeconds(1.3f);
         Fadeout.SetActive(false);
-        // SceneDataLoad.Instance.TitleScreen.SetActive(true); //with some pop up anim, display text
-        yield return new WaitForSeconds(2f); 
+        yield return new WaitForSeconds(1.8f); 
         SceneDataLoad.Instance.TitleScreen.SetActive(false);
         DialogueUI.SetActive(true);
         SoundManager.SetActive(true);
@@ -81,7 +75,6 @@ public class GameManager : MonoBehaviour
                         }
                         ServeTray.Instance.canServe = true;
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseTeapot;
-                        // arrowAnim.SetTrigger("stove");
                         if (Tutorial.Instance.usedStove)
                         {
                             currGhost.NextStage();
@@ -101,7 +94,7 @@ public class GameManager : MonoBehaviour
                 case (3):  //Stage3 Look ingredient, auto Next
                     {
                         if(!onoffarrow){ //this looping
-                            GameManager.Instance.arrowAnim.SetTrigger("ingredients");
+                            arrowAnim.SetTrigger("Deactivate");
                             onoffarrow = true;
                         }
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.GetIngredient;
@@ -110,7 +103,8 @@ public class GameManager : MonoBehaviour
                 case (4):  //Stage4 is pour hot water
                     {
                         if(onoffarrow){ //this looping
-                            GameManager.Instance.arrowAnim.SetTrigger("teapot");
+                            arrowAnim.SetTrigger("Deactivate");
+                            arrowAnim.SetTrigger("stove");
                             onoffarrow = false;
                         }
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseTeapot;
@@ -123,7 +117,8 @@ public class GameManager : MonoBehaviour
                 case (5):  //Stage5 is stir
                     {
                         if(!onoffarrow){ //this looping
-                            GameManager.Instance.arrowAnim.SetTrigger("stir");
+                            arrowAnim.SetTrigger("Deactivate");
+                            arrowAnim.SetTrigger("stir");
                             onoffarrow = true;
                         }
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseStirTool;
@@ -138,7 +133,7 @@ public class GameManager : MonoBehaviour
                 case (6): //serve...Nextstage in Ghost.DrinkTea()
                     {
                         if(onoffarrow){ //this looping
-                            //GameManager.Instance.arrowAnim.SetTrigger("serve");
+                            arrowAnim.SetTrigger("serve");
                             onoffarrow = false;
                         }
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.ServeOK;
@@ -148,6 +143,10 @@ public class GameManager : MonoBehaviour
                     }
                 case (7): //Snacktime NextStage in Ghost.EatSnack()
                     {
+                        if(!onoffarrow){ //this looping
+                            GameManager.Instance.arrowAnim.SetTrigger("snack");
+                            onoffarrow = true;
+                        }
                         ServeTray.Instance.canServe = false;
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseSnack;
                         break;

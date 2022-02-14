@@ -10,6 +10,7 @@ public class StartManager : MonoBehaviour
     public GameObject Camera;
     Animator camAnim;
     public GameObject ControlPanel;
+    public GameObject CollectionPanel;
     // [Header("LevelSelection")]
     void Start()
     {
@@ -39,6 +40,14 @@ public class StartManager : MonoBehaviour
     }
     public void BackButton(){
         ControlPanel.SetActive(false);
+    }
+    public void BackButton_2()
+    {
+        CollectionPanel.SetActive(false);
+    }
+    public void CollectionButton()
+    {
+        CollectionPanel.SetActive(true);
     }
     //LevelSelection Function
     public void GetDayNum(int num){ //assign the num back in inspector add to button

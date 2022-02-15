@@ -11,6 +11,7 @@ public class StartManager : MonoBehaviour
     Animator camAnim;
     public GameObject ControlPanel;
     public GameObject CollectionPanel;
+    public GameObject ChapterPanel;
     public AudioSource UI_SE;
     public AudioClip clicked;
 
@@ -27,6 +28,10 @@ public class StartManager : MonoBehaviour
     }
     public void StartButton(){
         StartCoroutine(IntoPlayScene());
+        UI_SE.PlayOneShot(clicked);
+    }
+    public void ChaptersButton(){
+        ChapterPanel.SetActive(true);
         UI_SE.PlayOneShot(clicked);
     }
     IEnumerator IntoPlayScene(){
@@ -46,6 +51,7 @@ public class StartManager : MonoBehaviour
     }
     public void BackButton(){
         ControlPanel.SetActive(false);
+        ChapterPanel.SetActive(false);
         UI_SE.PlayOneShot(clicked);
     }
     public void BackButton_2()

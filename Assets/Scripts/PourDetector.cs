@@ -3,11 +3,12 @@ using UnityEngine;
 
 public class PourDetector : MonoBehaviour
 {
+    public static PourDetector Instance;
     public int pourThreshold = 45;
     public Transform origin = null;
     public GameObject streamPrefab = null;
 
-    private bool isPouring = false;
+    public bool isPouring = false;
     private Stream currentStream = null;
     public GameObject cup;
     public static float current_emission_rate;
@@ -17,7 +18,9 @@ public class PourDetector : MonoBehaviour
     //Method2: Particle System
     public GameObject teaParticles;
     public ParticleSystem tp;
-
+    void Awake() {
+        Instance = this;
+    }
     void Start() {
         targetPos = new Vector3(cup.transform.position.x,cup.transform.position.y,cup.transform.position.z);
         teaParticles.SetActive(true);

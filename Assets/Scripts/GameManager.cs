@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
                         //arrowAnim.SetTrigger("");
                         arrowAnim.SetTrigger("Deactivate");
                         ServeTray.Instance.canServe = false;
-                        //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
+                        TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
                         break;//Intro
                     }
                 case (1):  //Stage1 - Put on boiler

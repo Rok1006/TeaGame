@@ -137,6 +137,9 @@ public class TeaPot : MonoBehaviour
             StovePlaceholderObj.SetActive(false);
             if(degree>pouringDegree){  //teapot pouring sound
                 sc.PourTea();
+                //Tea.Instance.isPouring = true;
+            }else{
+                //Tea.Instance.isPouring = false;
             }
         }
         else if (pickedUP&&Input.GetMouseButtonUp(0)){ //when pick up and release right click

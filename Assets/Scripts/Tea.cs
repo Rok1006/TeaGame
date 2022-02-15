@@ -43,6 +43,9 @@ public class Tea : MonoBehaviour
     public List<GameObject> powderList = new List<GameObject>();
     //heatness of the tea
     public SoundManager sc;
+    public GameObject floodParticles;
+    public ParticleSystem FP;
+    public bool isPouring = false;
     void Awake() {
         Instance = this;
     }
@@ -68,6 +71,7 @@ public class Tea : MonoBehaviour
         resetPos = OriginalPos.transform.position; //this is where original pos will go back to when reset
 
         originalColor = teasprite.color;
+        floodParticles.SetActive(false);
     }
     void Update()
     {
@@ -102,8 +106,14 @@ public class Tea : MonoBehaviour
             cc.fillAmount +=0.0012f;
             initialDistance = distance; //setting it to every current
         }
+        if(distance==0&&PourDetector.Instance.isPouring&&SpillingDetector.Instance.inCup){  //Determine Flooding
+            floodParticles.SetActive(true);
+            FP.emissionRate=40;
+        }else{
+            FP.emissionRate=0;
+            //Invoke("OFFFloodParticles",3f);
+        }
         FillingUP(); 
-
         //Stirring Tea
         if(stirring){   //the bar
             teaPattern.SetActive(true);
@@ -144,7 +154,9 @@ public class Tea : MonoBehaviour
             }
         }
     }
-
+    void OFFFloodParticles(){
+        floodParticles.SetActive(false);
+    }
     void MeltIngred()
     {
         if (toMeltList.Contains(Ingredients.ashObj))

@@ -11,6 +11,9 @@ public class StartManager : MonoBehaviour
     Animator camAnim;
     public GameObject ControlPanel;
     public GameObject CollectionPanel;
+    public AudioSource UI_SE;
+    public AudioClip clicked;
+
     // [Header("LevelSelection")]
     void Start()
     {
@@ -24,6 +27,7 @@ public class StartManager : MonoBehaviour
     }
     public void StartButton(){
         StartCoroutine(IntoPlayScene());
+        UI_SE.PlayOneShot(clicked);
     }
     IEnumerator IntoPlayScene(){
         camAnim.SetTrigger("start");
@@ -34,20 +38,25 @@ public class StartManager : MonoBehaviour
     }
     void LoadScene(){
         SceneManager.LoadScene(sceneName);
+        UI_SE.PlayOneShot(clicked);
     }
     public void ControlButton(){
         ControlPanel.SetActive(true);
+        UI_SE.PlayOneShot(clicked);
     }
     public void BackButton(){
         ControlPanel.SetActive(false);
+        UI_SE.PlayOneShot(clicked);
     }
     public void BackButton_2()
     {
         CollectionPanel.SetActive(false);
+        UI_SE.PlayOneShot(clicked);
     }
     public void CollectionButton()
     {
         CollectionPanel.SetActive(true);
+        UI_SE.PlayOneShot(clicked);
     }
     //LevelSelection Function
     public void GetDayNum(int num){ //assign the num back in inspector add to button
@@ -56,4 +65,5 @@ public class StartManager : MonoBehaviour
     public void GetCustomerName(string t){ //assign the num back in inspector add to button
        LevelData.Instance.title = t;
     }
-}
+ 
+    }

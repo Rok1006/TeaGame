@@ -40,6 +40,11 @@ public class Ghost : MonoBehaviour
     Coroutine dialogLoopCor; //Store so we can stop
     Coroutine reactCor;
     int wrongCount = 0;
+    public AudioSource sensi_SE;
+    public AudioClip happy;
+    public AudioClip shy;
+    public AudioClip angry;
+    public AudioClip normal;
 
     public Animator anim;
 
@@ -194,6 +199,7 @@ public class Ghost : MonoBehaviour
     public void EatSnack()
     {
         Debug.Log("Snacking..."); // Sensei Always like snack
+        sensi_SE.PlayOneShot(happy);
         NextStage();
     }
 
@@ -205,22 +211,26 @@ public class Ghost : MonoBehaviour
             {
                     print("GETMAD");
                 anim.SetBool("isAngry", true);
-                break;
+                    sensi_SE.PlayOneShot(angry);
+                    break;
             }
             case ("Happy"):
             {
                 anim.SetBool("isHappy", true);
-                break;
+                    sensi_SE.PlayOneShot(happy);
+                    break;
             }
             case ("Drink"):
             {
-                anim.SetTrigger("toDrinkT");    
-                break;
+                anim.SetTrigger("toDrinkT");
+                    sensi_SE.PlayOneShot(normal);
+                    break;
             }
             case ("Leave"):
             {
                 anim.SetBool("toLeave", true);
-                break;
+                    sensi_SE.PlayOneShot(normal);
+                    break;
             }
             case (null): //empty case, set everything to false!
             {       //It's null so you don't need to write <a> in txt if no animation

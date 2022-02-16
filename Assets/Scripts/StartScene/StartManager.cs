@@ -51,12 +51,16 @@ public class StartManager : MonoBehaviour
     }
     public void BackButton(){
         ControlPanel.SetActive(false);
-        ChapterPanel.SetActive(false);
         UI_SE.PlayOneShot(clicked);
     }
     public void BackButton_2()
     {
         CollectionPanel.SetActive(false);
+        UI_SE.PlayOneShot(clicked);
+    }
+    public void BackButton_3()
+    {
+        ChapterPanel.SetActive(false);
         UI_SE.PlayOneShot(clicked);
     }
     public void CollectionButton()

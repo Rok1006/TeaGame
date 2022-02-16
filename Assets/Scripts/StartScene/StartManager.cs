@@ -14,6 +14,7 @@ public class StartManager : MonoBehaviour
     public GameObject ChapterPanel;
     public AudioSource UI_SE;
     public AudioClip clicked;
+    //public int SavedNum;
 
     // [Header("LevelSelection")]
     void Start()
@@ -26,7 +27,7 @@ public class StartManager : MonoBehaviour
     {
         
     }
-    public void StartButton(){
+    public void StartButton(){ //player start where they left off
         StartCoroutine(IntoPlayScene());
         UI_SE.PlayOneShot(clicked);
     }
@@ -40,6 +41,9 @@ public class StartManager : MonoBehaviour
         FadeIn.SetActive(true);
         yield return new WaitForSeconds(1.5f);
         LoadScene();
+        LevelData.Instance.ghostNum = 0; //sample
+        LevelData.Instance.title = "SENSEI"; //sample
+        //get saved ghost index and title and bring it into play scene
     }
     void LoadScene(){
         SceneManager.LoadScene(sceneName);

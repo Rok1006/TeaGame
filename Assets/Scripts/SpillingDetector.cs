@@ -45,6 +45,7 @@ public class SpillingDetector : MonoBehaviour
         }
         //make in instanciate only once
         if(col.gameObject.tag == "Cup"){
+            Tea.Instance.RestartStirBar();
             print("Hit");
             inCup = true;
             if(TeaPot.Instance.heatness>=0.7f){TeaCeremonyManager.Instance.steamParticles.emissionRate = 2;}

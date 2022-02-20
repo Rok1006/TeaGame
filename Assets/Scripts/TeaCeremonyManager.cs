@@ -204,8 +204,6 @@ public class TeaCeremonyManager : MonoBehaviour
         mainCup.transform.position = ServeCupPos.transform.position;
         served = true;
         CamSwitch.Instance.ConversationCamOn();
-
-       
             StartCoroutine(SenseiJudge());
     }
     IEnumerator SenseiJudge(){
@@ -247,6 +245,7 @@ public class TeaCeremonyManager : MonoBehaviour
     }
     void ClearTea()
     {
+        Tea.Instance.RestartStirBar();
         Tea.Instance.OriginalPos.transform.position = Tea.Instance.resetPos; //rest tea to initial pos
         Tea.Instance.initialDistance = Tea.Instance.TopPos.transform.position.y - Tea.Instance.OriginalPos.transform.position.y; //reset initial distance for cup capacity
         tea.transform.localScale = new Vector3(Tea.Instance.minSize, Tea.Instance.minSize, Tea.Instance.minSize); //reset scale

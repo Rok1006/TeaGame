@@ -28,26 +28,26 @@ public class ServeTray : MonoBehaviour
         //go up a little
         if(!TeaCeremonyManager.Instance.served&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE && !occupied && canServe) {
             //&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.ServeOK){
-            oc.enabled = true;
-            guide.SetActive(true);
+            // oc.enabled = true;
+            // guide.SetActive(true);
         }
     }
 
     void OnMouseExit(){
-        oc.enabled = false;
-        guide.SetActive(false);
+        // oc.enabled = false;
+        // guide.SetActive(false);
     }
     void OnMouseDown() {
         if(!TeaCeremonyManager.Instance.served&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE && !occupied && canServe) {
             //&& TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.ServeOK)
-            TeaCeremonyManager.Instance.ServeTea();
+            //TeaCeremonyManager.Instance.ServeTea();
             GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
         }
     }
     void OnTriggerEnter(Collider col) {
         if(col.gameObject.tag=="Cup"||col.gameObject.tag=="Snacks"){
             occupied = true;
-            sc.ReleaseItem();
+            //sc.ReleaseItem();
         }
         if(col.gameObject.tag=="Cup"){
             

@@ -31,6 +31,10 @@ public class StartManager : MonoBehaviour
         StartCoroutine(IntoPlayScene());
         UI_SE.PlayOneShot(clicked);
     }
+    public void FirstPlay(){
+        LevelData.Instance.ghostNum = 0; //sample
+        LevelData.Instance.title = "SENSEI"; //sample
+    }
     public void ChaptersButton(){
         ChapterPanel.SetActive(true);
         UI_SE.PlayOneShot(clicked);
@@ -41,8 +45,8 @@ public class StartManager : MonoBehaviour
         FadeIn.SetActive(true);
         yield return new WaitForSeconds(1.5f);
         LoadScene();
-        LevelData.Instance.ghostNum = 0; //sample
-        LevelData.Instance.title = "SENSEI"; //sample
+        // LevelData.Instance.ghostNum = 0; //sample
+        // LevelData.Instance.title = "SENSEI"; //sample
         //get saved ghost index and title and bring it into play scene
     }
     void LoadScene(){

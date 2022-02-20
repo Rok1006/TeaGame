@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
                     {
                         //arrowAnim.SetTrigger("");
                         arrowAnim.SetTrigger("Deactivate");
-                        ServeTray.Instance.canServe = false;
+                        TeaCup.Instance.canServe = false;
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
                         break;//Intro
                     }
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
                             CamSwitch.Instance.TeaCamOn();
                             changeToTeaCam = true;
                         }
-                        ServeTray.Instance.canServe = true;
+                        TeaCup.Instance.canServe = true;
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseTeapot;
                         if (Tutorial.Instance.usedStove)
                         {
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
                     }
                 case (2):  //Stage2 Add powder
                     {
-                        ServeTray.Instance.canServe = false;
+                        TeaCup.Instance.canServe = false;
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UsePowderTool;
                         if (Tea.Instance.numOfPowder > 0 && Tutorial.Instance.usedPowderT)
                         {
@@ -137,7 +137,7 @@ public class GameManager : MonoBehaviour
                             onoffarrow = false;
                         }
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.ServeOK;
-                        ServeTray.Instance.canServe = true;
+                        TeaCup.Instance.canServe = true;
                         //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.ServeOK;
                         break;
                     }
@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour
                             GameManager.Instance.arrowAnim.SetTrigger("snack");
                             onoffarrow = true;
                         }
-                        ServeTray.Instance.canServe = false;
+                        TeaCup.Instance.canServe = false;
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseSnack;
                         break;
                     }

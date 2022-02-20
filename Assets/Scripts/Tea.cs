@@ -12,7 +12,7 @@ public class Tea : MonoBehaviour
     public GameObject tea;
     //public Color teaColor;
     public float minSize, middleSize, maxSize;   //max original: 0.003516069
-    public float speed;
+    public float speed; //speed of filling up, 0.03
     public GameObject OriginalPos;
     public GameObject TopPos;
     public Vector3 resetPos;
@@ -82,12 +82,12 @@ public class Tea : MonoBehaviour
             {
                 //TeaCeremonyManager.Instance.canDiscard = true;
                 TeaCeremonyManager.Instance.discardButton.GetComponent<Button>().interactable = true;
-                ServeTray.Instance.canServe = true;
+                TeaCup.Instance.canServe = true;
             }
             else
             {
                 TeaCeremonyManager.Instance.discardButton.GetComponent<Button>().interactable = false;
-                ServeTray.Instance.canServe = false;
+                TeaCup.Instance.canServe = false;
             }
         }
         // if(numOfIngredients>0||numOfPowder>0){
@@ -126,7 +126,7 @@ public class Tea : MonoBehaviour
             teaPattern.SetActive(false);
         }
         if(sb.fillAmount==1){  //every stirr
-            RestartStirBar();
+            //RestartStirBar(); //put this on when new things is added
             // TeaState();//affect tea//change tea color  //move it to before stirring, for instance when pick up tool
         }
 
@@ -190,7 +190,7 @@ public class Tea : MonoBehaviour
             OriginalPos.transform.position = Vector3.MoveTowards(OriginalPos.transform.position, TopPos.transform.position, step);
         }
     }
-    void RestartStirBar(){
+    public void RestartStirBar(){
         sb.fillAmount = 0;
     }
     void OnTriggerEnter(Collider col) {

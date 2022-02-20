@@ -34,6 +34,7 @@ public class PowderAndIngredients : MonoBehaviour
         //MatchaBox.Instance.havePowder = false;
         if(this.gameObject.tag == "Ingredients"){
             if(col.gameObject.tag == "Cup"){
+                Tea.Instance.RestartStirBar();
                 Tea.Instance.numOfIngredients+=1;
                 Tea.Instance.toMeltList.Add(gameObject);
                 //Destroy(this.gameObject, .5f);
@@ -46,6 +47,7 @@ public class PowderAndIngredients : MonoBehaviour
     void OnTriggerEnter(Collider col) {
         if(this.gameObject.tag == "Powder"){
             if(col.gameObject.tag == "Bottom"){  //Cup
+            Tea.Instance.RestartStirBar();
                 sc.PowderDown();
                 Tea.Instance.numOfPowder+=1;
                 MatchaBox.Instance.havePowder = false;

@@ -20,6 +20,10 @@ TagManager:
   - StirrTool
   - Ingredients
   - Snacks
+  - CupZone
+  - TrayZone
+  - TrayTrigger
+  - CupPlacementTrigger
   layers:
   - Default
   - TransparentFX

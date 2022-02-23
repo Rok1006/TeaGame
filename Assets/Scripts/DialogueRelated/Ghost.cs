@@ -48,6 +48,9 @@ public class Ghost : MonoBehaviour
 
     public Animator anim;
 
+    public Button button;
+    public bool buttonPressed;
+    public bool dialogueOngoing;
     void Start()
     {
         ReadDialogText();
@@ -60,6 +63,7 @@ public class Ghost : MonoBehaviour
 
         rectTrans = objDialogBox.GetComponent<RectTransform>();
         objDialogBox.SetActive(false);
+        button.onClick.AddListener(ifButtonClicked);
     }
     void Update()
     {
@@ -89,6 +93,7 @@ public class Ghost : MonoBehaviour
     IEnumerator TypeAll() //Go through every dialog of the stage
     {
         objDialogBox.SetActive(true);
+        button.gameObject.SetActive(true);
         for(int i=dialogIndex; i<stageList[stageIndex].dialogList.Count; i++)
         {
             DialogData dialogData = stageList[stageIndex].dialogList[i];
@@ -98,7 +103,10 @@ public class Ghost : MonoBehaviour
             }
             else
             {
+                buttonPressed = false;
                 Animate(dialogData.animType);
+                textDisplay.text = "";
+                dialogueOngoing = true;
                 foreach (char letter in dialogData.dialog.ToCharArray())
                 {
                     if (Input.GetKeyDown(KeyCode.Period)) //Debug Stuff
@@ -112,17 +120,25 @@ public class Ghost : MonoBehaviour
                         print(i);
                     }
                     textDisplay.text += letter;
+                    
                     yield return new WaitForSeconds(typingSpeed);
                 }
-                
-                yield return new WaitForSeconds(dialogData.pauseTime);
-                textDisplay.text = "";
-                dialogIndex++;
+                dialogueOngoing = false;
+                //yield return new WaitForSeconds(dialogData.pauseTime);
+                if (buttonPressed && !dialogueOngoing)
+                {
+                    
+                    dialogIndex++;
+                    
+                }
+                yield return new WaitUntil(()=>buttonPressed);
+
             }
         }
         Animate(null); //End of all dialog reset animation
 
         objDialogBox.SetActive(false);//Maybe delte later!!!!!IDK   
+        button.gameObject.SetActive(false);
         //Player game over here!!!
     }
     IEnumerator Type(DialogData dialogData) //Go through one specific dialog
@@ -380,6 +396,14 @@ public class Ghost : MonoBehaviour
             }
         }
         Debug.Log("Reading React done.");
+    }
+
+    void ifButtonClicked()
+    {
+        if (!dialogueOngoing)
+        {
+            buttonPressed = true;
+        }
     }
 
 }

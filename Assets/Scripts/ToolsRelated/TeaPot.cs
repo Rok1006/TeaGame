@@ -20,6 +20,7 @@ public class TeaPot : MonoBehaviour
     public bool canRelease = false;
     public bool pickedUP = false;
     public int upState = 0;
+    Vector3 mousePos;
     public bool poured = false;
     public bool canClick = true;
     public bool inOriginalPlace;
@@ -190,7 +191,13 @@ public class TeaPot : MonoBehaviour
     if (pickedUP && !Input.GetMouseButton(0))  //added canRelease to resolve issue: get pushed when release
         {
             if(canMove){
-                this.transform.position += deltaMousePosMove;
+                Plane plane = new Plane(Vector3.up, new Vector3(0, 2, 0));
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                float distance;
+                if (plane.Raycast(ray, out distance))
+                {
+                    transform.position = ray.GetPoint(distance);
+                }
             }
         }
         if(pickedUP){  //also: make it when hovering outside of original pos, player cant release
@@ -333,5 +340,6 @@ public class TeaPot : MonoBehaviour
         if(col.gameObject.tag == "Release"){
             canRelease = false;
         }
+   
     }
 }

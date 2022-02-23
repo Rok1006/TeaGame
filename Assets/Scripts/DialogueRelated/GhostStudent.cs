@@ -50,6 +50,9 @@ public class GhostStudent : MonoBehaviour
 
     public Animator anim;
 
+    public Button button;
+    public bool buttonPressed;
+    public bool dialogueOngoing;
     void Start()
     {
         objBlink.SetActive(true);
@@ -67,6 +70,7 @@ public class GhostStudent : MonoBehaviour
         objDialogBox.SetActive(true);
         textDisplay.color = textColor;
         objDialogBox.SetActive(false);
+        button.onClick.AddListener(ifButtonClicked);
     }
     void Update()
     {
@@ -108,7 +112,8 @@ public class GhostStudent : MonoBehaviour
     IEnumerator TypeAll() //Go through every dialog of the stage
     {
         objDialogBox.SetActive(true);
-        for(int i=dialogIndex; i<stageList[stageIndex].dialogList.Count; i++)
+        button.gameObject.SetActive(true);
+        for (int i = dialogIndex; i < stageList[stageIndex].dialogList.Count; i++)
         {
             DialogData dialogData = stageList[stageIndex].dialogList[i];
             if (dialogData.dialog == "<Next>")
@@ -117,7 +122,10 @@ public class GhostStudent : MonoBehaviour
             }
             else
             {
+                buttonPressed = false;
                 Animate(dialogData.animType);
+                textDisplay.text = "";
+                dialogueOngoing = true;
                 foreach (char letter in dialogData.dialog.ToCharArray())
                 {
                     if (Input.GetKeyDown(KeyCode.Period)) //Debug Stuff
@@ -131,12 +139,19 @@ public class GhostStudent : MonoBehaviour
                         print(i);
                     }
                     textDisplay.text += letter;
+
                     yield return new WaitForSeconds(typingSpeed);
                 }
-                
-                yield return new WaitForSeconds(dialogData.pauseTime);
-                textDisplay.text = "";
-                dialogIndex++;
+                dialogueOngoing = false;
+                //yield return new WaitForSeconds(dialogData.pauseTime);
+                if (buttonPressed && !dialogueOngoing)
+                {
+
+                    dialogIndex++;
+
+                }
+                yield return new WaitUntil(() => buttonPressed);
+
             }
         }
         Animate(null); //End of all dialog reset animation
@@ -466,6 +481,15 @@ public class GhostStudent : MonoBehaviour
             }
         }
         Debug.Log("Reading React done.");
+    }
+
+
+    void ifButtonClicked()
+    {
+        if (!dialogueOngoing)
+        {
+            buttonPressed = true;
+        }
     }
 
 }

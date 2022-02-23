@@ -23318,7 +23318,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1080286106
 RectTransform:
   m_ObjectHideFlags: 0
@@ -54273,6 +54273,8 @@ MonoBehaviour:
   indicator: {fileID: 1495579196}
   otsc: {fileID: 1931613694}
   toolFirststep: {fileID: 0}
+  TPZone: {fileID: 0}
+  TPTrigger: {fileID: 0}
   heatness: 0
   sc: {fileID: 0}
 --- !u!65 &1931613691
@@ -57917,7 +57919,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1942728389}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -1.2900001, y: 2, z: 1.2500002}
+  m_LocalPosition: {x: -1.2900001, y: 0.65, z: 1.2500002}
   m_LocalScale: {x: 49.871017, y: 49.87099, z: 49.87101}
   m_Children:
   - {fileID: 4849764395335803093}
@@ -61549,6 +61551,8 @@ MonoBehaviour:
   indicator: {fileID: 1495579196}
   otsc: {fileID: 1942728391}
   toolFirststep: {fileID: 2133692022}
+  TPZone: {fileID: 365603599}
+  TPTrigger: {fileID: 158003036}
   heatness: 0
   sc: {fileID: 464599065}
 --- !u!65 &1942728395
@@ -65396,6 +65400,8 @@ MonoBehaviour:
   indicator: {fileID: 1495579196}
   otsc: {fileID: 2500996698997959558}
   toolFirststep: {fileID: 0}
+  TPZone: {fileID: 0}
+  TPTrigger: {fileID: 0}
   heatness: 0
   sc: {fileID: 0}
 --- !u!54 &2500996698997959556

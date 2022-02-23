@@ -43,6 +43,8 @@ public class TeaPot : MonoBehaviour
     public GameObject indicator;
     public Outline otsc;  //the outline script
     public GameObject toolFirststep;
+    public GameObject TPZone;
+    public GameObject TPTrigger;
     Vector3 prevMousePos;
     Vector3 deltaMousePos;
     Vector3 deltaMousePosRot;
@@ -84,25 +86,32 @@ public class TeaPot : MonoBehaviour
         Originalindicator.SetActive(false);
         StovePlaceholderObj.SetActive(true);
         toolFirststep.SetActive(false);
+        TPZone.SetActive(false);
+        TPTrigger.SetActive(false);
        
     }
     void FixedUpdate()
     {
-      /*
-        originalPos = transform.position; //update the location constantly
-        pickUPDes = new Vector3(this.transform.position.x, destHeight, transform.position.z);
-     */
+        /*
+          originalPos = transform.position; //update the location constantly
+          pickUPDes = new Vector3(this.transform.position.x, destHeight, transform.position.z);
+       */
+       
+        
         if (TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseTeapot&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT){ //added stuff
         if(canClick && OnteaPot && Input.GetMouseButton(0)&&upState==0)
         {   //pick up pot
+                rb.isKinematic = true;
+                //rb.useGravity = false;
                 canClick = false;
-            toolFirststep.SetActive(false); //tutorial
+                toolFirststep.SetActive(false); //tutorial
                 moveup = true;
                 //Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
-              if(toolFirststep.activeSelf){ 
+              if(toolFirststep.activeSelf)
+                { 
                 GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
                 Tutorial.Instance.TPsteps[0].SetActive(true);  //release click to move
-            }
+                }
        
             sc.PickUpTeaPot();
         }
@@ -120,13 +129,14 @@ public class TeaPot : MonoBehaviour
               GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
               if(!Tutorial.Instance.tutorialComplete){GameManager.Instance.arrowAnim.SetTrigger("stove");}
             }
-            rb.isKinematic = true;
+            //rb.isKinematic = true;
         }else if(transform.position != pickUPDes&&moveup)
         {
+            //Debug.Log("not yet");
             float step = speed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(originalPos, pickUPDes, step);
+            transform.position = Vector3.MoveTowards(transform.position, pickUPDes, step);
             //Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(false); //tutorial: To fix tea pot tutorial glitch
-            upState = 0; //not yet to the top
+          //  upState = 0; //not yet to the top
         }
         //releasing it
        
@@ -147,7 +157,7 @@ public class TeaPot : MonoBehaviour
             TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
 
         }
-        Debug.Log("pickedup"+ pickedUP);
+        
         degree = this.transform.forward.y* Mathf.Rad2Deg;
        
         if (pickedUP && Input.GetMouseButton(0)){    //Mouse Distance based Tilt Pouring here
@@ -167,7 +177,7 @@ public class TeaPot : MonoBehaviour
             //  Vector3 tempZ = thisParent.transform.rotation * Vector3.forward; //Im trying to make the direction stay the same but failed....
             //tempZ.zsnap to this rotation, but keep the z rotation
             transform.rotation = original_rotation;
-            Debug.Log(transform.rotation);
+         
             // this.transform.rotation= Quaternion.Euler(0,0,0);
             Vector3 posFix = -mousePosPrePour + Input.mousePosition;
            // thisParent.transform.position += new Vector3(posFix.x * followHStrength, 0f, posFix.y * followVStrength ); //snap to mouse new position    posFix.y * followVStrength why rotating pot changes z pos
@@ -215,6 +225,8 @@ public class TeaPot : MonoBehaviour
         Tea.Instance.heatBar.SetActive(true);
         Tutorial.Instance.TPsteps[1].SetActive(true);
         Tutorial.Instance.TPsteps[0].SetActive(false);
+        TPZone.SetActive(true);
+        TPTrigger.SetActive(true);
     }
     void NtonPot(){
         OnteaPot = false;
@@ -254,7 +266,10 @@ public class TeaPot : MonoBehaviour
         TeaCeremonyManager.Instance.tText = "";
     }
     void OnCollisionEnter(Collision col) {
+        Debug.Log("collider:"+col);
         if(col.gameObject.tag == "Table"){
+            TPZone.SetActive(false);
+            TPTrigger.SetActive(false);
             Tutorial.Instance.TPsteps[0].SetActive(false);
             upState=0;
             sc.PlaceTeaPot();

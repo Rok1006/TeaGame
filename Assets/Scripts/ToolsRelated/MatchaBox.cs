@@ -78,6 +78,7 @@ public class MatchaBox : MonoBehaviour
             }
             float step = speed * Time.deltaTime;
             this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
+           
             mbAnim.SetBool("Open", true);
             mbAnim.SetBool("Close", false);
             //sc.OpenLid();
@@ -87,6 +88,7 @@ public class MatchaBox : MonoBehaviour
         if(this.transform.position==pickUPDes){  //player picked it up
             //otsc.enabled = false;
             state = 1;  //up
+            this.transform.rotation = Quaternion.Euler(-90, 0, -90);
             rb.isKinematic = true;
             if(Input.GetMouseButtonUp(0)){  //Fixed changed pos when hold pot and drag without release in the middle
               //Tutorial.Instance.NextStep();
@@ -115,6 +117,7 @@ public class MatchaBox : MonoBehaviour
             rb.isKinematic = false;
             TableCollider.SetActive(false);
             powdernumUI.SetActive(false);
+            transform.rotation = OriginalToolPos.transform.rotation;
             //Tutorial.Instance.PTsteps[Tutorial.Instance.stepIndex].SetActive(false); //tutorial
             Tutorial.Instance.PTsteps[1].SetActive(false);
             Tutorial.Instance.ResetSteps(); //tutorial
@@ -132,7 +135,7 @@ public class MatchaBox : MonoBehaviour
         }else if (pickedUP&&Input.GetMouseButtonUp(0)){ //when pick up and release right click
             havePowder = false;
             Vector3 tempZ = this.transform.rotation * Vector3.forward; //Im trying to make the direction stay the same but failed....
-            this.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);  //tempZ.zsnap to this rotation, but keep the z rotation
+            this.transform.rotation = Quaternion.Euler(-90f, 0f, -90f);  //tempZ.zsnap to this rotation, but keep the z rotation
             Vector3 posFix = -mousePosPrePour + Input.mousePosition;
             Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
             RaycastHit hit;

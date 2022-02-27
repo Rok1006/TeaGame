@@ -65,6 +65,7 @@ public class MatchaBox : MonoBehaviour
     }
     void Update()
     {
+        Debug.Log(this.transform.rotation.x);
         powdernum.text = "X"+Tea.Instance.numOfPowder.ToString();
         //originalPos = new Vector3(this.transform.position.x, 0.282f, transform.position.z); //0.653f
         //pickUPDes = new Vector3(this.transform.position.x, 1.076f, transform.position.z);
@@ -105,7 +106,7 @@ public class MatchaBox : MonoBehaviour
                 Debug.Log (hit.transform.name);
                 mPos = hit.point;
                 mPos.y = 1.076f;
-                Debug.Log (mPos);
+              
             }
             this.transform.position = mPos;
         }
@@ -127,7 +128,10 @@ public class MatchaBox : MonoBehaviour
         }
         //Dip it & snap back
         if (pickedUP && Input.GetMouseButton(0)){    //Mouse Distance based Tilt Pouring here  
-            this.transform.Rotate(deltaMousePosRot); 
+           
+         if (this.transform.rotation.x>-0.51f) {
+                this.transform.Rotate(deltaMousePosRot); 
+          }
             if(havePowder){  //if have powder and drag
                 Invoke("ReleasePowder",0f);
             }

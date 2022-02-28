@@ -30,6 +30,7 @@ public class MatchaBox : MonoBehaviour
     Animator mbAnim;
     Vector3 originalPos;  //0.282
     Vector3 pickUPDes; //1.076
+    Vector3 dipPos;
     Rigidbody rb;
     Vector3 prevMousePos;
     Vector3 deltaMousePos;
@@ -55,6 +56,7 @@ public class MatchaBox : MonoBehaviour
         rb = this.GetComponent<Rigidbody>();
         originalPos = new Vector3(1.44f, 0.282f, -2.261f); //0.653f
         pickUPDes = new Vector3(this.transform.position.x, 1.076f, this.transform.position.z);
+        dipPos = new Vector3(this.transform.position.x, 0.97f, this.transform.position.z); //0.653f
         prevMousePos = Input.mousePosition;
         toolTrigger.SetActive(false);
         TableCollider.SetActive(false);
@@ -65,6 +67,7 @@ public class MatchaBox : MonoBehaviour
     }
     void Update()
     {
+        //dipPos = new Vector3(this.transform.position.x, 0.97f, this.transform.position.z); //0.653f
         Debug.Log(this.transform.rotation.x);
         powdernum.text = "X"+Tea.Instance.numOfPowder.ToString();
         //originalPos = new Vector3(this.transform.position.x, 0.282f, transform.position.z); //0.653f
@@ -128,7 +131,8 @@ public class MatchaBox : MonoBehaviour
         }
         //Dip it & snap back
         if (pickedUP && Input.GetMouseButton(0)){    //Mouse Distance based Tilt Pouring here  
-           
+           //dip it
+           //this.transform.position = dipPos;
          if (this.transform.rotation.x>-0.51f) {
                 this.transform.Rotate(deltaMousePosRot); 
           }

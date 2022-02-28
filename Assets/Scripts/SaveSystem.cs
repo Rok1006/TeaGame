@@ -19,4 +19,26 @@ public class SaveSystem : MonoBehaviour
         }
         return theIndex;
     }
+
+    public List<string> collectionLoad()
+    {
+        List<string> collection = new List<string>();
+        if (ES3.KeyExists("collection"))
+        {
+            collection = ES3.Load<List<string>>("collection");
+        }
+        return collection;
+    }
+
+    public void collectionSave(string itemName)
+    {
+        List<string> collection = new List<string>();
+        if (ES3.KeyExists("collection"))
+        {
+            collection = ES3.Load<List<string>>("collection");
+        }
+        collection.Add(itemName);
+        ES3.Save("collection", collection);
+    }
+
 }

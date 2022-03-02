@@ -157,7 +157,7 @@ public class TeaPot : MonoBehaviour
             Tutorial.Instance.ResetSteps(); //tutorial
             Tutorial.Instance.usedTeaPot = true; //GameManager
             TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
-
+            TPindicator.SetActive(false);
         }
         
         degree = this.transform.forward.y* Mathf.Rad2Deg;
@@ -202,11 +202,11 @@ public class TeaPot : MonoBehaviour
             }
         }
         if(pickedUP){  //also: make it when hovering outside of original pos, player cant release
-            //TPindicator.SetActive(true); off
+            TPindicator.SetActive(true); //off
             Vector3 pos = this.transform.position;
             pos.y = 0.224f;  //table height
             pos.z = this.transform.position.z+0.15f;
-            //TPindicator.transform.position = pos; off
+            TPindicator.transform.position = pos; //off
         } 
         //TeaPot heatness
         Tea.Instance.hb.value = heatness;
@@ -327,7 +327,7 @@ public class TeaPot : MonoBehaviour
         if(col.gameObject.tag == "TPTrigger"){
             TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
             this.transform.position = tpPos.transform.position;
-            //TPindicator.transform.position = new Vector3(Originalindicator.transform.position.x,TPindicator.transform.position.y,Originalindicator.transform.position.z); off
+            TPindicator.transform.position = new Vector3(Originalindicator.transform.position.x,TPindicator.transform.position.y,Originalindicator.transform.position.z); //off
         }
         if(col.gameObject.tag == "TableZone"){
             Originalindicator.SetActive(true);

@@ -46,6 +46,7 @@ public class TeaPot : MonoBehaviour
     public GameObject toolFirststep;
     public GameObject TPZone;
     public GameObject TPTrigger;
+    public GameObject StoveZone;
     Vector3 prevMousePos;
     Vector3 deltaMousePos;
     Vector3 deltaMousePosRot;
@@ -89,15 +90,15 @@ public class TeaPot : MonoBehaviour
         toolFirststep.SetActive(false);
         TPZone.SetActive(false);
         TPTrigger.SetActive(false);
+        //StoveZone.SetActive(false);
        
     }
     void FixedUpdate()
     {
         /*
           originalPos = transform.position; //update the location constantly
-          pickUPDes = new Vector3(this.transform.position.x, destHeight, transform.position.z);
        */
-       
+       pickUPDes = new Vector3(this.transform.position.x, destHeight, transform.position.z);
         
         if (TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseTeapot&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT){ //added stuff
         if(canClick && OnteaPot && Input.GetMouseButton(0)&&upState==0)
@@ -289,16 +290,20 @@ public class TeaPot : MonoBehaviour
             if(!Tutorial.Instance.tutorialComplete){GameManager.Instance.arrowAnim.SetTrigger("powder");}
             Tutorial.Instance.TPsteps[0].SetActive(false);
             sc.PlaceTeaPot();
+            upState=0;
             onStove = true;
             pickedUP = false;
+            //StoveZone.SetActive(false); // //new
             Stoveindicator.SetActive(false);
             if(heatness<1){  //if not heated
+           // upState=0;
                 canClick =false;  
                 Debug.Log("heating");
                 TeaCeremonyManager.Instance.TeaPotHeating();
             }
             if (heatness>=1){
                 canClick =true; 
+               // upState=0;
             }
             //thisParent.transform.position = stovePos.transform.position;
             Tutorial.Instance.usedStove = true; //GameManager
@@ -317,6 +322,7 @@ public class TeaPot : MonoBehaviour
         }
         if(col.gameObject.tag == "StoveZone"){
             Stoveindicator.SetActive(true);
+
         }
         if(col.gameObject.tag == "TPTrigger"){
             TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;

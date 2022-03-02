@@ -43,6 +43,8 @@ public class StirTool : MonoBehaviour
         prevMousePos = Input.mousePosition;
         toolTrigger.SetActive(false);
         toolFirststep.SetActive(false);
+        MatchaBox.Instance.placementZone.SetActive(false);
+        
     }
     
     void Update()
@@ -114,6 +116,7 @@ public class StirTool : MonoBehaviour
         //Tutorial.Instance.STsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
         Tutorial.Instance.STsteps[1].SetActive(true);
         Tutorial.Instance.STsteps[0].SetActive(false);
+         MatchaBox.Instance.placementZone.SetActive(true);
     }
     void OnMouseDown() {
         if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){

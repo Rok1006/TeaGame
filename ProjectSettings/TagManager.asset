@@ -24,6 +24,7 @@ TagManager:
   - TrayZone
   - TrayTrigger
   - CupPlacementTrigger
+  - PtToolZone
   layers:
   - Default
   - TransparentFX

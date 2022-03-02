@@ -195,12 +195,12 @@ public class Tea : MonoBehaviour
     }
     void OnTriggerEnter(Collider col) {
         if(col.gameObject.tag == "L1"){
-            print("yeh");
+           // print("yeh");
             //this.transform.localScale = new Vector3(middleSize,middleSize,middleSize);
             this.transform.localScale = new Vector3(maxSize,maxSize,maxSize);
         }
         if(col.gameObject.tag == "L2"){
-            print("bigger");
+            //print("bigger");
             this.transform.localScale = new Vector3(maxSize,maxSize,maxSize);
         }
         if(col.gameObject.tag == "StirrTool"){

@@ -18,6 +18,7 @@ public class MatchaBox : MonoBehaviour
     public GameObject toolTrigger;
     public GameObject OriginalToolPos;
     public GameObject powdernumUI;
+    public GameObject placementZone;
     public Text powdernum;
     public Outline otsc;
     public bool pickedUP = false;
@@ -64,11 +65,13 @@ public class MatchaBox : MonoBehaviour
         toolFirststep.SetActive(false);
         OriginalToolPos.transform.position = transform.position;
         OriginalToolPos.transform.rotation = transform.rotation;
+
+        placementZone.SetActive(false);
     }
     void Update()
     {
         //dipPos = new Vector3(this.transform.position.x, 0.97f, this.transform.position.z); //0.653f
-        Debug.Log(this.transform.rotation.x);
+//        Debug.Log(this.transform.rotation.x);
         powdernum.text = "X"+Tea.Instance.numOfPowder.ToString();
         //originalPos = new Vector3(this.transform.position.x, 0.282f, transform.position.z); //0.653f
         //pickUPDes = new Vector3(this.transform.position.x, 1.076f, transform.position.z);
@@ -106,7 +109,7 @@ public class MatchaBox : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast (ray, out hit, 100)) {
-                Debug.Log (hit.transform.name);
+//                Debug.Log (hit.transform.name);
                 mPos = hit.point;
                 mPos.y = 1.076f;
               
@@ -133,9 +136,9 @@ public class MatchaBox : MonoBehaviour
         if (pickedUP && Input.GetMouseButton(0)){    //Mouse Distance based Tilt Pouring here  
            //dip it
            //this.transform.position = dipPos;
-         if (this.transform.rotation.x>-0.51f) {
+         //if (this.transform.rotation.x>-0.51f) {
                 this.transform.Rotate(deltaMousePosRot); 
-          }
+          //}
             if(havePowder){  //if have powder and drag
                 Invoke("ReleasePowder",0f);
             }
@@ -165,6 +168,27 @@ public class MatchaBox : MonoBehaviour
             // canClick =true;
             // canRelease = true;
         }
+        Vector3 centerPos = new Vector3(transform.position.x, transform.position.y,transform.position.z);
+ 
+    //   RaycastHit hit2;
+    //     if(Physics.Raycast(centerPos, Vector3.down,out hit2, 100)){
+    //        if(hit2.collider.isTrigger){
+    //            //Debug.Log("hitting area");
+    //            if(hit2.transform.tag == "sth"){
+    //            Debug.Log("hitting area");
+    //            Debug.DrawRay(centerPos, new Vector3(0,100,0), Color.green);
+
+    //            canRelease = true;
+    //        }
+    //        }else{
+    //            Debug.Log("nohitting area");
+    //            canRelease = false;
+    //        }
+    //     }
+
+
+
+
     }
     private void LateUpdate()
     {
@@ -181,6 +205,7 @@ public class MatchaBox : MonoBehaviour
         powdernumUI.SetActive(true);
         Tutorial.Instance.PTsteps[1].SetActive(true);
         Tutorial.Instance.PTsteps[0].SetActive(false);
+        placementZone.SetActive(true);
         //Tutorial.Instance.PTsteps[Tutorial.Instance.stepIndex].SetActive(true);
     }
     void OnMouseDown() {
@@ -244,8 +269,8 @@ public class MatchaBox : MonoBehaviour
         if(col.gameObject.tag == "Powder"){
             inPowderZone = true;
         }
-        if(col.gameObject.tag == "ToolZone"){
-            canRelease  = true;
+        if(col.gameObject.tag == "PtToolZone"){
+            canRelease  = true;  //here
         }
         if(col.gameObject.tag == "ToolTrigger"){
             TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
@@ -253,7 +278,7 @@ public class MatchaBox : MonoBehaviour
         }
     }
     void OnTriggerExit(Collider col) {
-        if(col.gameObject.tag == "ToolZone"){
+        if(col.gameObject.tag == "PtToolZone"){
             canRelease  = false;
         }
     }

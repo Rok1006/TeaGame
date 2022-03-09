@@ -164,7 +164,7 @@ public class TeaPot : MonoBehaviour
        
         if (pickedUP && Input.GetMouseButton(0)){    //Mouse Distance based Tilt Pouring here
             mousePosPrePour = Input.mousePosition;
-           transform.RotateAround(transform.position,Vector3.forward, deltaMousePos.x * tiltHStrength); 
+           transform.RotateAround(transform.position,Vector3.forward, -1*deltaMousePos.x * tiltHStrength); 
             StovePlaceholderObj.SetActive(false);
             if(degree>pouringDegree){  //teapot pouring sound
                 sc.PourTea();

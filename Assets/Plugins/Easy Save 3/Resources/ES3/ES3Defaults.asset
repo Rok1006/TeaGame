@@ -31,9 +31,9 @@ MonoBehaviour:
     assemblyNames:
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
+    - YarnSpinner.Unity
     - Cinemachine
     - AllIn1SpriteShaderAssembly
-    - YarnSpinner.Unity
     - CommandsInAnAssemblyDefinition
     - YarnSpinner.Unity.Editor
     showAdvancedSettings: 0

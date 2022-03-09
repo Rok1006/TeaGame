@@ -155,9 +155,9 @@ public class GameManager : MonoBehaviour
                     {
 
                         //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
-                        TeaCeremonyManager.Instance.startDiming = true;
+                        //TeaCeremonyManager.Instance.startDiming = true; //removed the candle, off for now
                         //Tutorial.Instance.tutorialComplete = true;  //this two may be put after case 8
-                        TeaCeremonyManager.Instance.LightingButton.SetActive(true);
+                        //TeaCeremonyManager.Instance.LightingButton.SetActive(true);//off for now
                         break;
                     }
                     //case 7 : pen camera to teaCam, allow player to serve
@@ -181,7 +181,7 @@ public class GameManager : MonoBehaviour
                 {
                     case (0):
                     {
-                            TeaCeremonyManager.Instance.startDiming = true;
+                            //TeaCeremonyManager.Instance.startDiming = true; //off for now
                             SnackOffer.Instance.canTakeSnack = true;
                             Tutorial.Instance.tutorialComplete = true;
                             TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;

@@ -18,6 +18,7 @@ public class StirTool : MonoBehaviour
     public GameObject toolFirststep;
     Vector3 dipPos;  
     Vector3 pickUPDes; //1.076
+    Vector3 mPos;
     Rigidbody rb;
     Vector3 prevMousePos;
     Vector3 deltaMousePos;
@@ -87,7 +88,6 @@ public class StirTool : MonoBehaviour
             pickedUP = false;
             rb.isKinematic = false;  //its being turned on constantly
             this.transform.rotation = Quaternion.Euler(90f, 0f, 0f); 
-            //Tutorial.Instance.STsteps[Tutorial.Instance.stepIndex].SetActive(false); //tutorial
             Tutorial.Instance.STsteps[1].SetActive(false);
             Tutorial.Instance.ResetSteps(); //tutorial
             Tutorial.Instance.usedStirT = true; //GameManager
@@ -96,8 +96,18 @@ public class StirTool : MonoBehaviour
         if (pickedUP && Input.GetMouseButton(0)){ 
             this.transform.position = dipPos;
             this.transform.position += deltaMousePosMove;
+            //cannot go out of cup
+            this.transform.position = new Vector3(Mathf.Clamp(transform.position.x, -0.296f,0.296f),transform.position.y, Mathf.Clamp(transform.position.z, -1.964f,-1.23f));
         }else if(pickedUP&&Input.GetMouseButtonUp(0)){
-            this.transform.position = pickUPDes;
+            //this.transform.position = pickUPDes;
+            Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast (ray, out hit, 100)) {
+                Debug.Log (hit.transform.name);
+                mPos = hit.point;
+                mPos.y = 1.6f;
+            }
+            this.transform.position = mPos;
         }
 
     }
@@ -113,7 +123,6 @@ public class StirTool : MonoBehaviour
         toolTrigger.SetActive(true);
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.STIRTOOL;
         Tea.Instance.TeaState();
-        //Tutorial.Instance.STsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
         Tutorial.Instance.STsteps[1].SetActive(true);
         Tutorial.Instance.STsteps[0].SetActive(false);
          MatchaBox.Instance.placementZone.SetActive(true);
@@ -149,10 +158,6 @@ public class StirTool : MonoBehaviour
         }
     }
     void OnTriggerEnter(Collider col) {
-        // if(col.gameObject.tag == "Table"){
-        //     pickedUP = false;  //why have to wait a while
-        //     toolTrigger.SetActive(false);
-        // }
         if(col.gameObject.tag == "ToolZone"){
             canRelease  = true;
         }

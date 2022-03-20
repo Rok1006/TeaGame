@@ -1,0 +1,32 @@
+fileFormatVersion: 2
+guid: e527b1b925c331a4aa10e2cdbc8ce39b
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
+  LastImportHadImplicitStringIDs: 1
+  LastImportHadAnyStrings: 1
+  isSuccessfullyParsed: 1
+  parseErrorMessages:
+  - '1:0: Error: The node ''Student Start'' contains illegal characters in its title.
+
+    title:
+    Student Start
+
+'
+  - '19:0: Error: The node ''Student 2nd Phase'' contains illegal characters in its
+    title.
+
+    title: Student 2nd Phase
+
+'
+  - '34:0: Error: The node ''Laikai Start'' contains illegal characters in its title.
+
+    title:
+    Laikai Start
+
+'

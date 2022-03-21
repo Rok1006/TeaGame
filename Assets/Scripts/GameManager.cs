@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour
     public GameObject Arrows;
     public Animator arrowAnim;
     private bool onoffarrow = false;
+    public LineView lineView;
+    public DialogueRunner runner;
     private void Awake()
     { 
         Instance = this;
@@ -30,6 +33,7 @@ public class GameManager : MonoBehaviour
     {
         TeaCeremonyManager.Instance.startDiming = false; //also whenever player is in tutorial
         arrowAnim = Arrows.GetComponent<Animator>();
+        runner.StartDialogue("Sensi_Start");
     }
 
     IEnumerator BeforePlay(){
@@ -41,7 +45,7 @@ public class GameManager : MonoBehaviour
         SceneDataLoad.Instance.TitleScreen.SetActive(false);
         DialogueUI.SetActive(true);
         SoundManager.SetActive(true);
-        GhostEnter(); //new
+        GhostEnter(); 
     }
     void Update()
     {
@@ -60,7 +64,7 @@ public class GameManager : MonoBehaviour
                 case (0):  //when player is allowed to move things //make it when ever player is in a tutorial, startDimming to false
                     {
                         //arrowAnim.SetTrigger("");
-                        arrowAnim.SetTrigger("Deactivate");
+                       arrowAnim.SetTrigger("Deactivate");
                         TeaCup.Instance.canServe = false;
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
                         break;//Intro

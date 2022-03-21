@@ -211,6 +211,7 @@ public class GameManager : MonoBehaviour
         foreach (GameObject ghost in ghostList)
             ghost.SetActive(false);
         ghostList[ghostIndex].SetActive(true);
+        if(ghostIndex==1){runner.StartDialogue("Student_Start");}
     }
     public void GhostLeave()
     {

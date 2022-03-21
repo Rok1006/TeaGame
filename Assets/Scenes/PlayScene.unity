@@ -15649,9 +15649,11 @@ MonoBehaviour:
   ghostList:
   - {fileID: 930557313}
   - {fileID: 389663942}
-  ghostIndex: 0
+  ghostIndex: 1
   Arrows: {fileID: 708259171}
   arrowAnim: {fileID: 0}
+  lineView: {fileID: 0}
+  runner: {fileID: 3579681405364716560}
 --- !u!4 &753367487
 Transform:
   m_ObjectHideFlags: 0

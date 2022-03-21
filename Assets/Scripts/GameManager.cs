@@ -30,6 +30,10 @@ public class GameManager : MonoBehaviour
     {
         TeaCeremonyManager.Instance.startDiming = false; //also whenever player is in tutorial
         arrowAnim = Arrows.GetComponent<Animator>();
+<<<<<<< Updated upstream
+=======
+        
+>>>>>>> Stashed changes
     }
 
     IEnumerator BeforePlay(){
@@ -181,12 +185,21 @@ public class GameManager : MonoBehaviour
                 {
                     case (0):
                     {
+<<<<<<< Updated upstream
                             TeaCeremonyManager.Instance.startDiming = true;
+=======
+
+                                //TeaCeremonyManager.Instance.startDiming = true; //off for now
+                          //  CamSwitch.Instance.TeaCamOn();
+>>>>>>> Stashed changes
                             SnackOffer.Instance.canTakeSnack = true;
                             Tutorial.Instance.tutorialComplete = true;
                             TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
                             break;
                     }
+                    case (1): {
+                                break;
+                        }
                 }
                 break;
             }
@@ -207,6 +220,22 @@ public class GameManager : MonoBehaviour
         foreach (GameObject ghost in ghostList)
             ghost.SetActive(false);
         ghostList[ghostIndex].SetActive(true);
+        if (ghostIndex==1) { 
+            runner.StartDialogue("Student_Start");
+          //  Debug.Log("load_student");
+        }
+ 
+    }
+    // Note that we aren't subclassing MonoBehaviour here; 
+    // static commands can be on any class.
+    public class CharacterMovement : MonoBehaviour
+    {
+
+        [YarnCommand("Camera_Change")]
+        public void Camera()
+        {
+            CamSwitch.Instance.TeaCamOn();
+        }
     }
     public void GhostLeave()
     {

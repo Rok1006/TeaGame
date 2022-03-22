@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public GhostStudent stuGhost;
     public static GameManager Instance;
     public GameObject Fadeout;
+    public GameObject Fadeout2;
+    Animator fd2;
     public Ghost gtcs;
     public GameObject DialogueUI;
     public GameObject SoundManager;
@@ -24,6 +26,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     { 
         Instance = this;
+        fd2 = Fadeout2.GetComponent<Animator>();
         Fadeout.SetActive(true);
         DialogueUI.SetActive(false);
         SoundManager.SetActive(false);
@@ -43,7 +46,9 @@ public class GameManager : MonoBehaviour
         Fadeout.SetActive(false);
         yield return new WaitForSeconds(1.8f); 
         SceneDataLoad.Instance.TitleScreen.SetActive(false);
-        DialogueUI.SetActive(true);
+        if(ghostIndex==0){
+            DialogueUI.SetActive(true);   
+        }
         SoundManager.SetActive(true);
         GhostEnter(); 
     }
@@ -181,6 +186,7 @@ public class GameManager : MonoBehaviour
             }
             case (1): //Student
             {
+                //DialogueUI.SetActive(false);
                 switch (stuGhost.stageIndex)
                 {
                     case (0):
@@ -213,7 +219,7 @@ public class GameManager : MonoBehaviour
                     }
                 break;
             }
-            case (2): //Student2
+            case (2): //Laika
             {
                 //save after this student
                 break;
@@ -222,7 +228,13 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator BetweenGhosts() //input day night switch?
     {
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(1f);  //need refine
+        fd2.SetBool("in",true);
+        fd2.SetBool("out",false);
+        yield return new WaitForSeconds(3f);
+        fd2.SetBool("out",true);
+        fd2.SetBool("in",false);
+        yield return new WaitForSeconds(1);
         GhostEnter();
     }
     public void GhostEnter()
@@ -231,18 +243,25 @@ public class GameManager : MonoBehaviour
             ghost.SetActive(false);
         ghostList[ghostIndex].SetActive(true);
         if(ghostIndex==1){runner.StartDialogue("Student_Start");}
+        //laika
     }
     public  void GhostLeave()
     {
         switch (ghostIndex)
         {
-            case (0):
+            case (0):  //when sensei leave
                 {
                     TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.Nothing;  //add these 2 when players is allow to freeplay 
                     SnackOffer.Instance.canTakeSnack = true;
                     Tutorial.Instance.tutorialComplete = true;
+                    DialogueUI.SetActive(false);
                     break;
                 }
+            case (1): //when student leave
+            {
+                break;
+            }
+
         }
         StartCoroutine(BetweenGhosts());
         ghostIndex++;

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 404058197070337123}
   - component: {fileID: -6761159556671187098}
   - component: {fileID: 1296967873730118057}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: powder
   m_TagString: Powder
   m_Icon: {fileID: 0}
@@ -112,6 +112,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c9e3eacd8d8145a4b1038734e132c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAsh: 0
+  isBomb: 0
+  isLeaf: 0
+  sc: {fileID: 0}
 --- !u!65 &1296967873730118057
 BoxCollider:
   m_ObjectHideFlags: 0

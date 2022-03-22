@@ -188,7 +188,7 @@ public class GameManager : MonoBehaviour
                             //TeaCeremonyManager.Instance.startDiming = true; //off for now
                             SnackOffer.Instance.canTakeSnack = true;
                             Tutorial.Instance.tutorialComplete = true;
-                            TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
+                            
                           
                                 if (TeaCup.Instance.canServe) {
                                     Debug.Log("student_ghost_canserve");
@@ -232,13 +232,13 @@ public class GameManager : MonoBehaviour
         ghostList[ghostIndex].SetActive(true);
         if(ghostIndex==1){runner.StartDialogue("Student_Start");}
     }
-    public void GhostLeave()
+    public  void GhostLeave()
     {
         switch (ghostIndex)
         {
             case (0):
                 {
-                    TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;  //add these 2 when players is allow to freeplay 
+                    TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.Nothing;  //add these 2 when players is allow to freeplay 
                     SnackOffer.Instance.canTakeSnack = true;
                     Tutorial.Instance.tutorialComplete = true;
                     break;

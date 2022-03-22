@@ -189,8 +189,17 @@ public class GameManager : MonoBehaviour
                             SnackOffer.Instance.canTakeSnack = true;
                             Tutorial.Instance.tutorialComplete = true;
                             TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
+                                if (TeaCup.Instance.canServe) {
+
+                                    currGhost.NextStage();
+                                }
                             break;
                     }
+                        case (1): {
+
+                                runner.StartDialogue("Student_2nd_Phase");
+                                break;
+                            }
                 }
                 break;
             }

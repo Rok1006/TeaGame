@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public Tutorial tutor;
     public Ghost currGhost;
     public GhostStudent stuGhost;
+    public int Laikai_index;
     public static GameManager Instance;
     public GameObject Fadeout;
     public GameObject Fadeout2;
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
     private bool onoffarrow = false;
     public LineView lineView;
     public DialogueRunner runner;
+    
     private void Awake()
     { 
         Instance = this;
@@ -196,7 +198,7 @@ public class GameManager : MonoBehaviour
                             Tutorial.Instance.tutorialComplete = true;
                             
                           
-                                if (TeaCup.Instance.canServe) {
+                                if (TeaCeremonyManager.Instance.served) {
                                     Debug.Log("student_ghost_canserve");
 
                                     stuGhost.stageIndex = 1;
@@ -220,7 +222,39 @@ public class GameManager : MonoBehaviour
                 break;
             }
             case (2): //Laika
-            {
+                {
+                    switch (Laikai_index)
+                    {
+                        case (0):
+                            {
+                                //TeaCeremonyManager.Instance.startDiming = true; //off for now
+                              
+                                SnackOffer.Instance.canTakeSnack = true;
+                                Tutorial.Instance.tutorialComplete = true;
+
+
+                                if (TeaCup.Instance.canServe)
+                                {
+                                    Debug.Log("laikai!");
+
+                                   Laikai_index = 1;
+                                }
+                                break;
+                            }
+                        case (1):
+                            {
+                               
+
+                                CamSwitch.Instance.ConversationCamOn();
+                                Laikai_index = 2;
+                                break;
+                            }
+                        case (2):
+                            {
+
+                                break;
+                            }
+                    }
                 //save after this student
                 break;
             }
@@ -242,8 +276,12 @@ public class GameManager : MonoBehaviour
         foreach (GameObject ghost in ghostList)
             ghost.SetActive(false);
         ghostList[ghostIndex].SetActive(true);
-        if(ghostIndex==1){runner.StartDialogue("Student_Start");}
-        //laika
+        if(ghostIndex==1){
+            Debug.Log("ghostindex");
+            runner.StartDialogue("Student_Start");}
+        if (ghostIndex == 2) { runner.StartDialogue("Laikai_Start"); }
+        
+
     }
     public  void GhostLeave()
     {
@@ -265,6 +303,7 @@ public class GameManager : MonoBehaviour
         }
         StartCoroutine(BetweenGhosts());
         ghostIndex++;
+       GhostEnter();
         //stuGhost = ghostList[ghostIndex];
     }
 }

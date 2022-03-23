@@ -31,7 +31,7 @@ public class Ghost : MonoBehaviour
     
     public GameObject objDialogBox;
     public RectTransform rectTrans;
-    float dialogBoxPosDown = -178f;
+    float dialogBoxPosDown = -162f;
     float dialogBoxPosUp = 160f;
 
     public float typingSpeed = 0.2f;

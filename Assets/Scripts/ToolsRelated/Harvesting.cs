@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Harvesting : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class Harvesting : MonoBehaviour
         
     }
     void OnMouseOver() {
-        otsc.enabled = false;
+        otsc.enabled = true;
 
     }
     void OnMouseExit(){

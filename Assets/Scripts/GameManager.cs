@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
     public GameObject Fadeout2;
     Animator fd2;
     public Ghost gtcs;
-    public GameObject DialogueUI;
+    public GameObject DialogueUI; //OLD
+    public GameObject YarnDialogueSys; //Yarn
     public GameObject SoundManager;
     public List<GameObject> ghostList = new List<GameObject>();
     public int ghostIndex = 0;
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour
                         //arrowAnim.SetTrigger("");
                        arrowAnim.SetTrigger("Deactivate");
                         TeaCup.Instance.canServe = false;
-                        TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
+                        //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
                         break;//Intro
                     }
                 case (1):  //Stage1 - Put on boiler
@@ -262,20 +263,23 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator BetweenGhosts() //input day night switch?
     {
-        yield return new WaitForSeconds(1f);  //need refine
+        yield return new WaitForSeconds(.2f);  //need refine
         fd2.SetBool("in",true);
         fd2.SetBool("out",false);
         yield return new WaitForSeconds(3f);
         fd2.SetBool("out",true);
         fd2.SetBool("in",false);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(.2f);
+        SceneDataLoad.Instance.TitleScreen.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        SceneDataLoad.Instance.TitleScreen.SetActive(false);
         GhostEnter();
     }
     public void GhostEnter()
     {
         foreach (GameObject ghost in ghostList)
             ghost.SetActive(false);
-        ghostList[ghostIndex].SetActive(true);
+            ghostList[ghostIndex].SetActive(true);
         if(ghostIndex==1){
             Debug.Log("ghostindex");
             runner.StartDialogue("Student_Start");}
@@ -293,6 +297,7 @@ public class GameManager : MonoBehaviour
                     SnackOffer.Instance.canTakeSnack = true;
                     Tutorial.Instance.tutorialComplete = true;
                     DialogueUI.SetActive(false);
+                    YarnDialogueSys.SetActive(true);
                     break;
                 }
             case (1): //when student leave
@@ -303,7 +308,7 @@ public class GameManager : MonoBehaviour
         }
         StartCoroutine(BetweenGhosts());
         ghostIndex++;
-       GhostEnter();
+       //GhostEnter();
         //stuGhost = ghostList[ghostIndex];
     }
 }

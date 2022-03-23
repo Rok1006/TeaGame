@@ -128,8 +128,8 @@ public class TeaPot : MonoBehaviour
             if(Input.GetMouseButtonUp(0)){  //Fixed changed pos when hold pot and drag without release in the middle
               //Tutorial.Instance.NextStep();  turn on next toool step here originally
               Invoke("PickedUP",0.01f);  //,.5f 
-              GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
-              if(!Tutorial.Instance.tutorialComplete){GameManager.Instance.arrowAnim.SetTrigger("stove");}
+            //   GameManager.Instance.arrowAnim.SetTrigger("Deactivate"); //deactivated as it affect stir arrow
+            //   if(!Tutorial.Instance.tutorialComplete){GameManager.Instance.arrowAnim.SetTrigger("stove");}
             }
             //rb.isKinematic = true;
         }else if(transform.position != pickUPDes&&moveup)

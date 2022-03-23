@@ -25,6 +25,25 @@ public class SceneDataLoad : MonoBehaviour
 
     void Update()
     {
-        
+        GhostInfoUpdate();
+    }
+    void GhostInfoUpdate(){
+        // if(GameManager.Instance.ghostIndex==0){
+
+        // }
+        switch(GameManager.Instance.ghostIndex){
+            case 0: 
+                titleText.text = "SENSEI";
+                GameManager.Instance.YarnDialogueSys.SetActive(false);
+            break;
+            case 1: 
+                titleText.text = "Overwork Student";
+                GameManager.Instance.YarnDialogueSys.SetActive(true);
+            break;
+            case 2: 
+                titleText.text = "The SPace traveler";
+                GameManager.Instance.YarnDialogueSys.SetActive(true);
+            break;
+        }
     }
 }

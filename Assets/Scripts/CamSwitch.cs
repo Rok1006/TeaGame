@@ -10,11 +10,12 @@ public class CamSwitch : MonoBehaviour
     public GameObject ConversationCam;
     public GameObject ChoiceCam;  //pick ingredients
     public GameObject CupboardCam;  //pick ingredients
+    public GameObject HarvestCam;  //harvest special fruit
     public GameObject drawer;
     Animator drawerAnim;
 
     //Enum for access
-    public enum CamState {StartCam, TeaCam, ConvCam, ChoiceCam, BoardCam}
+    public enum CamState {StartCam, TeaCam, ConvCam, ChoiceCam, BoardCam, HarvestCam}
     public CamState camState;
 
     void Awake() {
@@ -29,6 +30,7 @@ public class CamSwitch : MonoBehaviour
         ConversationCam.SetActive(false);
         ChoiceCam.SetActive(false);
         CupboardCam.SetActive(false);
+        HarvestCam.SetActive(false);
         drawerAnim = drawer.GetComponent<Animator>();
     }
 
@@ -60,10 +62,10 @@ public class CamSwitch : MonoBehaviour
             camState = CamState.BoardCam;
             CupboardCamOn();
         }
-        if(ChoiceCam.activeSelf){ //?
-
-        }else{
-            //drawerAnim.SetTrigger("in");
+        else if(Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            camState = CamState.HarvestCam;
+            HarvestCamOn();
         }
     }
 
@@ -74,6 +76,7 @@ public class CamSwitch : MonoBehaviour
         TeaCam.SetActive(false); 
         ChoiceCam.SetActive(false);
         ConversationCam.SetActive(false);
+        HarvestCam.SetActive(false);
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NOTOOL;
         TeaCeremonyManager.Instance.toolText.SetActive(false);
     }
@@ -85,6 +88,7 @@ public class CamSwitch : MonoBehaviour
         ChoiceCam.SetActive(false);
         ConversationCam.SetActive(false);
         CupboardCam.SetActive(false);
+        HarvestCam.SetActive(false);
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
         TeaCeremonyManager.Instance.toolText.SetActive(true);
     }
@@ -96,6 +100,7 @@ public class CamSwitch : MonoBehaviour
         ChoiceCam.SetActive(false);
         ConversationCam.SetActive(true);
         CupboardCam.SetActive(false);
+        HarvestCam.SetActive(false);
         TeaCeremonyManager.Instance.toolText.SetActive(false);
         camState = CamState.ConvCam;
     }
@@ -107,6 +112,7 @@ public class CamSwitch : MonoBehaviour
         ConversationCam.SetActive(false);
         ChoiceCam.SetActive(true);
         CupboardCam.SetActive(false);
+        HarvestCam.SetActive(false);
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.INGRED;
         TeaCeremonyManager.Instance.toolText.SetActive(false);
     }
@@ -118,9 +124,22 @@ public class CamSwitch : MonoBehaviour
         ConversationCam.SetActive(false);
         ChoiceCam.SetActive(false);
         CupboardCam.SetActive(true);
+        HarvestCam.SetActive(false);
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NOTOOL;
         camState = CamState.BoardCam;
         SnackOffer.Instance.snackText.SetActive(true);
         TeaCeremonyManager.Instance.toolText.SetActive(false);
+    }
+    public void HarvestCamOn(){ //when player harvest plant
+        drawerAnim.SetBool("In",true);
+        drawerAnim.SetBool("Out",false);
+        StartCam.SetActive(false);
+        TeaCam.SetActive(false); 
+        ChoiceCam.SetActive(false);
+        ConversationCam.SetActive(false);
+        CupboardCam.SetActive(false);
+        HarvestCam.SetActive(true);
+        TeaCeremonyManager.Instance.toolText.SetActive(false);
+        camState = CamState.HarvestCam;
     }
 }

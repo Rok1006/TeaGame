@@ -204,9 +204,9 @@ public class TeaCeremonyManager : MonoBehaviour
         mainCup.transform.position = ServeCupPos.transform.position;
         served = true;
         CamSwitch.Instance.ConversationCamOn();
-            StartCoroutine(SenseiJudge());
+            StartCoroutine(GhostJudge());
     }
-    IEnumerator SenseiJudge(){
+    IEnumerator GhostJudge(){  //GHost will judge your tea when it is served infront of them
         if(GameManager.Instance.ghostIndex == 0)
             GameManager.Instance.currGhost.DrinkTea(tea.GetComponent<Tea>());//opposite person with do sth to the tea
         else

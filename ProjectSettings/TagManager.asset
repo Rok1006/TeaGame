@@ -25,6 +25,7 @@ TagManager:
   - TrayTrigger
   - CupPlacementTrigger
   - PtToolZone
+  - StoveTrigger
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - Water
   - UI
   - Blink
-  - 
+  - SceneStuff
   - Particles
   - Objects
   - Cupboard
@@ -45,7 +46,7 @@ TagManager:
   - Tool
   - Tea
   - Ingredients
-  - 
+  - Collisions
   - 
   - 
   - 

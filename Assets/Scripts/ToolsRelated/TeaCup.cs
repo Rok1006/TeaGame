@@ -33,6 +33,9 @@ public class TeaCup : MonoBehaviour
     public GameObject CupZ;
     public GameObject TrayZTri;
     public GameObject CupZTri;
+    public GameObject PlayerTrayIndicate;
+    public GameObject ServeTrayIndicate;
+    public GameObject CupFollowIndicate;
     void Awake() {
         Instance = this;
     }
@@ -48,6 +51,9 @@ public class TeaCup : MonoBehaviour
         CupZ.SetActive(false);
         TrayZTri.SetActive(false);
         CupZTri.SetActive(false);
+        PlayerTrayIndicate.SetActive(false);
+        ServeTrayIndicate.SetActive(false);
+        CupFollowIndicate.SetActive(false);
     }
     void Update()
     {
@@ -73,8 +79,16 @@ public class TeaCup : MonoBehaviour
         {
             this.transform.position += deltaMousePosMove;
         }
+        if(pickedUP){  //also: make it when hovering outside of original pos, player cant release
+            CupFollowIndicate.SetActive(true); //off
+            Vector3 pos = this.transform.position;
+            pos.y = 0.19f;  //table height
+            pos.z = this.transform.position.z+0.15f;
+            CupFollowIndicate.transform.position = pos; //off
+        } 
         //RElease it
         if(state==1&&Input.GetMouseButton(1)&&canRelease){  //&&canRelease//later add canRelease boo
+            CupFollowIndicate.SetActive(false);
             state = 0;
             clicked = false;
             pickedUP = false;
@@ -122,6 +136,7 @@ public class TeaCup : MonoBehaviour
     void OnTriggerEnter(Collider col) {
         if(col.gameObject.tag == "TrayZone"){
             canRelease  = true;
+            ServeTrayIndicate.SetActive(true);
         }
         if(col.gameObject.tag == "TrayTrigger"){
             TeaCeremonyManager.Instance.ServeTea();
@@ -131,6 +146,7 @@ public class TeaCup : MonoBehaviour
         }
         if(col.gameObject.tag == "CupZone"){
             canRelease  = true;
+            PlayerTrayIndicate.SetActive(true);
         }
         if(col.gameObject.tag == "CupPlacementTrigger"){
             TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
@@ -145,6 +161,8 @@ public class TeaCup : MonoBehaviour
     void OnTriggerExit(Collider col) {
         if(col.gameObject.tag == "TrayZone"||col.gameObject.tag == "CupZone"){
             canRelease  = false;
+            PlayerTrayIndicate.SetActive(false);
+            ServeTrayIndicate.SetActive(false);
         }
         
     }

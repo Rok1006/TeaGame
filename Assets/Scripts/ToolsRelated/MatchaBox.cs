@@ -169,25 +169,6 @@ public class MatchaBox : MonoBehaviour
             // canRelease = true;
         }
         Vector3 centerPos = new Vector3(transform.position.x, transform.position.y,transform.position.z);
- 
-    //   RaycastHit hit2;
-    //     if(Physics.Raycast(centerPos, Vector3.down,out hit2, 100)){
-    //        if(hit2.collider.isTrigger){
-    //            //Debug.Log("hitting area");
-    //            if(hit2.transform.tag == "sth"){
-    //            Debug.Log("hitting area");
-    //            Debug.DrawRay(centerPos, new Vector3(0,100,0), Color.green);
-
-    //            canRelease = true;
-    //        }
-    //        }else{
-    //            Debug.Log("nohitting area");
-    //            canRelease = false;
-    //        }
-    //     }
-
-
-
 
     }
     private void LateUpdate()
@@ -245,8 +226,8 @@ public class MatchaBox : MonoBehaviour
         currenPowder.transform.parent = powderPt.transform;
         currenPowder.GetComponent<Rigidbody>().isKinematic = true;
         havePowder = true;  //if fell off cup turn it false
+        Invoke("ReleasePowder",1.5f); //if dont hurry up and put in cup it fell off
         
-        //currenPowder = j;
     }
     void ReleasePowder(){
         currenPowder.transform.parent = null;

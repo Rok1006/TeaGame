@@ -19,14 +19,16 @@ public class PowderAndIngredients : MonoBehaviour
     }
     void OnCollisionEnter(Collision col) {
         if(this.gameObject.tag == "Powder"){
-            // if(col.gameObject.tag == "Cup"){  //Cup
-            //     Tea.Instance.numOfPowder+=1;
-            //     MatchaBox.Instance.havePowder = false;
-            //     Tea.Instance.powderList.Add(gameObject);
-            //     Destroy(this.gameObject, 60f);
+            if(col.gameObject.tag == "Cup"){  //Cup
+                //Tea.Instance.numOfPowder+=1;
+                MatchaBox.Instance.havePowder = false;
+                sc.PowderDown();
+                //Tea.Instance.powderList.Add(gameObject);
+                Destroy(this.gameObject, .75f);
 
-            // }
+            }
             if(col.gameObject.tag == "Table"){
+                sc.PowderDown();
                 MatchaBox.Instance.havePowder = false;
                 Destroy(this.gameObject, .75f);
             }

@@ -317,12 +317,12 @@ public class TeaPot : MonoBehaviour
         }
     }
     void OnTriggerEnter(Collider col) {
-        if(col.gameObject.tag == "Stove"){
+        if(col.gameObject.tag == "StoveTrigger"){
             this.transform.position = stovePos.transform.position;
         }
         if(col.gameObject.tag == "StoveZone"){
             Stoveindicator.SetActive(true);
-
+            //canRelease = true;
         }
         if(col.gameObject.tag == "TPTrigger"){
             TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
@@ -331,6 +331,7 @@ public class TeaPot : MonoBehaviour
         }
         if(col.gameObject.tag == "TableZone"){
             Originalindicator.SetActive(true);
+            //canRelease = true;
         }
         if(col.gameObject.tag == "Release"){
             canRelease = true;
@@ -339,9 +340,11 @@ public class TeaPot : MonoBehaviour
     void OnTriggerExit(Collider col) {
         if(col.gameObject.tag == "TableZone"){
             Originalindicator.SetActive(false);
+            //canRelease = false;
         }
         if(col.gameObject.tag == "StoveZone"){
             Stoveindicator.SetActive(false);
+            //canRelease = false;
         }
         if(col.gameObject.tag == "Release"){
             canRelease = false;

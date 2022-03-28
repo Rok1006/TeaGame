@@ -46,6 +46,7 @@ public class MatchaBox : MonoBehaviour
     public GameObject TableCollider;
     public GameObject toolFirststep;
     public SoundManager sc;
+    public GameObject MatchaToolIndicate;
     void Awake() {
         Instance = this;
     }
@@ -67,6 +68,7 @@ public class MatchaBox : MonoBehaviour
         OriginalToolPos.transform.rotation = transform.rotation;
 
         placementZone.SetActive(false);
+        MatchaToolIndicate.SetActive(false);
     }
     void Update()
     {
@@ -116,8 +118,16 @@ public class MatchaBox : MonoBehaviour
             }
             this.transform.position = mPos;
         }
+        if(pickedUP){  //also: make it when hovering outside of original pos, player cant release
+            MatchaToolIndicate.SetActive(true); //off
+            Vector3 pos = this.transform.position;
+            pos.y = 0.228f;  //table height
+            pos.z = this.transform.position.z+0.15f;
+            MatchaToolIndicate.transform.position = pos; //off
+        }
         //Release it
         if(state==1&&Input.GetMouseButton(1)&&canRelease&&!havePowder){  //later add canRelease bool
+            MatchaToolIndicate.SetActive(false);
             state = 0;
             clicked = false;
             pickedUP = false;

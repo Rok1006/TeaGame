@@ -118,7 +118,7 @@ public class Tea : MonoBehaviour
         if(stirring){   //the bar
             teaPattern.SetActive(true);
             stirBar.SetActive(true);
-            sb.fillAmount+=0.008f;
+            sb.fillAmount+=0.7f*Time.deltaTime;  //Default: 0.008f
             GradualColorChange();
             //change tea
         }else{

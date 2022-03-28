@@ -41,13 +41,13 @@ public class CamSwitch : MonoBehaviour
             camState = CamState.StartCam;
             StartCamOn();
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        else if(Input.GetKeyDown(KeyCode.Z)) //2
         {
             camState = CamState.TeaCam;
             TeaCamOn();
             //drawerAnim.SetTrigger("in");
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha3))
+        else if(Input.GetKeyDown(KeyCode.X)) //3
         {
             camState = CamState.ConvCam;
             ConversationCamOn();

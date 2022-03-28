@@ -30,6 +30,7 @@ public class StirTool : MonoBehaviour
     public float followHStrength = 0.0025f;  //0.0025f
     public float followVStrength = 0.005f; //0.005f
     public SoundManager sc;
+    public GameObject StirToolIndicate;
     void Awake() {
         Instance = this;
     }
@@ -45,6 +46,7 @@ public class StirTool : MonoBehaviour
         toolTrigger.SetActive(false);
         toolFirststep.SetActive(false);
         MatchaBox.Instance.placementZone.SetActive(false);
+        StirToolIndicate.SetActive(false);
         
     }
     
@@ -81,8 +83,16 @@ public class StirTool : MonoBehaviour
         {
             this.transform.position += deltaMousePosMove;
         }
+        if(pickedUP){  //also: make it when hovering outside of original pos, player cant release
+            StirToolIndicate.SetActive(true); //off
+            Vector3 pos = this.transform.position;
+            pos.y = 0.228f;  //table height , .19
+            pos.z = this.transform.position.z+0.15f;
+            StirToolIndicate.transform.position = pos; //off
+        }
         //RElease it
         if(state==1&&Input.GetMouseButton(1)&&canRelease){  //&&canRelease//later add canRelease boo
+            StirToolIndicate.SetActive(false);
             state = 0;
             clicked = false;
             pickedUP = false;

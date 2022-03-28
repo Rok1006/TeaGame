@@ -5,10 +5,12 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseScreen;
-    // Start is called before the first frame update
+    public GameObject ControGuide;
+    public bool paused;
     void Start()
     {
         pauseScreen.SetActive(false);
+        ControGuide.SetActive(false);
     }
 
     // Update is called once per frame
@@ -16,12 +18,12 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Time.timeScale == 1)
+            if (!paused)
             {
                 Time.timeScale = 0;
                 showPaused();
             }
-            else if (Time.timeScale == 0)
+            else
             {
                 Debug.Log("high");
                 Time.timeScale = 1;
@@ -32,11 +34,25 @@ public class PauseMenu : MonoBehaviour
 
     void showPaused()
     {
+        paused = true;
         pauseScreen.SetActive(true);
     }
 
     void hidePaused()
     {
+        paused = false;
         pauseScreen.SetActive(false);
+    }
+    public void HoverApp(GameObject triangle){
+        triangle.SetActive(true);
+    }
+    public void HoverDpp(GameObject triangle){
+        triangle.SetActive(false);
+    }
+    public void ControlClick(){
+        ControGuide.SetActive(true);
+    }
+    public void ControlBackCLick(){
+        ControGuide.SetActive(false);
     }
  }

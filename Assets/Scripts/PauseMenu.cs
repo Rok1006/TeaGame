@@ -7,6 +7,14 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseScreen;
     public GameObject ControGuide;
     public bool paused;
+    public TeaPot teapostScr;
+    public GoToDrawer gotoDrawScr;
+    public ScrollInstruction scrollScr;
+    public List<Ingredients> ingreScr;
+    public StirTool toolScr1;
+    public MatchaBox toolScr2;
+    public SnackOffer toolScr3;
+    public List<Snacks> snackScr;
     void Start()
     {
         pauseScreen.SetActive(false);
@@ -22,12 +30,15 @@ public class PauseMenu : MonoBehaviour
             {
                 Time.timeScale = 0;
                 showPaused();
+                pauseObjs(false);
             }
             else
             {
                 Debug.Log("high");
                 Time.timeScale = 1;
                 hidePaused();
+                pauseObjs(true);
+
             }
         }
     }
@@ -55,4 +66,24 @@ public class PauseMenu : MonoBehaviour
     public void ControlBackCLick(){
         ControGuide.SetActive(false);
     }
+
+
+    public void pauseObjs(bool b)
+    {
+        teapostScr.enabled = b;
+        gotoDrawScr.enabled = b;
+        scrollScr.enabled = b;
+        toolScr1.enabled = b;
+        toolScr2.enabled = b;
+        toolScr3.enabled = b;
+        foreach (Ingredients ingre in ingreScr)
+        {
+            ingre.enabled = b;
+        }
+        foreach (Snacks snack in snackScr)
+        {
+            snack.enabled = b;
+        }
+    }
+
  }

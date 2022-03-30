@@ -66681,6 +66681,20 @@ MonoBehaviour:
   pauseScreen: {fileID: 314087170}
   ControGuide: {fileID: 2267298062225108527}
   paused: 0
+  teapostScr: {fileID: 1942728394}
+  gotoDrawScr: {fileID: 6828502950482988557}
+  scrollScr: {fileID: 1946464372}
+  ingreScr:
+  - {fileID: 8768232035070056994}
+  - {fileID: 1706177164149028136}
+  - {fileID: 3365941148654042180}
+  toolScr1: {fileID: 8109307607796221475}
+  toolScr2: {fileID: 5472855247150160073}
+  toolScr3: {fileID: 4631966727092866303}
+  snackScr:
+  - {fileID: 9207360028392696098}
+  - {fileID: 7339628837679829970}
+  - {fileID: 1597073611943663155}
 --- !u!1 &2095879117
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,6 +20,7 @@ public class Ingredients : MonoBehaviour
     public static GameObject bombObj;
     public static GameObject leafObj;
     public SoundManager sc;
+    public string category;
     void Start()
     {
         oc.enabled = false;

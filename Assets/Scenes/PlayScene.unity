@@ -68825,6 +68825,7 @@ MonoBehaviour:
   isBomb: 0
   isLeaf: 1
   sc: {fileID: 0}
+  category: sweet
 --- !u!135 &1706177164149028137
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -72476,6 +72477,7 @@ MonoBehaviour:
   isBomb: 1
   isLeaf: 0
   sc: {fileID: 0}
+  category: bitter
 --- !u!33 &3428426072941788224
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -96445,6 +96447,7 @@ MonoBehaviour:
   isBomb: 0
   isLeaf: 0
   sc: {fileID: 0}
+  category: savory
 --- !u!135 &8768232035070056995
 SphereCollider:
   m_ObjectHideFlags: 0

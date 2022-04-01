@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Ingredients : MonoBehaviour
 {
+    [Header("Information")]
     public string ingredientName;
+    public string category;
+    [Header("Others")]
     public Outline oc;
     public GameObject IngredientPrefab;
 
@@ -20,7 +23,7 @@ public class Ingredients : MonoBehaviour
     public static GameObject bombObj;
     public static GameObject leafObj;
     public SoundManager sc;
-    public string category;
+    
     void Start()
     {
         oc.enabled = false;
@@ -51,6 +54,7 @@ public class Ingredients : MonoBehaviour
             if (!haveAsh)
             {
                 TeaCeremonyManager.Instance.IngredientsAdd(IngredientPrefab, "Ash");
+                JudgeTea.Instance.IngredientsCatAdded.Add(this.category);
                 haveAsh = true;
                 sc.PickToolUp();
             }
@@ -60,6 +64,7 @@ public class Ingredients : MonoBehaviour
             if (!haveBomb)
             {
                 TeaCeremonyManager.Instance.IngredientsAdd(IngredientPrefab, "Bomb");
+                JudgeTea.Instance.IngredientsCatAdded.Add(this.category);
                 haveBomb = true;
                 sc.PickToolUp();
             }
@@ -69,6 +74,7 @@ public class Ingredients : MonoBehaviour
             if (!haveLeaf)
             {
                 TeaCeremonyManager.Instance.IngredientsAdd(IngredientPrefab, "Leaf");
+                JudgeTea.Instance.IngredientsCatAdded.Add(this.category);
                 haveLeaf = true;
                 sc.PickToolUp();
             }

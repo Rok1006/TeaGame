@@ -17,7 +17,7 @@ public class JudgeTea : MonoBehaviour
     public float amtOfLiquid = 0;
     public int heatnessOfWater = 0;
     public int powderAdded = 0; 
-    public List<string> IngredientsAdded = new List<string>();//add name when player add ingredients
+    public List<string> IngredientsCatAdded = new List<string>();//add name when player add ingredients
     public string playerMakingOrder;  //"12345"
     void Awake() {
         Instance = this;
@@ -30,6 +30,10 @@ public class JudgeTea : MonoBehaviour
     void Update()
     {
        CurrentSOJ(); 
+    //    if(Input.GetKey(KeyCode.Space)){
+    //        IngredientsCatAdded.Clear();
+    //     IngredientsCatAdded.TrimExcess();
+    //    }
     }
     public void CurrentSOJ(){
         switch(GameManager.Instance.ghostIndex){
@@ -46,20 +50,12 @@ public class JudgeTea : MonoBehaviour
             break;
         }
     }
-    public void CheckCurrentTea(){
-        if(amtOfLiquid == currentSOJ.amtOfLiquid){currentSOJ.enoughLiquid = true;}else{currentSOJ.enoughLiquid = false;}
-        if(heatnessOfWater > currentSOJ.heatnessOfWater){currentSOJ.heatnessRight = true;}else{currentSOJ.heatnessRight = false;}
-        if(powderAdded == currentSOJ.scoopOfPowder){currentSOJ.enoughPowder = true;}else{currentSOJ.enoughPowder = false;}
-        if(CheckIngredName()==true){currentSOJ.ingredientCorrect = true;}else{currentSOJ.ingredientCorrect = false;}
-        //stirred is determine at another place?
-        if(CheckMakeOrder()==true){currentSOJ.correctOrder = true;}else{currentSOJ.correctOrder = false;}
-
-    }
-    public bool CheckIngredName(){  //check all required ingredients are there
+    public bool CheckIngredName(){  //check all required categories of ingredients are there
         bool have = false;
-        for(int i = 0; i<IngredientsAdded.Count; i++){  //what player have
-            for(int j = 0; j<currentSOJ.IngredientsName.Length; j++){  //the standard list
-                if(IngredientsAdded[i]==currentSOJ.IngredientsName[j]){ //if have that ingred in it
+        for(int i = 0; i<IngredientsCatAdded.Count; i++){  //what player have
+            //var sc.IngredientsAdded[i].GetComponent<Ingredients
+            for(int j = 0; j<currentSOJ.IngredientsCategory.Length; j++){  //the standard list
+                if(IngredientsCatAdded[i]==currentSOJ.IngredientsCategory[j]){ //if have that ingred in it
                     have = true;
                 }else{
                     have = false;
@@ -87,16 +83,35 @@ public class JudgeTea : MonoBehaviour
         if(right){return true;
         }else{return false;}
     }
-    public int DeterminePassFail(){
+    public void CheckCurrentTea(){  //Before final step
+        if(amtOfLiquid == currentSOJ.amtOfLiquid){currentSOJ.enoughLiquid = true;}else{currentSOJ.enoughLiquid = false;}
+        if(heatnessOfWater > currentSOJ.heatnessOfWater){currentSOJ.heatnessRight = true;}else{currentSOJ.heatnessRight = false;}
+        if(powderAdded == currentSOJ.scoopOfPowder){currentSOJ.enoughPowder = true;}else{currentSOJ.enoughPowder = false;}
+        if(CheckIngredName()==true){currentSOJ.ingredientCorrect = true;}else{currentSOJ.ingredientCorrect = false;}
+        //stirred is determine at another place?
+        if(CheckMakeOrder()==true){currentSOJ.correctOrder = true;}else{currentSOJ.correctOrder = false;}
+    }
+    public bool IFPass(){ //Final Step   if pass(true) ghost happy if fail(false) ghost unhappy/angry
         int count = 0;
-        if(currentSOJ.correctOrder){count+=1;}
         if(currentSOJ.enoughLiquid){count+=1;}
         if(currentSOJ.heatnessRight){count+=1;}
         if(currentSOJ.enoughPowder){count+=1;}
         if(currentSOJ.ingredientCorrect){count+=1;}
         if(currentSOJ.stirred){count+=1;}
         if(currentSOJ.correctOrder){count+=1;}  //this is less harsh
-        return count;
+        if(count==7){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public void ResetPlayerState(){
+        amtOfLiquid = 0;
+        heatnessOfWater = 0;
+        powderAdded = 0; 
+        IngredientsCatAdded.Clear();
+        IngredientsCatAdded.TrimExcess();
+        playerMakingOrder = "";  //"12345"
     }
 }
 //Sketch

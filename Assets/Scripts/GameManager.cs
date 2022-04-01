@@ -172,17 +172,6 @@ public class GameManager : MonoBehaviour
                         //TeaCeremonyManager.Instance.LightingButton.SetActive(true);//off for now
                         break;
                     }
-                    //case 7 : pen camera to teaCam, allow player to serve
-                    //case (?):  //Tutorial ENDED , make real tea now
-                    //{
-                    //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;  //add these 2 when players is allow to freeplay 
-                    //SnackOffer.Instance.canTakeSnack = true;
-                    //Tutorial.Instance.tutorialComplete = true;
-                    //}
-
-                    // at some stage add SnackOffer.Instance.canTakeSnack = true; //allow player to take snack
-                    //after that is free play
-                    //how to turn them all to free to use later, afterwards  just put  or free play in too !! must be in front e.h Freeplay|| Usetool && ...
 
                 }
                 break;            
@@ -258,6 +247,12 @@ public class GameManager : MonoBehaviour
                     }
                 //save after this student
                 break;
+            }
+            case (3):  //Capitalist
+            {
+
+
+            break;
             }
         }
     }

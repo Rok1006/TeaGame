@@ -1,0 +1,103 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+//this script is to determine each tea type and check if the tea player serve is the same with it
+//and offer punishment: lower satsfaction, sensei poof the tea and make u make a new one
+//if satisfaction low to 0 u game over
+//Place this script in ManagerObj 
+public class JudgeTea : MonoBehaviour
+{
+    public static JudgeTea Instance;
+    public bool pass = false;
+    public TeaType teaTypeSOJ1; //student ghost
+    public TeaType teaTypeSOJ2; //laika
+    public TeaType teaTypeSOJ3; //capitalist
+    public TeaType currentSOJ;
+    [Header("PlayerTea")]  //reset when discard cup and after serve
+    public float amtOfLiquid = 0;
+    public int heatnessOfWater = 0;
+    public int powderAdded = 0; 
+    public List<string> IngredientsAdded = new List<string>();//add name when player add ingredients
+    public string playerMakingOrder;  //"12345"
+    void Awake() {
+        Instance = this;
+    }
+    void Start()
+    {
+       CurrentSOJ();  
+    }
+
+    void Update()
+    {
+       CurrentSOJ(); 
+    }
+    public void CurrentSOJ(){
+        switch(GameManager.Instance.ghostIndex){
+            case 0: //sensei, no need judge
+            break;
+            case 1: //student ghost
+            currentSOJ = teaTypeSOJ1;
+            break;
+            case 2: //Laika  //if more than one tea make another switch thing that current = teatype 2.1 or sth
+            currentSOJ = teaTypeSOJ2;
+            break;
+            case 3:  //capitalist
+            currentSOJ = teaTypeSOJ3;
+            break;
+        }
+    }
+    public void CheckCurrentTea(){
+        if(amtOfLiquid == currentSOJ.amtOfLiquid){currentSOJ.enoughLiquid = true;}else{currentSOJ.enoughLiquid = false;}
+        if(heatnessOfWater > currentSOJ.heatnessOfWater){currentSOJ.heatnessRight = true;}else{currentSOJ.heatnessRight = false;}
+        if(powderAdded == currentSOJ.scoopOfPowder){currentSOJ.enoughPowder = true;}else{currentSOJ.enoughPowder = false;}
+        if(CheckIngredName()==true){currentSOJ.ingredientCorrect = true;}else{currentSOJ.ingredientCorrect = false;}
+        //stirred is determine at another place?
+        if(CheckMakeOrder()==true){currentSOJ.correctOrder = true;}else{currentSOJ.correctOrder = false;}
+
+    }
+    public bool CheckIngredName(){  //check all required ingredients are there
+        bool have = false;
+        for(int i = 0; i<IngredientsAdded.Count; i++){  //what player have
+            for(int j = 0; j<currentSOJ.IngredientsName.Length; j++){  //the standard list
+                if(IngredientsAdded[i]==currentSOJ.IngredientsName[j]){ //if have that ingred in it
+                    have = true;
+                }else{
+                    have = false;
+                }
+            }
+        }
+        if(have){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public bool CheckMakeOrder(){  //do the addthing when using the stuff
+    bool right = false;
+        for(int i = 0; i<playerMakingOrder.Length; i++){
+            for(int j = 0; j<currentSOJ.teaMakingOrder.Length; j++){ 
+                if(playerMakingOrder[i]==currentSOJ.teaMakingOrder[i]){
+                    right = true;
+                }else{
+                    right = false; //if one step is wrong it instant break
+                    break;
+                }
+            }
+        }
+        if(right){return true;
+        }else{return false;}
+    }
+    public int DeterminePassFail(){
+        int count = 0;
+        if(currentSOJ.correctOrder){count+=1;}
+        if(currentSOJ.enoughLiquid){count+=1;}
+        if(currentSOJ.heatnessRight){count+=1;}
+        if(currentSOJ.enoughPowder){count+=1;}
+        if(currentSOJ.ingredientCorrect){count+=1;}
+        if(currentSOJ.stirred){count+=1;}
+        if(currentSOJ.correctOrder){count+=1;}  //this is less harsh
+        return count;
+    }
+}
+//Sketch
+//what about give a number to every action usign the tools, and add that number to a list here , if they match they add to the tea but if nt make the tea slightly bad

@@ -1,4 +1,5 @@
 ﻿title: Student_Start
+position: -168,1
 ---
 <<SE student_moan>> 
 So tired…can’t sleep…
@@ -112,4 +113,91 @@ Steak and eggs!
 Then I said goodbye to my master and got in the machine.
 It was dark then.
 But my master told me to, so I was happy to do it.
+===
+title: Captial_Stage_1
+position: -259,-100
+---
+Money…money…money…
+Need more…must keep working…
+Never enough time, never enough.
+The new car, the mortgage, need a new suit.
+Has to be Armani. Has to be nice.
+Only the finest. Only the most expensive.
+Can’t look like a slob going into work.
+Dress for the job you want.
+I want more.
+I want to make more money.
+When did I last go home?
+She’s saying she’ll leave me…
+She doesn’t understand, I’m doing this for us!
+I don’t need her.
+I don’t need her!
+She doesn’t understand…
+I need more money!
+===
+title: Captial_Stage_1_right_tea
+position: -94,-137
+---
+Hmph. I suppose this will suffice.
+===
+title: Captial_Stage_1_wrong_tea
+position: -180,90
+---
+No! That’s not right! It has to be the finest! Only the most bitter/most expensive!
+===
+title: Captial_Stage_2_right_tea
+position: -354,-21
+---
+I miss her…
+I’ve just been working so hard…
+What was it all for?
+Things?
+Why did I always need things?
+I thought they would make me happy…
+I remember…
+Back when I was just starting to get successful…
+I bought some really nice tea.
+For her, for us.
+But it was expensive, more than we could really afford.
+So she mixed it with the cheap stuff, to make it last longer…
+We drank it together.
+I miss her so much.
+===
+title: Captial_Stage_2_right_tea
+position: -94,-137
+---
+It’s been so long since I had tea like this…like what she made…
+===
+title: Captial_Stage_2_wrong_tea
+position: -180,90
+---
+No…I want what she made…the nice stuff, but diluted. Sweeter.
+===
+title: Captial_Stage_3_right_tea
+position: -354,-21
+---
+You know, when I first met her…
+Neither of us had any money.
+We could barely afford the basics.
+Everything we had, we got on sale.
+We bought things in bulk when we could.
+But we always drank tea together.
+It was cheap tea, something you could get at any convenience store.
+But we drank it together, and it was wonderful. 
+It was the most wonderful tea I ever drank.
+…I should have listened to her.
+She said I was killing myself, working so hard.
+She said we didn’t need more nice things, that being together was enough.
+It was.
+I’m just sorry it took me dying to realize that.
+===
+title: Captial_Stage_3_wrong_tea
+position: -94,-137
+---
+I just want one last cup of tea. Like we had when we were happy. The best tea I ever drank…
+===
+title: Captial_Stage_3_right_tea
+position: -180,90
+---
+The most wonderful tea…thank you. It wasn’t expensive, but it was ours. .
 ===

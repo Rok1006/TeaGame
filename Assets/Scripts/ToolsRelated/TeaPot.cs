@@ -278,7 +278,7 @@ public class TeaPot : MonoBehaviour
         if(col.gameObject.tag == "Table"){
             TPZone.SetActive(false);
             TPTrigger.SetActive(false);
-            Tutorial.Instance.TPsteps[0].SetActive(false);
+            TeaCeremonyManager.Instance.ts.TPsteps[0].SetActive(false);
             upState=0;
             sc.PlaceTeaPot();
             Tea.Instance.heatBar.SetActive(false);

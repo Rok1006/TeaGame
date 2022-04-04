@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+//This script is on UI_overlay>ToolTutorial
 public class Tutorial : MonoBehaviour
 {
     public GameObject ToolTutorialTP;

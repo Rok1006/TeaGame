@@ -172,7 +172,7 @@ public class StirTool : MonoBehaviour
     }
     void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "Table"){
-            Tutorial.Instance.STsteps[0].SetActive(false);
+            TeaCeremonyManager.Instance.ts.STsteps[0].SetActive(false);
             pickedUP = false; 
             toolTrigger.SetActive(false);
             sc.PlaceToolDown();

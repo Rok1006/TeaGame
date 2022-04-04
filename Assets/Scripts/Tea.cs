@@ -10,6 +10,8 @@ public class Tea : MonoBehaviour
     public static Tea Instance;
     public SpriteRenderer teasprite;
     public GameObject tea;
+    public Tutorial ts;
+    public GameObject tutorialObj;
     //public Color teaColor;
     public float minSize, middleSize, maxSize;   //max original: 0.003516069
     public float speed; //speed of filling up, 0.03
@@ -48,6 +50,7 @@ public class Tea : MonoBehaviour
     public bool isPouring = false;
     void Awake() {
         Instance = this;
+        ts = tutorialObj.GetComponent<Tutorial>();
     }
     void Start()
     {
@@ -76,7 +79,7 @@ public class Tea : MonoBehaviour
     void Update()
     {
         teasprite.color = currentColor;
-        if (Tutorial.Instance.tutorialComplete)
+        if (ts.tutorialComplete)
         {
             if (distance < originalDistance || numOfIngredients > 0 || numOfPowder > 0 && liquidLevel>0)
             {

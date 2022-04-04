@@ -72,8 +72,11 @@ public class TeaCeremonyManager : MonoBehaviour
     public GameObject tea;
     #endregion
     public SoundManager sc;
+    public Tutorial ts;
+    public GameObject tutorialObj;
     void Awake() {
         Instance = this;
+        ts = tutorialObj.GetComponent<Tutorial>();
     }
     void Start()
     {
@@ -102,7 +105,7 @@ public class TeaCeremonyManager : MonoBehaviour
     {
         toolText.GetComponent<Text>().text =  tText.ToString();
         if(currentTool == TeaTool.NOTOOL||currentTool == TeaTool.NONE&&currentTutorialState == TutorialState.FreePlay){
-            if(Tutorial.Instance.tutorialComplete){
+            if(ts.tutorialComplete){
                 discardButton.SetActive(true);
             }
         }else{

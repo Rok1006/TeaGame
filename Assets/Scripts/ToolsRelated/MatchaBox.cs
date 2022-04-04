@@ -246,7 +246,7 @@ public class MatchaBox : MonoBehaviour
     }
     void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "Table"){
-            Tutorial.Instance.PTsteps[0].SetActive(false);
+            TeaCeremonyManager.Instance.ts.PTsteps[0].SetActive(false);
             // GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
             // //if(!Tutorial.Instance.tutorialComplete){GameManager.Instance.arrowAnim.SetTrigger("ingredients");} //this
             mbAnim.SetBool("Open", false);

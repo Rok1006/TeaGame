@@ -52,7 +52,6 @@ public class StirTool : MonoBehaviour
     
     void Update()
     {
-        Debug.Log("canRelease"+canRelease);
         dipPos = new Vector3(this.transform.position.x, 0.97f, this.transform.position.z); //0.653f
         pickUPDes = new Vector3(this.transform.position.x, 1.6f, this.transform.position.z);
         //CLick and pick it up
@@ -82,14 +81,7 @@ public class StirTool : MonoBehaviour
         //Movement
         if (pickedUP && !Input.GetMouseButton(0))  //moving the tool
         {
-          //  this.transform.position += deltaMousePosMove;
-            Plane plane = new Plane(Vector3.up, new Vector3(0, 2, 0));
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            float distance;
-            if (plane.Raycast(ray, out distance))
-            {
-                transform.position = ray.GetPoint(distance);
-            }
+            this.transform.position += deltaMousePosMove;
         }
         if(pickedUP){  //also: make it when hovering outside of original pos, player cant release
             StirToolIndicate.SetActive(true); //off

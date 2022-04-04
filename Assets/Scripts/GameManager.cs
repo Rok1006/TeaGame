@@ -225,18 +225,9 @@ public class GameManager : MonoBehaviour
 
                                 if (TeaCup.Instance.canServe)
                                 {
-
-                                    if (JudgeTea.Instance.IFPass())
-                                    {
-                                        Laikai_index = 1;
-                                    }
-                                    else {
-                                        runner.StartDialogue("Laikai_Wrong_Choice");
-                                    }
                                     Debug.Log("laikai!");
 
-
-
+                                   Laikai_index = 1;
                                 }
                                 break;
                             }

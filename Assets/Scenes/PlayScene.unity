@@ -2916,7 +2916,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &290878935
 Transform:
   m_ObjectHideFlags: 0
@@ -68818,6 +68818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientName: Tea Leaf
+  category: sweet
   oc: {fileID: 1706177164149028138}
   IngredientPrefab: {fileID: 1781662755987918177, guid: d09df7af1b3b2486f9bc0b42c2db5cd7,
     type: 3}
@@ -68825,7 +68826,6 @@ MonoBehaviour:
   isBomb: 0
   isLeaf: 1
   sc: {fileID: 0}
-  category: sweet
 --- !u!135 &1706177164149028137
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -72470,6 +72470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientName: Flower Tea Bomb
+  category: bitter
   oc: {fileID: 3365941148654042178}
   IngredientPrefab: {fileID: 6736212257081809794, guid: a5142787849684316b2331da146d36f3,
     type: 3}
@@ -72477,7 +72478,6 @@ MonoBehaviour:
   isBomb: 1
   isLeaf: 0
   sc: {fileID: 0}
-  category: bitter
 --- !u!33 &3428426072941788224
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -96440,6 +96440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientName: BONE ASH
+  category: savory
   oc: {fileID: 8768232035070056993}
   IngredientPrefab: {fileID: 6335559991074494937, guid: 07637f1b6a6954130a8f1c1d976f5d6b,
     type: 3}
@@ -96447,7 +96448,6 @@ MonoBehaviour:
   isBomb: 0
   isLeaf: 0
   sc: {fileID: 0}
-  category: savory
 --- !u!135 &8768232035070056995
 SphereCollider:
   m_ObjectHideFlags: 0

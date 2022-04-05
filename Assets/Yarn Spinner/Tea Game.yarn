@@ -41,50 +41,67 @@ title: Laikai_Start
 position: 224,136.5
 ---
 тяв тяв тяв?
-<<SE Helmed Laika_1>> 
+<<SE Helmed_Laika_1>> 
 тяв…тяв?
-<<SE Helmed Laika_2>> 
+<<SE Helmed_Laika_2>> 
 тяв, тяв-тяв, тяв тяв тяв.
-<<SE Helmed Laika_3>> 
+<<SE Helmed_Laika_3>> 
 тяв тяв…
-<<SE Helmed Laika_4>> 
+<<SE Helmed_Laika_4>> 
 тяв.
-<<SE Helmed Laika_5>> 
+<<SE Helmed_Laika_5>> 
 тяв-тяв, тяв тяв тяв-тяв тяв.
-<<SE Helmed Laika_6>> 
+<<SE Helmed_Laika_6>> 
 <<Camera_Change>>
 ===
 title: Laikai_Stage_1_human
 position: 219,20
 ---
 Hello?
+<<SE Laika_happy>>
 Hello, are you real?
 It’s been so long since I saw another person.
 You don’t look like my master.
 You don’t smell like my master either.
 But, a person!
+<<SE Laika_happy>>
 I did my mission!
+<<SE Laika_whine>>
 I did a good job, right?
 I hope I can have another cup of tea.
+<<Camera_Change>>
 ===
 title: Laikai_Wrong_Choice
 position: 306,-110
 ---
 тяв, тяв-тяв!
+<<SE Helmed_Laika_4>> 
 гав, гав-гав? гав-гав, гав гав! гав! 
+<<SE Helmed_Laika_1>> 
 ===
 title: Laikai_Final_Stage
 position: 109,-95
 ---
 гав-гав
+<<SE Helmed_Laika_2>>
+гав, гав-гав. гав-гав-гав.
+<<SE Helmed_Laika_3>>
+гав…
+<<SE Helmed_Laika_4>>
+гав, гав-гав?
+<<SE Helmed_Laika_5>>
+Hello?
+I was in that big metal cone.
 It was so loud in there.
 Louder than thunder!
+<<SE Laika_angry>>
 It was really scary.
 Then the air was…heavy?
 Like a blanket, but more.
 A lot more.
-I saw the ground getting father and farther away out the window.
+I saw the ground getting farther and farther away out the window.
 I couldn’t even see my master anymore.
+<<SE Laika_whine>>
 And then…
 When the noise stopped, I looked out the window again.
 It was just dark, I couldn’t smell anything.
@@ -92,6 +109,7 @@ There were so many stars. More than I’d ever seen before.
 And below…
 A ball.
 The biggest ball I’ve ever seen.
+<<SE Laika_happy>>
 Too big to play fetch with.
 It was swirling and parts of it were lit up.
 It was…home.
@@ -101,6 +119,7 @@ I remember he said I would make history.
 I don’t really remember anything else.
 …was I a good girl?
 Did I make my master happy?
+<<SE Laika_whine2>>
 I hope so.
 I think so.
 ===

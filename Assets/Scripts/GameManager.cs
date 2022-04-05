@@ -222,17 +222,18 @@ public class GameManager : MonoBehaviour
                                 SnackOffer.Instance.canTakeSnack = true;
                                 Tutorial.Instance.tutorialComplete = true;
 
-
+                                Debug.Log("laikai?");
                                 if (TeaCup.Instance.canServe)
                                 {
                                     if (JudgeTea.Instance.IFPass())
                                     {
+                                        Debug.Log("laikai!");
                                         Laikai_index = 1;
                                     }
                                     else { runner.StartDialogue("Laikai_Wrong_Choice"); }
-                                    Debug.Log("laikai!");
 
-                                   
+                                    Debug.Log("laikai?");
+
                                 }
                                 break;
                             }

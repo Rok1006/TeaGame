@@ -77,7 +77,13 @@ public class TeaCup : MonoBehaviour
         //Movement
         if (pickedUP && !Input.GetMouseButton(0))  //moving the tool
         {
-            this.transform.position += deltaMousePosMove;
+            Plane plane = new Plane(Vector3.up, new Vector3(0, 2, 0));
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            float distance;
+            if (plane.Raycast(ray, out distance))
+            {
+                transform.position = ray.GetPoint(distance);
+            }
         }
         if(pickedUP){  //also: make it when hovering outside of original pos, player cant release
             CupFollowIndicate.SetActive(true); //off

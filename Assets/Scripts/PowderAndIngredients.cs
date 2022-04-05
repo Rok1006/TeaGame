@@ -7,6 +7,7 @@ public class PowderAndIngredients : MonoBehaviour
     public bool isAsh;
     public bool isBomb;
     public bool isLeaf;
+    public bool isChili;
     public SoundManager sc;
     void Start()
     {
@@ -20,10 +21,8 @@ public class PowderAndIngredients : MonoBehaviour
     void OnCollisionEnter(Collision col) {
         if(this.gameObject.tag == "Powder"){
             if(col.gameObject.tag == "Cup"){  //Cup
-                //Tea.Instance.numOfPowder+=1;
                 MatchaBox.Instance.havePowder = false;
                 sc.PowderDown();
-                //Tea.Instance.powderList.Add(gameObject);
                 Destroy(this.gameObject, .75f);
 
             }
@@ -33,13 +32,11 @@ public class PowderAndIngredients : MonoBehaviour
                 Destroy(this.gameObject, .75f);
             }
         }
-        //MatchaBox.Instance.havePowder = false;
         if(this.gameObject.tag == "Ingredients"){
             if(col.gameObject.tag == "Cup"){
                 Tea.Instance.RestartStirBar();
                 Tea.Instance.numOfIngredients+=1;
                 Tea.Instance.toMeltList.Add(gameObject);
-                //Destroy(this.gameObject, .5f);
             }
             if(col.gameObject.tag == "Table"){
                 Destroy(this.gameObject, .75f);

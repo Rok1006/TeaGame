@@ -73,7 +73,6 @@ public class MatchaBox : MonoBehaviour
     void Update()
     {
         //dipPos = new Vector3(this.transform.position.x, 0.97f, this.transform.position.z); //0.653f
-//        Debug.Log(this.transform.rotation.x);
         powdernum.text = "X"+Tea.Instance.numOfPowder.ToString();
         //originalPos = new Vector3(this.transform.position.x, 0.282f, transform.position.z); //0.653f
         //pickUPDes = new Vector3(this.transform.position.x, 1.076f, transform.position.z);
@@ -95,7 +94,6 @@ public class MatchaBox : MonoBehaviour
         }
         }
         if(this.transform.position==pickUPDes){  //player picked it up
-            //otsc.enabled = false;
             state = 1;  //up
             this.transform.rotation = Quaternion.Euler(-90, 0, -90);
             rb.isKinematic = true;
@@ -104,14 +102,13 @@ public class MatchaBox : MonoBehaviour
               Invoke("PickedUP",0.01f);  //,.5f 
             }
         }
-        //MOvement
+//MOvement
         if (pickedUP && !Input.GetMouseButton(0))  //moving the tool
         {
             //this.transform.position += deltaMousePosMove;
             Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast (ray, out hit, 100)) {
-//                Debug.Log (hit.transform.name);
                 mPos = hit.point;
                 mPos.y = 1.076f;
               
@@ -125,7 +122,7 @@ public class MatchaBox : MonoBehaviour
             pos.z = this.transform.position.z+0.15f;
             MatchaToolIndicate.transform.position = pos; //off
         }
-        //Release it
+//Release it
         if(state==1&&Input.GetMouseButton(1)&&canRelease&&!havePowder){  //later add canRelease bool
             MatchaToolIndicate.SetActive(false);
             state = 0;
@@ -142,13 +139,12 @@ public class MatchaBox : MonoBehaviour
             GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
             if(!Tutorial.Instance.tutorialComplete){GameManager.Instance.arrowAnim.SetTrigger("ingredients");} //this
         }
-        //Dip it & snap back
+//Dip it & snap back
         if (pickedUP && Input.GetMouseButton(0)){    //Mouse Distance based Tilt Pouring here  
-           //dip it
-           //this.transform.position = dipPos;
-         //if (this.transform.rotation.x>-0.51f) {
-                this.transform.Rotate(deltaMousePosRot); 
-          //}
+            Quaternion r = Quaternion.Euler(transform.rotation.x, 0, transform.rotation.y);
+            float scalingFactor = .3f; // Bigger for slower
+            this.transform.rotation = Quaternion.Slerp(transform.rotation, r, Time.deltaTime/scalingFactor);  //Plan2; Automatic Rotate
+            //this.transform.Rotate(deltaMousePosRot); //Plan1: Rotate by your own (on this)
             if(havePowder){  //if have powder and drag
                 Invoke("ReleasePowder",0f);
             }

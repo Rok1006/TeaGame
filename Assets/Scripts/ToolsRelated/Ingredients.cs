@@ -14,14 +14,17 @@ public class Ingredients : MonoBehaviour
     public bool isAsh;
     public bool isBomb;
     public bool isLeaf;
+    public bool isChili;
 
     public static bool haveAsh;
     public static bool haveBomb;
     public static bool haveLeaf;
+    public static bool haveChili;
 
     public static GameObject ashObj;
     public static GameObject bombObj;
     public static GameObject leafObj;
+    public static GameObject chiliObj;
     public SoundManager sc;
     
     void Start()
@@ -76,6 +79,16 @@ public class Ingredients : MonoBehaviour
                 TeaCeremonyManager.Instance.IngredientsAdd(IngredientPrefab, "Leaf");
                 JudgeTea.Instance.IngredientsCatAdded.Add(this.category);
                 haveLeaf = true;
+                sc.PickToolUp();
+            }
+        }
+        else if (isChili)
+        {
+            if (!haveChili)
+            {
+                TeaCeremonyManager.Instance.IngredientsAdd(IngredientPrefab, "Chili");
+                JudgeTea.Instance.IngredientsCatAdded.Add(this.category);
+                haveChili = true;
                 sc.PickToolUp();
             }
         }

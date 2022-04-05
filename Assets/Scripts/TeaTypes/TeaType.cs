@@ -10,6 +10,7 @@ public class TeaType : ScriptableObject
     //4. type of ingredient
     //5. stirred
    // public int numberOfTea = 0; //some ghost have more than one tea. this is the number for 
+    public string teaName; //for clarity
     public float amtOfLiquid = 0;
     public int heatnessOfWater = 0;
     public int scoopOfPowder = 0;

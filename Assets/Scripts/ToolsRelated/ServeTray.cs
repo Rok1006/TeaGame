@@ -8,7 +8,7 @@ public class ServeTray : MonoBehaviour
     public Outline oc;
     public GameObject guide;
     public bool occupied = false;
-    public bool canServe = false;
+    public bool canServe = false; //not using? the real one in Teacup
     public SoundManager sc;
     void Awake() {
         Instance = this;

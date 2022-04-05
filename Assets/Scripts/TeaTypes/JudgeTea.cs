@@ -9,9 +9,9 @@ public class JudgeTea : MonoBehaviour
 {
     public static JudgeTea Instance;
     public bool pass = false;
-    public TeaType teaTypeSOJ1; //student ghost
-    public TeaType teaTypeSOJ2; //laika
-    public TeaType teaTypeSOJ3; //capitalist
+    public TeaType StudentTeaSOJ1; //student ghost
+    public TeaType LaikaSOJ1; //laika
+    public TeaType CapitalistSOJ1; //capitalist
     public TeaType currentSOJ;
     [Header("PlayerTea")]  //reset when discard cup and after serve
     public float amtOfLiquid = 0;
@@ -40,13 +40,13 @@ public class JudgeTea : MonoBehaviour
             case 0: //sensei, no need judge
             break;
             case 1: //student ghost
-            currentSOJ = teaTypeSOJ1;
+            currentSOJ = StudentTeaSOJ1;
             break;
             case 2: //Laika  //if more than one tea make another switch thing that current = teatype 2.1 or sth
-            currentSOJ = teaTypeSOJ2;
+            currentSOJ = LaikaSOJ1;
             break;
             case 3:  //capitalist
-            currentSOJ = teaTypeSOJ3;
+            currentSOJ = CapitalistSOJ1;
             break;
         }
     }

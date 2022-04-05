@@ -1,13 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//have teapot heatness reduce
 public class TeaPot : MonoBehaviour
 {
     public static TeaPot Instance;
     public string toolName;
-
-
     public GameObject cup;
     public GameObject stovePos;
     public GameObject tpPos;
@@ -240,7 +238,10 @@ public class TeaPot : MonoBehaviour
         OnteaPot = false;
     }
     void HeatnessReduce(){
-        heatness-=0.0005f;
+        heatness-=0.0008f; //0.0005
+        if(Tea.Instance.temp>Tea.Instance.minD){
+            Tea.Instance.temp-=3.4f*Time.deltaTime;  //3.5
+        }
     }
     void OnMouseEnter(){
         OnteaPot = true;

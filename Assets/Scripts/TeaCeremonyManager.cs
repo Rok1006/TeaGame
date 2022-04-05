@@ -16,6 +16,7 @@ public class TeaCeremonyManager : MonoBehaviour
     //6.TeaColor
     //7.Ingredients Insertion
     //8.TeaServing
+    //Teapot heating
     public static TeaCeremonyManager Instance; //For easy access this is smart
     public string sceneName;
     #region UI
@@ -30,7 +31,6 @@ public class TeaCeremonyManager : MonoBehaviour
     public bool canDiscard = false;
     public GameObject toolText;
     public string tText;
-    //public GameObject toolFirststep;
     #endregion
 
     #region Lights
@@ -100,6 +100,7 @@ public class TeaCeremonyManager : MonoBehaviour
         //Color32 c = Stain.GetComponent<SpriteRenderer>().color;
         discardButton.SetActive(false);
         toolText.SetActive(false);
+
     }
     void Update()
     {
@@ -115,7 +116,7 @@ public class TeaCeremonyManager : MonoBehaviour
           LightDiming();  
         }
         candleFire.transform.localScale = new Vector3(fireSize,fireSize,fireSize);
-        //Candle
+//Candle
         if(cb.fillAmount == 1){
             fireSize = 100;
             tl.intensity = initTorchBrightness;
@@ -128,18 +129,21 @@ public class TeaCeremonyManager : MonoBehaviour
             candleBar.SetActive(true);
             cb.fillAmount+=0.008f;
         }
-        //Teapot
+//Teapot heating
         if(pb.fillAmount == 1){
             TeaPot.Instance.canClick = true;
             tpSteamParticles.emissionRate = 2;
             Invoke("StopTeaPotSteam",30f);
             ResetStove();
         }
-        if(potHeating){
+        if(potHeating){  
             potBar.SetActive(true);
-            pb.fillAmount+=0.008f;
+            pb.fillAmount+=0.008f; //0.008
             if(pb.fillAmount!=1&&TeaPot.Instance.heatness<1){
                 TeaPot.Instance.heatness+=0.008f; //keep tracking
+                if(Tea.Instance.temp<Tea.Instance.maxD){
+                    Tea.Instance.temp+=40f*Time.deltaTime;
+                }
             }
         }
 
@@ -152,7 +156,7 @@ public class TeaCeremonyManager : MonoBehaviour
             TeaReturn();
         }
     }
-    //TeaPot & Heating
+//TeaPot & Heating
     public void ResetStove(){
         potHeating = false;
         potBar.SetActive(false);
@@ -165,7 +169,7 @@ public class TeaCeremonyManager : MonoBehaviour
     public void TeaPotHeating(){
         potHeating = true;
     }
-    //Lighting
+//Lighting
     public void CandleLighting(){
         candlelighting = true;
     }
@@ -200,9 +204,14 @@ public class TeaCeremonyManager : MonoBehaviour
                 Ingredients.leafObj = i;
                 break;
             }
+            case ("Chili"):
+            {
+                i.GetComponent<PowderAndIngredients>().isChili = true;
+                Ingredients.chiliObj = i;
+                break;
+            }
         }
-    }
-        
+    }    
     public void ServeTea(){
         mainCup.transform.position = ServeCupPos.transform.position;
         served = true;
@@ -265,6 +274,7 @@ public class TeaCeremonyManager : MonoBehaviour
         Ingredients.haveAsh = false;
         Ingredients.haveBomb = false;
         Ingredients.haveLeaf = false;
+        Ingredients.haveChili = false;
         Tea.Instance.toMeltList.Clear();
     }
     public void BackToMenu(){

@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
                         //arrowAnim.SetTrigger("");
                        arrowAnim.SetTrigger("Deactivate");
                         TeaCup.Instance.canServe = false;
-                        TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay; //off when build 
+                        //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay; //off when build 
                         break;//Intro
                     }
                 case (1):  //Stage1 - Put on boiler
@@ -251,7 +251,7 @@ public class GameManager : MonoBehaviour
                             {
 
                                 runner.StartDialogue("Laikai_Stage_1_human");
-                                TeaCeremonyManager.Instance.TeaReturn();
+                                TeaCeremonyManager.Instance.OtherTeaReturn(); //new
 
                                 Laikai_index = 2;
                                 break;

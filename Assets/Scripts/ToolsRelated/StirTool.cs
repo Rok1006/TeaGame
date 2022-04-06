@@ -31,7 +31,8 @@ public class StirTool : MonoBehaviour
     public float followVStrength = 0.005f; //0.005f
     public SoundManager sc;
     public GameObject StirToolIndicate;
-    public mouseDetection teaCup;
+    //public mouseDetection teaCup;
+    bool above = false;
     void Awake() {
         Instance = this;
     }
@@ -111,18 +112,20 @@ public class StirTool : MonoBehaviour
             Tutorial.Instance.usedStirT = true; //GameManager
         }
         //Dip it & snap back
-        if (teaCup.mouseOver)
-        {
+        // if (teaCup.mouseOver)
+        // {
             if (pickedUP && Input.GetMouseButton(0))
             {
                 this.transform.position = dipPos;
                 this.transform.position += deltaMousePosMove;
                 //cannot go out of cup
                 //this.transform.position = new Vector3(Mathf.Clamp(transform.position.x, -0.296f,0.296f),transform.position.y, Mathf.Clamp(transform.position.z, -1.964f,-1.23f));
+                //if(above){
                 Vector3 circleCenter = new Vector3(0, 0, -1.657f);
                 Vector3 v = this.transform.position - circleCenter;
                 v = Vector3.ClampMagnitude(v, .9f);
                 this.transform.position = circleCenter + v;
+                //}
             }
             else if (pickedUP && Input.GetMouseButtonUp(0))
             {
@@ -137,7 +140,7 @@ public class StirTool : MonoBehaviour
                 }
                 this.transform.position = mPos;
             }
-        }
+       // }
 
     }
     private void LateUpdate()
@@ -194,10 +197,16 @@ public class StirTool : MonoBehaviour
             TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
             this.transform.position = OriginalToolPos.transform.position;
         }
+        if(col.gameObject.tag == "StirrTool"){
+            above = true;
+        }
     }
     void OnTriggerExit(Collider col) {
         if(col.gameObject.tag == "ToolZone"){
             canRelease  = false;
+        }
+        if(col.gameObject.tag == "StirrTool"){
+            above = false;
         }
     }
 }

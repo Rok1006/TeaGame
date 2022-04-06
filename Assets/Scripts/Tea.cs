@@ -36,7 +36,7 @@ public class Tea : MonoBehaviour
     public Slider hb;
     public TextMeshProUGUI degree;
     public int maxD, minD; 
-    public float temp;
+    public float temp = 20;
     
     [Header("Tea Status")]
     public bool stirring = false;
@@ -179,6 +179,7 @@ public class Tea : MonoBehaviour
         if(SpillingDetector.Instance.inCup&& Input.GetMouseButton(0)&&TeaPot.Instance.degree<TeaPot.Instance.pouringDegree){
             //cc.fillAmount +=0.0018f;  //0.0023f, change this to according to the distance between top and original pos
             liquidLevel += 10* Time.deltaTime;
+            JudgeTea.Instance.heatnessOfWater = (int)Tea.Instance.temp;
             float step = speed * Time.deltaTime;
             OriginalPos.transform.position = Vector3.MoveTowards(OriginalPos.transform.position, TopPos.transform.position, step);
         }

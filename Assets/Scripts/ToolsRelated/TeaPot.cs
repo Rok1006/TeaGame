@@ -58,8 +58,7 @@ public class TeaPot : MonoBehaviour
     float pX;
     float pY;
     bool moveup;
-    
-    public float heatness = 0;  //current heatness of the pot  will decrease constantly
+    public float heatness = 20;  //current heatness of the pot  will decrease constantly
     Vector3 mPos;
     public SoundManager sc;
     Quaternion original_rotation;
@@ -98,7 +97,7 @@ public class TeaPot : MonoBehaviour
        */
        pickUPDes = new Vector3(this.transform.position.x, destHeight, transform.position.z);
         
-        if (TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseTeapot&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT){ //added stuff
+        if (TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseTeapot||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){ //added stuff
         if(canClick && OnteaPot && Input.GetMouseButton(0)&&upState==0)
         {   //pick up pot
                 rb.isKinematic = true;
@@ -106,6 +105,7 @@ public class TeaPot : MonoBehaviour
                 canClick = false;
                 toolFirststep.SetActive(false); //tutorial
                 moveup = true;
+                Tea.Instance.heatBar.SetActive(true);
                 //Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
               if(toolFirststep.activeSelf)
                 { 
@@ -202,7 +202,7 @@ public class TeaPot : MonoBehaviour
             pos.y = 0.224f;  //table height
             pos.z = this.transform.position.z+0.15f;
             TPindicator.transform.position = pos; //off
-            Tea.Instance.heatBar.SetActive(true);
+            //Tea.Instance.heatBar.SetActive(true);
         } 
         //TeaPot heatness
         Tea.Instance.hb.value = heatness;
@@ -226,7 +226,7 @@ public class TeaPot : MonoBehaviour
         pickedUP  = true;
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.TEAPOT;
         Tea.Instance.cupCapacity.SetActive(false);
-        Tea.Instance.heatBar.SetActive(true);
+        // Tea.Instance.heatBar.SetActive(true);
         Tutorial.Instance.TPsteps[1].SetActive(true);
         Tutorial.Instance.TPsteps[0].SetActive(false);
         TPZone.SetActive(true);
@@ -236,9 +236,9 @@ public class TeaPot : MonoBehaviour
         OnteaPot = false;
     }
     void HeatnessReduce(){
-        heatness-=0.0008f; //0.0005
+        heatness-=1f*Time.deltaTime; //0.0008  0.01
         if(Tea.Instance.temp>Tea.Instance.minD){
-            Tea.Instance.temp-=3.4f*Time.deltaTime;  //3.5
+            Tea.Instance.temp-=1f*Time.deltaTime;  //3.4   1
         }
     }
     void OnMouseEnter(){
@@ -249,7 +249,7 @@ public class TeaPot : MonoBehaviour
         if(!pickedUP&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseTeapot||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay&&!pickedUP&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){  //originally have: ||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT
             if(canClick){
             otsc.enabled = true;
-            Tea.Instance.heatBar.SetActive(true);
+            //Tea.Instance.heatBar.SetActive(true);
             if(!Tutorial.Instance.TPsteps[0].activeSelf){
             toolFirststep.SetActive(true);
             }
@@ -268,7 +268,7 @@ public class TeaPot : MonoBehaviour
         }
     }
     void OnMouseExit(){
-        Tea.Instance.heatBar.SetActive(false);
+        //Tea.Instance.heatBar.SetActive(false);
         otsc.enabled = false;
         toolFirststep.SetActive(false);
         Invoke("NtonPot",.5f);
@@ -294,15 +294,15 @@ public class TeaPot : MonoBehaviour
             upState=0;
             onStove = true;
             pickedUP = false;
-            //StoveZone.SetActive(false); // //new
+            Tea.Instance.heatBar.SetActive(true);
             Stoveindicator.SetActive(false);
-            if(heatness<1){  //if not heated
+            if(heatness<100){  //if not heated
            // upState=0;
                 canClick =false;  
                 Debug.Log("heating");
                 TeaCeremonyManager.Instance.TeaPotHeating();
             }
-            if (heatness>=1){
+            if (heatness>=99){
                 canClick =true; 
                // upState=0;
             }

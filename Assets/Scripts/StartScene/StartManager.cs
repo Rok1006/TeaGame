@@ -15,7 +15,9 @@ public class StartManager : MonoBehaviour
     public AudioSource UI_SE;
     public AudioClip clicked;
     //public int SavedNum;
-
+    void Awake() {
+        FadeIn.SetActive(true);
+    }
     // [Header("LevelSelection")]
     void Start()
     {
@@ -40,6 +42,7 @@ public class StartManager : MonoBehaviour
         UI_SE.PlayOneShot(clicked);
     }
     IEnumerator IntoPlayScene(){
+        FadeIn.SetActive(false); //new
         camAnim.SetTrigger("start");
         yield return new WaitForSeconds(1.3f);
         FadeIn.SetActive(true);

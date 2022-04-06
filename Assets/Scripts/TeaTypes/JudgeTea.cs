@@ -209,7 +209,7 @@ public class JudgeTea : MonoBehaviour
     }
     public void GetPlayerTeaState(){
         amtOfLiquid = Tea.Instance.liquidLevel;
-        heatnessOfWater = (int)Tea.Instance.temp;
+        //heatnessOfWater = (int)Tea.Instance.temp;
         powderAdded = Tea.Instance.numOfPowder;
     }
     public bool IFPass(){ //Final Step   if pass(true) ghost happy if fail(false) ghost unhappy/angry

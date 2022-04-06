@@ -53,6 +53,15 @@ TextureImporter:
   - first:
       213: -1722430775292143823
     second: p2_16
+  - first:
+      213: 95390403719168259
+    second: p2_17
+  - first:
+      213: 2527632671379193636
+    second: p2_18
+  - first:
+      213: 3436960263933230353
+    second: p2_19
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -477,7 +486,7 @@ TextureImporter:
         width: 78
         height: 74
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -498,7 +507,7 @@ TextureImporter:
         width: 847
         height: 173
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -506,6 +515,69 @@ TextureImporter:
       bones: []
       spriteID: 137d280f552b818e0800000000000000
       internalID: -1722430775292143823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: p2_17
+      rect:
+        serializedVersion: 2
+        x: 1159
+        y: 440
+        width: 106
+        height: 328
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30189a81115e25100800000000000000
+      internalID: 95390403719168259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: p2_18
+      rect:
+        serializedVersion: 2
+        x: 1276
+        y: 466
+        width: 571
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42f7a3cc584f31320800000000000000
+      internalID: 2527632671379193636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: p2_19
+      rect:
+        serializedVersion: 2
+        x: 1871
+        y: 452
+        width: 21
+        height: 329
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11d7fd6762982bf20800000000000000
+      internalID: 3436960263933230353
       vertices: []
       indices: 
       edges: []

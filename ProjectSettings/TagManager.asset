@@ -26,6 +26,7 @@ TagManager:
   - CupPlacementTrigger
   - PtToolZone
   - StoveTrigger
+  - PotPlant
   layers:
   - Default
   - TransparentFX

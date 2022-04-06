@@ -140,10 +140,10 @@ public class TeaCeremonyManager : MonoBehaviour
         if(potHeating){  
             potBar.SetActive(true);
             pb.fillAmount+=0.008f; //0.008
-            if(pb.fillAmount!=1&&TeaPot.Instance.heatness<1){
-                TeaPot.Instance.heatness+=0.008f; //keep tracking
+            if(pb.fillAmount!=1&&TeaPot.Instance.heatness<100){
+                TeaPot.Instance.heatness+=1f; //keep tracking //0.008
                 if(Tea.Instance.temp<Tea.Instance.maxD){
-                    Tea.Instance.temp+=40f*Time.deltaTime;
+                    Tea.Instance.temp+=1f;   //40
                 }
             }
         }
@@ -279,6 +279,7 @@ public class TeaCeremonyManager : MonoBehaviour
         Tea.Instance.cc.fillAmount = 0;
         Tea.Instance.numOfPowder = 0;
         Tea.Instance.numOfIngredients = 0;
+        Tea.Instance.liquidLevel = 0;
         Tea.Instance.currentColor = TeaCeremonyManager.Instance.TeaColors[0];
         foreach (GameObject powder in Tea.Instance.powderList)
             Destroy(powder);

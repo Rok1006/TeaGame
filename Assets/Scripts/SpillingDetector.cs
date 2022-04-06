@@ -6,6 +6,7 @@ public class SpillingDetector : MonoBehaviour
 {
     public static SpillingDetector Instance;
     public bool inCup = false;
+    public bool watering = false;
     public GameObject stain;
     bool leaveStain = false;
     void Awake() {
@@ -37,22 +38,27 @@ public class SpillingDetector : MonoBehaviour
     }
     void OnParticleCollision(GameObject col)   
     {
-        //print("sth");
+//Stain LEave on Table
         if(col.gameObject.tag == "Table"){
             leaveStain = true;
         }else{
             leaveStain = false;
         }
-        //make in instanciate only once
+// Tea Filling up
         if(col.gameObject.tag == "Cup"){
             Tea.Instance.RestartStirBar();
-//            print("Hit");
             inCup = true;
             if(TeaPot.Instance.heatness>=0.7f){TeaCeremonyManager.Instance.steamParticles.emissionRate = 2;}
             Invoke("SteamEmitStop",2f);
         }else{
             print("notHit");
             inCup = false;
+        }
+//Watering Plants
+        if(col.gameObject.tag == "PotPlant"){
+            watering = true;
+        }else{
+            watering = false;
         }
     }
     void OnParticleTrigger(){

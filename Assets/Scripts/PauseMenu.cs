@@ -8,7 +8,9 @@ public class PauseMenu : MonoBehaviour
     public GameManager gm;
     public GameObject pauseScreen;
     public GameObject ControGuide;
+    public GameObject FadeIn;
     public bool paused;
+    public bool canGoMenu = false;
     public TeaPot teapostScr;
     public GoToDrawer gotoDrawScr;
     public ScrollInstruction scrollScr;
@@ -29,8 +31,20 @@ public class PauseMenu : MonoBehaviour
 
     public void goToMainMenu()
     {
+        // StartCoroutine(SceneTransition()); //this one not working
+        // if(canGoMenu){
         SceneManager.LoadScene("StartScene", LoadSceneMode.Single);
         Time.timeScale = 1;
+        // canGoMenu = false;
+        //}
+    }
+    // public void Dotransition(){
+    //     StartCoroutine(SceneTransition());
+    // }
+    IEnumerator SceneTransition(){
+        FadeIn.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        canGoMenu = true;
     }
 
     void Start()
@@ -84,8 +98,6 @@ public class PauseMenu : MonoBehaviour
     public void ControlBackCLick(){
         ControGuide.SetActive(false);
     }
-
-
     public void pauseObjs(bool b)
     {
         teapostScr.enabled = b;

@@ -218,19 +218,26 @@ public class GameManager : MonoBehaviour
                         case (0):
                             {
                                 //TeaCeremonyManager.Instance.startDiming = true; //off for now
-                              
+
                                 SnackOffer.Instance.canTakeSnack = true;
                                 Tutorial.Instance.tutorialComplete = true;
 
-                                Debug.Log("laikai?");
-                                if (TeaCup.Instance.canServe)
+
+                                if (TeaCeremonyManager.Instance.served)
                                 {
                                     if (JudgeTea.Instance.IFPass())
                                     {
                                         Debug.Log("laikai!");
                                         Laikai_index = 1;
+
                                     }
-                                    else { runner.StartDialogue("Laikai_Wrong_Choice"); }
+                                    else
+                                    {
+                                        runner.StartDialogue("Laikai_Wrong_Choice");
+                                        CamSwitch.Instance.ConversationCamOn();
+
+                                        TeaCeremonyManager.Instance.TeaReturn();
+                                    }
 
                                     Debug.Log("laikai?");
 
@@ -239,15 +246,46 @@ public class GameManager : MonoBehaviour
                             }
                         case (1):
                             {
-                                runner.StartDialogue("Laikai_Stage_1_human");
 
-                                CamSwitch.Instance.ConversationCamOn();
+                                runner.StartDialogue("Laikai_Stage_1_human");
+                                TeaCeremonyManager.Instance.TeaReturn();
+
                                 Laikai_index = 2;
                                 break;
                             }
                         case (2):
                             {
+                                if (TeaCeremonyManager.Instance.served)
+                                {
+                                    if (JudgeTea.Instance.IFPass())
+                                    {
+                                        Debug.Log("laikai!");
+                                        Laikai_index = 3;
 
+                                    }
+                                    else
+                                    {
+                                        runner.StartDialogue("Laikai_Wrong_Choice");
+                                        CamSwitch.Instance.ConversationCamOn();
+
+                                        TeaCeremonyManager.Instance.TeaReturn();
+                                    }
+
+                                    Debug.Log("laikai?");
+
+                                }
+                                break;
+
+                            }
+                        case (3):
+                            {
+                                runner.StartDialogue("Laikai_Final_Stage");
+                                Laikai_index = 4;
+                                TeaCeremonyManager.Instance.TeaReturn();
+                                break;
+                            }
+                        case (4):
+                            {
                                 break;
                             }
                     }

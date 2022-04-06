@@ -40,6 +40,7 @@ Maybe it will help you more than it helped me.
 title: Laikai_Start
 position: 224,136.5
 ---
+<<Anime 2 Laika2Idle>>
 тяв тяв тяв?
 <<SE Helmed_Laika_1>> 
 тяв…тяв?
@@ -57,6 +58,7 @@ position: 224,136.5
 title: Laikai_Stage_1_human
 position: 219,20
 ---
+<<Anime 2 LaikaIdle>>
 Hello?
 <<SE Laika_happy>>
 Hello, are you real?
@@ -69,6 +71,7 @@ I did my mission!
 <<SE Laika_whine>>
 I did a good job, right?
 I hope I can have another cup of tea.
+<<Anime 2 Laika2Idle>>
 <<Camera_Change>>
 ===
 title: Laikai_Wrong_Choice
@@ -78,10 +81,12 @@ position: 306,-110
 <<SE Helmed_Laika_4>> 
 гав, гав-гав? гав-гав, гав гав! гав! 
 <<SE Helmed_Laika_1>> 
+<<Camera_Change>>
 ===
 title: Laikai_Final_Stage
 position: 109,-95
 ---
+<<Anime 2 LaikaIdle>>
 гав-гав
 <<SE Helmed_Laika_2>>
 гав, гав-гав. гав-гав-гав.
@@ -121,7 +126,9 @@ I don’t really remember anything else.
 Did I make my master happy?
 <<SE Laika_whine2>>
 I hope so.
+<<Anime 2 LaikaEnding>>
 I think so.
+<<next>>
 ===
 title: Laikai_Second_Stage
 position: 201,-228

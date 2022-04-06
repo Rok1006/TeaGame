@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    public GameManager gm;
     public GameObject pauseScreen;
     public GameObject ControGuide;
     public bool paused;
@@ -15,6 +17,22 @@ public class PauseMenu : MonoBehaviour
     public MatchaBox toolScr2;
     public SnackOffer toolScr3;
     public List<Snacks> snackScr;
+
+
+
+    public void saveGhostIndex()
+    {
+        SaveSystem ss = GetComponent<SaveSystem>();
+        ss.toSave(gm.ghostIndex);
+    }
+
+
+    public void goToMainMenu()
+    {
+        SceneManager.LoadScene("StartScene", LoadSceneMode.Single);
+        Time.timeScale = 1;
+    }
+
     void Start()
     {
         pauseScreen.SetActive(false);

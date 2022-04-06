@@ -146,6 +146,7 @@ public class TeaCup : MonoBehaviour
         }
         if(col.gameObject.tag == "TrayTrigger"){
             TeaCeremonyManager.Instance.ServeTea();
+            TeaCeremonyManager.Instance.canProceed = true;
             TrayZTri.SetActive(false);
             //TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
             //this.transform.position = OriginalToolPos.transform.position;

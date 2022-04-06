@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fd80540f4dab4e28867eee92e300f50, type: 3}
-  m_Name: CapitalistTea1
+  m_Name: CapitalistTea2
   m_EditorClassIdentifier: 
   teaName: '?'
-  amtOfLiquid: 90
+  amtOfLiquid: 95
   heatnessOfWater: 80
-  scoopOfPowder: 3
+  scoopOfPowder: 1
   IngredientsCategory:
   - expensive
-  - expensive
+  - cheap
   teaMakingOrder: 
   correctOrder: 0
   enoughLiquid: 0

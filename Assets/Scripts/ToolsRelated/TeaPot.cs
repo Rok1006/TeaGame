@@ -124,7 +124,6 @@ public class TeaPot : MonoBehaviour
             
             upState=1; //upState refers to the upState of being picked up or not
             if(Input.GetMouseButtonUp(0)){  //Fixed changed pos when hold pot and drag without release in the middle
-              //Tutorial.Instance.NextStep();  turn on next toool step here originally
               Invoke("PickedUP",0.01f);  //,.5f 
             //   GameManager.Instance.arrowAnim.SetTrigger("Deactivate"); //deactivated as it affect stir arrow
             //   if(!Tutorial.Instance.tutorialComplete){GameManager.Instance.arrowAnim.SetTrigger("stove");}
@@ -132,13 +131,12 @@ public class TeaPot : MonoBehaviour
             //rb.isKinematic = true;
         }else if(transform.position != pickUPDes&&moveup)
         {
-            //Debug.Log("not yet");
             float step = speed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, pickUPDes, step);
             //Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(false); //tutorial: To fix tea pot tutorial glitch
           //  upState = 0; //not yet to the top
         }
-        //releasing it
+//releasing it
        
         if(pickedUP&&canRelease&&Input.GetMouseButton(1)){  //release it change to right click
            
@@ -159,7 +157,6 @@ public class TeaPot : MonoBehaviour
         }
         
         degree = this.transform.forward.y* Mathf.Rad2Deg;
-       
         if (pickedUP && Input.GetMouseButton(0)){    //Mouse Distance based Tilt Pouring here
             mousePosPrePour = Input.mousePosition;
            transform.RotateAround(transform.position,Vector3.forward, -1*deltaMousePos.x * tiltHStrength); 
@@ -186,7 +183,7 @@ public class TeaPot : MonoBehaviour
             
         }
         indicator.transform.position= new Vector3(indicatorPt.transform.position.x,indicator.transform.position.y, indicatorPt.transform.position.z);
-        //Mouse Pickup and movement
+//Mouse Pickup and movement
     if (pickedUP && !Input.GetMouseButton(0))  //added canRelease to resolve issue: get pushed when release
         {
             if(canMove){
@@ -205,6 +202,7 @@ public class TeaPot : MonoBehaviour
             pos.y = 0.224f;  //table height
             pos.z = this.transform.position.z+0.15f;
             TPindicator.transform.position = pos; //off
+            Tea.Instance.heatBar.SetActive(true);
         } 
         //TeaPot heatness
         Tea.Instance.hb.value = heatness;
@@ -251,6 +249,7 @@ public class TeaPot : MonoBehaviour
         if(!pickedUP&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseTeapot||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay&&!pickedUP&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){  //originally have: ||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT
             if(canClick){
             otsc.enabled = true;
+            Tea.Instance.heatBar.SetActive(true);
             if(!Tutorial.Instance.TPsteps[0].activeSelf){
             toolFirststep.SetActive(true);
             }
@@ -269,6 +268,7 @@ public class TeaPot : MonoBehaviour
         }
     }
     void OnMouseExit(){
+        Tea.Instance.heatBar.SetActive(false);
         otsc.enabled = false;
         toolFirststep.SetActive(false);
         Invoke("NtonPot",.5f);

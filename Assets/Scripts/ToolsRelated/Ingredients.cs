@@ -6,7 +6,7 @@ public class Ingredients : MonoBehaviour
 {
     [Header("Information")]
     public string ingredientName;
-    public string category;
+    public string[] category;
     [Header("Others")]
     public Outline oc;
     public GameObject IngredientPrefab;
@@ -57,7 +57,8 @@ public class Ingredients : MonoBehaviour
             if (!haveAsh)
             {
                 TeaCeremonyManager.Instance.IngredientsAdd(IngredientPrefab, "Ash");
-                JudgeTea.Instance.IngredientsCatAdded.Add(this.category);
+                JudgeTea.Instance.IngredientsCatAdded.Add(this.category[0]);
+                JudgeTea.Instance.IngredientsRankAdded.Add(this.category[1]);
                 haveAsh = true;
                 sc.PickToolUp();
             }
@@ -67,7 +68,8 @@ public class Ingredients : MonoBehaviour
             if (!haveBomb)
             {
                 TeaCeremonyManager.Instance.IngredientsAdd(IngredientPrefab, "Bomb");
-                JudgeTea.Instance.IngredientsCatAdded.Add(this.category);
+                JudgeTea.Instance.IngredientsCatAdded.Add(this.category[0]);
+                JudgeTea.Instance.IngredientsRankAdded.Add(this.category[1]);
                 haveBomb = true;
                 sc.PickToolUp();
             }
@@ -77,7 +79,8 @@ public class Ingredients : MonoBehaviour
             if (!haveLeaf)
             {
                 TeaCeremonyManager.Instance.IngredientsAdd(IngredientPrefab, "Leaf");
-                JudgeTea.Instance.IngredientsCatAdded.Add(this.category);
+                JudgeTea.Instance.IngredientsCatAdded.Add(this.category[0]);
+                JudgeTea.Instance.IngredientsRankAdded.Add(this.category[1]);
                 haveLeaf = true;
                 sc.PickToolUp();
             }
@@ -87,7 +90,8 @@ public class Ingredients : MonoBehaviour
             if (!haveChili)
             {
                 TeaCeremonyManager.Instance.IngredientsAdd(IngredientPrefab, "Chili");
-                JudgeTea.Instance.IngredientsCatAdded.Add(this.category);
+                JudgeTea.Instance.IngredientsCatAdded.Add(this.category[0]);
+                JudgeTea.Instance.IngredientsRankAdded.Add(this.category[1]);
                 haveChili = true;
                 sc.PickToolUp();
             }

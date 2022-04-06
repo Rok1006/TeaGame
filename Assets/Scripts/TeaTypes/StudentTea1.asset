@@ -12,5 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fd80540f4dab4e28867eee92e300f50, type: 3}
   m_Name: StudentTea1
   m_EditorClassIdentifier: 
-  ghost_teaNum: 0
-  teaType: 0
+  teaName: Sweet Match Tea
+  amtOfLiquid: 90
+  heatnessOfWater: 60
+  scoopOfPowder: 1
+  IngredientsCategory:
+  - sweet
+  teaMakingOrder: 
+  correctOrder: 0
+  enoughLiquid: 0
+  heatnessRight: 0
+  enoughPowder: 0
+  ingredientCorrect: 0
+  stirred: 0
+  TeaFlavour: 0

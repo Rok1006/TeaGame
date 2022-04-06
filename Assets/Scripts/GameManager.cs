@@ -223,8 +223,9 @@ public class GameManager : MonoBehaviour
                                 Tutorial.Instance.tutorialComplete = true;
 
 
-                                if (TeaCeremonyManager.Instance.served)
+                                if (TeaCeremonyManager.Instance.served&&TeaCeremonyManager.Instance.canProceed)
                                 {
+                                    JudgeTea.Instance.CheckCurrentTea();
                                     if (JudgeTea.Instance.IFPass())
                                     {
                                         Debug.Log("laikai!");
@@ -235,8 +236,10 @@ public class GameManager : MonoBehaviour
                                     {
                                         runner.StartDialogue("Laikai_Wrong_Choice");
                                         CamSwitch.Instance.ConversationCamOn();
-
-                                        TeaCeremonyManager.Instance.TeaReturn();
+                                        
+                                        TeaCeremonyManager.Instance.OtherTeaReturn(); //new
+                                        TeaCeremonyManager.Instance.canProceed =  false; //new
+                                        //TeaCeremonyManager.Instance.TeaReturn(); //dont want this to do this fast but if remove will pause the game
                                     }
 
                                     Debug.Log("laikai?");

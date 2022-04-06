@@ -16,14 +16,15 @@ public class TeaType : ScriptableObject
     public int scoopOfPowder = 0;
     public string[] IngredientsCategory;
     public string teaMakingOrder;  //"12345" 
-    [Header("DetermineTea")]
-    public bool correctOrder = false;
-    public bool enoughLiquid = false;
-    public bool heatnessRight = false;
-    public bool enoughPowder = false;
-    public bool ingredientCorrect = false;
-    public bool stirred = false;
-    public int TeaFlavour; //the score of the tea, default ?
+    // [Header("DetermineTea")]
+    // public bool correctOrder = false;
+    // public bool enoughLiquid = false;
+    // public bool heatnessRight = false;
+    // public bool enoughPowder = false;
+    // public bool correctIngredAmount = false;
+    // public bool ingredientCorrect = false;
+    // public bool stirred = false;
+    // public int TeaFlavour; //the score of the tea, default ?
     
 }
 /*Tea Making order:

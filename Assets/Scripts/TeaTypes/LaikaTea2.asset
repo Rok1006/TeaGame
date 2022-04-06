@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fd80540f4dab4e28867eee92e300f50, type: 3}
-  m_Name: CapitalistTea1
+  m_Name: LaikaTea2
   m_EditorClassIdentifier: 
-  teaName: '?'
+  teaName: Black Tea
   amtOfLiquid: 90
-  heatnessOfWater: 80
-  scoopOfPowder: 3
+  heatnessOfWater: 70
+  scoopOfPowder: 0
   IngredientsCategory:
-  - expensive
-  - expensive
+  - savory
+  - spicy
   teaMakingOrder: 
   correctOrder: 0
   enoughLiquid: 0

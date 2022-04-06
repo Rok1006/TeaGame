@@ -69,6 +69,7 @@ public class TeaCeremonyManager : MonoBehaviour
     public GameObject ServeCupPos;
     public GameObject mainCup;
     public bool served = false;
+    public bool canProceed = false;  //temp bool with served for dialogue proceed
     public GameObject tea;
     #endregion
     public SoundManager sc;
@@ -223,6 +224,7 @@ public class TeaCeremonyManager : MonoBehaviour
             GameManager.Instance.currGhost.DrinkTea(tea.GetComponent<Tea>());//opposite person with do sth to the tea
         else
             GameManager.Instance.stuGhost.DrinkTea(tea.GetComponent<Tea>());//opposite person with do sth to the tea
+        //JudgeTea.Instance.CheckCurrentTea();
         yield return new WaitForSeconds(2f);
         TeaReturn();
         sc.Poof();
@@ -241,9 +243,21 @@ public class TeaCeremonyManager : MonoBehaviour
     // }
     public void TeaReturn(){
         mainCup.transform.position = OriginalCupPos.transform.position;
-        //Tea.Instance.OriginalPos.transform.position = Tea.Instance.resetPos; //rest tea to initial pos
         served = false;
+        canProceed = true;
         ClearTea();
+    }
+    public void OtherTeaReturn(){ //for ghost after sensei
+        StartCoroutine(JudgeBeforeReturn());
+    }
+    IEnumerator JudgeBeforeReturn(){ //for ghost after sensei
+        yield return new WaitForSeconds(3f);
+        TeaReturn();
+        JudgeTea.Instance.ResetPlayerState();
+        sc.Poof();
+        cloudParticles.SetActive(true);  //poof Pl
+        yield return new WaitForSeconds(3.5f);
+        cloudParticles.SetActive(false);
     }
     public void DiscardTea(){ //whe sensei want to discard it , it will happened, cus there is stuff in it
         sc.Poof();

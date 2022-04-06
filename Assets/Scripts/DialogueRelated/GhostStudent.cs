@@ -231,7 +231,7 @@ public class GhostStudent : MonoBehaviour
     }
     public void DrinkTea(Tea tea)
     {
-        Debug.Log("Drinking tea...");
+//        Debug.Log("Drinking tea...");
         Animate("Drink");
         switch (stageIndex)
         {

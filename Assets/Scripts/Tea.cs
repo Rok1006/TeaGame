@@ -40,7 +40,7 @@ public class Tea : MonoBehaviour
     
     [Header("Tea Status")]
     public bool stirring = false;
-    public float liquidLevel;  //amt of liquid in the cup  Decent amt is 0.80
+    public float liquidLevel;  //max 130, acceptable range: 90
     public int numOfPowder;
     public int numOfIngredients;
     public int teastate;
@@ -89,7 +89,7 @@ public class Tea : MonoBehaviour
         teasprite.color = currentColor;
         degree.text = Mathf.Round(temp).ToString();
 //FillUp Tea
-        liquidLevel = cc.fillAmount;
+        // liquidLevel = cc.fillAmount;  //originally uncheck
         distance = TopPos.transform.position.y-OriginalPos.transform.position.y;
         if(distance<initialDistance){
             cc.fillAmount +=0.0012f;
@@ -128,7 +128,7 @@ public class Tea : MonoBehaviour
             teastate = 0;
         }
 //Destroy special ingredients if have liquid
-        if (liquidLevel >= 0.3f)
+        if (liquidLevel >= 30f)  //om3
         {
             if(toMeltList.Count > 0)
                 MeltIngred();
@@ -178,6 +178,7 @@ public class Tea : MonoBehaviour
     void FillingUP(){   //Filling UP tea
         if(SpillingDetector.Instance.inCup&& Input.GetMouseButton(0)&&TeaPot.Instance.degree<TeaPot.Instance.pouringDegree){
             //cc.fillAmount +=0.0018f;  //0.0023f, change this to according to the distance between top and original pos
+            liquidLevel += 10* Time.deltaTime;
             float step = speed * Time.deltaTime;
             OriginalPos.transform.position = Vector3.MoveTowards(OriginalPos.transform.position, TopPos.transform.position, step);
         }

@@ -36,6 +36,7 @@ public class TeaCup : MonoBehaviour
     public GameObject PlayerTrayIndicate;
     public GameObject ServeTrayIndicate;
     public GameObject CupFollowIndicate;
+    public bool mouseOver;
     void Awake() {
         Instance = this;
     }
@@ -123,6 +124,7 @@ public class TeaCup : MonoBehaviour
                 guide.SetActive(true); 
             }
         }
+        mouseOver = true;
     }
 
     void OnMouseExit(){
@@ -130,7 +132,7 @@ public class TeaCup : MonoBehaviour
             HandsIndicator.SetActive(false);
             guide.SetActive(false); 
         }
-        
+        mouseOver = false;
     }
     void OnMouseDown() {
         if(!TeaCeremonyManager.Instance.served&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE && !ServeTray.Instance.occupied && canServe) {
@@ -173,4 +175,6 @@ public class TeaCup : MonoBehaviour
         }
         
     }
+
+
 }

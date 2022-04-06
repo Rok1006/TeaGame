@@ -8,6 +8,8 @@ public class SaveSystem : MonoBehaviour
     public void toSave(int index)
     {
         ES3.Save("ghostIndex", index);
+        int theIndex = ES3.Load<int>("ghostIndex");
+        Debug.Log(theIndex + " saved");
     }
 
     public int toLoad()
@@ -15,7 +17,7 @@ public class SaveSystem : MonoBehaviour
         int theIndex = 0;
         if (ES3.KeyExists("ghostIndex"))
         {
-            theIndex = ES3.Load<int>("myInt");
+            theIndex = ES3.Load<int>("ghostIndex");
         }
         return theIndex;
     }

@@ -1229,7 +1229,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &121372099
 Transform:
   m_ObjectHideFlags: 0
@@ -27200,7 +27200,7 @@ MonoBehaviour:
   - {fileID: 389663942}
   - {fileID: 290878934}
   - {fileID: 2008223407}
-  ghostIndex: 1
+  ghostIndex: 0
   Arrows: {fileID: 708259171}
   arrowAnim: {fileID: 0}
   lineView: {fileID: 0}

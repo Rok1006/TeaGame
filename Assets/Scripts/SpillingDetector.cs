@@ -57,6 +57,7 @@ public class SpillingDetector : MonoBehaviour
 //Watering Plants
         if(col.gameObject.tag == "PotPlant"){
             watering = true;
+            Debug.Log("watering");
         }else{
             watering = false;
         }

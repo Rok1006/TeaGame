@@ -1,9 +1,29 @@
 fileFormatVersion: 2
-guid: 30fa9f7b2b8764495ab0befdbd5f9bc8
+guid: 2c52fe5e68c164f01a86d08337579795
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: T_blue
+    second: {fileID: 2100000, guid: 5485cbee26be94c349ef947724fb6f2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Toon_green
+    second: {fileID: 2100000, guid: fd676adc8991a44d6b0445fed30cdc6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Toon_paper
+    second: {fileID: 2100000, guid: 7d214ac08fb5b46faa1cfa9c2f89d2fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sg_brown_wood
+    second: {fileID: 2100000, guid: edddd71828766408e8d8086b6e4c6125, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

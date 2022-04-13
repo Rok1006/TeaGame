@@ -55,11 +55,13 @@ public class SpillingDetector : MonoBehaviour
             inCup = false;
         }
 //Watering Plants
-        if(col.gameObject.tag == "PotPlant"){
+        if(col.gameObject.tag == "PotPlant"&&PourDetector.Instance.isPouring){
             watering = true;
             Debug.Log("watering");
+            //ZoneStabllize.Instance.WaterBar.SetActive(true);
         }else{
             watering = false;
+            //ZoneStabllize.Instance.WaterBar.SetActive(false);
         }
     }
     void OnParticleTrigger(){

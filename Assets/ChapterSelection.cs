@@ -11,9 +11,9 @@ public class ChapterSelection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (ES3.KeyExists("ghostIndex"))
+        if (ES3.KeyExists("biggestIndex"))
         {
-            theIndex = ES3.Load<int>("ghostIndex");
+            theIndex = ES3.Load<int>("biggestIndex");
         }
     }
 

@@ -28,6 +28,11 @@ public class PauseMenu : MonoBehaviour
         ss.toSave(gm.ghostIndex);
     }
 
+    public void saveBiggestIndex()
+    {
+        SaveSystem ss = GetComponent<SaveSystem>();
+        ss.saveBiggest(gm.ghostIndex);
+    }
 
     public void goToMainMenu()
     {

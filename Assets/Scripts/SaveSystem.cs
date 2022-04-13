@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class SaveSystem : MonoBehaviour
 {
+    private void Start()
+    {
+        if (ES3.KeyExists("biggestIndex"))
+        {
+            GameObject.Find("GameManager").GetComponent<GameManager>().ghostIndex = ES3.Load<int>("biggestIndex");
+        }
+    }
     // Start is called before the first frame update
     public void toSave(int index)
     {
@@ -18,6 +25,30 @@ public class SaveSystem : MonoBehaviour
         if (ES3.KeyExists("ghostIndex"))
         {
             theIndex = ES3.Load<int>("ghostIndex");
+        }
+        return theIndex;
+    }
+
+    public void saveBiggest(int index)
+    {
+        int theIndex = 0;
+        if (ES3.KeyExists("ghostIndex"))
+        {
+            theIndex = ES3.Load<int>("ghostIndex");
+        }
+        if (index > theIndex)
+        {
+            theIndex = index;
+        }
+        ES3.Save("biggestIndex", theIndex);
+    }
+
+    public int loadBiggest()
+    {
+        int theIndex = 0;
+        if (ES3.KeyExists("biggestIndex"))
+        {
+            theIndex = ES3.Load<int>("biggestIndex");
         }
         return theIndex;
     }

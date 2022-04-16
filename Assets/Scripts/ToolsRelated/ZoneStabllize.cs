@@ -15,10 +15,11 @@ public class ZoneStabllize : MonoBehaviour
     public Animator FruitPlant;
     public int plantHP = 100;
     public bool isHotWater = false;
-    public float hydration = 100; //link with waterbar
+    public float hydration = 100; //link with waterbar, animations,plants anim
     public GameObject WaterBar;
     public Slider wb;
     public int UnsafeTimeCount = 0;  //after zone turn unsafe, start counting down before warning> fail
+    public GameObject plantEmit;
 
     void Awake() {
         Instance = this;
@@ -26,7 +27,7 @@ public class ZoneStabllize : MonoBehaviour
     void Start()
     {
         WaterBar.SetActive(false);
-        
+        plantEmit.SetActive(true);
     }
     void Update()
     {
@@ -37,12 +38,12 @@ public class ZoneStabllize : MonoBehaviour
             WaterBar.SetActive(false);
         }else if(SpillingDetector.Instance.watering&&TeaPot.Instance.pickedUP){
             PlantWateringPlus();
+            FruitPlant.SetTrigger("watering");
             WaterBar.SetActive(true);
         }
-        if(hydration<=40){
-            Effects.Instance.BadZoneEffect();
-        }else if(hydration>40){
-            Effects.Instance.GoodZoneEffect();
+        PlantStatusAnim();
+        if(hydration<1){//start counting 
+            //INvoke gameover scene
         }
     }
     void DetermineTempofWater(){
@@ -59,13 +60,19 @@ public class ZoneStabllize : MonoBehaviour
     public void PlantHydrationReduce(){ //plant hp harmed according to different ghost 
         switch(GameManager.Instance.ghostIndex){
             case 0: //sensei
-                hydration-=0;
+                if(hydration>0){
+                    hydration-=5*Time.deltaTime;
+                }
             break;
             case 1: //student
-                hydration-=2*Time.deltaTime;
+                if(hydration>0){
+                    hydration-=2*Time.deltaTime;  //default: 2
+                }
             break;
             case 2: //laika
-                hydration-=1*Time.deltaTime;
+                if(hydration>0){
+                    hydration-=1*Time.deltaTime;
+                }
             break;
             case 3: //capitalist
 
@@ -73,6 +80,26 @@ public class ZoneStabllize : MonoBehaviour
         }
     }
     void PlantStatusAnim(){ //plant animation control accored to hydration
-
+        if(hydration<=45){
+            Effects.Instance.BadZoneEffect();
+            plantEmit.SetActive(false);
+        }else if(hydration>45){
+            Effects.Instance.GoodZoneEffect();
+            plantEmit.SetActive(true);
+        }
+        //Anim
+        if(hydration<=50){
+            FruitPlant.SetBool("weak1", true);
+        }
+        if(hydration<=35){
+            FruitPlant.SetBool("weak2", true);
+            FruitPlant.SetBool("weak1", false);
+            Effects.Instance.TableLighting.SetTrigger("sickening");
+        }
+        if(hydration>=60&&hydration<=100){
+            FruitPlant.SetBool("weak2", false);
+            FruitPlant.SetBool("weak1", false);
+            FruitPlant.SetTrigger("reviving");
+        }
     }
 }

@@ -8,9 +8,11 @@ public class Tutorial : MonoBehaviour
     public GameObject ToolTutorialTP;
     public GameObject ToolTutorialST;
     public GameObject ToolTutorialPT;
+    public GameObject ToolTutorialCT;
     public GameObject[] TPsteps;
     public GameObject[] STsteps;
     public GameObject[] PTsteps;
+    public GameObject[] CTsteps;
     //public GameObject[] currentStepsDisplay;
     public int stepIndex = 0;
     public static Tutorial Instance;

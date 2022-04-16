@@ -145,6 +145,7 @@ public class GameManager : MonoBehaviour
                 case (6): //serve...Nextstage in Ghost.DrinkTea()
                     {
                         if(onoffarrow){ //this looping
+                            arrowAnim.SetTrigger("Deactivate");
                             arrowAnim.SetTrigger("serve");
                             onoffarrow = false;
                         }
@@ -156,6 +157,7 @@ public class GameManager : MonoBehaviour
                 case (7): //Snacktime NextStage in Ghost.EatSnack()
                     {
                         if(!onoffarrow){ //this looping
+                            arrowAnim.SetTrigger("Deactivate");
                             GameManager.Instance.arrowAnim.SetTrigger("snack");
                             onoffarrow = true;
                         }
@@ -191,6 +193,7 @@ public class GameManager : MonoBehaviour
                                 if (TeaCeremonyManager.Instance.served)
                                 {
                                     Debug.Log("student_ghost_canserve");
+                                    JudgeTea.Instance.CheckCurrentTea();
                                     if (JudgeTea.Instance.IFPass())
                                     { stuGhost.stageIndex = 1; }
                                     else
@@ -208,6 +211,8 @@ public class GameManager : MonoBehaviour
                             }
                         case (1): {
                                 runner.StartDialogue("Student_Right");
+                                TeaCeremonyManager.Instance.OtherTeaReturn(); //new
+                                
                                 CamSwitch.Instance.ConversationCamOn();
                                 stuGhost.stageIndex = 2;
                                 break;
@@ -241,7 +246,7 @@ public class GameManager : MonoBehaviour
 
                                 if (TeaCeremonyManager.Instance.served&&TeaCeremonyManager.Instance.canProceed)
                                 {
-                                    JudgeTea.Instance.CheckCurrentTea();
+                                    JudgeTea.Instance.CheckCurrentTea(); //must put
                                     if (JudgeTea.Instance.IFPass())
                                     {
                                         Debug.Log("laikai!");
@@ -276,6 +281,7 @@ public class GameManager : MonoBehaviour
                             {
                                 if (TeaCeremonyManager.Instance.served)
                                 {
+                                    JudgeTea.Instance.CheckCurrentTea();
                                     if (JudgeTea.Instance.IFPass())
                                     {
                                         Debug.Log("laikai!");
@@ -286,8 +292,9 @@ public class GameManager : MonoBehaviour
                                     {
                                         runner.StartDialogue("Laikai_Wrong_Choice");
                                         CamSwitch.Instance.ConversationCamOn();
-
-                                        TeaCeremonyManager.Instance.TeaReturn();
+                                        TeaCeremonyManager.Instance.OtherTeaReturn(); //new
+                                        TeaCeremonyManager.Instance.canProceed =  false; //new
+                                        //TeaCeremonyManager.Instance.TeaReturn();
                                     }
 
                                     Debug.Log("laikai?");
@@ -300,7 +307,8 @@ public class GameManager : MonoBehaviour
                             {
                                 runner.StartDialogue("Laikai_Final_Stage");
                                 Laikai_index = 4;
-                                TeaCeremonyManager.Instance.TeaReturn();
+                                TeaCeremonyManager.Instance.OtherTeaReturn(); //new
+                                //TeaCeremonyManager.Instance.TeaReturn();
                                 break;
                             }
                         case (4):

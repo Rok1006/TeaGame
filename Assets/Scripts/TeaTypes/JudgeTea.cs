@@ -193,7 +193,7 @@ public class JudgeTea : MonoBehaviour
     }
     public bool CheckAmtofPowder(){
         if(currentSOJ==StudentTeaSOJ1){  //this one with either one or 2 scoop, others are fixed
-            if(powderAdded>=1&&powderAdded<1){
+            if(powderAdded>0&&powderAdded<=2){
                 return true;
             }else{
                 return false;

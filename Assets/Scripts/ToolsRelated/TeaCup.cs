@@ -37,6 +37,7 @@ public class TeaCup : MonoBehaviour
     public GameObject ServeTrayIndicate;
     public GameObject CupFollowIndicate;
     public bool mouseOver;
+    //public GameObject toolFirstStep; //for tutorial
     void Awake() {
         Instance = this;
     }
@@ -65,6 +66,12 @@ public class TeaCup : MonoBehaviour
                 this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
                 HandsIndicator.SetActive(false);
                 guide.SetActive(false); 
+                Tutorial.Instance.CTsteps[0].SetActive(false);
+                if(!Tutorial.Instance.tutorialComplete){ //!Tutorial.Instance.tutorialComplete
+                    GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
+                    GameManager.Instance.arrowAnim.SetTrigger("tray");
+                    Tutorial.Instance.CTsteps[1].SetActive(true);
+                }
             }
         }
         if(this.transform.position==pickUPDes){  //player picked it up
@@ -120,8 +127,9 @@ public class TeaCup : MonoBehaviour
         if(!TeaCeremonyManager.Instance.served&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE && !ServeTray.Instance.occupied && canServe) {
             //&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.ServeOK){
             if(!clicked){
+                Tutorial.Instance.CTsteps[0].SetActive(true);
                 HandsIndicator.SetActive(true);
-                guide.SetActive(true); 
+                //guide.SetActive(true); 
             }
         }
         mouseOver = true;
@@ -129,6 +137,7 @@ public class TeaCup : MonoBehaviour
 
     void OnMouseExit(){
         if(!clicked){
+            Tutorial.Instance.CTsteps[0].SetActive(false);
             HandsIndicator.SetActive(false);
             guide.SetActive(false); 
         }
@@ -150,6 +159,8 @@ public class TeaCup : MonoBehaviour
             TeaCeremonyManager.Instance.ServeTea();
             TeaCeremonyManager.Instance.canProceed = true;
             TrayZTri.SetActive(false);
+            Tutorial.Instance.CTsteps[1].SetActive(false);
+            if(!Tutorial.Instance.tutorialComplete){GameManager.Instance.arrowAnim.SetTrigger("Deactivate");}
             //TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NONE;
             //this.transform.position = OriginalToolPos.transform.position;
         }
@@ -165,6 +176,7 @@ public class TeaCup : MonoBehaviour
             TrayZ.SetActive(false);
             CupZ.SetActive(false);
             CupZTri.SetActive(false);
+            Tutorial.Instance.CTsteps[1].SetActive(false);
         }
     }
     void OnTriggerExit(Collider col) {

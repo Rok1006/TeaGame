@@ -21,9 +21,9 @@ public class Effects : MonoBehaviour
         goodp = good.GetComponent<ParticleSystem>();
         badp = bad.GetComponent<ParticleSystem>();
         good.SetActive(true);
-        bad.SetActive(false);
+        bad.SetActive(true);
         goodp.emissionRate = 1.45f;
-        badp.emissionRate = 0f;
+        badp.emissionRate = 1.45f;
     }
 
     void Update()
@@ -31,13 +31,15 @@ public class Effects : MonoBehaviour
         
     }
     public void GoodZoneEffect(){
-        good.SetActive(true);
-        bad.SetActive(false);
-        //good.emissionRate = 1.45f;
+        // good.SetActive(true);
+        // bad.SetActive(false);
+        goodp.enableEmission = true;
+        badp.enableEmission = false;
     }
     public void BadZoneEffect(){
-        good.SetActive(false);
-        bad.SetActive(true);
-        //bad.emissionRate = 1.45f;
+        // good.SetActive(false);
+        // bad.SetActive(true);
+        badp.enableEmission = true;
+        goodp.enableEmission = false;
     }
 }

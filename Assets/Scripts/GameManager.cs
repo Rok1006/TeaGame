@@ -182,32 +182,48 @@ public class GameManager : MonoBehaviour
                 switch (stuGhost.stageIndex)
                 {
                     case (0):
-                    {
-                            //TeaCeremonyManager.Instance.startDiming = true; //off for now
-                            SnackOffer.Instance.canTakeSnack = true;
-                            Tutorial.Instance.tutorialComplete = true;
-                            
-                          
-                                if (TeaCeremonyManager.Instance.served) {
-                                    Debug.Log("student_ghost_canserve");
+                            {
+                                //TeaCeremonyManager.Instance.startDiming = true; //off for now
+                                SnackOffer.Instance.canTakeSnack = true;
+                                Tutorial.Instance.tutorialComplete = true;
 
-                                    stuGhost.stageIndex = 1;
+
+                                if (TeaCeremonyManager.Instance.served)
+                                {
+                                    Debug.Log("student_ghost_canserve");
+                                    if (JudgeTea.Instance.IFPass())
+                                    { stuGhost.stageIndex = 1; }
+                                    else
+                                    {
+                                        runner.StartDialogue("Student_Wrong");
+                                        CamSwitch.Instance.ConversationCamOn();
+
+                                        TeaCeremonyManager.Instance.OtherTeaReturn(); //new
+                                        TeaCeremonyManager.Instance.canProceed = false; //new}
+
+                                    }
+                                    
                                 }
-                            break;
-                    }
+                                break;
+                            }
                         case (1): {
-                                Debug.Log("student_ghost_level_1");
-                              
-                                runner.StartDialogue("Student_2nd_Phase");
+                                runner.StartDialogue("Student_Right");
                                 CamSwitch.Instance.ConversationCamOn();
                                 stuGhost.stageIndex = 2;
                                 break;
                             }
                         case (2):
                             {
-                            
+                                Debug.Log("student_ghost_level_1");
+
+                                runner.StartDialogue("Student_2nd_Phase");
+                                //CamSwitch.Instance.ConversationCamOn();
+                                stuGhost.stageIndex = 3;
                                 break;
+                                
                             }
+                        case (3): { break; }
+                        case (4): { break; }
                     }
                 break;
             }

@@ -234,3 +234,14 @@ position: -180,90
 ---
 The most wonderful tea…thank you. It wasn’t expensive, but it was ours. .
 ===
+title: Student_Right
+position: 25,-186
+---
+Oh…this tastes really nice…I wish I had had more of this in life.
+===
+title: Student_Wrong
+position: -14,-61
+---
+Oh…it’s tea…I wish it was sweeter…
+<<Camera_Change>>
+===

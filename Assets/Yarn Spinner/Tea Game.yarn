@@ -21,7 +21,7 @@ If I could just have a cup of tea or two, I think I could move on.
 <<Camera_Change>>
 ===
 title: Student_2nd_Phase
-position: 13,73
+position: -87,155
 ---
 This clover…
 My mother gave me this.
@@ -38,7 +38,7 @@ Maybe it will help you more than it helped me.
 <<next>>
 ===
 title: Laikai_Start
-position: 224,136.5
+position: 190,128
 ---
 <<Anime 2 Laika2Idle>>
 тяв тяв тяв?
@@ -56,7 +56,7 @@ position: 224,136.5
 <<Camera_Change>>
 ===
 title: Laikai_Stage_1_human
-position: 219,20
+position: 182,23
 ---
 <<Anime 2 LaikaIdle>>
 Hello?
@@ -240,8 +240,140 @@ position: 25,-186
 Oh…this tastes really nice…I wish I had had more of this in life.
 ===
 title: Student_Wrong
-position: -14,-61
+position: -4,-79
 ---
 Oh…it’s tea…I wish it was sweeter…
 <<Camera_Change>>
+===
+title: Sensei_Final
+position: 17,-17
+---
+<<Anime 0 SenseiHappy>>
+I am contented. I was right about you.
+My time is up.
+And I can feel them coming soon.
+I don’t have enough time to teach you more…
+But, that scroll: it contains recipes.
+Be sure to consult it. 
+My last reminder to you…
+This plant…it is your tether to the living world.
+You must be sure to keep it healthy.
+Make sure it has water. If it dies…well…
+I think you understand what I’m saying.
+Every wandering soul needs some warmth and guidance. light to warm them.
+Your tea... will guide them to their next life.
+They won't be as nice as I am, but,
+I have faith in you. 
+Goodbye, my best pupil.
+<<Anime 0 SenseiLeave>>
+<<next>> 
+===
+title: Sensei_Start
+position: 3,67
+---
+Good Evening.
+This is the night then.
+I'll be gone soon, and you'll have to face them all by yourself.
+I can see you're nervous.
+It's alright. 
+Let's go through each step once more.
+Serve me tea one last time... The regular is fine.
+Let's get started.
+===
+title: Sensei_Stage_1
+position: 4,114
+---
+Take the tea pot and put it on the boiler next to it.
+They are both in the upper right corner of the table.
+...Please hurry. My time is running out and your next customer will arrive soon.
+===
+title: Sensei_Stage_1_Angry
+position: 185,162
+---
+<<Anime 0 SenseiAngry>>
+Are you serious...Take The Tea Pot and Drop it on the Boiler!
+They're in the upper right corner of the table!!
+===
+title: Sensei_Stage_2
+position: -162,266
+---
+<<Anime 0 SenseiIdle>>
+While the water is boiling. Add some tea powder to the cup.
+The spoon is to your left.
+I would love some matcha for the last cup of tea I drink in this life.
+Spoon some matcha powder, and put it in the cup.
+Matcha powder is in the container above your spoon.
+===
+title: Sensei_Stage_2_Angry
+position: 177,241
+---
+<<Anime 0 SenseiAngry>>
+I will be gone soon without having my last cup of tea. Are you okay with that?
+Spoon the powder from the container!!
+===
+title: Sensei_Stage_3
+position: -53,-218
+---
+<<Anime 0 SenseiIdle>>
+Some customers may prefer a stronger taste.
+Use the tea leaf. It's next to the cup.
+Though I don't need these ingredients, you should be aware when they want them
+They have lost their minds, so it is up to you to realize their needs.
+Or else...you might become one of them...
+Anyways. Let's move on.
+Ice breeds no green. Let's add the hot water in.
+Take the teapot and pour the hot water into the cup.
+Keep pouring the water until its almost completely full
+Just pour the water in...
+===
+title: Sensei_Stage_3_Angry
+position: 0,242
+---
+<<Anime 0 SenseiAngry>>
+Do you know how to pour?
+POUR. THE. WATER. BEFORE. I. GO. POOF.
+===
+title: Sensei_Stage_4
+position: 0,242
+---
+<<Anime 0 SenseiIdle>>
+Good. Now stir with the matcha whisk on your left.
+Grab the matcha whisk and stir the tea...
+===
+title: Sensei_Stage_4_Angry
+position: 0,242
+---
+<<Anime 0 SenseiAngry>>
+It's are on your left...get stirring!
+you grab and stir!!!
+===
+title: Sensei_Stage_5
+position: 0,242
+---
+<<Anime 0 SenseiIdle>>
+Well done...now serve the tea on the tray in front of me.
+===
+title: Sensei_Stage_6
+position: 0,242
+---
+<<Anime 0 SenseiDrink>>
+Ah...the bitterness...
+<<Anime 0 SenseiHappy>>
+I wish I could carry the memory of this tea to the next life.
+If only I learned the simply yet profound joy of tea earlier,
+Maybe that would have saved me from getting wasted and...
+Nevermind.
+Sigh...I would like to have some dessert to ease the bitterness.
+Sometimes serving dessert might just save your life.
+Get the dessert using the dessert tongs next to the spoon.
+It's on your left.
+It's right there.
+===
+title: Sensei_Stage_6_Angry
+position: 0,242
+---
+<<Anime 0 SenseiAngry>>
+I want dessert...I don't care about my diar-
+Just get the dessert! I can't go feeling this uncontend!
+The tool is on your left!!!
 ===

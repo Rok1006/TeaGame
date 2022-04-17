@@ -34,7 +34,7 @@ public class SceneDataLoad : MonoBehaviour
         switch(GameManager.Instance.ghostIndex){
             case 0: 
                 titleText.text = "SENSEI";
-                GameManager.Instance.YarnDialogueSys.SetActive(false);
+                GameManager.Instance.YarnDialogueSys.SetActive(true);
             break;
             case 1: 
                 titleText.text = "Overwork Student";

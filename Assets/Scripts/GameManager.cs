@@ -49,9 +49,9 @@ public class GameManager : MonoBehaviour
         Fadeout.SetActive(false);
         yield return new WaitForSeconds(1.8f); 
         SceneDataLoad.Instance.TitleScreen.SetActive(false);
-        if(ghostIndex==0){
-            DialogueUI.SetActive(true);   
-        }
+        /*if(ghostIndex==0){
+           DialogueUI.SetActive(true);   
+        }*/
         SoundManager.SetActive(true);
         GhostEnter(); 
     }
@@ -346,8 +346,13 @@ public class GameManager : MonoBehaviour
         foreach (GameObject ghost in ghostList)
             ghost.SetActive(false);
             ghostList[ghostIndex].SetActive(true);
-        if(ghostIndex==1){
-            Debug.Log("ghostindex");
+        if (ghostIndex == 0)
+        {
+            Debug.Log("sensei");
+            runner.StartDialogue("Sensei_Start");
+        }
+        if (ghostIndex==1){
+      
             runner.StartDialogue("Student_Start");}
         if (ghostIndex == 2) { runner.StartDialogue("Laikai_Start"); }
         
@@ -362,8 +367,8 @@ public class GameManager : MonoBehaviour
                     TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.Nothing;  //add these 2 when players is allow to freeplay 
                     SnackOffer.Instance.canTakeSnack = true;
                     Tutorial.Instance.tutorialComplete = true;
-                    DialogueUI.SetActive(false);
-                    YarnDialogueSys.SetActive(true);
+                  // DialogueUI.SetActive(false);
+                    //YarnDialogueSys.SetActive(true);
                     break;
                 }
             case (1): //when student leave

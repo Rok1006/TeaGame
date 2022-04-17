@@ -18,13 +18,15 @@ public class GameManager : MonoBehaviour
     public GameObject YarnDialogueSys; //Yarn
     public GameObject SoundManager;
     public List<GameObject> ghostList = new List<GameObject>();
-    public int ghostIndex = 0;
-    bool changeToTeaCam = false;
+    public  int ghostIndex = 0;
+    public static bool changeToTeaCam = false;
     public GameObject Arrows;
     public Animator arrowAnim;
     private bool onoffarrow = false;
     public LineView lineView;
     public DialogueRunner runner;
+     static bool angry_time;
+    public static bool count;
     
     private void Awake()
     { 
@@ -49,15 +51,16 @@ public class GameManager : MonoBehaviour
         Fadeout.SetActive(false);
         yield return new WaitForSeconds(1.8f); 
         SceneDataLoad.Instance.TitleScreen.SetActive(false);
-        /*if(ghostIndex==0){
-           DialogueUI.SetActive(true);   
-        }*/
+   
+           DialogueUI.SetActive(false);   
+      
         SoundManager.SetActive(true);
         GhostEnter(); 
     }
     void Update()
     {
         CheckState();
+        if (count) { StartCoroutine(Angry());count = false; }
     }
     public void CheckState()  //stageIndex 0 is stage1, stevo will change it
     {
@@ -74,23 +77,31 @@ public class GameManager : MonoBehaviour
                         //arrowAnim.SetTrigger("");
                        arrowAnim.SetTrigger("Deactivate");
                         TeaCup.Instance.canServe = false;
-                        TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay; //off when build 
-                        break;//Intro
+                                currGhost.stageIndex = 1;
+                                // TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay; //off when build 
+                                break;//Intro
                     }
                 case (1):  //Stage1 - Put on boiler
                     {
-                        if (!changeToTeaCam)
+                       if (changeToTeaCam)
                         {
                             arrowAnim.SetTrigger("teapot");
                             CamSwitch.Instance.TeaCamOn();
-                            changeToTeaCam = true;
+                            changeToTeaCam = false;
                         }
                         TeaCup.Instance.canServe = true;
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseTeapot;
-                        if (Tutorial.Instance.usedStove)
-                        {
-                            currGhost.NextStage();
-                        }
+                                if (Tutorial.Instance.usedStove)
+                                {
+                                    runner.Stop();
+                                    runner.StartDialogue("Sensei_Stage_2");
+                                    currGhost.stageIndex = 2;
+
+                                }
+                                else if (angry_time) {
+                                   
+                                    runner.StartDialogue("Sensei_Stage_1_Angry"); angry_time = false; }
+                      
                         break;
                     }
                 case (2):  //Stage2 Add powder
@@ -99,9 +110,16 @@ public class GameManager : MonoBehaviour
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UsePowderTool;
                         if (Tea.Instance.numOfPowder > 0 && Tutorial.Instance.usedPowderT)
                         {
-                            currGhost.NextStage();
-                        }
-                        break;
+                                    runner.Stop();
+                                    runner.StartDialogue("Sensei_Stage_3");
+                                    currGhost.stageIndex = 3;
+                                }
+                                else if (angry_time)
+                                {
+
+                                    runner.StartDialogue("Sensei_Stage_2_Angry"); angry_time = false;
+                                }
+                                break;
                     }
                 case (3):  //Stage3 Look ingredient, auto Next
                     {
@@ -110,7 +128,8 @@ public class GameManager : MonoBehaviour
                             onoffarrow = true;
                         }
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.GetIngredient;
-                        break;
+                                currGhost.stageIndex = 4;
+                                break;
                     }
                 case (4):  //Stage4 is pour hot water
                     {
@@ -122,9 +141,16 @@ public class GameManager : MonoBehaviour
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseTeapot;
                         if (Tutorial.Instance.usedTeaPot && Tea.Instance.distance < 0.2f)
                         {
-                            currGhost.NextStage();
-                        }
-                        break;
+                                    runner.Stop();
+                                    runner.StartDialogue("Sensei_Stage_4");
+                                    currGhost.stageIndex = 5;
+                                }
+                                else if (angry_time)
+                                {
+
+                                    runner.StartDialogue("Sensei_Stage_3_Angry"); angry_time = false;
+                                }
+                                break;
                     }
                 case (5):  //Stage5 is stir
                     {
@@ -134,9 +160,18 @@ public class GameManager : MonoBehaviour
                             onoffarrow = true;
                         }
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseStirTool;
-                        if (Tutorial.Instance.usedStirT&&Tea.Instance.teasprite.color != Tea.Instance.originalColor)// && Tea.Instance.teasprite.color == Tea.Instance.targetColor)
-                            currGhost.NextStage();
-                        if (Tea.Instance.numOfIngredients > 0)
+                                if (Tutorial.Instance.usedStirT && Tea.Instance.teasprite.color != Tea.Instance.originalColor)// && Tea.Instance.teasprite.color == Tea.Instance.targetColor)
+                                {
+                                    runner.Stop();
+                                    runner.StartDialogue("Sensei_Stage_5");
+                                    currGhost.stageIndex = 6;
+                                }
+                                else if (angry_time)
+                                {
+
+                                    runner.StartDialogue("Sensei_Stage_4_Angry"); angry_time = false;
+                                }
+                                if (Tea.Instance.numOfIngredients > 0)
                         {  //may need edit 
 
                         }
@@ -151,8 +186,17 @@ public class GameManager : MonoBehaviour
                         }
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.ServeOK;
                         TeaCup.Instance.canServe = true;
-                        //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.ServeOK;
-                        break;
+                                //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.ServeOK;
+                                JudgeTea.Instance.CheckCurrentTea();
+                                if (JudgeTea.Instance.IFPass())
+                                {
+                                    runner.Stop();
+                                    runner.StartDialogue("Sensei_Stage_6"); 
+                                    currGhost.stageIndex = 7; Debug.Log("next stage");
+                                }
+                              
+                                    
+                                break;
                     }
                 case (7): //Snacktime NextStage in Ghost.EatSnack()
                     {
@@ -163,7 +207,17 @@ public class GameManager : MonoBehaviour
                         }
                         TeaCup.Instance.canServe = false;
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseSnack;
-                        break;
+                                if (true) {
+                                    runner.Stop();
+                                    runner.StartDialogue("Sensei_Final");
+                                    currGhost.stageIndex = 8;
+                                }
+                                else if (angry_time)
+                                {
+
+                                    runner.StartDialogue("Sensei_Stage_6_Angry"); angry_time = false;
+                                }
+                                break;
                     }
                 case (8): //sensei abt to go, may be put the following to the next
                     {
@@ -340,6 +394,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
         SceneDataLoad.Instance.TitleScreen.SetActive(false);
         GhostEnter();
+    }
+    public static IEnumerator  Angry() {
+        yield return new WaitForSeconds(5f);
+        angry_time = true;
     }
     public void GhostEnter()
     {

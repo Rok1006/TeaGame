@@ -9,5 +9,6 @@ public class Camera_Change
       public static void Camera_Change_1(){
           CamSwitch.Instance.TeaCamOn();
         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
+        Debug.Log("change");
     }
 }

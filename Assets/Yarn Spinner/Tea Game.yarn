@@ -169,7 +169,7 @@ She doesn’t understand…
 I need more money!
 ===
 title: Captial_Stage_1_right_tea
-position: -94,-137
+position: -77,-149
 ---
 Hmph. I suppose this will suffice.
 ===
@@ -197,7 +197,7 @@ We drank it together.
 I miss her so much.
 ===
 title: Captial_Stage_2_right_tea
-position: -94,-137
+position: -136,-217
 ---
 It’s been so long since I had tea like this…like what she made…
 ===
@@ -225,7 +225,7 @@ It was.
 I’m just sorry it took me dying to realize that.
 ===
 title: Captial_Stage_3_wrong_tea
-position: -94,-137
+position: 111,-166
 ---
 I just want one last cup of tea. Like we had when we were happy. The best tea I ever drank…
 ===
@@ -249,6 +249,7 @@ title: Sensei_Final
 position: 17,-17
 ---
 <<Anime 0 SenseiHappy>>
+<<SE sensei_v2_blush>>
 I am contented. I was right about you.
 My time is up.
 And I can feel them coming soon.
@@ -279,6 +280,11 @@ It's alright.
 Let's go through each step once more.
 Serve me tea one last time... The regular is fine.
 Let's get started.
+<<Camera_Tutorial>>
+Take the tea pot and put it on the boiler next to it.
+They are both in the upper right corner of the table.
+...Please hurry. My time is running out and your next customer will arrive soon.
+<<Angry>>
 ===
 title: Sensei_Stage_1
 position: 4,114
@@ -291,6 +297,7 @@ title: Sensei_Stage_1_Angry
 position: 185,162
 ---
 <<Anime 0 SenseiAngry>>
+<<SE sensei_v2_angry2>>
 Are you serious...Take The Tea Pot and Drop it on the Boiler!
 They're in the upper right corner of the table!!
 ===
@@ -303,11 +310,13 @@ The spoon is to your left.
 I would love some matcha for the last cup of tea I drink in this life.
 Spoon some matcha powder, and put it in the cup.
 Matcha powder is in the container above your spoon.
+<<Angry>>
 ===
 title: Sensei_Stage_2_Angry
 position: 177,241
 ---
 <<Anime 0 SenseiAngry>>
+<<SE sensei_v2_angry2>>
 I will be gone soon without having my last cup of tea. Are you okay with that?
 Spoon the powder from the container!!
 ===
@@ -325,38 +334,43 @@ Ice breeds no green. Let's add the hot water in.
 Take the teapot and pour the hot water into the cup.
 Keep pouring the water until its almost completely full
 Just pour the water in...
+<<Angry>>
 ===
 title: Sensei_Stage_3_Angry
-position: 0,242
+position: 17,224
 ---
 <<Anime 0 SenseiAngry>>
+<<SE sensei_v2_angry2>>
 Do you know how to pour?
 POUR. THE. WATER. BEFORE. I. GO. POOF.
 ===
 title: Sensei_Stage_4
-position: 0,242
+position: 182,320
 ---
 <<Anime 0 SenseiIdle>>
 Good. Now stir with the matcha whisk on your left.
 Grab the matcha whisk and stir the tea...
+<<Angry>>
 ===
 title: Sensei_Stage_4_Angry
-position: 0,242
+position: -163,298
 ---
 <<Anime 0 SenseiAngry>>
+<<SE sensei_v2_angry2>>
 It's are on your left...get stirring!
 you grab and stir!!!
 ===
 title: Sensei_Stage_5
-position: 0,242
+position: -209,189
 ---
 <<Anime 0 SenseiIdle>>
 Well done...now serve the tea on the tray in front of me.
 ===
 title: Sensei_Stage_6
-position: 0,242
+position: 35,182
 ---
 <<Anime 0 SenseiDrink>>
+<<SE sensei_v2_happy>>
 Ah...the bitterness...
 <<Anime 0 SenseiHappy>>
 I wish I could carry the memory of this tea to the next life.
@@ -368,11 +382,13 @@ Sometimes serving dessert might just save your life.
 Get the dessert using the dessert tongs next to the spoon.
 It's on your left.
 It's right there.
+<<Angry>>
 ===
 title: Sensei_Stage_6_Angry
-position: 0,242
+position: -11,310
 ---
 <<Anime 0 SenseiAngry>>
+<<SE sensei_v2_angry2>>
 I want dessert...I don't care about my diar-
 Just get the dessert! I can't go feeling this uncontend!
 The tool is on your left!!!

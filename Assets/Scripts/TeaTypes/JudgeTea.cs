@@ -220,6 +220,8 @@ public class JudgeTea : MonoBehaviour
         if(ingredientCorrect){count+=1;}
         if(stirred){count+=1;} //later add back
         if(correctOrder){count+=1;}  //later add back
+        if (GameManager.Instance.ghostIndex==0) { return true; }
+        
         if(count==4){
             return true;
         }else{

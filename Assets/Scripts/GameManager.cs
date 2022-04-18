@@ -22,11 +22,13 @@ public class GameManager : MonoBehaviour
     public static bool changeToTeaCam = false;
     public GameObject Arrows;
     public Animator arrowAnim;
-    private bool onoffarrow = false;
+    public bool onoffarrow = false;
     public LineView lineView;
     public DialogueRunner runner;
      static bool angry_time;
     public static bool count;
+    public bool tutorialIngredGet = false;
+    public bool tutorialAteSnack = false;
     
     private void Awake()
     { 
@@ -125,10 +127,14 @@ public class GameManager : MonoBehaviour
                     {
                         if(!onoffarrow){ //this looping
                             arrowAnim.SetTrigger("Deactivate");
+                            arrowAnim.SetTrigger("ingredients");
                             onoffarrow = true;
                         }
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.GetIngredient;
-                                currGhost.stageIndex = 4;
+                            //if have ingredients move on where the check at
+                        //    if(Tea.Instance.numOfIngredients>0&&tutorialIngredGet){
+                        //         currGhost.stageIndex = 4;
+                        //     }
                                 break;
                     }
                 case (4):  //Stage4 is pour hot water
@@ -141,16 +147,16 @@ public class GameManager : MonoBehaviour
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseTeapot;
                         if (Tutorial.Instance.usedTeaPot && Tea.Instance.distance < 0.2f)
                         {
-                                    runner.Stop();
-                                    runner.StartDialogue("Sensei_Stage_4");
-                                    currGhost.stageIndex = 5;
-                                }
-                                else if (angry_time)
-                                {
+                            runner.Stop();
+                            runner.StartDialogue("Sensei_Stage_4");
+                            currGhost.stageIndex = 5;
+                        }
+                        else if (angry_time)
+                        {
 
-                                    runner.StartDialogue("Sensei_Stage_3_Angry"); angry_time = false;
-                                }
-                                break;
+                            runner.StartDialogue("Sensei_Stage_3_Angry"); angry_time = false;
+                        }
+                        break;
                     }
                 case (5):  //Stage5 is stir
                     {
@@ -187,15 +193,13 @@ public class GameManager : MonoBehaviour
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.ServeOK;
                         TeaCup.Instance.canServe = true;
                                 //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.ServeOK;
-                                JudgeTea.Instance.CheckCurrentTea();
-                                if (JudgeTea.Instance.IFPass())
+                                //JudgeTea.Instance.CheckCurrentTea();
+                                if (TeaCeremonyManager.Instance.served)//JudgeTea.Instance.IFPass()
                                 {
                                     runner.Stop();
                                     runner.StartDialogue("Sensei_Stage_6"); 
-                                    currGhost.stageIndex = 7; Debug.Log("next stage");
+                                    currGhost.stageIndex = 8; Debug.Log("next stage");
                                 }
-                              
-                                    
                                 break;
                     }
                 case (7): //Snacktime NextStage in Ghost.EatSnack()
@@ -207,7 +211,7 @@ public class GameManager : MonoBehaviour
                         }
                         TeaCup.Instance.canServe = false;
                         TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.UseSnack;
-                                if (true) {
+                                if (tutorialAteSnack) {
                                     runner.Stop();
                                     runner.StartDialogue("Sensei_Final");
                                     currGhost.stageIndex = 8;
@@ -221,7 +225,8 @@ public class GameManager : MonoBehaviour
                     }
                 case (8): //sensei abt to go, may be put the following to the next
                     {
-
+                        // runner.Stop();
+                        // runner.StartDialogue("Sensei_Final");
                         //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
                         //TeaCeremonyManager.Instance.startDiming = true; //removed the candle, off for now
                         //Tutorial.Instance.tutorialComplete = true;  //this two may be put after case 8

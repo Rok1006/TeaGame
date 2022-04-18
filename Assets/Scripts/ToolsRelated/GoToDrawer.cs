@@ -56,6 +56,9 @@ public class GoToDrawer : MonoBehaviour
         TeaCeremonyManager.Instance.tText = "";
     }
     void OnMouseDown() {//
+        if(GameManager.Instance.tutorialIngredGet){
+           GameManager.Instance.currGhost.stageIndex = 4;
+       }
         if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.GetIngredient
         &&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.INGRED){
         tutorial.SetActive(false);

@@ -137,7 +137,7 @@ public class MatchaBox : MonoBehaviour
             Tutorial.Instance.ResetSteps(); //tutorial
             Tutorial.Instance.usedPowderT = true; //GameManager
             GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
-            if(!Tutorial.Instance.tutorialComplete){GameManager.Instance.arrowAnim.SetTrigger("ingredients");} //this
+            //if(!Tutorial.Instance.tutorialComplete){GameManager.Instance.arrowAnim.SetTrigger("ingredients");} //this
         }
 //Dip it & snap back
         if (pickedUP && Input.GetMouseButton(0)){    //Mouse Distance based Tilt Pouring here  

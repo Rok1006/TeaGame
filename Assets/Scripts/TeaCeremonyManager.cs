@@ -215,22 +215,25 @@ public class TeaCeremonyManager : MonoBehaviour
     }    
     public void ServeTea(){
         mainCup.transform.position = ServeCupPos.transform.position;
-        served = true;
         CamSwitch.Instance.ConversationCamOn();
-            StartCoroutine(GhostJudge());
+        GhostJudgeS();
+        served = true;
+    }
+    public void GhostJudgeS(){
+        StartCoroutine(GhostJudge());
     }
     IEnumerator GhostJudge(){  //GHost will judge your tea when it is served infront of them
-        if(GameManager.Instance.ghostIndex == 0)
-            GameManager.Instance.currGhost.DrinkTea(tea.GetComponent<Tea>());//opposite person with do sth to the tea
-        else
-            GameManager.Instance.stuGhost.DrinkTea(tea.GetComponent<Tea>());//opposite person with do sth to the tea
+        // if(GameManager.Instance.ghostIndex == 0)
+        //     GameManager.Instance.currGhost.DrinkTea(tea.GetComponent<Tea>());//opposite person with do sth to the tea
+        // else
+        //     GameManager.Instance.stuGhost.DrinkTea(tea.GetComponent<Tea>());//opposite person with do sth to the tea
         //JudgeTea.Instance.CheckCurrentTea();
         yield return new WaitForSeconds(2f);
         TeaReturn();
         sc.Poof();
         cloudParticles.SetActive(true);  //poof Pl
         yield return new WaitForSeconds(3.5f);
-        cloudParticles.SetActive(false);
+        cloudParticles.SetActive(false); 
     }
     // public void JudgeTea(){   //sensei and customer judging your tea
     //     if(Tutorial.Instance.tutorialComplete){ //is completed tutrial

@@ -7,6 +7,7 @@ public class Ingredients : MonoBehaviour
     [Header("Information")]
     public string ingredientName;
     public string[] category;
+   // public Tea teaSc;
     [Header("Others")]
     public Outline oc;
     public GameObject IngredientPrefab;
@@ -48,8 +49,11 @@ public class Ingredients : MonoBehaviour
         GoToDrawer.Instance.IGText = "";
     }
     void OnMouseDown() {
-        if(!Tutorial.Instance.tutorialComplete){
+        if(!Tutorial.Instance.tutorialComplete){  //!Tutorial.Instance.tutorialComplete&&
+            GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
             GameManager.Instance.arrowAnim.SetTrigger("ingredients");   
+            //Debug.Log("usiignsjknk");
+            GameManager.Instance.tutorialIngredGet = true;
         }
        
         if (isAsh)

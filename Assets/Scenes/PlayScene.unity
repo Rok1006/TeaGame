@@ -28882,8 +28882,10 @@ MonoBehaviour:
   ghostIndex: 0
   Arrows: {fileID: 708259171}
   arrowAnim: {fileID: 0}
+  onoffarrow: 0
   lineView: {fileID: 0}
   runner: {fileID: 3579681405364716560}
+  tutorialIngredGet: 0
 --- !u!4 &753367487
 Transform:
   m_ObjectHideFlags: 0

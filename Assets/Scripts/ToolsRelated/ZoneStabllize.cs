@@ -61,7 +61,7 @@ public class ZoneStabllize : MonoBehaviour
         switch(GameManager.Instance.ghostIndex){
             case 0: //sensei
                 if(hydration>0){
-                    hydration-=5*Time.deltaTime;
+                    hydration-=0; //5*Time.deltaTime
                 }
             break;
             case 1: //student

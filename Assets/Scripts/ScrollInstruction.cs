@@ -19,6 +19,7 @@ public class ScrollInstruction : MonoBehaviour
         theOutline = GetComponent<Outline>();
         theOutline.enabled = false;
         scrollMenu.SetActive(false);
+        maxPage = pages.Length-1;
     }
     void Update()
     {
@@ -104,11 +105,41 @@ public class ScrollInstruction : MonoBehaviour
                 DisableAllPage();
                 pages[2].SetActive(true);
             break;
+            case 3:
+                contentText.text = "Tea Types";
+                DisableAllPage();
+                pages[3].SetActive(true);
+            break;
+            case 4:
+                contentText.text = "Tea Types";
+                DisableAllPage();
+                pages[4].SetActive(true);
+            break;
+            case 5:
+                contentText.text = "Tea Types";
+                DisableAllPage();
+                pages[5].SetActive(true);
+            break;
+            case 6:
+                contentText.text = "Tea Types";
+                DisableAllPage();
+                pages[6].SetActive(true);
+            break;
+            // case 7:
+            //     contentText.text = "Tea Types";
+            //     DisableAllPage();
+            //     pages[7].SetActive(true);
+            // break;
         }
     }
     void DisableAllPage(){
         pages[0].SetActive(false);
         pages[1].SetActive(false);
         pages[2].SetActive(false);
+        pages[3].SetActive(false);
+        pages[4].SetActive(false);
+        pages[5].SetActive(false);
+        pages[6].SetActive(false);
+
     }
 }

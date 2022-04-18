@@ -32,7 +32,7 @@ public class Snacks : MonoBehaviour
     void OnMouseDown() {
         if(!ServeTray.Instance.occupied){
             CamSwitch.Instance.ConversationCamOn();
-            if(this.gameObject.name=="Snack_Buns")
+            if(this.gameObject.name=="Snack_Buns"&&this.gameObject.name=="Snack_Mochi"&&this.gameObject.name=="Snack_Jelly")
             {
                 Vector3 newPos = new Vector3(servePos.transform.position.x+0.23f,servePos.transform.position.y,servePos.transform.position.z);
                 GameObject s = Instantiate(snackPrefab, newPos,Quaternion.identity) as GameObject;
@@ -45,6 +45,7 @@ public class Snacks : MonoBehaviour
                 currentSnack = s;
                 sc.PickToolUp();
             }
+            Debug.Log("sdfhsjdghfjgsadgfs");
             if (once) { StartCoroutine(SenseiEat()); once = false; }
    
         }
@@ -56,14 +57,15 @@ public class Snacks : MonoBehaviour
         yield return new WaitForSeconds(2f);
         sc.Poof();
         SnackOffer.Instance.snackParticles.SetActive(true);
-        if(GameManager.Instance.ghostIndex == 0)
-            GameManager.Instance.currGhost.EatSnack();
-        else
-            GameManager.Instance.stuGhost.EatSnack();
+        // if(GameManager.Instance.ghostIndex == 0)
+        //     GameManager.Instance.currGhost.EatSnack();
+        // else
+        //     GameManager.Instance.stuGhost.EatSnack();
         Destroy(currentSnack.gameObject);
         ServeTray.Instance.occupied = false;
       //  yield return new WaitForSeconds(3.5f);
         SnackOffer.Instance.snackParticles.SetActive(false);
+        // Debug.Log("sdfhsjdghfjgsadgfs");
         GameManager.Instance.tutorialAteSnack = true;
     }
 

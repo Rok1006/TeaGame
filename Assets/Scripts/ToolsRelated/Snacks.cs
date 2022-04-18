@@ -11,6 +11,7 @@ public class Snacks : MonoBehaviour
     public GameObject snackPrefab;
     public GameObject currentSnack;
     public SoundManager sc;
+    bool once=true;
     void Start()
     {
         sc = GameObject.Find("SoundManager").GetComponent<SoundManager>();
@@ -44,7 +45,8 @@ public class Snacks : MonoBehaviour
                 currentSnack = s;
                 sc.PickToolUp();
             }
-            SenseiEatS();
+            if (once) { SenseiEatS(); once = false; }
+   
         }
     }
     public void SenseiEatS(){

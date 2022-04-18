@@ -198,7 +198,7 @@ public class GameManager : MonoBehaviour
                                 {
                                     runner.Stop();
                                     runner.StartDialogue("Sensei_Stage_6"); 
-                                    currGhost.stageIndex = 8; Debug.Log("next stage");
+                                    currGhost.stageIndex = 7; Debug.Log("next stage");
                                 }
                                 break;
                     }

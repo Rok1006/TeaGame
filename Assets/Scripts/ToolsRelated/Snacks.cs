@@ -45,12 +45,12 @@ public class Snacks : MonoBehaviour
                 currentSnack = s;
                 sc.PickToolUp();
             }
-            if (once) { SenseiEatS(); once = false; }
+            if (once) { StartCoroutine(SenseiEat()); once = false; }
    
         }
     }
     public void SenseiEatS(){
-        StartCoroutine(SenseiEat());
+        //StartCoroutine(SenseiEat());
     }
     IEnumerator SenseiEat(){
         yield return new WaitForSeconds(2f);
@@ -62,7 +62,7 @@ public class Snacks : MonoBehaviour
             GameManager.Instance.stuGhost.EatSnack();
         Destroy(currentSnack.gameObject);
         ServeTray.Instance.occupied = false;
-        yield return new WaitForSeconds(3.5f);
+      //  yield return new WaitForSeconds(3.5f);
         SnackOffer.Instance.snackParticles.SetActive(false);
         GameManager.Instance.tutorialAteSnack = true;
     }

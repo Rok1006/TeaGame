@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
                        arrowAnim.SetTrigger("Deactivate");
                         TeaCup.Instance.canServe = false;
                                 currGhost.stageIndex = 1;
-                                // TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay; //off when build 
+                                TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay; //off when build 
                                 break;//Intro
                     }
                 case (1):  //Stage1 - Put on boiler

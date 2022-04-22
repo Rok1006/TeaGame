@@ -30441,7 +30441,7 @@ MonoBehaviour:
   - {fileID: 389663942}
   - {fileID: 290878934}
   - {fileID: 2008223407}
-  ghostIndex: 2
+  ghostIndex: 0
   Arrows: {fileID: 708259171}
   arrowAnim: {fileID: 0}
   onoffarrow: 0

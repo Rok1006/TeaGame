@@ -257,6 +257,7 @@ public class GameManager : MonoBehaviour
                                     { stuGhost.stageIndex = 1; }
                                     else
                                     {
+                                        runner.Stop();
                                         runner.StartDialogue("Student_Wrong");
                                         CamSwitch.Instance.ConversationCamOn();
 
@@ -269,6 +270,7 @@ public class GameManager : MonoBehaviour
                                 break;
                             }
                         case (1): {
+                                runner.Stop();
                                 runner.StartDialogue("Student_Right");
                                 TeaCeremonyManager.Instance.OtherTeaReturn(); //new
                                 
@@ -279,7 +281,7 @@ public class GameManager : MonoBehaviour
                         case (2):
                             {
                                 Debug.Log("student_ghost_level_1");
-
+                                runner.Stop();
                                 runner.StartDialogue("Student_2nd_Phase");
                                 //CamSwitch.Instance.ConversationCamOn();
                                 stuGhost.stageIndex = 3;

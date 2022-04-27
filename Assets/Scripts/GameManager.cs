@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public Ghost currGhost;
     public GhostStudent stuGhost;
     public int Laikai_index;
+    public int Captial_index;
     public static GameManager Instance;
     public GameObject Fadeout;
     public GameObject Fadeout2;
@@ -382,7 +383,14 @@ public class GameManager : MonoBehaviour
             }
             case (3):  //Capitalist
             {
+                    switch (Captial_index)
+                    {
+                        case (0): {
 
+                                SnackOffer.Instance.canTakeSnack = true;
+                                Tutorial.Instance.tutorialComplete = true;
+                                break; }
+                    }
 
             break;
             }
@@ -420,8 +428,8 @@ public class GameManager : MonoBehaviour
       
             runner.StartDialogue("Student_Start");}
         if (ghostIndex == 2) { runner.StartDialogue("Laikai_Start"); }
-        
 
+        if (ghostIndex == 3) { runner.StartDialogue("Captial_Stage_1"); }
     }
     public  void GhostLeave()
     {

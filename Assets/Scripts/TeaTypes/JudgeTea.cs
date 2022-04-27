@@ -192,7 +192,9 @@ public class JudgeTea : MonoBehaviour
         if(CheckMakeOrder()==true){correctOrder = true;}else{correctOrder = false;}
     }
     public bool CheckAmtofPowder(){
+        Debug.Log("checking powders");
         if(currentSOJ==StudentTeaSOJ1){  //this one with either one or 2 scoop, others are fixed
+            Debug.Log("student");
             if(powderAdded>0&&powderAdded<=2){
                 return true;
             }else{

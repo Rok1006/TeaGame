@@ -26,6 +26,7 @@ public class Momento : MonoBehaviour
         //put into collection in start screen tgt with name and description
         MomentoDisplay.Instance.momentoAnim.SetTrigger("close");
         Destroy(this.gameObject);
+        GameObject.Find("SceneManager").GetComponent<SaveSystem>().collectionSave(name);
     }
     void OnMouseExit(){
         OC.enabled = false;

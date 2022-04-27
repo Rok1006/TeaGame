@@ -95,7 +95,20 @@ public class SaveSystem : MonoBehaviour
             {
                 collection = ES3.Load<List<string>>("collection");
             }
-            collection.Add(itemName);
+            bool nameExists = false;
+            foreach (string s in collection)
+            {
+                if (s == itemName)
+                {
+                    nameExists = true;
+                    break;
+                }
+            }
+            if (!nameExists)
+            {
+                collection.Add(itemName);
+            }
+            Debug.Log(itemName + " saved");
             ES3.Save("collection", collection);
         }
     }

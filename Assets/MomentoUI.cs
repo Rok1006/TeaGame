@@ -9,10 +9,7 @@ public class MomentoUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach(Transform t in transform)
-        {
-            children.Add(t.gameObject);
-        }
+
     }
 
     private void Awake()
@@ -25,11 +22,12 @@ public class MomentoUI : MonoBehaviour
         {
             if (s == "Dog Collar")
             {
-                children[0].SetActive(true);
+                children[1].SetActive(true);
             }
             if (s == "Clover")
             {
-                children[1].SetActive(true);
+                children[0].SetActive(true);
+                Debug.Log("Clover loaded");
             }
             if (s == "Engagement Ring")
             {

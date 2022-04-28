@@ -30460,6 +30460,7 @@ MonoBehaviour:
   currGhost: {fileID: 1641279433}
   stuGhost: {fileID: 1827956063}
   Laikai_index: 0
+  Captial_index: 0
   Fadeout: {fileID: 2054568248}
   Fadeout2: {fileID: 2029730537}
   gtcs: {fileID: 1641279433}
@@ -30471,7 +30472,7 @@ MonoBehaviour:
   - {fileID: 389663942}
   - {fileID: 290878934}
   - {fileID: 2008223407}
-  ghostIndex: 2
+  ghostIndex: 0
   Arrows: {fileID: 708259171}
   arrowAnim: {fileID: 0}
   onoffarrow: 0

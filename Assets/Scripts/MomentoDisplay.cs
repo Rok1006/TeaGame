@@ -58,9 +58,9 @@ public class MomentoDisplay : MonoBehaviour
     }
     IEnumerator DisplayMomento(){
         PlaceInMomento();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         momentoAnim.SetTrigger("give");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         momentoAnim.SetTrigger("open");
         yield return new WaitForSeconds(.3f);
         currentObj.SetActive(true);

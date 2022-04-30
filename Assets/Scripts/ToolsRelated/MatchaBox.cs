@@ -208,6 +208,7 @@ public class MatchaBox : MonoBehaviour
                 otsc.enabled = true;
                 mbAnim.SetBool("Open", true);
                 mbAnim.SetBool("Close", false);
+                TeaCeremonyManager.Instance.CurrentToolName = "PowderTool";
                 //sc.OpenLid();
                 //toolFirststep.SetActive(true);
                 if(!Tutorial.Instance.PTsteps[0].activeSelf){

@@ -51,7 +51,7 @@ public class SpillingDetector : MonoBehaviour
             if(TeaPot.Instance.heatness>=0.7f){TeaCeremonyManager.Instance.steamParticles.emissionRate = 2;}
             Invoke("SteamEmitStop",2f);
         }else{
-            print("notHit");
+            //print("notHit");
             inCup = false;
         }
 //Watering Plants

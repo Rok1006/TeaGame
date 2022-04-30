@@ -57,6 +57,7 @@ public class TeaCeremonyManager : MonoBehaviour
     #endregion
     public enum TutorialState{Nothing,FreePlay,UseTeapot,UseStirTool,UsePowderTool,GetIngredient,ServeOK,UseSnack};
     public TutorialState currentTutorialState = TutorialState.Nothing;  
+    public string CurrentToolName;
     #region TeaColor
     public Color[] TeaColors; //0=Water, 1=GreenTea, 2=TeawithToolesspowder, 3=Water with weirdElement, 4=GreenTeaWtoomucPowder
     public GameObject Stain;
@@ -274,6 +275,7 @@ public class TeaCeremonyManager : MonoBehaviour
     }
     void ClearTea()
     {
+        Debug.Log("clearing tea");
         Tea.Instance.RestartStirBar();
         Tea.Instance.OriginalPos.transform.position = Tea.Instance.resetPos; //rest tea to initial pos
         Tea.Instance.initialDistance = Tea.Instance.TopPos.transform.position.y - Tea.Instance.OriginalPos.transform.position.y; //reset initial distance for cup capacity

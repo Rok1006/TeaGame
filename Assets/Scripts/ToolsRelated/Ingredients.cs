@@ -41,6 +41,7 @@ public class Ingredients : MonoBehaviour
     void OnMouseOver() {
         //go up a little
         oc.enabled = true;
+        //TeaCeremonyManager.Instance.CurrentToolName = "IngredPlate";
         GoToDrawer.Instance.IGText = ingredientName;
     }
 

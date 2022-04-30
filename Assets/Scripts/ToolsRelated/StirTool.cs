@@ -167,6 +167,7 @@ public class StirTool : MonoBehaviour
     void OnMouseOver() {
         if(!clicked&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseStirTool||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay&&!clicked&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){
             otsc.enabled = true;
+            TeaCeremonyManager.Instance.CurrentToolName = "StirTool";
             //toolFirststep.SetActive(true);
             if(!Tutorial.Instance.STsteps[0].activeSelf){
             toolFirststep.SetActive(true);

@@ -98,7 +98,7 @@ public class TeaPot : MonoBehaviour
        pickUPDes = new Vector3(this.transform.position.x, destHeight, transform.position.z);
         
         if (TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseTeapot||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){ //added stuff
-        if(canClick && OnteaPot && Input.GetMouseButton(0)&&upState==0)
+        if(canClick && OnteaPot && Input.GetMouseButton(0)&&upState==0&&TeaCeremonyManager.Instance.CurrentToolName == "TeaPot")
         {   //pick up pot
                 rb.isKinematic = true;
                 //rb.useGravity = false;
@@ -249,6 +249,7 @@ public class TeaPot : MonoBehaviour
         if(!pickedUP&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseTeapot||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay&&!pickedUP&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE){  //originally have: ||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.TEAPOT
             if(canClick){
             otsc.enabled = true;
+            TeaCeremonyManager.Instance.CurrentToolName = "TeaPot";
             //Tea.Instance.heatBar.SetActive(true);
             if(!Tutorial.Instance.TPsteps[0].activeSelf){
             toolFirststep.SetActive(true);

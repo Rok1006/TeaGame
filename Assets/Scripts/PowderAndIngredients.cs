@@ -39,7 +39,7 @@ public class PowderAndIngredients : MonoBehaviour
                 Tea.Instance.toMeltList.Add(gameObject);
             }
             if(col.gameObject.tag == "Table"){
-                Destroy(this.gameObject, .75f);
+                //Destroy(this.gameObject, .75f);
             }
         }
     }

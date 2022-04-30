@@ -30403,7 +30403,7 @@ MonoBehaviour:
   - {fileID: 389663942}
   - {fileID: 290878934}
   - {fileID: 2008223407}
-  ghostIndex: 0
+  ghostIndex: 2
   Arrows: {fileID: 708259171}
   arrowAnim: {fileID: 0}
   onoffarrow: 0
@@ -99829,6 +99829,7 @@ MonoBehaviour:
   cloudParticles: {fileID: 1101239913}
   currentTool: 4
   currentTutorialState: 0
+  CurrentToolName: 
   TeaColors:
   - {r: 0.49247953, g: 0.8307065, b: 0.8773585, a: 1}
   - {r: 0.4, g: 0.49019608, b: 0.30588236, a: 1}

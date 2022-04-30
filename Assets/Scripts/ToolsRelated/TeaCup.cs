@@ -129,6 +129,7 @@ public class TeaCup : MonoBehaviour
             if(!clicked){
                 Tutorial.Instance.CTsteps[0].SetActive(true);
                 HandsIndicator.SetActive(true);
+                TeaCeremonyManager.Instance.CurrentToolName = "TeaCup";
                 //guide.SetActive(true); 
             }
         }
@@ -173,6 +174,7 @@ public class TeaCup : MonoBehaviour
             TeaCeremonyManager.Instance.served = false;
             canServe = true;
             TeaCeremonyManager.Instance.mainCup.transform.position = TeaCeremonyManager.Instance.OriginalCupPos.transform.position;
+            rb.isKinematic = true; //new
             TrayZ.SetActive(false);
             CupZ.SetActive(false);
             CupZTri.SetActive(false);

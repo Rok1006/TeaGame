@@ -143,8 +143,9 @@ public class Tea : MonoBehaviour
     void OFFFloodParticles(){
         floodParticles.SetActive(false);
     }
-    void MeltIngred()
+    void MeltIngred() //for some reason it auto get call this when second tea
     {
+        Debug.Log("Melting");
         if (toMeltList.Contains(Ingredients.ashObj))
         {
             toMeltList.Remove(Ingredients.ashObj);
@@ -191,6 +192,7 @@ public class Tea : MonoBehaviour
         if(col.gameObject.tag == "L1"){
             //this.transform.localScale = new Vector3(middleSize,middleSize,middleSize);
             this.transform.localScale = new Vector3(maxSize,maxSize,maxSize);
+            //Debug.Log("enlarge");
         }
         if(col.gameObject.tag == "L2"){
             this.transform.localScale = new Vector3(maxSize,maxSize,maxSize);
@@ -199,6 +201,13 @@ public class Tea : MonoBehaviour
             sc.Stirring();
             stirring = true;
         } 
+    }
+    void OnTriggerStay(Collider col) {
+        if(col.gameObject.tag == "L1"){ //solved small circle issue
+            //this.transform.localScale = new Vector3(middleSize,middleSize,middleSize);
+            this.transform.localScale = new Vector3(maxSize,maxSize,maxSize);
+            //Debug.Log("enlarge");
+        }
     }
     void OnTriggerExit(Collider col) {
         if(col.gameObject.tag == "StirrTool"){

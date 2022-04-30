@@ -43,6 +43,7 @@ public class GoToDrawer : MonoBehaviour
         if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.GetIngredient
         &&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE||TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.INGRED){
             oc.enabled = true;
+            TeaCeremonyManager.Instance.CurrentToolName = "IngredPlate";
             canClick=true;
             tutorial.SetActive(true);
             TeaCeremonyManager.Instance.tText = toolName;

@@ -4,6 +4,7 @@ using UnityEngine;
 /*COntent of the script (In ZOne/Effects MAnager)
 - Particles effect used in Zone Stabilize.cs
 - Lighting animation used with ghost reaction, hand wrong tea
+- display scroll from tutorial part
 */
 public class Effects : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class Effects : MonoBehaviour
     public GameObject bad;
     ParticleSystem goodp;
     ParticleSystem badp;
+    public GameObject scrollObject;
+    Animator scrollAnim;
     void Awake() {
         Instance = this;
     }
@@ -24,11 +27,15 @@ public class Effects : MonoBehaviour
         bad.SetActive(true);
         goodp.emissionRate = 1.45f;
         badp.emissionRate = 1.45f;
+
+        scrollAnim = scrollObject.GetComponent<Animator>();
     }
 
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.O)){
+            Scroll_Show();
+        }
     }
     public void GoodZoneEffect(){
         // good.SetActive(true);
@@ -41,5 +48,18 @@ public class Effects : MonoBehaviour
         // bad.SetActive(true);
         badp.enableEmission = true;
         goodp.enableEmission = false;
+    }
+    public void Scroll_Show(){  //link this to after sensei mention scroll, this is Effect.cs
+        StartCoroutine(ScrollShow());
+    }
+    IEnumerator ScrollShow() {
+        CamSwitch.Instance.ChoiceCamOn();
+        yield return new WaitForSeconds(.5f);
+        scrollAnim.SetTrigger("show");
+        yield return new WaitForSeconds(4f);
+        scrollAnim.SetTrigger("back");
+        yield return new WaitForSeconds(1f);
+        CamSwitch.Instance.ConversationCamOn();
+        scrollAnim.SetTrigger("idle");
     }
 }

@@ -402,13 +402,13 @@ public class GameManager : MonoBehaviour
         fd2.SetBool("in",true);
         fd2.SetBool("out",false);
         yield return new WaitForSeconds(3f);
+        GhostEnter();
         fd2.SetBool("out",true);
         fd2.SetBool("in",false);
         yield return new WaitForSeconds(.2f);
         SceneDataLoad.Instance.TitleScreen.SetActive(true);
         yield return new WaitForSeconds(3f);
         SceneDataLoad.Instance.TitleScreen.SetActive(false);
-        GhostEnter();
     }
     public static IEnumerator  Angry() {
         yield return new WaitForSeconds(5f);

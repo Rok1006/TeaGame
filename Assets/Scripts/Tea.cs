@@ -53,6 +53,7 @@ public class Tea : MonoBehaviour
     public GameObject floodParticles;
     public ParticleSystem FP;
     public bool isPouring = false;
+    public Vector2 mousePos;
     void Awake() {
         Instance = this;
         ts = tutorialObj.GetComponent<Tutorial>();
@@ -83,6 +84,7 @@ public class Tea : MonoBehaviour
         maxD = 100;
         minD = 20;
         temp = minD;
+        mousePos = Input.mousePosition;
     }
     void Update()
     {
@@ -105,7 +107,16 @@ public class Tea : MonoBehaviour
         FillingUP(); 
 //Stirring Tea
         if(stirring){   //the bar
-            teaPattern.SetActive(true);
+            Vector2 thisMousePos = Input.mousePosition;
+            if (Mathf.Abs(thisMousePos.x-mousePos.x)>0|| Mathf.Abs(thisMousePos.y - mousePos.y)>0)
+            {
+                teaPattern.SetActive(true);
+            }
+            else
+            {
+                teaPattern.SetActive(false);
+            }
+            mousePos = thisMousePos;
             stirBar.SetActive(true);
             sb.fillAmount+=0.7f*Time.deltaTime;  //Default: 0.008f
             GradualColorChange();

@@ -10896,6 +10896,7 @@ GameObject:
   - component: {fileID: 426959874}
   - component: {fileID: 426959876}
   - component: {fileID: 426959875}
+  - component: {fileID: 426959877}
   m_Layer: 0
   m_Name: Capi_P1_Idle_phd
   m_TagString: Untagged
@@ -10911,7 +10912,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 426959873}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.32, z: 0.66}
+  m_LocalPosition: {x: 0, y: -0.67, z: 0.66}
   m_LocalScale: {x: 0.8606447, y: 0.8606447, z: 0.8606447}
   m_Children: []
   m_Father: {fileID: 2008223408}
@@ -10973,7 +10974,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 10621de2ae4ba4f708c3fe33bf8c5373, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c0e7384c167895e43a72bfe7cde9b3e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -10984,6 +10985,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &426959877
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426959873}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 85440b787a3e12c439ecddb0cc05655c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &438074995
 GameObject:
   m_ObjectHideFlags: 0
@@ -98743,7 +98763,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2008223408
 Transform:
   m_ObjectHideFlags: 0
@@ -98752,7 +98772,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2008223407}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.89554, z: 5.64}
+  m_LocalPosition: {x: 0, y: 1.44, z: 4.82}
   m_LocalScale: {x: 0.78, y: 0.78, z: 0.78}
   m_Children:
   - {fileID: 426959874}

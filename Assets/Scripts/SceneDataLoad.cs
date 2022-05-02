@@ -44,6 +44,10 @@ public class SceneDataLoad : MonoBehaviour
                 titleText.text = "The SPace traveler";
                 GameManager.Instance.YarnDialogueSys.SetActive(true);
             break;
+            case 3:
+                titleText.text = "SalaryMan";
+                GameManager.Instance.YarnDialogueSys.SetActive(true);
+                break;
         }
     }
 }

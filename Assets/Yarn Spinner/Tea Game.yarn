@@ -169,6 +169,7 @@ I don’t need her.
 I don’t need her!
 She doesn’t understand…
 I need more money!
+<<Camera_Change>>
 ===
 title: Captial_Stage_1_right_tea
 position: -235,-171
@@ -179,10 +180,12 @@ title: Captial_Stage_1_wrong_tea
 position: -180,90
 ---
 No! That’s not right! It has to be the finest! Only the most bitter/most expensive!
+<<Camera_Change>>
 ===
-title: Captial_Stage_2_right_tea
+title: Captial_Stage_2
 position: -354,-21
 ---
+Hmph. I suppose this will suffice.
 I miss her…
 I’ve just been working so hard…
 What was it all for?
@@ -197,6 +200,7 @@ But it was expensive, more than we could really afford.
 So she mixed it with the cheap stuff, to make it last longer…
 We drank it together.
 I miss her so much.
+<<Camera_Change>>
 ===
 title: Captial_Stage_2_right_tea
 position: -136,-217
@@ -207,10 +211,12 @@ title: Captial_Stage_2_wrong_tea
 position: -180,90
 ---
 No…I want what she made…the nice stuff, but diluted. Sweeter.
+<<Camera_Change>>
 ===
-title: Captial_Stage_3_right_tea
+title: Captial_Stage_3
 position: -354,-21
 ---
+It’s been so long since I had tea like this…like what she made…
 You know, when I first met her…
 Neither of us had any money.
 We could barely afford the basics.
@@ -230,11 +236,14 @@ title: Captial_Stage_3_wrong_tea
 position: 111,-166
 ---
 I just want one last cup of tea. Like we had when we were happy. The best tea I ever drank…
+<<Camera_Change>>
 ===
 title: Captial_Stage_3_right_tea
 position: -180,90
 ---
+<<Momento>>
 The most wonderful tea…thank you. It wasn’t expensive, but it was ours. .
+<<load>>
 ===
 title: Student_Right
 position: 25,-186

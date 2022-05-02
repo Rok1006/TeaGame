@@ -387,9 +387,111 @@ public class GameManager : MonoBehaviour
                     {
                         case (0): {
 
+                                //TeaCeremonyManager.Instance.startDiming = true; //off for now
+
                                 SnackOffer.Instance.canTakeSnack = true;
                                 Tutorial.Instance.tutorialComplete = true;
-                                break; }
+
+
+                                if (TeaCeremonyManager.Instance.served && TeaCeremonyManager.Instance.canProceed)
+                                {
+                                    JudgeTea.Instance.CheckCurrentTea(); //must put
+                                    if (JudgeTea.Instance.IFPass())
+                                    {
+                                        Debug.Log("that is very captial of you!");
+                                        Captial_index = 1;
+
+                                    }
+                                    else
+                                    {
+                                        runner.StartDialogue("Captial_Stage_1_wrong_tea");
+                                        CamSwitch.Instance.ConversationCamOn();
+
+                                        TeaCeremonyManager.Instance.OtherTeaReturn(); //new
+                                        TeaCeremonyManager.Instance.canProceed = false; //new
+                                        //TeaCeremonyManager.Instance.TeaReturn(); //dont want this to do this fast but if remove will pause the game
+                                    }
+
+                                    Debug.Log("laikai?");
+
+                                }
+                                break;
+                            }
+                        case (1):
+                            {
+
+                                runner.StartDialogue("Captial_Stage_2");
+                                TeaCeremonyManager.Instance.OtherTeaReturn(); //new
+
+                                Captial_index = 2;
+                                break;
+                            }
+                        case (2):
+                            {
+                                if (TeaCeremonyManager.Instance.served && TeaCeremonyManager.Instance.canProceed) //must
+                                {
+                                    JudgeTea.Instance.CheckCurrentTea(); //must
+                                    if (JudgeTea.Instance.IFPass())
+                                    {
+                                        Debug.Log("captial!");
+                                        Captial_index = 3;
+
+                                    }
+                                    else
+                                    {
+                                        runner.StartDialogue("Captial_Stage_2_wrong_tea");
+                                        CamSwitch.Instance.ConversationCamOn();
+                                        TeaCeremonyManager.Instance.OtherTeaReturn(); //must
+                                        TeaCeremonyManager.Instance.canProceed = false; //must
+                                        //TeaCeremonyManager.Instance.TeaReturn();
+                                    }
+
+                                 
+
+                                }
+                                break;
+                            }
+                        case (3):
+                            {
+                                runner.StartDialogue("Captial_Stage_3");
+                                TeaCeremonyManager.Instance.OtherTeaReturn(); //new
+
+                                Captial_index = 4;
+                                break;
+                            }
+                        case (4):
+                            {
+                                if (TeaCeremonyManager.Instance.served && TeaCeremonyManager.Instance.canProceed) //must
+                                {
+                                    JudgeTea.Instance.CheckCurrentTea(); //must
+                                    if (JudgeTea.Instance.IFPass())
+                                    {
+                                        Debug.Log("captial!");
+                                        Captial_index = 5;
+
+                                    }
+                                    else
+                                    {
+                                        runner.StartDialogue("Captial_Stage_3_wrong_tea");
+                                        CamSwitch.Instance.ConversationCamOn();
+                                        TeaCeremonyManager.Instance.OtherTeaReturn(); //must
+                                        TeaCeremonyManager.Instance.canProceed = false; //must
+                                        //TeaCeremonyManager.Instance.TeaReturn();
+                                    }
+
+                                    
+
+                                }
+                                break;
+                            }
+                        case (5):
+                            {
+                                runner.StartDialogue("Captial_Stage_3_right_tea");
+                                TeaCeremonyManager.Instance.OtherTeaReturn(); //new
+
+                                Captial_index = 4;
+                                break;
+                            }
                     }
 
             break;

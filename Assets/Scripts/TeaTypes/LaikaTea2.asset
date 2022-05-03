@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fd80540f4dab4e28867eee92e300f50, type: 3}
   m_Name: LaikaTea2
   m_EditorClassIdentifier: 
-  teaName: Black Tea
+  teaName: Russian Black Tea
   amtOfLiquid: 90
-  heatnessOfWater: 70
+  heatnessOfWater: 25
+  maxHeatness: 40
   scoopOfPowder: 2
   IngredientsCategory:
   - savory

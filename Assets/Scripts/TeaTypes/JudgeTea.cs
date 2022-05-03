@@ -171,7 +171,7 @@ public class JudgeTea : MonoBehaviour
         }else{
             enoughLiquid = false;
         }
-        if(heatnessOfWater >= currentSOJ.heatnessOfWater){
+        if(heatnessOfWater >= currentSOJ.heatnessOfWater&&heatnessOfWater <= currentSOJ.maxHeatness){
             heatnessRight = true;
         }else{
             heatnessRight = false;

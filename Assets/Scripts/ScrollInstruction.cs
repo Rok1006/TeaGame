@@ -14,6 +14,7 @@ public class ScrollInstruction : MonoBehaviour
     public Animator scrollAnim;
     public TextMeshProUGUI contentText;
     public GameObject[] pages;
+    bool canShow = false;
     void Start()
     {
         theOutline = GetComponent<Outline>();
@@ -76,7 +77,8 @@ public class ScrollInstruction : MonoBehaviour
         if(pageNum>0){
           scrollAnim.SetTrigger("flip");  
           pageNum-=1;
-          PageContent();
+          StartCoroutine(ScrollContentShow());
+          //PageContent();
         }  
     }
     public void FlipRight()
@@ -84,45 +86,51 @@ public class ScrollInstruction : MonoBehaviour
         if(pageNum<maxPage){
           scrollAnim.SetTrigger("flip");  
           pageNum+=1;
-          PageContent();
+          StartCoroutine(ScrollContentShow());
+          //PageContent();
         }  
+    }
+    IEnumerator ScrollContentShow(){ 
+        DisableAllPage();
+        yield return new WaitForSeconds(.5f);
+        PageContent();
     }
     public void PageContent(){
         switch(pageNum){
             case 0:
                 //setactive
                 contentText.text = "Ingredients";
-                DisableAllPage();
+                //DisableAllPage();
                 pages[0].SetActive(true);
             break;
             case 1:
                 contentText.text = "Tea Types";
-                DisableAllPage();
+                //DisableAllPage();
                 pages[1].SetActive(true);
             break;
             case 2:
                 contentText.text = "Tea Types";
-                DisableAllPage();
+                //DisableAllPage();
                 pages[2].SetActive(true);
             break;
             case 3:
                 contentText.text = "Tea Types";
-                DisableAllPage();
+                //DisableAllPage();
                 pages[3].SetActive(true);
             break;
             case 4:
                 contentText.text = "Tea Types";
-                DisableAllPage();
+               // DisableAllPage();
                 pages[4].SetActive(true);
             break;
             case 5:
                 contentText.text = "Tea Types";
-                DisableAllPage();
+                //DisableAllPage();
                 pages[5].SetActive(true);
             break;
             case 6:
                 contentText.text = "Tea Types";
-                DisableAllPage();
+                //DisableAllPage();
                 pages[6].SetActive(true);
             break;
             // case 7:

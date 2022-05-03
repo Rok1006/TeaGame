@@ -13,6 +13,7 @@ public class TeaType : ScriptableObject
     public string teaName; //for clarity
     public float amtOfLiquid = 0;
     public int heatnessOfWater = 0;
+    public int maxHeatness = 0;
     public int scoopOfPowder = 0;
     public string[] IngredientsCategory;
     public string teaMakingOrder;  //"12345" 

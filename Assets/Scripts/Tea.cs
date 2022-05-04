@@ -56,6 +56,7 @@ public class Tea : MonoBehaviour
     public ParticleSystem FP;
     public bool isPouring = false;
     public Vector2 mousePos;
+    public bool mouseMove;
     void Awake() {
         Instance = this;
         ts = tutorialObj.GetComponent<Tutorial>();
@@ -115,21 +116,11 @@ public class Tea : MonoBehaviour
             Vector2 thisMousePos = Input.mousePosition;
             if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
             {
-                var c1 = teaPattern.GetComponent<SpriteRenderer>().color;
-                if (c1.a < 0.5f)
-                {
-                    c1.a += 0.01f;
-                }
-                teaPattern.GetComponent<SpriteRenderer>().color = c1;
+                mouseMove = true;
             }
             else
             {
-                var c1 = teaPattern.GetComponent<SpriteRenderer>().color;
-                if (c1.a > 0)
-                {
-                    c1.a -= 0.01f;
-                }
-                teaPattern.GetComponent<SpriteRenderer>().color = c1;
+                mouseMove = false;
             }
             mousePos = thisMousePos;
             
@@ -139,12 +130,7 @@ public class Tea : MonoBehaviour
             GradualColorChange();
         }else{
             stirBar.SetActive(false);
-            var c = teaPattern.GetComponent<SpriteRenderer>().color;
-            if (c.a > 0)
-            {
-                c.a -= 0.01f;
-            }
-            teaPattern.GetComponent<SpriteRenderer>().color = c;
+            mouseMove = false;
         }
         if(sb.fillAmount==1){  //every stirr
             //RestartStirBar(); //put this on when new things is added
@@ -300,4 +286,37 @@ public class Tea : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (stirring)
+        {
+            if (mouseMove)
+            {
+                var c1 = teaPattern.GetComponent<SpriteRenderer>().color;
+                if (c1.a < 0.5f)
+                {
+                    c1.a += 0.08f;
+                }
+                teaPattern.GetComponent<SpriteRenderer>().color = c1;
+            }
+            else
+            {
+                var c1 = teaPattern.GetComponent<SpriteRenderer>().color;
+                if (c1.a > 0)
+                {
+                    c1.a -= 0.08f;
+                }
+                teaPattern.GetComponent<SpriteRenderer>().color = c1;
+            }
+        }
+        else
+        {
+            var c1 = teaPattern.GetComponent<SpriteRenderer>().color;
+            if (c1.a > 0)
+            {
+                c1.a -= 0.08f;
+            }
+            teaPattern.GetComponent<SpriteRenderer>().color = c1;
+        }
+    }
 }

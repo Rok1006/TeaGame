@@ -17,7 +17,7 @@ public class MomentoDisplay : MonoBehaviour
     }
     void Start()
     {
-        GM = GameObject.Find("GameManger").GetComponent<GameManager>();
+        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         momentoAnim = MomentoBox.GetComponent<Animator>();  //give
     }
 

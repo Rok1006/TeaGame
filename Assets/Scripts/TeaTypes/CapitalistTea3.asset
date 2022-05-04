@@ -22,3 +22,6 @@ MonoBehaviour:
   - cheap
   - sweet
   teaMakingOrder: 
+  teaColor:
+    serializedVersion: 2
+    rgba: 4282355818

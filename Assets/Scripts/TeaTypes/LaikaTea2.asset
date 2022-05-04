@@ -14,10 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teaName: Russian Black Tea
   amtOfLiquid: 90
-  heatnessOfWater: 25
-  maxHeatness: 40
+  heatnessOfWater: 20
+  maxHeatness: 45
   scoopOfPowder: 2
   IngredientsCategory:
   - savory
   - spicy
   teaMakingOrder: 
+  teaColor:
+    serializedVersion: 2
+    rgba: 4285745249

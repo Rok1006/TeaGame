@@ -10,17 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fd80540f4dab4e28867eee92e300f50, type: 3}
-  m_Name: CapitalistTea2
+  m_Name: Sensei
   m_EditorClassIdentifier: 
-  teaName: Her Blend
-  amtOfLiquid: 95
-  heatnessOfWater: 65
-  maxHeatness: 85
-  scoopOfPowder: 1
-  IngredientsCategory:
-  - expensive
-  - cheap
+  teaName: Empty
+  amtOfLiquid: 0
+  heatnessOfWater: 0
+  maxHeatness: 0
+  scoopOfPowder: 0
+  IngredientsCategory: []
   teaMakingOrder: 
   teaColor:
     serializedVersion: 2
-    rgba: 4286426536
+    rgba: 0

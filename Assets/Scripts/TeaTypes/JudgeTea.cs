@@ -44,14 +44,16 @@ public class JudgeTea : MonoBehaviour
     void Update()
     {
        CurrentSOJ(); 
-    //    if(Input.GetKey(KeyCode.Space)){
-    //        IngredientsCatAdded.Clear();
-    //     IngredientsCatAdded.TrimExcess();
-    //    }
+        if(CheckAmtofPowder()&&CheckIngredFlavour()){
+            Tea.Instance.targetColor = currentSOJ.teaColor;
+        }else{
+            Tea.Instance.TeaColorChange();
+        }
     }
     public void CurrentSOJ(){
         switch(GameManager.Instance.ghostIndex){
             case 0: //sensei, no need judge
+                currentSOJ = StudentTeaSOJ1;
             break;
             case 1: //student ghost
                 GetPlayerTeaState();

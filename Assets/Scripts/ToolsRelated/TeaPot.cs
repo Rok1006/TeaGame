@@ -106,6 +106,7 @@ public class TeaPot : MonoBehaviour
                 toolFirststep.SetActive(false); //tutorial
                 moveup = true;
                 Tea.Instance.heatBar.SetActive(true);
+                Tea.Instance.capacity.SetActive(true);
                 //Tutorial.Instance.TPsteps[Tutorial.Instance.stepIndex].SetActive(true); //tutorial
               if(toolFirststep.activeSelf)
                 { 
@@ -284,6 +285,7 @@ public class TeaPot : MonoBehaviour
             upState=0;
             sc.PlaceTeaPot();
             Tea.Instance.heatBar.SetActive(false);
+            Tea.Instance.capacity.SetActive(false);
             pickedUP = false; 
             canClick =true;
         }

@@ -17,6 +17,7 @@ public class TeaType : ScriptableObject
     public int scoopOfPowder = 0;
     public string[] IngredientsCategory;
     public string teaMakingOrder;  //"12345" 
+    public Color32 teaColor;
     // [Header("DetermineTea")]
     // public bool correctOrder = false;
     // public bool enoughLiquid = false;

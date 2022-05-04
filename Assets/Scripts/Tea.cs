@@ -37,6 +37,8 @@ public class Tea : MonoBehaviour
     public TextMeshProUGUI degree;
     public int maxD, minD; 
     public float temp = 20;
+    public GameObject capacity;
+    public TextMeshProUGUI capacityDisplay;
     
     [Header("Tea Status")]
     public bool stirring = false;
@@ -90,6 +92,7 @@ public class Tea : MonoBehaviour
     {
         teasprite.color = currentColor;
         degree.text = Mathf.Round(temp).ToString();
+        capacityDisplay.text = Mathf.Round(liquidLevel).ToString();
 //FillUp Tea
         // liquidLevel = cc.fillAmount;  //originally uncheck
         distance = TopPos.transform.position.y-OriginalPos.transform.position.y;
@@ -128,16 +131,8 @@ public class Tea : MonoBehaviour
             //RestartStirBar(); //put this on when new things is added
             // TeaState();//affect tea//change tea color  //move it to before stirring, for instance when pick up tool
         }
-//Change of state
-        if(numOfPowder==3){  //right amt
-            teastate = 1;
-        }else if(numOfPowder<3&&numOfPowder>0){  //too less
-            teastate = 2;
-        }else if(numOfPowder>3){   //too much
-            teastate = 4;
-        }else if(numOfPowder<1){  //&& if have other ingredients
-            teastate = 0;
-        }
+//Change of tea state-------------------
+        TeaColorChange();
 //Destroy special ingredients if have liquid
         if (liquidLevel >= 30f)  //om3
         {
@@ -184,8 +179,16 @@ public class Tea : MonoBehaviour
         //melted = true; commented this out bc what is the player adds after melting?
         //If find good way to optimize, don't have this method run in update.
     }
-    void TeaBottom(){
-        //teaColor.a = 0f;
+    public void TeaColorChange(){
+        if(numOfPowder==3){  //right amt
+            teastate = 1;
+        }else if(numOfPowder<3&&numOfPowder>0){  //too less
+            teastate = 2;
+        }else if(numOfPowder>3){   //too much; super dark
+            teastate = 4;
+        }else if(numOfPowder<1){  //&& if have other ingredients
+            teastate = 0;
+        }
     }
     void FillingUP(){   //Filling UP tea
         if(SpillingDetector.Instance.inCup&& Input.GetMouseButton(0)&&TeaPot.Instance.degree<TeaPot.Instance.pouringDegree){

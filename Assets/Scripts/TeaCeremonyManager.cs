@@ -236,15 +236,6 @@ public class TeaCeremonyManager : MonoBehaviour
         yield return new WaitForSeconds(3.5f);
         cloudParticles.SetActive(false); 
     }
-    // public void JudgeTea(){   //sensei and customer judging your tea
-    //     if(Tutorial.Instance.tutorialComplete){ //is completed tutrial
-    //         // TeaType.Instance.CheckCurrentTea();
-    //         GameManager.Instance.currGhost.DrinkTea(tea.GetComponent<Tea>());//opposite person with do sth to the tea
-    //         TeaReturn();
-    //     }else{ //For tutorial tea
-    //         TeaType.Instance.CheckTutorialTea();
-    //     }
-    // }
     public void TeaReturn(){
         mainCup.transform.position = OriginalCupPos.transform.position;
         served = false;

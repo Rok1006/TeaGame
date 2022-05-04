@@ -11,6 +11,6 @@ public class Yarn_load_scene : MonoBehaviour
     // Update is called once per frame
     public static void Load()
     {
-        SceneManager.LoadScene("StartScene");
+        SceneManager.LoadScene(0);
     }
 }

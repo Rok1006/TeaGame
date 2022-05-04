@@ -62,6 +62,9 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
+        if (runner.IsDialogueRunning) {
+            TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.Nothing;
+        }
         CheckState();
         if (count) { StartCoroutine(Angry());count = false; }
     }

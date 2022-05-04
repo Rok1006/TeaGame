@@ -74,8 +74,10 @@ public class Tea : MonoBehaviour
         stirBar.SetActive(false);
         cc.fillAmount = 0;
         cupCapacity.SetActive(false);  //on when player holding up pot
-        
-        teaPattern.SetActive(false);
+
+        var c = teaPattern.GetComponent<SpriteRenderer>().color;
+        c.a = 0;
+        teaPattern.GetComponent<SpriteRenderer>().color = c;
         initialDistance = TopPos.transform.position.y-OriginalPos.transform.position.y;
         originalDistance = TopPos.transform.position.y-OriginalPos.transform.position.y;
         //Reset Related
@@ -111,21 +113,38 @@ public class Tea : MonoBehaviour
 //Stirring Tea
         if(stirring){   //the bar
             Vector2 thisMousePos = Input.mousePosition;
-            if (Mathf.Abs(thisMousePos.x-mousePos.x)>0|| Mathf.Abs(thisMousePos.y - mousePos.y)>0)
+            if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
             {
-                teaPattern.SetActive(true);
+                var c1 = teaPattern.GetComponent<SpriteRenderer>().color;
+                if (c1.a < 0.5f)
+                {
+                    c1.a += 0.01f;
+                }
+                teaPattern.GetComponent<SpriteRenderer>().color = c1;
             }
             else
             {
-                teaPattern.SetActive(false);
+                var c1 = teaPattern.GetComponent<SpriteRenderer>().color;
+                if (c1.a > 0)
+                {
+                    c1.a -= 0.01f;
+                }
+                teaPattern.GetComponent<SpriteRenderer>().color = c1;
             }
             mousePos = thisMousePos;
-            stirBar.SetActive(true);
+            
+           
+            
             sb.fillAmount+=0.7f*Time.deltaTime;  //Default: 0.008f
             GradualColorChange();
         }else{
             stirBar.SetActive(false);
-            teaPattern.SetActive(false);
+            var c = teaPattern.GetComponent<SpriteRenderer>().color;
+            if (c.a > 0)
+            {
+                c.a -= 0.01f;
+            }
+            teaPattern.GetComponent<SpriteRenderer>().color = c;
         }
         if(sb.fillAmount==1){  //every stirr
             //RestartStirBar(); //put this on when new things is added

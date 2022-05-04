@@ -232,11 +232,11 @@ public class JudgeTea : MonoBehaviour
         if(heatnessRight){count+=1;}
         if(enoughPowder){count+=1;}
         if(ingredientCorrect){count+=1;}
-        // if(stirred){count+=1;} //later add back
+        if(stirred){count+=1;} //later add back
         // if(correctOrder){count+=1;}  //later add back
         // if (GameManager.Instance.ghostIndex==0) { return true; }
         
-        if(count==4){
+        if(count>4){
             Debug.Log(count);
             return true;
         }else{

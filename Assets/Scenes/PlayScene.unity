@@ -10613,6 +10613,7 @@ MonoBehaviour:
   FP: {fileID: 672394816}
   isPouring: 0
   mousePos: {x: 0, y: 0}
+  mouseMove: 0
 --- !u!212 &414926195
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -30027,7 +30028,7 @@ MonoBehaviour:
   - {fileID: 389663942}
   - {fileID: 290878934}
   - {fileID: 2008223407}
-  ghostIndex: 3
+  ghostIndex: 2
   Arrows: {fileID: 708259171}
   arrowAnim: {fileID: 0}
   onoffarrow: 0
@@ -99086,6 +99087,7 @@ MonoBehaviour:
   FP: {fileID: 0}
   isPouring: 0
   mousePos: {x: 0, y: 0}
+  mouseMove: 0
 --- !u!65 &1953210250
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -100940,8 +100942,8 @@ MonoBehaviour:
   canProceed: 0
   tea: {fileID: 414926190}
   sc: {fileID: 0}
-  ts: {fileID: 0}
-  tutorialObj: {fileID: 705667687}
+  ts: {fileID: 1469967469}
+  tutorialObj: {fileID: 1469967467}
 --- !u!114 &2067510784
 MonoBehaviour:
   m_ObjectHideFlags: 0

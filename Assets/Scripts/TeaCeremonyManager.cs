@@ -107,10 +107,15 @@ public class TeaCeremonyManager : MonoBehaviour
     void Update()
     {
         toolText.GetComponent<Text>().text =  tText.ToString();
-        if(currentTool == TeaTool.NOTOOL||currentTool == TeaTool.NONE&&currentTutorialState == TutorialState.FreePlay){
-            if(ts.tutorialComplete){
-                discardButton.SetActive(true);
-            }
+        // if(currentTool == TeaTool.NOTOOL||currentTool == TeaTool.NONE&&currentTutorialState == TutorialState.FreePlay){
+        //     if(ts.tutorialComplete){
+        //         discardButton.SetActive(true);
+        //     }
+        // }else{
+        //     discardButton.SetActive(false);
+        // }
+        if(ts.tutorialComplete&&currentTutorialState == TutorialState.FreePlay&&currentTool == TeaTool.NONE){
+            discardButton.SetActive(true);
         }else{
             discardButton.SetActive(false);
         }

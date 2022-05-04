@@ -113,6 +113,7 @@ public class Tea : MonoBehaviour
         FillingUP(); 
 //Stirring Tea
         if(stirring){   //the bar
+            stirBar.SetActive(true);
             Vector2 thisMousePos = Input.mousePosition;
             if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
             {
@@ -123,9 +124,6 @@ public class Tea : MonoBehaviour
                 mouseMove = false;
             }
             mousePos = thisMousePos;
-            
-           
-            
             sb.fillAmount+=0.7f*Time.deltaTime;  //Default: 0.008f
             GradualColorChange();
         }else{
@@ -133,6 +131,7 @@ public class Tea : MonoBehaviour
             mouseMove = false;
         }
         if(sb.fillAmount==1){  //every stirr
+            JudgeTea.Instance.stirred = true;
             //RestartStirBar(); //put this on when new things is added
             // TeaState();//affect tea//change tea color  //move it to before stirring, for instance when pick up tool
         }

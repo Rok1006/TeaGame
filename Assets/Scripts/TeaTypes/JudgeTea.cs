@@ -77,33 +77,43 @@ public class JudgeTea : MonoBehaviour
                 switch(GhostTeaNum){
                     case 0:
                         currentSOJ = CapitalistSOJ1;
-                        if(IFPass()){GhostTeaNum = 1; }
+                        //if(IFPass()){GhostTeaNum = 1; }
                     break;
                     case 1:
                         currentSOJ = CapitalistSOJ2;
-                        if(IFPass()){GhostTeaNum = 2; }
+                        //if(IFPass()){GhostTeaNum = 2; }
                     break;
                     case 2:
                         currentSOJ = CapitalistSOJ3;  //reset after pass
-                        if(IFPass()){GhostTeaNum = 0; }
+                        //if(IFPass()){GhostTeaNum = 0; }
                     break;
                 }
             break;
         }
     }
     public bool CheckIngredFlavour(){  //check there is certain ingred
-        bool have = false;
-        //int countOfIngred = 0; //count the num of it
-        for(int i = 0; i<IngredientsCatAdded.Count; i++){  //what player have
-            for(int j = 0; j<currentSOJ.IngredientsCategory.Length; j++){  //the standard list
-                if(IngredientsCatAdded[i]==currentSOJ.IngredientsCategory[j]){ //if have that ingred in it
-                    have = true;
-                }else{
-                    have = false;
+        bool haveF = false;
+        bool haveR = false;
+        // if(IngredientsRankAdded.Count>0){ 
+            for(int i = 0; i<IngredientsCatAdded.Count; i++){  //what player have
+                for(int j = 0; j<currentSOJ.IngredientsCategory.Length; j++){  //the standard list
+                    if(IngredientsCatAdded[i]==currentSOJ.IngredientsCategory[j]){ //if have that ingred in it
+                        haveF = true;
+                    }else{
+                        haveF = false;
+                    }
                 }
             }
-        }
-        if(have){
+            for(int i = 0; i<IngredientsRankAdded.Count; i++){  //what player have
+                for(int j = 0; j<currentSOJ.IngredientsCategory.Length; j++){  //the standard list
+                    if(IngredientsRankAdded[i]==currentSOJ.IngredientsCategory[j]){ //if have that ingred in it
+                        haveR = true;
+                    }else{
+                        haveR = false;
+                    }
+                }
+            }
+        if(haveF||haveR){
             return true;
         }else{
             return false;
@@ -194,7 +204,7 @@ public class JudgeTea : MonoBehaviour
         if(CheckMakeOrder()==true){correctOrder = true;}else{correctOrder = false;}
     }
     public bool CheckAmtofPowder(){
-        Debug.Log("checking powders");
+       // Debug.Log("checking powders");
         if(currentSOJ==StudentTeaSOJ1){  //this one with either one or 2 scoop, others are fixed
             Debug.Log("student");
             if(powderAdded>0&&powderAdded<=2){
@@ -222,11 +232,12 @@ public class JudgeTea : MonoBehaviour
         if(heatnessRight){count+=1;}
         if(enoughPowder){count+=1;}
         if(ingredientCorrect){count+=1;}
-        if(stirred){count+=1;} //later add back
-        if(correctOrder){count+=1;}  //later add back
-        if (GameManager.Instance.ghostIndex==0) { return true; }
+        // if(stirred){count+=1;} //later add back
+        // if(correctOrder){count+=1;}  //later add back
+        // if (GameManager.Instance.ghostIndex==0) { return true; }
         
         if(count==4){
+            Debug.Log(count);
             return true;
         }else{
             return false;

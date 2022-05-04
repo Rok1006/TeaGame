@@ -422,7 +422,7 @@ public class GameManager : MonoBehaviour
 
                                 runner.StartDialogue("Captial_Stage_2");
                                 TeaCeremonyManager.Instance.OtherTeaReturn(); //new
-
+                                JudgeTea.Instance.GhostTeaNum = 1;
                                 Captial_index = 2;
                                 break;
                             }
@@ -455,7 +455,7 @@ public class GameManager : MonoBehaviour
                             {
                                 runner.StartDialogue("Captial_Stage_3");
                                 TeaCeremonyManager.Instance.OtherTeaReturn(); //new
-
+                                JudgeTea.Instance.GhostTeaNum = 2;
                                 Captial_index = 4;
                                 break;
                             }

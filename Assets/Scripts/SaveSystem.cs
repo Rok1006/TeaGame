@@ -9,7 +9,16 @@ public class SaveSystem : MonoBehaviour
     {
         if (enableSave)
         {
-            if (ES3.KeyExists("biggestIndex"))
+            int selectedIndex = -1;
+            if (ES3.KeyExists("selectedIndex"))
+            {
+                selectedIndex = ES3.Load<int>("selectedIndex");
+            }
+            if (selectedIndex >= 0)
+            {
+                GameObject.Find("GameManager").GetComponent<GameManager>().ghostIndex = selectedIndex;
+            }
+            else if (ES3.KeyExists("biggestIndex"))
             {
                 GameObject.Find("GameManager").GetComponent<GameManager>().ghostIndex = ES3.Load<int>("biggestIndex");
             }
@@ -20,9 +29,11 @@ public class SaveSystem : MonoBehaviour
     {
         if (enableSave)
         {
-            ES3.Save("ghostIndex", index);
-            int theIndex = ES3.Load<int>("ghostIndex");
-            Debug.Log(theIndex + " saved");
+            if (!ES3.KeyExists("biggestIndex"))
+            {
+                ES3.Save("ghostIndex", index);
+            }
+            ES3.Save("selectedIndex", -1);
         }
     }
 

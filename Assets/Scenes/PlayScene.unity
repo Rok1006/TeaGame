@@ -101020,7 +101020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cff3ed0f0b94abc4498c6f264e5ea976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableSave: 0
+  enableSave: 1
 --- !u!4 &2069071639 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 40fea843c6b43458b9079526bfbc01fc,

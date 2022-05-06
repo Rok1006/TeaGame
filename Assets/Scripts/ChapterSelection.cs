@@ -8,6 +8,7 @@ public class ChapterSelection : MonoBehaviour
     public GameObject chapterParent;
     public bool opened;
     public int theIndex = -1;
+    public int selectedIndex = -1;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +16,7 @@ public class ChapterSelection : MonoBehaviour
         {
             theIndex = ES3.Load<int>("biggestIndex");
         }
+        ES3.Save("selectedIndex", selectedIndex);
     }
 
     // Update is called once per frame
@@ -51,4 +53,11 @@ public class ChapterSelection : MonoBehaviour
             opened = false;
         }
     }
+
+
+    public void selectGhost(int idx)
+    {
+        ES3.Save("selectedIndex", idx);
+    }
+
 }

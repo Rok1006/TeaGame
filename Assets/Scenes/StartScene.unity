@@ -290,6 +290,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1398462814}
+        m_TargetAssemblyTypeName: ChapterSelection, Assembly-CSharp
+        m_MethodName: selectGhost
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &25493648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -921,6 +933,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1398462814}
+        m_TargetAssemblyTypeName: ChapterSelection, Assembly-CSharp
+        m_MethodName: selectGhost
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &188357819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1150,6 +1174,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1398462814}
+        m_TargetAssemblyTypeName: ChapterSelection, Assembly-CSharp
+        m_MethodName: selectGhost
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4367,6 +4403,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1398462814}
+        m_TargetAssemblyTypeName: ChapterSelection, Assembly-CSharp
+        m_MethodName: selectGhost
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -17361,6 +17409,7 @@ MonoBehaviour:
   chapterParent: {fileID: 132254564}
   opened: 0
   theIndex: -1
+  selectedIndex: -1
 --- !u!1 &1405430627 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8994965142421717867, guid: 65c51c3a2e4254185ae3834fb50df5bc,

@@ -69,6 +69,8 @@ public class Effects : MonoBehaviour
         StartCoroutine(PlantArrowShow());
     }
     IEnumerator PlantArrowShow(){
+        Debug.Log("run");
+        arrowAnim.SetTrigger("Deactivate");
         arrowAnim.SetTrigger("plant");
         yield return new WaitForSeconds(1.5f);
         arrowAnim.SetTrigger("Deactivate");

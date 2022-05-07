@@ -206,7 +206,26 @@ Hmph. I suppose this will suffice.
 title: Captial_Stage_1_wrong_tea
 position: -180,90
 ---
-No! That’s not right! It has to be the finest! Only the most bitter/most expensive!
+No! That’s not right! 
+<<SE capitalist_angry_4>>
+<<if Read("hot")==true>>
+I once heard my master say that how hot something is affects how it tastes. Maybe if this was cooler?
+<<endif>>
+<<if Read("cold")==true>>
+I once heard my master say that how hot something is affects how it tastes. Maybe if this was hotter?
+<<endif>>
+<<if Read("bitter")==true>>
+Wow! This is really bitter! I don’t think this is what my master used to drink.
+<<endif>>
+<<if Read("light")==true>>
+No! Not enough flavor! Are you trying to scam me?!
+<<endif>>
+<<if Read("ingre")==true>>
+It has to be the finest! Only the most expensive!
+<<endif>>
+<<if Read("little")==true>>
+Too little water! Can’t you even make tea properly?!
+<<endif>>
 <<Camera_Change>>
 ===
 title: Captial_Stage_2
@@ -243,7 +262,26 @@ It’s been so long since I had tea like this…like what she made…
 title: Captial_Stage_2_wrong_tea
 position: -180,90
 ---
-No…I want what she made…the nice stuff, but diluted. Sweeter.
+<<SE capitalist_angry_4>>
+No…
+<<if Read("hot")==true>>
+it’s too hot. I don’t have time to wait for it to cool
+<<endif>>
+<<if Read("cold")==true>>
+it’s too cold. Neither of us liked cold tea.
+<<endif>>
+<<if Read("bitter")==true>>
+this is too bitter. She’d never waste tea like this.
+<<endif>>
+<<if Read("light")==true>>
+this doesn’t have enough flavor. She’d never be cheap like this.
+<<endif>>
+<<if Read("ingre")==true>>
+I want what she made…the nice stuff, but diluted. Sweeter.
+<<endif>>
+<<if Read("little")==true>>
+this isn’t enough water. She always made enough for us both.
+<<endif>>
 <<Camera_Change>>
 ===
 title: Captial_Stage_3
@@ -272,7 +310,26 @@ I’m just sorry it took me dying to realize that.
 title: Captial_Stage_3_wrong_tea
 position: 111,-166
 ---
-I just want one last cup of tea. Like we had when we were happy. The best tea I ever drank…
+I just want one last cup of tea.
+<<SE capitalist_angry_4>>
+<<if Read("hot")==true>>
+it’s too hot. I don’t have time to wait for it to cool. She’s not here for me to talk to.
+<<endif>>
+<<if Read("cold")==true>>
+it’s too cold. Neither of us liked cold tea.
+<<endif>>
+<<if Read("bitter")==true>>
+this is too bitter. She’d never waste tea like this.
+<<endif>>
+<<if Read("light")==true>>
+this doesn’t have enough flavor. She’d never be cheap like this.
+<<endif>>
+<<if Read("ingre")==true>>
+Like we had when we were happy. The best tea I ever drank…
+<<endif>>
+<<if Read("little")==true>>
+What we had wasn’t expensive, but it was all we could afford. We had to make it last. 
+<<endif>>
 <<Camera_Change>>
 ===
 title: Captial_Stage_3_right_tea

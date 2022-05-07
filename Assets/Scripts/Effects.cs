@@ -16,6 +16,8 @@ public class Effects : MonoBehaviour
     ParticleSystem badp;
     public GameObject scrollObject;
     Animator scrollAnim;
+    public GameObject arrows;
+    Animator arrowAnim;
     void Awake() {
         Instance = this;
     }
@@ -29,6 +31,7 @@ public class Effects : MonoBehaviour
         badp.emissionRate = 1.45f;
 
         scrollAnim = scrollObject.GetComponent<Animator>();
+        arrowAnim = arrows.GetComponent<Animator>();
     }
 
     void Update()
@@ -61,5 +64,16 @@ public class Effects : MonoBehaviour
         yield return new WaitForSeconds(1f);
         CamSwitch.Instance.ConversationCamOn();
         scrollAnim.SetTrigger("idle");
+    }
+    public void PlantArrow_Show(){  //this is effect.cs, link this to right before plant dialogue
+        StartCoroutine(PlantArrowShow());
+    }
+    IEnumerator PlantArrowShow(){
+        arrowAnim.SetTrigger("plant");
+        yield return new WaitForSeconds(1.5f);
+        arrowAnim.SetTrigger("Deactivate");
+    }
+    public void GhostAngry(){
+        TableLighting.SetTrigger("ghostAngry");
     }
 }

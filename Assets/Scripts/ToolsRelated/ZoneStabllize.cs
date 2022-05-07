@@ -100,6 +100,7 @@ public class ZoneStabllize : MonoBehaviour
             FruitPlant.SetBool("weak2", false);
             FruitPlant.SetBool("weak1", false);
             FruitPlant.SetTrigger("reviving");
+            Effects.Instance.TableLighting.SetTrigger("normal");
         }
     }
 }

@@ -119,7 +119,7 @@ public class JudgeTea : MonoBehaviour
             return false;
         }
     }
-    public void CompareNumOfIngred(string s){  //use this to check the amount of certain ingred
+    public void CompareNumOfIngred(string s){  //use this to check the amount of certain ingred //Condition 4: correct ingredient?
         int numOFIngredInPlayerTea = 0;
         int numOfIngredInStandard = 0;
         for(int i = 0; i<IngredientsCatAdded.Count; i++){
@@ -135,6 +135,7 @@ public class JudgeTea : MonoBehaviour
         if(numOFIngredInPlayerTea==numOfIngredInStandard){
             correctIngredAmount = true;
         }else{
+            //wrong ingredient; trigger dialogue?
             correctIngredAmount = false;
         }
     }
@@ -178,12 +179,12 @@ public class JudgeTea : MonoBehaviour
     }
     public void CheckCurrentTea(){  //Before final step
     Debug.Log("executed");
-        if(amtOfLiquid >= currentSOJ.amtOfLiquid){
+        if(CheckLiquidAmt()){
             enoughLiquid = true;
         }else{
             enoughLiquid = false;
         }
-        if(heatnessOfWater >= currentSOJ.heatnessOfWater&&heatnessOfWater <= currentSOJ.maxHeatness){
+        if(CheckWaterTemperature()){
             heatnessRight = true;
         }else{
             heatnessRight = false;
@@ -198,13 +199,30 @@ public class JudgeTea : MonoBehaviour
         }else{
             ingredientCorrect = false;
         }
-       //compare amt
         IngredCompareAccordtoTeaType();
-        //stirred is determine at another place?
         if(CheckMakeOrder()==true){correctOrder = true;}else{correctOrder = false;}
     }
-    public bool CheckAmtofPowder(){
-       // Debug.Log("checking powders");
+    public bool CheckLiquidAmt(){  //Condition 1: enough liquid
+        if(amtOfLiquid >= currentSOJ.amtOfLiquid){
+            return true;
+        }else{
+            //too less water;trigger dialogue?
+            return false;
+        }
+    }
+    public bool CheckWaterTemperature(){ //Condition 2: hot enough?
+        if(heatnessOfWater > currentSOJ.heatnessOfWater){ //for conditioned dialogue
+            //too hot;trigger dialogue?
+        }else{
+            //too cold;trigger dialogue?
+        }
+        if(heatnessOfWater >= currentSOJ.heatnessOfWater&&heatnessOfWater <= currentSOJ.maxHeatness){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public bool CheckAmtofPowder(){   //Condition 3: powder enough?
         if(currentSOJ==StudentTeaSOJ1){  //this one with either one or 2 scoop, others are fixed
             Debug.Log("student");
             if(powderAdded>0&&powderAdded<=2){
@@ -213,6 +231,11 @@ public class JudgeTea : MonoBehaviour
                 return false;
             }
         }else{
+            if(powderAdded > currentSOJ.scoopOfPowder){
+                //too bitter;trigger dialogue?
+            }else{
+                //too watery;trigger dialogue?
+            }
             if(powderAdded == currentSOJ.scoopOfPowder){
                 return true;
             }else{

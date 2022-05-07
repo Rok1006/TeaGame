@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4609993118926053782}
   m_Layer: 0
   m_Name: ChiliCut
-  m_TagString: Untagged
+  m_TagString: Ingredients
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,4 +131,5 @@ MonoBehaviour:
   isAsh: 0
   isBomb: 0
   isLeaf: 0
+  isChili: 1
   sc: {fileID: 0}

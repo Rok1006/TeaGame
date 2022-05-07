@@ -152,22 +152,28 @@ But my master told me to, so I was happy to do it.
 title: Captial_Stage_1
 position: -196,-105
 ---
+<<SE capitalist_normal_1>>
 Money…money…money…
 Need more…must keep working…
 Never enough time, never enough.
+<<SE capitalist_normal_1>>
 The new car, the mortgage, need a new suit.
 Has to be Armani. Has to be nice.
+<<SE capitalist_angry_1>>
 Only the finest. Only the most expensive.
 Can’t look like a slob going into work.
 Dress for the job you want.
 I want more.
+<<SE capitalist_angry_3>>
 I want to make more money.
 When did I last go home?
 She’s saying she’ll leave me…
+<<SE capitalist_angry_2>>
 She doesn’t understand, I’m doing this for us!
 I don’t need her.
 I don’t need her!
 She doesn’t understand…
+<<SE capitalist_normal_1>>
 I need more money!
 <<Camera_Change>>
 ===
@@ -186,19 +192,25 @@ title: Captial_Stage_2
 position: -354,-21
 ---
 Hmph. I suppose this will suffice.
+<<SE capitalist_normal_1s>>
 I miss her…
 I’ve just been working so hard…
+<<SE capitalist_angry_4>>
 What was it all for?
 Things?
 Why did I always need things?
 I thought they would make me happy…
+<<SE capitalist_normal_1>>
 I remember…
 Back when I was just starting to get successful…
+<<SE capitalist_happy_1>>
 I bought some really nice tea.
 For her, for us.
 But it was expensive, more than we could really afford.
+<<SE capitalist_angry_1>>
 So she mixed it with the cheap stuff, to make it last longer…
 We drank it together.
+<<SE capitalist_happy_1>>
 I miss her so much.
 <<Camera_Change>>
 ===
@@ -222,14 +234,17 @@ Neither of us had any money.
 We could barely afford the basics.
 Everything we had, we got on sale.
 We bought things in bulk when we could.
+<<SE capitalist_happy_1>>
 But we always drank tea together.
 It was cheap tea, something you could get at any convenience store.
+<<SE capitalist_happy_2>>
 But we drank it together, and it was wonderful. 
 It was the most wonderful tea I ever drank.
 …I should have listened to her.
 She said I was killing myself, working so hard.
 She said we didn’t need more nice things, that being together was enough.
 It was.
+<<SE capitalist_normal_1>>
 I’m just sorry it took me dying to realize that.
 <<Camera_Change>>
 ===
@@ -243,6 +258,7 @@ title: Captial_Stage_3_right_tea
 position: -180,90
 ---
 <<Momento>>
+<<SE capitalist_happy_3>>
 The most wonderful tea…thank you. It wasn’t expensive, but it was ours. .
 <<load>>
 ===

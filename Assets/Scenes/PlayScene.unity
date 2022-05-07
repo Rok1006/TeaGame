@@ -2880,6 +2880,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4160fec2a69b7904780ed7507cfc4a12, type: 3}
   - {fileID: 8300000, guid: 70146d3922c367e4dbe2dcc2239f029a, type: 3}
   - {fileID: 8300000, guid: 2c9aa832f4f70b149b5db6abcc279b9d, type: 3}
+  - {fileID: 8300000, guid: d933a93fc4e3934419d7139cd507d5ef, type: 3}
+  - {fileID: 8300000, guid: dc9f04369f79c0b4090630bde02e49ef, type: 3}
+  - {fileID: 8300000, guid: d0b4ec5ba557f1c4b89d8239eceb7290, type: 3}
+  - {fileID: 8300000, guid: 9847fc1175e21bc498bc40c4b4e80abd, type: 3}
+  - {fileID: 8300000, guid: 46b9672b47ad33c46b2ac6b981f55d91, type: 3}
+  - {fileID: 8300000, guid: babab37e02aaea048bdd4a70798efed8, type: 3}
+  - {fileID: 8300000, guid: 1f010da1fb12c1a468613778eafd1bdd, type: 3}
+  - {fileID: 8300000, guid: 263d23ac8f135e145b4b3b5e9f884827, type: 3}
+  - {fileID: 8300000, guid: 0bd8de4f2ce951044bd68ef4aee52360, type: 3}
+  - {fileID: 8300000, guid: 3abd7a8f91f90c14bbc030beaaf4aa6a, type: 3}
+  - {fileID: 8300000, guid: af93e59d96215b344a45e4bfd574d02c, type: 3}
+  - {fileID: 8300000, guid: 05669cb26ff38ac4eade3583f32a27ea, type: 3}
+  - {fileID: 8300000, guid: 09365f6762a36de4c8a9bf498fde2e9b, type: 3}
 --- !u!1 &196600697
 GameObject:
   m_ObjectHideFlags: 0
@@ -30028,7 +30041,7 @@ MonoBehaviour:
   - {fileID: 389663942}
   - {fileID: 290878934}
   - {fileID: 2008223407}
-  ghostIndex: 1
+  ghostIndex: 3
   Arrows: {fileID: 708259171}
   arrowAnim: {fileID: 0}
   onoffarrow: 0

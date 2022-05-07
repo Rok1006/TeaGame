@@ -270,7 +270,25 @@ Oh…this tastes really nice…I wish I had had more of this in life.
 title: Student_Wrong
 position: -4,-79
 ---
-Oh…it’s tea…I wish it was sweeter…
+Oh…it’s tea…
+<<if Read("hot")==true>>
+I wish it wasn’t quite so hot…
+<<endif>>
+<<if Read("cold")==true>>
+I wish it was hotter…
+<<endif>>
+<<if Read("bitter")==true>>
+it’s awfully bitter, though…
+<<endif>>
+<<if Read("light")==true>>
+it doesn’t really have much flavor…
+<<endif>>
+<<if Read("ingre")==true>>
+I wish it was sweeter…
+<<endif>>
+<<if Read("little")==true>>
+I wish there was more…
+<<endif>>
 <<Camera_Change>>
 ===
 title: Sensei_Final

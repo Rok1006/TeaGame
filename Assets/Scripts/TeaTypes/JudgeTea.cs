@@ -33,6 +33,13 @@ public class JudgeTea : MonoBehaviour
     public bool ingredientCorrect = false;
     public bool stirred = false;
     public int TeaFlavour; //the score of the tea, default ?
+    public static bool hot;
+    public static bool cold;
+    public static bool bitter;
+    public static bool light;
+    public static bool little;
+    public static bool much;
+    public static bool ingre;
     void Awake() {
         Instance = this;
     }
@@ -49,6 +56,7 @@ public class JudgeTea : MonoBehaviour
         }else{
             Tea.Instance.TeaColorChange();
         }
+        
     }
     public void CurrentSOJ(){
         switch(GameManager.Instance.ghostIndex){
@@ -179,6 +187,7 @@ public class JudgeTea : MonoBehaviour
     }
     public void CheckCurrentTea(){  //Before final step
     Debug.Log("executed");
+        hot = false;cold = false;light = false;little = false;bitter = false;much = false;ingre = false;
         if(CheckLiquidAmt()){
             enoughLiquid = true;
         }else{
@@ -196,8 +205,10 @@ public class JudgeTea : MonoBehaviour
         }
         if(CheckIngredFlavour()){
             ingredientCorrect = true;
+            
         }else{
             ingredientCorrect = false;
+            ingre = true;
         }
         IngredCompareAccordtoTeaType();
         if(CheckMakeOrder()==true){correctOrder = true;}else{correctOrder = false;}
@@ -207,14 +218,18 @@ public class JudgeTea : MonoBehaviour
             return true;
         }else{
             //too less water;trigger dialogue?
+            little = true;
+          
             return false;
         }
     }
     public bool CheckWaterTemperature(){ //Condition 2: hot enough?
         if(heatnessOfWater > currentSOJ.heatnessOfWater){ //for conditioned dialogue
             //too hot;trigger dialogue?
+            hot = true;
         }else{
             //too cold;trigger dialogue?
+            cold = true;
         }
         if(heatnessOfWater >= currentSOJ.heatnessOfWater&&heatnessOfWater <= currentSOJ.maxHeatness){
             return true;
@@ -233,7 +248,9 @@ public class JudgeTea : MonoBehaviour
         }else{
             if(powderAdded > currentSOJ.scoopOfPowder){
                 //too bitter;trigger dialogue?
+                bitter = true;
             }else{
+                light = true;
                 //too watery;trigger dialogue?
             }
             if(powderAdded == currentSOJ.scoopOfPowder){

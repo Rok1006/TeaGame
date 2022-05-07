@@ -262,6 +262,7 @@ public class GameManager : MonoBehaviour
                                     else
                                     {
                                         runner.Stop();
+                                      
                                         runner.StartDialogue("Student_Wrong");
                                         CamSwitch.Instance.ConversationCamOn();
 

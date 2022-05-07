@@ -423,3 +423,38 @@ I want dessert...I don't care about my diar-
 Just get the dessert! I can't go feeling this uncontend!
 The tool is on your left!!!
 ===
+title: student_wrong_ingredient
+position: -11,310
+---
+Oh…it’s tea…I wish it was sweeter…
+===
+title: student_too_little_water
+position: -11,310
+---
+Oh…it’s tea…I wish there was more…
+===
+title: student_too_much_water
+position: -11,310
+---
+Oh…it’s tea…I think it’s too full for me to drink…
+===
+title: student_too_hot
+position: -11,310
+---
+Oh…it’s tea…I wish it wasn’t quite so hot…
+===
+title: student_too_cold
+position: -11,310
+---
+Oh…it’s tea…I wish it was hotter…
+===
+title: student_too_bitter
+position: -11,310
+---
+Oh…it’s tea…it’s awfully bitter, though…
+===
+title: student_too_light
+position: -11,310
+---
+Oh…it’s tea…it doesn’t really have much flavor…
+===

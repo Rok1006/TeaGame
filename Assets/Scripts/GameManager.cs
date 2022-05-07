@@ -356,7 +356,7 @@ public class GameManager : MonoBehaviour
                                     }
                                     else
                                     {
-                                        runner.StartDialogue("Laikai_Wrong_Choice");
+                                        runner.StartDialogue("Laikai_Wrong_Choice_2");
                                         CamSwitch.Instance.ConversationCamOn();
                                         TeaCeremonyManager.Instance.OtherTeaReturn(); //must
                                         TeaCeremonyManager.Instance.canProceed =  false; //must

@@ -66,6 +66,9 @@ Hello, are you real?
 It’s been so long since I saw another person.
 You don’t look like my master.
 You don’t smell like my master either.
+My master always smelled so good.
+Like a really nice bone.
+Maybe it was because he kept treats in his pockets…
 But, a person!
 <<SE Laika_happy>>
 I did my mission!
@@ -81,6 +84,24 @@ position: 306,-110
 тяв, тяв-тяв!
 <<SE Helmed_Laika_4>> 
 гав, гав-гав? гав-гав, гав гав! гав! 
+<<if Read("hot")==true>>
+I once heard my master say that how hot something is affects how it tastes. Maybe if this was cooler?
+<<endif>>
+<<if Read("cold")==true>>
+I once heard my master say that how hot something is affects how it tastes. Maybe if this was hotter?
+<<endif>>
+<<if Read("bitter")==true>>
+Wow! This is really bitter! I don’t think this is what my master used to drink.
+<<endif>>
+<<if Read("light")==true>>
+This tastes a lot like water. I don’t think this is what my master used to drink.
+<<endif>>
+<<if Read("ingre")==true>>
+Hm…this doesn’t smell like my master’s tea. It smelled more savory, I guess.
+<<endif>>
+<<if Read("little")==true>>
+You know, I’m actually pretty thirsty.
+<<endif>>
 <<SE Helmed_Laika_1>> 
 <<Camera_Change>>
 ===
@@ -475,4 +496,31 @@ title: student_too_light
 position: -11,310
 ---
 Oh…it’s tea…it doesn’t really have much flavor…
+===
+title: Laikai_Wrong_Choice_2
+position: 306,-110
+---
+тяв, тяв-тяв!
+<<SE Helmed_Laika_4>> 
+гав, гав-гав? гав-гав, гав гав! гав! 
+<<if Read("hot")==true>>
+I once heard my master say that how hot something is affects how it tastes. Maybe if this was cooler?
+<<endif>>
+<<if Read("cold")==true>>
+I once heard my master say that how hot something is affects how it tastes. Maybe if this was hotter?
+<<endif>>
+<<if Read("bitter")==true>>
+Wow! This is really bitter! I don’t think this is what my master used to drink.
+<<endif>>
+<<if Read("light")==true>>
+This tastes a lot like water. I don’t think this is what my master used to drink.
+<<endif>>
+<<if Read("ingre")==true>>
+That day, master’s tea smelled different than it usually did. It smelled both savory and…hot, I think.
+<<endif>>
+<<if Read("little")==true>>
+You know, I’m actually pretty thirsty.
+<<endif>>
+<<SE Helmed_Laika_1>> 
+<<Camera_Change>>
 ===

@@ -104,12 +104,14 @@ public class ZoneStabllize : MonoBehaviour
             FruitPlant.SetBool("weak2", true);
             FruitPlant.SetBool("weak1", false);
             Effects.Instance.TableLighting.SetTrigger("sickening");
+            CamSwitch.Instance.DetermineAngryEffectPos();
             Effects.Instance.AngryEAnim.SetBool("IN", true);
             Effects.Instance.AngryEAnim.SetBool("OUT", false);
         }
         if(hydration>=35&&hydration<=50){
             warning = false;
             FruitPlant.SetBool("weak1", true);
+            CamSwitch.Instance.DetermineAngryEffectPos();
             Effects.Instance.AngryEAnim.SetBool("IN", false);
             Effects.Instance.AngryEAnim.SetBool("OUT", true);
         }
@@ -119,6 +121,7 @@ public class ZoneStabllize : MonoBehaviour
             FruitPlant.SetBool("weak1", false);
             FruitPlant.SetTrigger("reviving");
             Effects.Instance.TableLighting.SetTrigger("normal");
+            CamSwitch.Instance.DetermineAngryEffectPos();
             Effects.Instance.AngryEAnim.SetBool("IN", false);
             Effects.Instance.AngryEAnim.SetBool("OUT", true);
             //Effects.Instance.AngryEAnim.SetBool("IN", false);

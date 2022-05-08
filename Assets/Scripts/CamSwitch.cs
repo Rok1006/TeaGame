@@ -88,6 +88,7 @@ public class CamSwitch : MonoBehaviour
         Effects.Instance.AngryEffect.SetActive(false);
     }
     public void TeaCamOn(){  //When player is making tea
+    camState = CamState.TeaCam;
         drawerAnim.SetBool("In",true);
         drawerAnim.SetBool("Out",false);
         StartCam.SetActive(false);
@@ -108,6 +109,7 @@ public class CamSwitch : MonoBehaviour
         }
     }
     public void ConversationCamOn(){ //when player have conversation with customers
+    camState = CamState.ConvCam;
         drawerAnim.SetBool("In",true);
         drawerAnim.SetBool("Out",false);
         StartCam.SetActive(false);
@@ -129,6 +131,7 @@ public class CamSwitch : MonoBehaviour
         }
     }
     public void ChoiceCamOn(){ //when player have conversation with customers
+    camState = CamState.ChoiceCam;
         drawerAnim.SetBool("Out",true);
         drawerAnim.SetBool("In",false);
         StartCam.SetActive(false);
@@ -149,6 +152,7 @@ public class CamSwitch : MonoBehaviour
         }
     }
     public void CupboardCamOn(){ //when player have conversation with customers
+    camState = CamState.BoardCam;
         drawerAnim.SetBool("In",true);
         drawerAnim.SetBool("Out",false);
         StartCam.SetActive(false);
@@ -158,7 +162,6 @@ public class CamSwitch : MonoBehaviour
         CupboardCam.SetActive(true);
         HarvestCam.SetActive(false);
         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NOTOOL;
-        camState = CamState.BoardCam;
         SnackOffer.Instance.snackText.SetActive(true);
         TeaCeremonyManager.Instance.toolText.SetActive(false);
         if(ZoneStabllize.Instance.warning){
@@ -194,5 +197,26 @@ public class CamSwitch : MonoBehaviour
         Effects.Instance.AngryEffect.SetActive(false);
         Effects.Instance.AngryEffect.SetActive(true);
         Effects.Instance.AngryEAnim.SetTrigger("IN");
+    }
+    public void DetermineAngryEffectPos(){
+        switch(camState){
+            case CamState.TeaCam:
+                Effects.Instance.AngryEffect.transform.position = new Vector3(TeaCam.transform.position.x+0.405f,TeaCam.transform.position.y-3.266f,TeaCam.transform.position.z+3.785f);
+                Effects.Instance.AngryEffect.transform.eulerAngles = new Vector3(47.1859131f,0,0);
+            break;
+            case CamState.ConvCam:
+                Effects.Instance.AngryEffect.transform.position = new Vector3(ConversationCam.transform.position.x+0.525f,ConversationCam.transform.position.y-0.202f,ConversationCam.transform.position.z+4.89f);
+                Effects.Instance.AngryEffect.transform.eulerAngles = new Vector3(0,0,0);
+            break;
+            case CamState.BoardCam:
+                Effects.Instance.AngryEffect.transform.position = new Vector3(CupboardCam.transform.position.x-4.615f,CupboardCam.transform.position.y-0.652f,CupboardCam.transform.position.z+0.49f);
+                Effects.Instance.AngryEffect.transform.eulerAngles = new Vector3(0,270f,0);
+                
+            break;
+            case CamState.ChoiceCam:
+                Effects.Instance.AngryEffect.transform.position = new Vector3(ChoiceCam.transform.position.x+0.875f,ChoiceCam.transform.position.y-4.192f,ChoiceCam.transform.position.z+2.84f);
+                Effects.Instance.AngryEffect.transform.eulerAngles = new Vector3(47.19f,0,0);
+            break;
+        }
     }
 }

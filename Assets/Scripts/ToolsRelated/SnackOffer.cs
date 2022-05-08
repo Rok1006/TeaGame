@@ -37,6 +37,7 @@ public class SnackOffer : MonoBehaviour
             otsc.enabled = true;
             tutorial.SetActive(true);
             TeaCeremonyManager.Instance.tText = toolName;
+            TeaCeremonyManager.Instance.CurrentToolName = "GrabTool";
         }
     }
     void OnMouseExit() {
@@ -47,12 +48,13 @@ public class SnackOffer : MonoBehaviour
     void OnMouseDown() {
         if (TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE
             && TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseSnack||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE
-            )//&& canTakeSnack
+            &&TeaCeremonyManager.Instance.CurrentToolName == "GrabTool")//&& canTakeSnack
         {
             GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
             sc.PickToolUp();
             tutorial.SetActive(false);
             CamSwitch.Instance.CupboardCamOn();
+            CamSwitch.Instance.snackButton.SetActive(true);
             snackText.SetActive(true);
         }
     }

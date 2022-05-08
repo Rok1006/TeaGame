@@ -20,6 +20,8 @@ public class ZoneStabllize : MonoBehaviour
     public Slider wb;
     public int UnsafeTimeCount = 0;  //after zone turn unsafe, start counting down before warning> fail
     public GameObject plantEmit;
+    public bool warning = false;
+    public bool zoneHarm = false;
 
     void Awake() {
         Instance = this;
@@ -28,6 +30,7 @@ public class ZoneStabllize : MonoBehaviour
     {
         WaterBar.SetActive(false);
         plantEmit.SetActive(true);
+        //warning = true;
     }
     void Update()
     {
@@ -54,29 +57,37 @@ public class ZoneStabllize : MonoBehaviour
         }
     }
     public void PlantWateringPlus(){ //gain of hp by watering it
-        hydration+=3*Time.deltaTime;
+        if(!isHotWater){
+            hydration+=5*Time.deltaTime;
+        }else{
+            hydration-=.8f*Time.deltaTime;  //player using hotwater
+        }
     }
 
     public void PlantHydrationReduce(){ //plant hp harmed according to different ghost 
-        switch(GameManager.Instance.ghostIndex){
-            case 0: //sensei
-                if(hydration>0){
-                    hydration-=0; //5*Time.deltaTime
-                }
-            break;
-            case 1: //student
-                if(hydration>0){
-                    hydration-=2*Time.deltaTime;  //default: 2
-                }
-            break;
-            case 2: //laika
-                if(hydration>0){
-                    hydration-=1*Time.deltaTime;
-                }
-            break;
-            case 3: //capitalist
-
-            break;
+        if(zoneHarm){
+            switch(GameManager.Instance.ghostIndex){
+                case 0: //sensei
+                    if(hydration>0){
+                        hydration-=0; //5*Time.deltaTime
+                    }
+                break;
+                case 1: //student
+                    if(hydration>0){
+                        hydration-=2*Time.deltaTime;  //default: 2
+                    }
+                break;
+                case 2: //laika
+                    if(hydration>0){
+                        hydration-=1*Time.deltaTime;
+                    }
+                break;
+                case 3: //capitalist
+                    if(hydration>0){
+                        hydration-=3*Time.deltaTime;
+                    }
+                break;
+            }
         }
     }
     void PlantStatusAnim(){ //plant animation control accored to hydration
@@ -88,19 +99,39 @@ public class ZoneStabllize : MonoBehaviour
             plantEmit.SetActive(true);
         }
         //Anim
-        if(hydration<=50){
-            FruitPlant.SetBool("weak1", true);
-        }
-        if(hydration<=35){
+        if(hydration<=35){  //Warning, zone unsafe
+            warning = true;
             FruitPlant.SetBool("weak2", true);
             FruitPlant.SetBool("weak1", false);
             Effects.Instance.TableLighting.SetTrigger("sickening");
+            Effects.Instance.AngryEAnim.SetBool("IN", true);
+            Effects.Instance.AngryEAnim.SetBool("OUT", false);
         }
-        if(hydration>=60&&hydration<=100){
+        if(hydration>=35&&hydration<=50){
+            warning = false;
+            FruitPlant.SetBool("weak1", true);
+            Effects.Instance.AngryEAnim.SetBool("IN", false);
+            Effects.Instance.AngryEAnim.SetBool("OUT", true);
+        }
+        if(hydration>=50&&hydration<=100){
+            warning = false;
             FruitPlant.SetBool("weak2", false);
             FruitPlant.SetBool("weak1", false);
             FruitPlant.SetTrigger("reviving");
             Effects.Instance.TableLighting.SetTrigger("normal");
+            Effects.Instance.AngryEAnim.SetBool("IN", false);
+            Effects.Instance.AngryEAnim.SetBool("OUT", true);
+            //Effects.Instance.AngryEAnim.SetBool("IN", false);
         }
     }
+    public void ResetPlantStatus(){
+        hydration = 100;
+    }
+    // IEnumerator AngryEffect(){
+    //     Effects.Instance.AngryEAnim.SetTrigger("OUT");
+    //     yield return new WaitForSeconds(1f);
+    //     Effects.Instance.AngryEffect.SetActive(false);
+    //     Effects.Instance.AngryEffect.SetActive(true);
+    //     Effects.Instance.AngryEAnim.SetTrigger("IN");
+    // }
 }

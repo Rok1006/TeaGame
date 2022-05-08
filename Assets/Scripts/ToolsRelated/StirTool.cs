@@ -58,7 +58,7 @@ public class StirTool : MonoBehaviour
         pickUPDes = new Vector3(this.transform.position.x, 1.6f, this.transform.position.z);
         //CLick and pick it up
         if(TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE&&TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.UseStirTool||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay){
-        if(state==0&&clicked){
+        if(state==0&&clicked&&TeaCeremonyManager.Instance.CurrentToolName == "StirTool"){
             toolFirststep.SetActive(false); //tutorial
             // Tutorial.Instance.STsteps[Tutorial.Instance.stepIndex].SetActive(true);
             if(Input.GetMouseButtonDown(0)&&!toolFirststep.activeSelf){ //did only once why keep appearing

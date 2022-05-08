@@ -32,6 +32,7 @@ public class Snacks : MonoBehaviour
     void OnMouseDown() {
         if(!ServeTray.Instance.occupied){
             CamSwitch.Instance.ConversationCamOn();
+            CamSwitch.Instance.snackButton.SetActive(false);
             if(this.gameObject.name=="Snack_Buns"&&this.gameObject.name=="Snack_Mochi"&&this.gameObject.name=="Snack_Jelly")
             {
                 Vector3 newPos = new Vector3(servePos.transform.position.x+0.23f,servePos.transform.position.y,servePos.transform.position.z);

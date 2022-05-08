@@ -61,7 +61,7 @@ public class TeaCup : MonoBehaviour
     {
         pickUPDes = new Vector3(this.transform.position.x, 1.6f, this.transform.position.z);
         if(!TeaCeremonyManager.Instance.served&&TeaCeremonyManager.Instance.currentTool == TeaCeremonyManager.TeaTool.NONE && !ServeTray.Instance.occupied && canServe) {
-            if(state==0&&clicked){
+            if(state==0&&clicked&&TeaCeremonyManager.Instance.CurrentToolName == "TeaCup"){
                 float step = speed * Time.deltaTime;
                 this.transform.position = Vector3.MoveTowards(this.transform.position, pickUPDes, step);
                 HandsIndicator.SetActive(false);

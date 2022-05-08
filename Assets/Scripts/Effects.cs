@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 /*COntent of the script (In ZOne/Effects MAnager)
 - Particles effect used in Zone Stabilize.cs
 - Lighting animation used with ghost reaction, hand wrong tea
@@ -18,6 +19,8 @@ public class Effects : MonoBehaviour
     Animator scrollAnim;
     public GameObject arrows;
     Animator arrowAnim;
+    public GameObject AngryEffect;
+    public Animator AngryEAnim;
     void Awake() {
         Instance = this;
     }
@@ -32,12 +35,14 @@ public class Effects : MonoBehaviour
 
         scrollAnim = scrollObject.GetComponent<Animator>();
         arrowAnim = arrows.GetComponent<Animator>();
+        AngryEAnim = AngryEffect.GetComponent<Animator>();
     }
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.O)){
-            Scroll_Show();
+            //Scroll_Show();
+            AngryEAnim.SetTrigger("IN");
         }
     }
     public void GoodZoneEffect(){

@@ -251,14 +251,14 @@ public class GameManager : MonoBehaviour
                                 //TeaCeremonyManager.Instance.startDiming = true; //off for now
                                 SnackOffer.Instance.canTakeSnack = true;
                                 Tutorial.Instance.tutorialComplete = true;
-
+                                ZoneStabllize.Instance.zoneHarm = true; //plant start being affected
 
                                 if (TeaCeremonyManager.Instance.served&&TeaCeremonyManager.Instance.canProceed)
                                 {
                                     Debug.Log("student_ghost_canserve");
                                     JudgeTea.Instance.CheckCurrentTea();
                                     if (JudgeTea.Instance.IFPass())
-                                    { stuGhost.stageIndex = 1; }
+                                    { stuGhost.stageIndex = 1;}
                                     else
                                     {
                                         runner.Stop();
@@ -275,6 +275,8 @@ public class GameManager : MonoBehaviour
                                 break;
                             }
                         case (1): {
+                                ZoneStabllize.Instance.ResetPlantStatus();
+                                ZoneStabllize.Instance.zoneHarm = false;
                                 runner.Stop();
                                 runner.StartDialogue("Student_Right");
                                 TeaCeremonyManager.Instance.OtherTeaReturn(); //new
@@ -308,7 +310,7 @@ public class GameManager : MonoBehaviour
 
                                 SnackOffer.Instance.canTakeSnack = true;
                                 Tutorial.Instance.tutorialComplete = true;
-
+                                ZoneStabllize.Instance.zoneHarm = true;
 
                                 if (TeaCeremonyManager.Instance.served&&TeaCeremonyManager.Instance.canProceed)
                                 {
@@ -317,7 +319,6 @@ public class GameManager : MonoBehaviour
                                     {
                                         Debug.Log("laikai!");
                                         Laikai_index = 1;
-
                                     }
                                     else
                                     {
@@ -336,7 +337,7 @@ public class GameManager : MonoBehaviour
                             }
                         case (1):
                             {
-
+                                ZoneStabllize.Instance.ResetPlantStatus();
                                 runner.StartDialogue("Laikai_Stage_1_human");
                                 TeaCeremonyManager.Instance.OtherTeaReturn(); //new
 
@@ -371,6 +372,8 @@ public class GameManager : MonoBehaviour
                             }
                         case (3):
                             {
+                                ZoneStabllize.Instance.ResetPlantStatus();
+                                ZoneStabllize.Instance.zoneHarm = false;
                                 runner.StartDialogue("Laikai_Final_Stage");
                                 Laikai_index = 4;
                                 TeaCeremonyManager.Instance.OtherTeaReturn(); //new
@@ -390,12 +393,9 @@ public class GameManager : MonoBehaviour
                     switch (Captial_index)
                     {
                         case (0): {
-
-                                //TeaCeremonyManager.Instance.startDiming = true; //off for now
-
                                 SnackOffer.Instance.canTakeSnack = true;
                                 Tutorial.Instance.tutorialComplete = true;
-
+                                ZoneStabllize.Instance.zoneHarm = true;
 
                                 if (TeaCeremonyManager.Instance.served && TeaCeremonyManager.Instance.canProceed)
                                 {
@@ -423,7 +423,7 @@ public class GameManager : MonoBehaviour
                             }
                         case (1):
                             {
-
+                                ZoneStabllize.Instance.ResetPlantStatus();
                                 runner.StartDialogue("Captial_Stage_2");
                                 TeaCeremonyManager.Instance.OtherTeaReturn(); //new
                                 JudgeTea.Instance.GhostTeaNum = 1;
@@ -449,14 +449,12 @@ public class GameManager : MonoBehaviour
                                         TeaCeremonyManager.Instance.canProceed = false; //must
                                         //TeaCeremonyManager.Instance.TeaReturn();
                                     }
-
-                                 
-
                                 }
                                 break;
                             }
                         case (3):
                             {
+                                ZoneStabllize.Instance.ResetPlantStatus();
                                 runner.StartDialogue("Captial_Stage_3");
                                 TeaCeremonyManager.Instance.OtherTeaReturn(); //new
                                 JudgeTea.Instance.GhostTeaNum = 2;
@@ -482,14 +480,13 @@ public class GameManager : MonoBehaviour
                                         TeaCeremonyManager.Instance.canProceed = false; //must
                                         //TeaCeremonyManager.Instance.TeaReturn();
                                     }
-
-                                    
-
                                 }
                                 break;
                             }
                         case (5):
                             {
+                                ZoneStabllize.Instance.ResetPlantStatus();
+                                ZoneStabllize.Instance.zoneHarm = false;
                                 runner.StartDialogue("Captial_Stage_3_right_tea");
                                 TeaCeremonyManager.Instance.OtherTeaReturn(); //new
 

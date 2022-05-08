@@ -17,24 +17,29 @@ I never had time to rest.
 <<SE student_cry>> 
 I never even had time for a cup of tea.
 Oh, I wish that I had taken more time to relax and drink some tea.
+Just, slightly sweet, green tea…
 If I could just have a cup of tea or two, I think I could move on.
 <<Camera_Change>>
 ===
 title: Student_2nd_Phase
 position: -87,155
 ---
-This clover…
-My mother gave me this.
+<<Anime 1 StudentDrink>>
+That… was a great tea…..
+Just sweet enough. 
+It reminds me of what my mother used to make.
+The kitchen always smelled  like tea. She drank a lot of it.
+I always loved that smell.
+Before I left for school, my mother gave me a four-leaf clover.
 It would bring me luck, she said.
-<<Momento>>
 There was something else.
 She also told me
-I’d never find a clover like this if I never stopped to take a break once in a while.
+“I’d never find a clover like this if I never stopped to take a break once in a while.”
 You have to take your time and look around to find a four-leaf clover.
+<<Momento>>
 <<SE student_laugh>> 
-…Thank you.
 I think..I’m ready to pass on now.
-You can keep the clover.
+Here, you should take this. 
 Maybe it will help you more than it helped me.
 <<next>>
 ===
@@ -355,6 +360,8 @@ Oh…this tastes really nice…I wish I had had more of this in life.
 title: Student_Wrong
 position: -4,-79
 ---
+<<Anime 1 StudentDisp>>
+<<SE student_sigh>>
 Oh…it’s tea…
 <<if Read("hot")==true>>
 I wish it wasn’t quite so hot…

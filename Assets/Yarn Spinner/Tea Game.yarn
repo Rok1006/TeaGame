@@ -181,11 +181,13 @@ Never enough time, never enough.
 The new car, the mortgage, need a new suit.
 Has to be Armani. Has to be nice.
 <<SE capitalist_angry_1>>
+<<Anime 3 Capi1Angry>>
 Only the finest. Only the most expensive.
 Can’t look like a slob going into work.
 Dress for the job you want.
 I want more.
 <<SE capitalist_angry_3>>
+<<Anime 3 Capi2Angry>>
 I want to make more money.
 When did I last go home?
 She’s saying she’ll leave me…
@@ -194,6 +196,7 @@ She doesn’t understand, I’m doing this for us!
 I don’t need her.
 I don’t need her!
 She doesn’t understand…
+<<Anime 3 Capi3Angry>>
 <<SE capitalist_normal_1>>
 I need more money!
 <<Camera_Change>>
@@ -209,10 +212,10 @@ position: -180,90
 No! That’s not right! 
 <<SE capitalist_angry_4>>
 <<if Read("hot")==true>>
-I once heard my master say that how hot something is affects how it tastes. Maybe if this was cooler?
+it’s too hot. I don’t have time to wait for it to cool
 <<endif>>
 <<if Read("cold")==true>>
-I once heard my master say that how hot something is affects how it tastes. Maybe if this was hotter?
+it’s too cold. Neither of us liked cold tea.
 <<endif>>
 <<if Read("bitter")==true>>
 Wow! This is really bitter! I don’t think this is what my master used to drink.
@@ -231,6 +234,7 @@ Too little water! Can’t you even make tea properly?!
 title: Captial_Stage_2
 position: -354,-21
 ---
+<<Anime 3 Capi1Drink>>
 Hmph. I suppose this will suffice.
 <<SE capitalist_normal_1s>>
 I miss her…
@@ -263,6 +267,7 @@ title: Captial_Stage_2_wrong_tea
 position: -180,90
 ---
 <<SE capitalist_angry_4>>
+<<Anime 3 Capi2Angry>>
 No…
 <<if Read("hot")==true>>
 it’s too hot. I don’t have time to wait for it to cool
@@ -287,6 +292,7 @@ this isn’t enough water. She always made enough for us both.
 title: Captial_Stage_3
 position: -354,-21
 ---
+<<Anime 3 Capi2Drink>>
 It’s been so long since I had tea like this…like what she made…
 You know, when I first met her…
 Neither of us had any money.
@@ -335,6 +341,7 @@ What we had wasn’t expensive, but it was all we could afford. We had to make i
 title: Captial_Stage_3_right_tea
 position: -180,90
 ---
+<<Anime 3 Capi3Drink>>
 <<Momento>>
 <<SE capitalist_happy_3>>
 The most wonderful tea…thank you. It wasn’t expensive, but it was ours. .

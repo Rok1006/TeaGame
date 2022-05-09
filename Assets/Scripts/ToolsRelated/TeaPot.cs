@@ -19,6 +19,7 @@ public class TeaPot : MonoBehaviour
     public bool pickedUP = false;
     public int upState = 0;
     Vector3 mousePos;
+    [SerializeField] AudioSource tea_sound;
     public bool poured = false;
     public bool canClick = true;
     public bool inOriginalPlace;
@@ -164,6 +165,7 @@ public class TeaPot : MonoBehaviour
             //StovePlaceholderObj.SetActive(false);
             if(degree>pouringDegree){  //teapot pouring sound
                 sc.PourTea();
+                tea_sound.Play();
                 //Tea.Instance.isPouring = true;
             }
             else

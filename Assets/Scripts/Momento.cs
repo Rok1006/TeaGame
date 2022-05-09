@@ -25,6 +25,7 @@ public class Momento : MonoBehaviour
     void OnMouseDown(){
         //put into collection in start screen tgt with name and description
         MomentoDisplay.Instance.momentoAnim.SetTrigger("close");
+         MomentoDisplay.Instance.MomentoBox_Gone();
         Destroy(this.gameObject);
         GameObject.Find("SceneManager").GetComponent<SaveSystem>().collectionSave(name);
     }

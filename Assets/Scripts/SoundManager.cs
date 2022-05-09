@@ -17,6 +17,10 @@ public class SoundManager : MonoBehaviour
     AudioSource powder;
     public GameObject SelectAndOtherSound;
     AudioSource poof;
+    public GameObject EffectSound;
+    public AudioSource EffectIn;
+    public AudioSource EffectStay;
+    public AudioSource EffectOut;
     void Start()
     {
         AudioSource[] toolAudios = ToolSound.GetComponents<AudioSource>();
@@ -32,6 +36,10 @@ public class SoundManager : MonoBehaviour
         powder = toolAudios2[3];
         AudioSource[] selectOther = SelectAndOtherSound.GetComponents<AudioSource>();
         poof = selectOther[0];
+        AudioSource[] es = EffectSound.GetComponents<AudioSource>();
+        EffectIn = es[0];
+        EffectStay = es[1];
+        EffectOut = es[2];
     }
 
     private void Update()

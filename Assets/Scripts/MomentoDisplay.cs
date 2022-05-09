@@ -18,7 +18,8 @@ public class MomentoDisplay : MonoBehaviour
     void Start()
     {
         GM = GameObject.Find("GameManager").GetComponent<GameManager>();
-        momentoAnim = MomentoBox.GetComponent<Animator>();  //give
+        momentoAnim = MomentoBox.GetComponent<Animator>();  //give\
+        MomentoBox.SetActive(false);
     }
 
     void Update()
@@ -39,6 +40,7 @@ public class MomentoDisplay : MonoBehaviour
         }
 
         if(Input.GetKeyDown(KeyCode.P)){ //Testing
+            MomentoBox.SetActive(true);
             GiveMomento();  //later add this baak in gamemanager at the right line for each ghost
         }
         // if(currentMomento ==null){
@@ -71,5 +73,12 @@ public class MomentoDisplay : MonoBehaviour
         }else{
             return false;
         }
+    }
+    IEnumerator MomentoBoxGone(){
+        yield return new WaitForSeconds(1.5f);
+        MomentoBox.SetActive(false);
+    }
+    public void MomentoBox_Gone(){
+        StartCoroutine(MomentoBoxGone());
     }
 }

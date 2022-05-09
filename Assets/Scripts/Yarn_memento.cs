@@ -5,11 +5,9 @@ using Yarn.Unity;
 
 public class Yarn_memento : MonoBehaviour
 {
-    // Start is called before the first frame update
     [YarnCommand("Momento")]
-
-    // Update is called once per frame
     public static void Momento() {
+        MomentoDisplay.Instance.MomentoBox.SetActive(true);
         MomentoDisplay.Instance.GiveMomento();
     }
 }

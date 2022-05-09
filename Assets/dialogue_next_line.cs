@@ -16,6 +16,7 @@ public class dialogue_next_line : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (runner.IsDialogueRunning&& Input.GetMouseButtonDown(0)) { line.OnContinueClicked(); }
+        if (runner.IsDialogueRunning&& Input.GetMouseButtonDown(0)&& MomentoDisplay.Instance.IfMomentoUP()==false) 
+        { line.OnContinueClicked(); }
     }
 }

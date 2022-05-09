@@ -239,7 +239,7 @@ public class JudgeTea : MonoBehaviour
     }
     public bool CheckAmtofPowder(){   //Condition 3: powder enough?
         if(currentSOJ==StudentTeaSOJ1){  //this one with either one or 2 scoop, others are fixed
-            Debug.Log("student");
+            //Debug.Log("student");
             if(powderAdded>0&&powderAdded<=2){
                 return true;
             }else{

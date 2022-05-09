@@ -77,7 +77,7 @@ public class Effects : MonoBehaviour
         Debug.Log("run");
         arrowAnim.SetTrigger("Deactivate");
         arrowAnim.SetTrigger("plant");
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(5f);
         arrowAnim.SetTrigger("Deactivate");
     }
     public void GhostAngry(){

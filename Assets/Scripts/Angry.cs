@@ -9,5 +9,6 @@ public class Angry : MonoBehaviour
     public static void Angry_1()
     {
         GameManager.count = true;
+        //GameManager.Instance.wrongCount+=1;
     }
 }

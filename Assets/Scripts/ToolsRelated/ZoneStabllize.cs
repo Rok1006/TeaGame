@@ -47,7 +47,12 @@ public class ZoneStabllize : MonoBehaviour
         PlantStatusAnim();
         if(hydration<1){//start counting 
             //INvoke gameover scene
+            Invoke("GameOver", 10);
         }
+    }
+    public void GameOver(){
+        EventTrigger.Instance.GameOverScreen.SetActive(true);
+        //Time.timeScale = 0;
     }
     void DetermineTempofWater(){
         if(Tea.Instance.temp>40){
@@ -74,17 +79,17 @@ public class ZoneStabllize : MonoBehaviour
                 break;
                 case 1: //student
                     if(hydration>0){
-                        hydration-=2*Time.deltaTime;  //default: 2
+                        hydration-=1*Time.deltaTime;  //default: 2
                     }
                 break;
                 case 2: //laika
                     if(hydration>0){
-                        hydration-=1*Time.deltaTime;
+                        hydration-=.5f*Time.deltaTime;
                     }
                 break;
                 case 3: //capitalist
                     if(hydration>0){
-                        hydration-=3*Time.deltaTime;
+                        hydration-=2*Time.deltaTime;
                     }
                 break;
             }

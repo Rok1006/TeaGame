@@ -65,4 +65,11 @@ public class MomentoDisplay : MonoBehaviour
         yield return new WaitForSeconds(.3f);
         currentObj.SetActive(true);
     }
+    public bool IfMomentoUP(){
+        if(MomentoBox.activeSelf){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

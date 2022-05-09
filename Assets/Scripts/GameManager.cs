@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public static bool count;
     public bool tutorialIngredGet = false;
     public bool tutorialAteSnack = false;
+    public int wrongCount = 0;
     
     private void Awake()
     { 
@@ -84,7 +85,7 @@ public class GameManager : MonoBehaviour
                        arrowAnim.SetTrigger("Deactivate");
                         TeaCup.Instance.canServe = false;
                                 currGhost.stageIndex = 1;
-                                TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay; //off when build 
+                                //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay; //off when build 
                                 break;//Intro
                     }
                 case (1):  //Stage1 - Put on boiler
@@ -229,6 +230,7 @@ public class GameManager : MonoBehaviour
                     }
                 case (8): //sensei abt to go, may be put the following to the next
                     {
+                        TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NOTOOL;
                         // runner.Stop();
                         // runner.StartDialogue("Sensei_Final");
                         //TeaCeremonyManager.Instance.currentTutorialState = TeaCeremonyManager.TutorialState.FreePlay;
@@ -251,7 +253,7 @@ public class GameManager : MonoBehaviour
                                 //TeaCeremonyManager.Instance.startDiming = true; //off for now
                                 SnackOffer.Instance.canTakeSnack = true;
                                 Tutorial.Instance.tutorialComplete = true;
-                                ZoneStabllize.Instance.zoneHarm = true; //plant start being affected
+                                //ZoneStabllize.Instance.zoneHarm = true; //plant start being affected
 
                                 if (TeaCeremonyManager.Instance.served&&TeaCeremonyManager.Instance.canProceed)
                                 {
@@ -261,6 +263,7 @@ public class GameManager : MonoBehaviour
                                     { stuGhost.stageIndex = 1;}
                                     else
                                     {
+                                        wrongCount+=1;
                                         runner.Stop();
                                       
                                         runner.StartDialogue("Student_Wrong");
@@ -292,6 +295,7 @@ public class GameManager : MonoBehaviour
                                 runner.StartDialogue("Student_2nd_Phase");
                                 //CamSwitch.Instance.ConversationCamOn();
                                 stuGhost.stageIndex = 3;
+                                wrongCount = 0;
                                 break;
                                 
                             }
@@ -307,10 +311,9 @@ public class GameManager : MonoBehaviour
                         case (0):
                             {
                                 //TeaCeremonyManager.Instance.startDiming = true; //off for now
-
                                 SnackOffer.Instance.canTakeSnack = true;
                                 Tutorial.Instance.tutorialComplete = true;
-                                ZoneStabllize.Instance.zoneHarm = true;
+                                // ZoneStabllize.Instance.zoneHarm = true;
 
                                 if (TeaCeremonyManager.Instance.served&&TeaCeremonyManager.Instance.canProceed)
                                 {
@@ -322,6 +325,7 @@ public class GameManager : MonoBehaviour
                                     }
                                     else
                                     {
+                                        wrongCount+=1;
                                         runner.StartDialogue("Laikai_Wrong_Choice");
                                         CamSwitch.Instance.ConversationCamOn();
                                         
@@ -340,7 +344,7 @@ public class GameManager : MonoBehaviour
                                 ZoneStabllize.Instance.ResetPlantStatus();
                                 runner.StartDialogue("Laikai_Stage_1_human");
                                 TeaCeremonyManager.Instance.OtherTeaReturn(); //new
-
+                                wrongCount = 0;
                                 Laikai_index = 2;
                                 break;
                             }
@@ -357,6 +361,7 @@ public class GameManager : MonoBehaviour
                                     }
                                     else
                                     {
+                                        wrongCount+=1;
                                         runner.StartDialogue("Laikai_Wrong_Choice_2");
                                         CamSwitch.Instance.ConversationCamOn();
                                         TeaCeremonyManager.Instance.OtherTeaReturn(); //must
@@ -372,6 +377,7 @@ public class GameManager : MonoBehaviour
                             }
                         case (3):
                             {
+                                wrongCount = 0;
                                 ZoneStabllize.Instance.ResetPlantStatus();
                                 ZoneStabllize.Instance.zoneHarm = false;
                                 runner.StartDialogue("Laikai_Final_Stage");
@@ -395,7 +401,7 @@ public class GameManager : MonoBehaviour
                         case (0): {
                                 SnackOffer.Instance.canTakeSnack = true;
                                 Tutorial.Instance.tutorialComplete = true;
-                                ZoneStabllize.Instance.zoneHarm = true;
+                                //ZoneStabllize.Instance.zoneHarm = true;
 
                                 if (TeaCeremonyManager.Instance.served && TeaCeremonyManager.Instance.canProceed)
                                 {
@@ -408,6 +414,7 @@ public class GameManager : MonoBehaviour
                                     }
                                     else
                                     {
+                                        wrongCount+=1;
                                         runner.StartDialogue("Captial_Stage_1_wrong_tea");
                                         CamSwitch.Instance.ConversationCamOn();
 
@@ -428,6 +435,7 @@ public class GameManager : MonoBehaviour
                                 TeaCeremonyManager.Instance.OtherTeaReturn(); //new
                                 JudgeTea.Instance.GhostTeaNum = 1;
                                 Captial_index = 2;
+                                wrongCount=0;
                                 break;
                             }
                         case (2):
@@ -443,6 +451,7 @@ public class GameManager : MonoBehaviour
                                     }
                                     else
                                     {
+                                        wrongCount+=1;
                                         runner.StartDialogue("Captial_Stage_2_wrong_tea");
                                         CamSwitch.Instance.ConversationCamOn();
                                         TeaCeremonyManager.Instance.OtherTeaReturn(); //must
@@ -459,6 +468,7 @@ public class GameManager : MonoBehaviour
                                 TeaCeremonyManager.Instance.OtherTeaReturn(); //new
                                 JudgeTea.Instance.GhostTeaNum = 2;
                                 Captial_index = 4;
+                                wrongCount = 0;
                                 break;
                             }
                         case (4):
@@ -474,6 +484,7 @@ public class GameManager : MonoBehaviour
                                     }
                                     else
                                     {
+                                        wrongCount+=1;
                                         runner.StartDialogue("Captial_Stage_3_wrong_tea");
                                         CamSwitch.Instance.ConversationCamOn();
                                         TeaCeremonyManager.Instance.OtherTeaReturn(); //must
@@ -491,6 +502,7 @@ public class GameManager : MonoBehaviour
                                 TeaCeremonyManager.Instance.OtherTeaReturn(); //new
 
                                 Captial_index = 4;
+                                wrongCount = 0;
                                 break;
                             }
                     }

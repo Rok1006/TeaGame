@@ -39,10 +39,11 @@ public class Ingredients : MonoBehaviour
         
     }
     void OnMouseOver() {
-        //go up a little
+        if(TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.GetIngredient||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay){
         oc.enabled = true;
         //TeaCeremonyManager.Instance.CurrentToolName = "IngredPlate";
         GoToDrawer.Instance.IGText = ingredientName;
+        }
     }
 
     void OnMouseExit(){
@@ -50,6 +51,7 @@ public class Ingredients : MonoBehaviour
         GoToDrawer.Instance.IGText = "";
     }
     void OnMouseDown() {
+        if(TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.GetIngredient||TeaCeremonyManager.Instance.currentTutorialState == TeaCeremonyManager.TutorialState.FreePlay){
         if(!Tutorial.Instance.tutorialComplete){  //!Tutorial.Instance.tutorialComplete&&
             GameManager.Instance.arrowAnim.SetTrigger("Deactivate");
             GameManager.Instance.arrowAnim.SetTrigger("ingredients");   
@@ -102,5 +104,6 @@ public class Ingredients : MonoBehaviour
             }
         }
         Tea.Instance.ChangeIngredientType(ingredientName);
+        }
     }
 }

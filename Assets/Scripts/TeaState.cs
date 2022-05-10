@@ -22,7 +22,7 @@ public class TeaState : MonoBehaviour
     public void ServableCheck(){  //except sensei , if cup have at least sth u can serve
         if (tutorialSc.tutorialComplete)
         {
-            if ((tcs.numOfIngredients > 0 || tcs.numOfPowder > 0 || tcs.liquidLevel>0)&&Tea.Instance.toMeltList.Count==0)
+            if (tcs.numOfIngredients > 0 || tcs.numOfPowder > 0 || tcs.liquidLevel>0 || Tea.Instance.toMeltList.Count>0)
             {
                 TeaCeremonyManager.Instance.discardButton.GetComponent<Button>().interactable = true;
                 TeaCup.Instance.canServe = true;

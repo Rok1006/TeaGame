@@ -17,4 +17,19 @@ public class AnimSound : MonoBehaviour
     public void Effect_End(){
         SM.EffectOut.Stop();
     }
+    public void Momento_Appear(){
+        SM.boxAppear.Play();
+    }
+    public void Momento_Open(){
+        SM.boxOpen.Play();
+    }
+    public void Momento_Close(){
+        SM.boxClose.Play();
+    }
+    public void Momento_Bling(){
+        SM.boxBling.Play();
+    }
+    public void Fade_Transition(){
+        SM.fadeTransition.Play();
+    }
 }

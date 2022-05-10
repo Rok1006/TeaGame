@@ -89,7 +89,7 @@ public class ZoneStabllize : MonoBehaviour
                 break;
                 case 3: //capitalist
                     if(hydration>0){
-                        hydration-=2*Time.deltaTime;
+                        hydration-=1.5f*Time.deltaTime;
                     }
                 break;
             }

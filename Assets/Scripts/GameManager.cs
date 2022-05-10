@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public bool tutorialIngredGet = false;
     public bool tutorialAteSnack = false;
     public int wrongCount = 0;
+    public PauseMenu PM;
     
     private void Awake()
     { 
@@ -230,6 +231,8 @@ public class GameManager : MonoBehaviour
                     }
                 case (8): //sensei abt to go, may be put the following to the next
                     {
+                        PM.saveGhostIndex();
+                        PM.saveBiggestIndex();
                         TeaCeremonyManager.Instance.currentTool = TeaCeremonyManager.TeaTool.NOTOOL;
                         // runner.Stop();
                         // runner.StartDialogue("Sensei_Final");
@@ -250,6 +253,8 @@ public class GameManager : MonoBehaviour
                 {
                     case (0):
                             {
+                                PM.saveGhostIndex(); 
+                                PM.saveBiggestIndex();
                                 //TeaCeremonyManager.Instance.startDiming = true; //off for now
                                 SnackOffer.Instance.canTakeSnack = true;
                                 Tutorial.Instance.tutorialComplete = true;
@@ -283,7 +288,6 @@ public class GameManager : MonoBehaviour
                                 runner.Stop();
                                 runner.StartDialogue("Student_Right");
                                 TeaCeremonyManager.Instance.OtherTeaReturn(); //new
-                                
                                 CamSwitch.Instance.ConversationCamOn();
                                 stuGhost.stageIndex = 2;
                                 break;
@@ -310,6 +314,8 @@ public class GameManager : MonoBehaviour
                     {
                         case (0):
                             {
+                                PM.saveGhostIndex();
+                                PM.saveBiggestIndex();
                                 //TeaCeremonyManager.Instance.startDiming = true; //off for now
                                 SnackOffer.Instance.canTakeSnack = true;
                                 Tutorial.Instance.tutorialComplete = true;
@@ -383,7 +389,6 @@ public class GameManager : MonoBehaviour
                                 runner.StartDialogue("Laikai_Final_Stage");
                                 Laikai_index = 4;
                                 TeaCeremonyManager.Instance.OtherTeaReturn(); //new
-                                
                                 //TeaCeremonyManager.Instance.TeaReturn();
                                 break;
                             }
@@ -401,6 +406,8 @@ public class GameManager : MonoBehaviour
                     switch (Captial_index)
                     {
                         case (0): {
+                                PM.saveGhostIndex();
+                                PM.saveBiggestIndex();
                                 SnackOffer.Instance.canTakeSnack = true;
                                 Tutorial.Instance.tutorialComplete = true;
                                 //ZoneStabllize.Instance.zoneHarm = true;

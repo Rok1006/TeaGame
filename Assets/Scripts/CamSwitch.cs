@@ -144,10 +144,11 @@ public class CamSwitch : MonoBehaviour
         TeaCeremonyManager.Instance.toolText.SetActive(false);
         if(ZoneStabllize.Instance.warning){
            // StartCoroutine(AngryEffect());
+           Debug.Log("yeh");
         Effects.Instance.AngryEffect.SetActive(false);
         Effects.Instance.AngryEffect.SetActive(true);
-        Effects.Instance.AngryEAnim.SetTrigger("IN");
-        Effects.Instance.AngryEffect.transform.position = new Vector3(ChoiceCam.transform.position.x+0.875f,ChoiceCam.transform.position.y-4.192f,ChoiceCam.transform.position.z+2.84f);
+        Effects.Instance.AngryEAnim.SetTrigger("IN");  //0.875f, -4.192f, +2.84f
+        Effects.Instance.AngryEffect.transform.position = new Vector3(ChoiceCam.transform.position.x+0.5f,ChoiceCam.transform.position.y-4.192f,ChoiceCam.transform.position.z+2.84f);
         Effects.Instance.AngryEffect.transform.eulerAngles = new Vector3(47.19f,0,0);
         }
     }
@@ -214,7 +215,7 @@ public class CamSwitch : MonoBehaviour
                 
             break;
             case CamState.ChoiceCam:
-                Effects.Instance.AngryEffect.transform.position = new Vector3(ChoiceCam.transform.position.x+0.875f,ChoiceCam.transform.position.y-4.192f,ChoiceCam.transform.position.z+2.84f);
+                Effects.Instance.AngryEffect.transform.position = new Vector3(ChoiceCam.transform.position.x+0.5f,ChoiceCam.transform.position.y-4.192f,ChoiceCam.transform.position.z+2.84f);
                 Effects.Instance.AngryEffect.transform.eulerAngles = new Vector3(47.19f,0,0);
             break;
         }

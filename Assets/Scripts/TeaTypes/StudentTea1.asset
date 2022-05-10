@@ -15,7 +15,7 @@ MonoBehaviour:
   teaName: Sweet Match Tea
   amtOfLiquid: 90
   heatnessOfWater: 60
-  maxHeatness: 85
+  maxHeatness: 90
   scoopOfPowder: 1
   IngredientsCategory:
   - sweet

@@ -15,7 +15,7 @@ MonoBehaviour:
   teaName: Only the Finest
   amtOfLiquid: 90
   heatnessOfWater: 65
-  maxHeatness: 85
+  maxHeatness: 90
   scoopOfPowder: 3
   IngredientsCategory:
   - expensive

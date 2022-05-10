@@ -383,11 +383,13 @@ public class GameManager : MonoBehaviour
                                 runner.StartDialogue("Laikai_Final_Stage");
                                 Laikai_index = 4;
                                 TeaCeremonyManager.Instance.OtherTeaReturn(); //new
+                                
                                 //TeaCeremonyManager.Instance.TeaReturn();
                                 break;
                             }
                         case (4):
                             {
+                                JudgeTea.Instance.GhostTeaNum = 0;
                                 break;
                             }
                     }
@@ -500,7 +502,7 @@ public class GameManager : MonoBehaviour
                                 ZoneStabllize.Instance.zoneHarm = false;
                                 runner.StartDialogue("Captial_Stage_3_right_tea");
                                 TeaCeremonyManager.Instance.OtherTeaReturn(); //new
-
+                                JudgeTea.Instance.GhostTeaNum = 0;
                                 Captial_index = 4;
                                 wrongCount = 0;
                                 break;

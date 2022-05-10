@@ -15,7 +15,7 @@ MonoBehaviour:
   teaName: True Happiness
   amtOfLiquid: 92
   heatnessOfWater: 65
-  maxHeatness: 85
+  maxHeatness: 90
   scoopOfPowder: 1
   IngredientsCategory:
   - cheap

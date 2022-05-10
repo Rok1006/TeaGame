@@ -271,6 +271,10 @@ public class TeaCeremonyManager : MonoBehaviour
     }
     void ClearTea()
     {
+        JudgeTea.Instance.IngredientsCatAdded.Clear();
+        JudgeTea.Instance.IngredientsCatAdded.TrimExcess();
+        JudgeTea.Instance.IngredientsRankAdded.Clear();
+        JudgeTea.Instance.IngredientsRankAdded.TrimExcess();
         Debug.Log("clearing tea");
         Tea.Instance.RestartStirBar();
         Tea.Instance.OriginalPos.transform.position = Tea.Instance.resetPos; //rest tea to initial pos

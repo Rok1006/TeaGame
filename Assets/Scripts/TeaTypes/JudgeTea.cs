@@ -76,7 +76,10 @@ public class JudgeTea : MonoBehaviour
                     break;
                     case 1:
                         currentSOJ = LaikaSOJ2;
-                        if(IFPass()){GhostTeaNum = 0; }
+                        if(IFPass()){GhostTeaNum = 2; }
+                    break;
+                    case 2:
+                        // GhostTeaNum = 0;
                     break;
                 }
             break;
@@ -85,15 +88,18 @@ public class JudgeTea : MonoBehaviour
                 switch(GhostTeaNum){
                     case 0:
                         currentSOJ = CapitalistSOJ1;
-                        //if(IFPass()){GhostTeaNum = 1; }
+                        if(IFPass()){GhostTeaNum = 1; }
                     break;
                     case 1:
                         currentSOJ = CapitalistSOJ2;
-                        //if(IFPass()){GhostTeaNum = 2; }
+                        if(IFPass()){GhostTeaNum = 2; }
                     break;
                     case 2:
                         currentSOJ = CapitalistSOJ3;  //reset after pass
-                        //if(IFPass()){GhostTeaNum = 0; }
+                        if(IFPass()){GhostTeaNum = 3; }
+                    break;
+                    case 3:
+                        // GhostTeaNum = 0;
                     break;
                 }
             break;
@@ -102,24 +108,36 @@ public class JudgeTea : MonoBehaviour
     public bool CheckIngredFlavour(){  //check there is certain ingred
         bool haveF = false;
         bool haveR = false;
+        int FCount = 0;
+        int RCount = 0;
         // if(IngredientsRankAdded.Count>0){ 
             for(int i = 0; i<IngredientsCatAdded.Count; i++){  //what player have
                 for(int j = 0; j<currentSOJ.IngredientsCategory.Length; j++){  //the standard list
                     if(IngredientsCatAdded[i]==currentSOJ.IngredientsCategory[j]){ //if have that ingred in it
-                        haveF = true;
+                        FCount+=1;
                     }else{
-                        haveF = false;
+                        FCount+=0;
                     }
                 }
+            }
+            if(FCount==currentSOJ.IngredientsCategory.Length){
+                haveF = true;
+            }else{
+                haveF = false;
             }
             for(int i = 0; i<IngredientsRankAdded.Count; i++){  //what player have
                 for(int j = 0; j<currentSOJ.IngredientsCategory.Length; j++){  //the standard list
                     if(IngredientsRankAdded[i]==currentSOJ.IngredientsCategory[j]){ //if have that ingred in it
-                        haveR = true;
+                        RCount+=1;
                     }else{
-                        haveR = false;
+                        RCount+=0;
                     }
                 }
+            }
+            if(RCount==currentSOJ.IngredientsCategory.Length){
+                haveR = true;
+            }else{
+                haveR = false;
             }
         if(haveF||haveR){
             return true;

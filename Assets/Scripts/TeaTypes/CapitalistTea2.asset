@@ -15,7 +15,7 @@ MonoBehaviour:
   teaName: Her Blend
   amtOfLiquid: 95
   heatnessOfWater: 65
-  maxHeatness: 85
+  maxHeatness: 90
   scoopOfPowder: 1
   IngredientsCategory:
   - expensive

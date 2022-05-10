@@ -21,6 +21,12 @@ public class SoundManager : MonoBehaviour
     public AudioSource EffectIn;
     public AudioSource EffectStay;
     public AudioSource EffectOut;
+    public GameObject MomentoSound;
+    public AudioSource boxBling;
+    public AudioSource boxOpen;
+    public AudioSource boxClose;
+    public AudioSource boxAppear;
+    public AudioSource fadeTransition;
     void Start()
     {
         AudioSource[] toolAudios = ToolSound.GetComponents<AudioSource>();
@@ -40,6 +46,11 @@ public class SoundManager : MonoBehaviour
         EffectIn = es[0];
         EffectStay = es[1];
         EffectOut = es[2];
+        AudioSource[] ms = MomentoSound.GetComponents<AudioSource>();
+        boxBling = ms[0];
+        boxOpen = ms[1];
+        boxClose = ms[2];
+        boxAppear = ms[3];
     }
 
     private void Update()

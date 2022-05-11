@@ -9,6 +9,7 @@ public class dialogue_next_line : MonoBehaviour
     [SerializeField]DialogueRunner runner;
     [SerializeField]LineView line;
     [SerializeField] GameObject scroll;
+    [SerializeField] GameObject game_over_screen;
     void Start()
     {
         
@@ -17,7 +18,7 @@ public class dialogue_next_line : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (runner.IsDialogueRunning&& Input.GetMouseButtonDown(0)&& MomentoDisplay.Instance.IfMomentoUP()==false&&scroll.activeSelf==false) 
+        if (runner.IsDialogueRunning&& Input.GetMouseButtonDown(0)&& MomentoDisplay.Instance.IfMomentoUP()==false&&scroll.activeSelf==false&&game_over_screen.activeSelf==false) 
         { line.OnContinueClicked(); }
     }
 }

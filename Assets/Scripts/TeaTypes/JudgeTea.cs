@@ -88,15 +88,15 @@ public class JudgeTea : MonoBehaviour
                 switch(GhostTeaNum){
                     case 0:
                         currentSOJ = CapitalistSOJ1;
-                        if(IFPass()){GhostTeaNum = 1; }
+                        //if(IFPass()){GhostTeaNum = 1; }
                     break;
                     case 1:
                         currentSOJ = CapitalistSOJ2;
-                        if(IFPass()){GhostTeaNum = 2; }
+                        //if(IFPass()){GhostTeaNum = 2; }
                     break;
                     case 2:
                         currentSOJ = CapitalistSOJ3;  //reset after pass
-                        if(IFPass()){GhostTeaNum = 3; }
+                        //if(IFPass()){GhostTeaNum = 3; }
                     break;
                     case 3:
                         // GhostTeaNum = 0;
@@ -120,7 +120,7 @@ public class JudgeTea : MonoBehaviour
                     }
                 }
             }
-            if(FCount==currentSOJ.IngredientsCategory.Length){
+            if(FCount>=currentSOJ.IngredientsCategory.Length){
                 haveF = true;
             }else{
                 haveF = false;
@@ -134,14 +134,16 @@ public class JudgeTea : MonoBehaviour
                     }
                 }
             }
-            if(RCount==currentSOJ.IngredientsCategory.Length){
+            if(RCount>=currentSOJ.IngredientsCategory.Length){
                 haveR = true;
             }else{
                 haveR = false;
             }
         if(haveF||haveR){
+            //Debug.Log(haveR);
             return true;
         }else{
+            //Debug.Log(FCount);
             return false;
         }
     }
@@ -150,6 +152,11 @@ public class JudgeTea : MonoBehaviour
         int numOfIngredInStandard = 0;
         for(int i = 0; i<IngredientsCatAdded.Count; i++){
             if(IngredientsCatAdded[i]==s){
+                numOFIngredInPlayerTea+=1;
+            }
+        }
+        for(int i = 0; i<IngredientsCatAdded.Count; i++){
+            if(IngredientsRankAdded[i]==s){
                 numOFIngredInPlayerTea+=1;
             }
         }
@@ -228,6 +235,11 @@ public class JudgeTea : MonoBehaviour
             ingredientCorrect = false;
             ingre = true;
         }
+        // if(IngredCompareAccordtoTeaType){
+        //     correctIngredAmount = true;
+        // }else{
+        //     correctIngredAmount = false;
+        // }
         IngredCompareAccordtoTeaType();
         if(CheckMakeOrder()==true){correctOrder = true;}else{correctOrder = false;}
     }
@@ -291,11 +303,12 @@ public class JudgeTea : MonoBehaviour
         if(enoughPowder){count+=1;}
         if(ingredientCorrect){count+=1;}
         if(stirred){count+=1;} //later add back
+        if(correctIngredAmount){count+=1;}
         // if(correctOrder){count+=1;}  //later add back
         // if (GameManager.Instance.ghostIndex==0) { return true; }
         
-        if(count>4){
-            Debug.Log(count);
+        if(count>=6){
+            //Debug.Log(count);
             return true;
         }else{
             return false;

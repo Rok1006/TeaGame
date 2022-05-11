@@ -14,7 +14,8 @@ public class PourDetector : MonoBehaviour
     public static float current_emission_rate;
     Vector3 targetPos;
     public float rotatespeed;
-
+    [SerializeField] AudioSource tea_sound;
+    [SerializeField] AudioClip pour_sound;
     //Method2: Particle System
     public GameObject teaParticles;
     public ParticleSystem tp;
@@ -36,9 +37,14 @@ public class PourDetector : MonoBehaviour
             if(isPouring){
                 //teaParticles.SetActive(true);
                 tp.emissionRate = 70;
+                Debug.Log("pouring!");
+                if (tea_sound.isPlaying == false) { tea_sound.PlayOneShot(pour_sound); }
                 //StartPour();   //put this back on for method 1
-            }else{
+            }
+            else{
+
                 tp.emissionRate = 10;
+                tea_sound.Stop();
                 Invoke("StopPouring", 1f);
                 //EndPour();    //put this back on for method 1
             }

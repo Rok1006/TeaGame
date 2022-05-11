@@ -20,6 +20,7 @@ public class TeaPot : MonoBehaviour
     public int upState = 0;
     Vector3 mousePos;
     [SerializeField] AudioSource tea_sound;
+    [SerializeField] AudioClip pour_sound;
     public bool poured = false;
     public bool canClick = true;
     public bool inOriginalPlace;
@@ -165,15 +166,19 @@ public class TeaPot : MonoBehaviour
             //StovePlaceholderObj.SetActive(false);
             if(degree>pouringDegree){  //teapot pouring sound
                 sc.PourTea();
-                tea_sound.Play();
+       
+                if (tea_sound.isPlaying==false) { tea_sound.PlayOneShot(pour_sound); }
+                
                 //Tea.Instance.isPouring = true;
             }
             else
             {
+                tea_sound.Stop();
                 //Tea.Instance.isPouring = false;
             }
         }else if (pickedUP&&Input.GetMouseButtonUp(0)){ //when pick up and release left click
             sc.StopPourTea();
+            tea_sound.Stop();
             //  Vector3 tempZ = thisParent.transform.rotation * Vector3.forward; //Im trying to make the direction stay the same but failed....
             //tempZ.zsnap to this rotation, but keep the z rotation
             transform.rotation = original_rotation;

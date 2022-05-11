@@ -11863,7 +11863,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 472110315}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1498024795}
@@ -11892,7 +11892,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -12017,6 +12017,8 @@ MonoBehaviour:
   isPouring: 0
   cup: {fileID: 6886713078415206889}
   rotatespeed: 5
+  tea_sound: {fileID: 0}
+  pour_sound: {fileID: 0}
   teaParticles: {fileID: 1177525789}
   tp: {fileID: 1177525791}
 --- !u!95 &484021270
@@ -30959,7 +30961,7 @@ MonoBehaviour:
   - {fileID: 389663942}
   - {fileID: 290878934}
   - {fileID: 2008223407}
-  ghostIndex: 0
+  ghostIndex: 1
   Arrows: {fileID: 708259171}
   arrowAnim: {fileID: 0}
   onoffarrow: 0
@@ -45508,6 +45510,8 @@ MonoBehaviour:
   isPouring: 0
   cup: {fileID: 6886713078415206889}
   rotatespeed: 5
+  tea_sound: {fileID: 0}
+  pour_sound: {fileID: 0}
   teaParticles: {fileID: 1177525789}
   tp: {fileID: 1177525791}
 --- !u!120 &1119789518
@@ -92097,6 +92101,7 @@ MonoBehaviour:
   pickedUP: 0
   upState: 0
   tea_sound: {fileID: 0}
+  pour_sound: {fileID: 0}
   poured: 0
   canClick: 1
   inOriginalPlace: 0
@@ -99606,7 +99611,8 @@ MonoBehaviour:
   canRelease: 0
   pickedUP: 0
   upState: 0
-  tea_sound: {fileID: 0}
+  tea_sound: {fileID: 472110317}
+  pour_sound: {fileID: 8300000, guid: c2ffc211f28d641789ac3816a1f74141, type: 3}
   poured: 0
   canClick: 1
   inOriginalPlace: 0
@@ -99707,6 +99713,8 @@ MonoBehaviour:
   isPouring: 0
   cup: {fileID: 6886713078415206889}
   rotatespeed: 5
+  tea_sound: {fileID: 191677239}
+  pour_sound: {fileID: 8300000, guid: c2ffc211f28d641789ac3816a1f74141, type: 3}
   teaParticles: {fileID: 1576325158}
   tp: {fileID: 1576325162}
 --- !u!1 &1953210246
@@ -107695,6 +107703,7 @@ MonoBehaviour:
   pickedUP: 0
   upState: 0
   tea_sound: {fileID: 0}
+  pour_sound: {fileID: 0}
   poured: 0
   canClick: 1
   inOriginalPlace: 0

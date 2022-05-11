@@ -55,9 +55,9 @@ public class ZoneStabllize : MonoBehaviour
         //Time.timeScale = 0;
     }
     void DetermineTempofWater(){
-        if(Tea.Instance.temp>40){
+        if(Tea.Instance.temp>60){
             isHotWater = true;
-        }else if(Tea.Instance.temp<40){
+        }else if(Tea.Instance.temp<60){
             isHotWater = false;
         }
     }
@@ -79,7 +79,7 @@ public class ZoneStabllize : MonoBehaviour
                 break;
                 case 1: //student
                     if(hydration>0){
-                        hydration-=1*Time.deltaTime;  //default: 2
+                        hydration-=.8f*Time.deltaTime;  //default: 2
                     }
                 break;
                 case 2: //laika
@@ -89,7 +89,7 @@ public class ZoneStabllize : MonoBehaviour
                 break;
                 case 3: //capitalist
                     if(hydration>0){
-                        hydration-=1.5f*Time.deltaTime;
+                        hydration-=1f*Time.deltaTime;
                     }
                 break;
             }
@@ -115,6 +115,7 @@ public class ZoneStabllize : MonoBehaviour
         }
         if(hydration>=35&&hydration<=50){
             warning = false;
+            FruitPlant.SetBool("weak2", false);
             FruitPlant.SetBool("weak1", true);
             CamSwitch.Instance.DetermineAngryEffectPos();
             Effects.Instance.AngryEAnim.SetBool("IN", false);
@@ -124,7 +125,7 @@ public class ZoneStabllize : MonoBehaviour
             warning = false;
             FruitPlant.SetBool("weak2", false);
             FruitPlant.SetBool("weak1", false);
-            FruitPlant.SetTrigger("reviving");
+            FruitPlant.SetBool("reviving", true);
             Effects.Instance.TableLighting.SetTrigger("normal");
             CamSwitch.Instance.DetermineAngryEffectPos();
             Effects.Instance.AngryEAnim.SetBool("IN", false);
